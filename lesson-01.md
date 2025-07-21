@@ -1,6 +1,6 @@
 # Getting Started with Ethical Hacking
 
-![./imgs/b1b55f18288795.562c702fe9883.gif]
+![](./imgs/b1b55f18288795.562c702fe9883.gif)
 
 - Hacking is getting unauthorized access to a system.
 - Hackers generally are of three types:
