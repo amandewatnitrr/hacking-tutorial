@@ -143,24 +143,23 @@
   Once executed we get the following output:
 
     ```bash
-    /root/PycharmProjects/hacking-tutorial/.venv/bin/python -X pycache_prefix=/root/.cache/JetBrains/PyCharmCE2025.1/cpython-cache /root/.local/share/JetBrains/Toolbox/apps/pycharm-community/plugins/python-ce/helpers/pydev/pydevd.py --multiprocess --qt-support=auto --client 127.0.0.1 --port 40183 --file /root/PycharmProjects/hacking-tutorial/mac-address-change.py 
-    Connected to pydev debugger (build 251.26927.90)
+    (.venv) root@kali:~/PycharmProjects/hacking-tutorial# python mac-address-change.py 
     Enter the interface name (e.g., eth0, wlan0): eth0
-    Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): 00:01:02:03:04:05
-    [+] Changing MAC address of eth0 to 00:01:02:03:04:05
+    Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): 3c:b9:aa:d1:42:32
+    [+] Changing MAC address of eth0 to 3c:b9:aa:d1:42:32
     [+] MAC address changed successfully
-    New MAC address for eth0 is 00:01:02:03:04:05
+    New MAC address for eth0 is 3c:b9:aa:d1:42:32
     eth0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
-            inet 172.16.47.131  netmask 255.255.255.0  broadcast 172.16.47.255
+            inet 172.16.47.133  netmask 255.255.255.0  broadcast 172.16.47.255
             inet6 fe80::211:22ff:fe33:4455  prefixlen 64  scopeid 0x20<link>
-            ether 00:01:02:03:04:05  txqueuelen 1000  (Ethernet)
-            RX packets 812179  bytes 1185554880 (1.1 GiB)
+            ether 3c:b9:aa:d1:42:32  txqueuelen 1000  (Ethernet)
+            RX packets 812230  bytes 1185567088 (1.1 GiB)
             RX errors 0  dropped 0  overruns 0  frame 0
-            TX packets 72098  bytes 5796625 (5.5 MiB)
+            TX packets 72191  bytes 5808154 (5.5 MiB)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
             device interrupt 45  memory 0x3fe00000-3fe20000  
-    [+] Verification complete for eth0.
-    Process finished with exit code 0
+
+    [+] Verification complete for eth0
     ```
 
 - In the program, we didn't use `shell=True` in the `subprocess.call()` function. This is because we are passing the command and its arguments as a list, which is the recommended way to avoid shell injection vulnerabilities. If you use `shell=True`, you should be very careful about the input to avoid executing arbitrary commands.
