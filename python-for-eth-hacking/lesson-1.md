@@ -49,6 +49,8 @@
 
 - Now, use `ifconfig` command again to check if the MAC Address has changed again or not. Now, if you look at the `ether` option of the `interface_name` we have been using so far, it's been modified to what we have set.
 
+  ![](../imgs/Screenshot%202025-07-24%20at%206.49.53 AM.png)
+
 - Following are the proof for proper execution of these statements:
 
     ```shell
@@ -96,3 +98,69 @@
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
     ```
+
+## Using Python Modules to Execute System Commands
+
+- We can use Python Modules to execute system commands.
+- The `subprocess` module contains a number of functions for this purpose.
+- It can execute any command, doesn't nessecarily have to be a linux command.
+- If we execute the script from Windows, it will allow us to exeucte windows commands. If we run scripts on mac, it will allow you to execute mac commands. If you run from linux, it let's you run linux based commands.
+- In our case, we will be using the `subprocess` module to execute the `ifconfig` command, and change the MAC Address of the interface.
+- The `subprocess` module contains a number of functions for this purpose. All of them are used to execute system commands, and return the output of the command, but in different ways.
+- For example, some of them will run commands in the background, some in foreground, some will return the output of the command, some will not, some will return the error if any, some will not.
+
+>[!IMPORTANT]
+>The function that we will be using today is `subprocess.call()`. This function is used to run a command in the foreground, and return the exit code of the command. If the command is executed successfully, it returns `0`, otherwise it returns the error code.
+>It doesn't run it in a different thread, so it will block the execution of the script until the command is executed.
+
+- This will be very important because we don't want our script to move forward until the command is executed, and the MAC Address is changed.
+
+- Now, let's write a simple script to change the MAC Address of the interface.
+
+    ```python
+    # Program to change MAC Address of an interface
+
+    import subprocess
+    def change_mac(interface, new_mac):
+        print(f"[+] Changing MAC address of {interface} to {new_mac}")
+        # Execute the command to change the MAC address
+        subprocess.call(["sudo", "ifconfig", interface, "down"],shell=True)
+        subprocess.call(["sudo", "ifconfig", interface, "hw", "ether", new_mac],shell=True)
+        subprocess.call(["sudo", "ifconfig", interface, "up"],shell=True)
+        print("[+] MAC address changed successfully")
+        
+    # Example usage
+    if __name__ == "__main__":
+        interface = input("Enter the interface name (e.g., eth0, wlan0): ")
+        new_mac = input("Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): ")
+        change_mac(interface, new_mac)
+        print(f"New MAC address for {interface} is {new_mac}")
+        # Verify the change
+        subprocess.call(["ifconfig", interface],shell=True)
+        print(f"[+] Verification complete for {interface}.")
+    ```
+
+  Once executed we get the following output:
+
+    ```bash
+    /root/PycharmProjects/hacking-tutorial/.venv/bin/python -X pycache_prefix=/root/.cache/JetBrains/PyCharmCE2025.1/cpython-cache /root/.local/share/JetBrains/Toolbox/apps/pycharm-community/plugins/python-ce/helpers/pydev/pydevd.py --multiprocess --qt-support=auto --client 127.0.0.1 --port 40183 --file /root/PycharmProjects/hacking-tutorial/mac-address-change.py 
+    Connected to pydev debugger (build 251.26927.90)
+    Enter the interface name (e.g., eth0, wlan0): eth0
+    Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): 00:01:02:03:04:05
+    [+] Changing MAC address of eth0 to 00:01:02:03:04:05
+    [+] MAC address changed successfully
+    New MAC address for eth0 is 00:01:02:03:04:05
+    eth0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+            inet 172.16.47.131  netmask 255.255.255.0  broadcast 172.16.47.255
+            inet6 fe80::211:22ff:fe33:4455  prefixlen 64  scopeid 0x20<link>
+            ether 00:01:02:03:04:05  txqueuelen 1000  (Ethernet)
+            RX packets 812179  bytes 1185554880 (1.1 GiB)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 72098  bytes 5796625 (5.5 MiB)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+            device interrupt 45  memory 0x3fe00000-3fe20000  
+    [+] Verification complete for eth0.
+    Process finished with exit code 0
+    ```
+
+- In the program, we didn't use `shell=True` in the `subprocess.call()` function. This is because we are passing the command and its arguments as a list, which is the recommended way to avoid shell injection vulnerabilities. If you use `shell=True`, you should be very careful about the input to avoid executing arbitrary commands.
