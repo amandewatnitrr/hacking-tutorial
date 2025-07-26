@@ -1,6 +1,6 @@
 # Network Hacking - Pre Connection Attacks
 
-![](../imgs/What-is-Packet-Sniffing-01.png.webp)
+![Packet Sniffing Illustration](../imgs/What-is-Packet-Sniffing-01.png.webp)
 
 ## Packet Sniffing Basics
 
@@ -51,7 +51,7 @@
   - **Beacons**: The number of beacon frames sent by the network in order to announce its presence.
   - **#Data**: The number of data packets captured from the network.
   - **#/s**: The number of data packets captured per second.
-  - **CH**: The channel on which the network iworks on. 
+  - **CH**: The channel on which the network iworks on.
   - **MB**: The maximum speed of the network.
   - **ENC**: The encryption type used by the network (e.g., WPA2, WPA3).
   - **CIPHER**: The cipher used for encryption.
@@ -203,6 +203,4 @@
     Quitting...
     ```
 
-    <center><img width="30%" src="../imgs/WhatsApp%20Image%202025-07-26%20at%2007.47.53.jpeg"/></center>
-
-
+    ![Screenshot of mobile trying to reconnect to the network](../imgs/WhatsApp%20Image%202025-07-26%20at%2007.47.53.jpeg)
