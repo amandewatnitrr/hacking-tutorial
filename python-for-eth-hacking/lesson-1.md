@@ -1,6 +1,6 @@
 # Writing A MAC Address Changer
 
-  ![](./../imgs/What-is-MAC-Address.jpeg)
+  ![What is a MAC Address](./../imgs/What-is-MAC-Address.jpeg)
 
 - MAC stands for `Media Access Control`. It is a permantent, physical and unique address assigned to netowrk interfaces by the device manufacutrer.
 - So, whether you have a wireless card or wired or ether net card, each of them come with a specific address that is unique to the card, so there is no 2 devices in the world with same MAC Address.
@@ -18,7 +18,7 @@
 
 - Run `ifconfig` command on the computer. This will list all the interfaces available on the computer. When we say interface, we mean a network card. When we exectue the command it shows `eth0` which is a virtual interface.
 
-    ![](../imgs/Screenshot%202025-07-24%20at%204.58.09 AM.png)
+    ![ifconfig output showing network interfaces](../imgs/Screenshot%202025-07-24%20at%204.58.09 AM.png)
 
 - `eth0` is not real is created by the virtual box, because the VM is set to use a NAT network, by default. It thinks that it is connected to a wired network. All this is done using a Virtual Interface connected to the Virtual Wired Network.
 - We can also see `lo` which is also a virtual interface created by `linux`.
@@ -28,7 +28,7 @@
 - Now, to change the MAC Address of the Interface, we must first disable the interface.
 
   ```shell
-  $ ifconfig ${interface_name} down
+  ifconfig ${interface_name} down
   ```
 
   If you don't see any erors, it means the command got executed properly. Now, that the interface is disabled, we can modify it's options. And, the option that we want to modify in our case is the `ether`, which is the MAC Address.
@@ -36,20 +36,20 @@
 - We can now change the MAC Address using the command:
 
   ```bash
-  $ ifconfig ${interface_name} hw ether ${new_mac_address}
+  ifconfig ${interface_name} hw ether ${new_mac_address}
   ```
 
 - Now, we need to again re-enable the interface using the following command:
 
   ```bash
-  $ ifconfig ${interface_name} up
+  ifconfig ${interface_name} up
   ```
 
   If we don't see the error it means the command got exectued properly.
 
 - Now, use `ifconfig` command again to check if the MAC Address has changed again or not. Now, if you look at the `ether` option of the `interface_name` we have been using so far, it's been modified to what we have set.
 
-  ![](../imgs/Screenshot%202025-07-24%20at%206.49.53 AM.png)
+  ![ifconfig output showing changed MAC address](../imgs/Screenshot%202025-07-24%20at%206.49.53 AM.png)
 
 - Following are the proof for proper execution of these statements:
 
@@ -163,4 +163,3 @@
     ```
 
 - In the program, we didn't use `shell=True` in the `subprocess.call()` function. This is because we are passing the command and its arguments as a list, which is the recommended way to avoid shell injection vulnerabilities. If you use `shell=True`, you should be very careful about the input to avoid executing arbitrary commands.
-- 
