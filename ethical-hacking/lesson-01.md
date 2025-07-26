@@ -1,5 +1,18 @@
 # Getting Started with Ethical Hacking
 
+
+<!-- TOC -->
+- [Getting Started with Ethical Hacking](#getting-started-with-ethical-hacking)
+  - [Setup for learning](#setup-for-learning)
+    - [Virtualization](#virtualization)
+- [Introduction to Penetration Testing](#introduction-to-penetration-testing)
+  - [Connecting Wireless adapter to Kali ](#connecting-wireless-adapter-to-kali-)
+  - [Wireless Modes](#wireless-modes)
+    - [Enabling Monitor Mode on Wireless Adapter](#enabling-monitor-mode-on-wireless-adapter)
+<!-- /TOC -->
+---
+
+
 ![](./imgs/b1b55f18288795.562c702fe9883.gif)
 
 - Hacking is getting unauthorized access to a system.

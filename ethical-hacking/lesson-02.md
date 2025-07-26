@@ -1,5 +1,15 @@
 # Network Hacking - Pre Connection Attacks
 
+<!-- TOC -->
+- [Network Hacking - Pre Connection Attacks](#network-hacking---pre-connection-attacks)
+  - [Packet Sniffing Basics](#packet-sniffing-basics)
+  - [Wifi Bands](#wifi-bands)
+  - [Tageted Packet Sniffing](#tageted-packet-sniffing)
+  - [Deauthentication Attack](#deauthentication-attack)
+<!-- /TOC -->
+---
+
+
 ![Packet Sniffing Illustration](../imgs/What-is-Packet-Sniffing-01.png.webp)
 
 ## Packet Sniffing Basics
