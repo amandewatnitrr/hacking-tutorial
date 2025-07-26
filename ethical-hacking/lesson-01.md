@@ -80,3 +80,109 @@
 
   - Realtek RTL8812AU
   - Atheros AR9271
+
+- To connect the Wireless Adapter to Kali, follow these steps:
+
+  1. Plug in the Wireless Adapter to your Host Machine.
+  2. Open VirtualBox and select your Kali VM.
+  3. Go to `Settings` > `USB`.
+  4. Enable USB Controller and add a new USB filter for your Wireless Adapter.
+  5. Start your Kali VM and check if the adapter is recognized using the command:
+
+     ```bash
+     ifconfig
+     ```
+
+- For mac, thie USB Controller is automatically enabled, so you don't need to do anything. Just plug in the Wireless Adapter and it will be recognized by Kali.
+
+- Now, we run the python script to change the MAC address of the Wireless Adapter:
+
+  ```bash
+  /root/PycharmProjects/hacking-tutorial/.venv/bin/python /root/PycharmProjects/hacking-tutorial/mac-address-change.py 
+  Enter the interface name (e.g., eth0, wlan0): wlan0
+  Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): 00:11:22:33:44:55
+  [+] Changing MAC address of wlan0 to 00:11:22:33:44:55
+  [+] MAC address changed successfully
+  New MAC address for wlan0 is 00:11:22:33:44:55
+  wlan0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 2312
+          ether 00:11:22:33:44:55  txqueuelen 1000  (Ethernet)
+          RX packets 0  bytes 0 (0.0 B)
+          RX errors 0  dropped 0  overruns 0  frame 0
+          TX packets 0  bytes 0 (0.0 B)
+          TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+  [+] Verification complete for wlan0.
+
+  Process finished with exit code 0
+  ```
+
+- As, you can see now the MAC address of the Wireless Adapter has been changed to `00:11:22:33:44:55`.
+
+## Wireless Modes
+
+- So, we now know that a machine will only recieve the packets if the Destination MAC address of the packet matches with the MAC address of the machine. But, what if we want to capture all the packets that are being sent over the network, even if they are not meant for our machine? This is where Wireless Modes come into play.
+
+- Run the following command to check the current mode of your Wireless Adapter, and wireless interfaces only:
+
+  ```bash
+  root@kali:~# iwconfig
+  lo        no wireless extensions.
+
+  eth0      no wireless extensions.
+
+  wlan0     unassociated  ESSID:""  Nickname:"<WIFI@REALTEK>"
+            Mode:Managed  Frequency=2.412 GHz  Access Point: Not-Associated   
+            Sensitivity:0/0  
+            Retry:off   RTS thr:off   Fragment thr:off
+            Encryption key:off
+            Power Management:off
+            Link Quality:0  Signal level:0  Noise level:0
+            Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+            Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+  ```
+
+- We can see out Wireless adapter `wlan0`, which is set to `Mode:Managed`. This means that the Wireless Adapter is currently in Managed Mode, which is the default mode for most wireless adapters. In this mode, the adapter can only communicate with the access point it is connected to.
+
+- This also means this device will only capture packets that has the Destination MAC as MAC Address of this device. What we want is to be able to capture all the packets that are within our range, even if they are sent to the router, and even if there Destination MAC Address is set to other device. For this we need to change the mode of our Wireless Adapter to `Monitor Mode`.
+
+### Enabling Monitor Mode on Wireless Adapter
+
+- To enable Monitor Mode on your Wireless Adapter, run the following command:
+
+  ```bash
+  root@kali:~# ifconfig wlan0 down
+  root@kali:~# airmon-ng check kill
+
+  Killing these processes:
+
+      PID Name
+    3171 wpa_supplicant
+
+  root@kali:~# iwconfig wlan0 mode monitor
+  root@kali:~# ifconfig wlan0 up
+  root@kali:~# iwconfig
+  lo        no wireless extensions.
+
+  eth0      no wireless extensions.
+
+  wlan0     IEEE 802.11b  ESSID:""  Nickname:"<WIFI@REALTEK>"
+            Mode:Monitor  Frequency:2.412 GHz  Access Point: Not-Associated   
+            Sensitivity:0/0  
+            Retry:off   RTS thr:off   Fragment thr:off
+            Encryption key:off
+            Power Management:off
+            Link Quality:0  Signal level:0  Noise level:0
+            Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+            Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+  ```
+
+- First, we disable the Wireless Adapter using `ifconfig wlan0 down`.
+- Then, we run `airmon-ng check kill` to kill any processes that might interfere with the Wireless Adapter.
+- After that, we change the mode of the Wireless Adapter to `Monitor Mode` using:
+
+  ```bash
+  iwconfig wlan0 mode monitor
+  ```
+
+- Finally, we enable the Wireless Adapter again using `ifconfig wlan0 up`.
+- Now, if we run `iwconfig` again, we can see that the mode of the Wireless Adapter has been changed to `Monitor Mode`.
