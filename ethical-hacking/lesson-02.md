@@ -261,7 +261,7 @@
 
     BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
 
-    WIFI_MAC  -19  58      926       98    0  36  780   WPA2 CCMP   PSK  ACT-ai_102739915390       
+    WIFI_MAC  -19  58      926       98    0  36  780   WPA2 CCMP   PSK  WIFI_NAME       
 
     BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
 
