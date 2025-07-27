@@ -203,6 +203,10 @@ sequenceDiagram
 
 - To use `XX:XX:XX:XX:XX:XX` remove the colons and use it as the password to connect to the network.
 
+- **Proof, this image will take you to the video where you can see me enter hex password on mobile device and connect to the network:**
+
+    [![Watch the video](../imgs/242390692-0b335028-1d3d-4ee5-b5b3-a373d499be7e.gif)](https://youtu.be/sLQRBuHkpw4)
+
 ## Fake Authentication Attack
 
 - Now, let's work on the issue of idle networks. Let's say the target network is not busy enough, and we are not able to capture enough packets to crack the WEP key.
