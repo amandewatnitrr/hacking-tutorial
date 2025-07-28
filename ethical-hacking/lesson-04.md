@@ -525,3 +525,15 @@
         13:44:11  Got a deauthentication packet! (Waiting 3 seconds)
         ```
     </details>
+
+- **We will use the WPA-PSK at the end of the `reaver` logs to connect to the wifi. Below is the video proof that we can connect to the wifi using the cracked WPA-PSK.**
+
+    [![Watch the video](../imgs/238353467-897cd757-ea1f-492d-aaf9-6d1674177e08.gif)](https://youtu.be/stE-FNupm0o)
+
+- Also, you might be thinking, why we needed to run a fake authentication attack using `aireplay-ng`? The answer is simple, we needed to associate with the access point to be able to send EAPOL packets, if not associated the network would have just ignored us.
+
+## Capturing the Handshake
+
+- Now, if WPS is disabled on the target network, or if it's enabled but configured to use push button configuration (PBC), than the method we disucssed just now before will not work. Therefore, we will have to go and crack the actual WPA/WPA2 Encryption.
+
+- In WPA/WPA2 the keys are unique, they are temporary, and are much longer than WEP. Therefore, the packets sent in the air contained no information that is useful for us. So, it doesn't matter even if we capture 1 million packets, we can't use them to crack the key.
