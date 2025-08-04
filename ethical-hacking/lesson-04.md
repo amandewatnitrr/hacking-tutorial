@@ -2,6 +2,18 @@
 
 ![](../imgs/06f21a161921919.63cd7887d0a70.gif)
 
+---
+
+- [Network Hacking - Gaining Access - WPA/WPA2 Cracking](#network-hacking---gaining-access---wpawpa2-cracking)
+  - [Introduction to WPA/WPA2 Cracking](#introduction-to-wpawpa2-cracking)
+  - [WPS (Wi-Fi Protected Setup) Vulnerability](#wps-wi-fi-protected-setup-vulnerability)
+  - [Capturing the Handshake](#capturing-the-handshake)
+  - [Creating a Wordlist](#creating-a-wordlist)
+  - [Cracking WPA/WPA2 Key using a Wordlist Attack](#cracking-wpawpa2-key-using-a-wordlist-attack)
+
+
+---
+
 ## Introduction to WPA/WPA2 Cracking
 
 - WPA (Wi-Fi Protected Access) and WPA2 are security protocols designed to secure wireless networks.
