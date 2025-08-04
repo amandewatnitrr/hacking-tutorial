@@ -9,7 +9,6 @@
 <!-- /TOC -->
 ---
 
-
 ![Packet Sniffing Illustration](../imgs/What-is-Packet-Sniffing-01.png.webp)
 
 ## Packet Sniffing Basics
