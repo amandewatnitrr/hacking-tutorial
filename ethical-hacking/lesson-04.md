@@ -10,6 +10,7 @@
   - [Capturing the Handshake](#capturing-the-handshake)
   - [Creating a Wordlist](#creating-a-wordlist)
   - [Cracking WPA/WPA2 Key using a Wordlist Attack](#cracking-wpawpa2-key-using-a-wordlist-attack)
+  - [Configuring Wireless Settings for Maximum Security](#configuring-wireless-settings-for-maximum-security)
 
 
 ---
@@ -703,3 +704,13 @@
 - You can use this password to connect to the target network. Here's the proof of my Wifi Password.
 
   ![](../imgs/WhatsApp%20Image%202025-07-28%20at%2019.40.07.jpeg)
+
+
+## Configuring Wireless Settings for Maximum Security
+
+- So, far we have learned a number of techniques that hacker can use to gain access to networks, even if they use WPA and WPA2.  If this happens, and a hacker manages to gain access to the computer it's game over. They will be able to run so much more powerful attacks, to spy on every single connected device, and potentially even gain full control, over these devices. 
+
+- Always prefer WPA2 over WPA, and WPA over WEP. If you have the option to use WPA3, then use that instead of WPA2.
+- Make sure WPS is disabled on your access point. WPS is a feature that allows users to easily connect to a wireless network by pressing a button on the router, but it can also be exploited by attackers to gain access to the network.
+- Use a strong password for your wireless network. A strong password should be at least 12 characters long, and should include a mix of uppercase and lowercase letters, numbers, and special characters.
+- Use a unique SSID for your wireless network. Avoid using default SSIDs, as they can be easily guessed by attackers.
