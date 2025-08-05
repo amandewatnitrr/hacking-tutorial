@@ -53,4 +53,4 @@
 
 ## Gathering Sensitive Information about Connected Devices
 
-- 
+- Now
