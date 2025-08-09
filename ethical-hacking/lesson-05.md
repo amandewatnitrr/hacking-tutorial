@@ -53,4 +53,41 @@
 
 ## Gathering Sensitive Information about Connected Devices
 
-- Now
+- Now, the second program that we will use for Network Mapping is `Nmap`. Nmap is a powerful network scanning tool that can discover hosts and services on a computer network.
+
+- Nmap takes scanning to a whole new level. It is slightly slower than `Netdiscover`, but it provides a lot more information about the connected devices. It can also be used to scan for open ports, services running on those ports, and even the operating system of the device, connected clients, and more. You can bypass security firewalls etc..
+
+- Nmap is a huge tool and, there are books and complete courses just on learning to use Nmap. We will be using Zenmap, which is a graphical user interface for Nmap. It is easier to use and provides a more user-friendly experience.
+
+- Use the command `zenmap` to open `Nmap` UI:
+
+  ```bash
+  root@kali:~# zenmap
+  ```
+
+  ![](../imgs/Screenshot%202025-08-09%20at%203.38.18 PM.png)
+
+- It has a very simple interface. You can enter the target IP address or hostname in the "Target" field, and then select the type of scan you want to perform from the "Profile" dropdown menu.
+
+- Enter the target range in the "Target" field, for example `XX.XX.XX.1/24`, and select the "Intense Scan" profile from the dropdown menu. Then click on the "Scan" button to start the scan.
+
+  ![](../imgs/Screenshot%202025-08-09%20at%203.47.22 PM.png)
+
+- As you can see here, it is scanning the target range for open ports, services running on those ports, and even the operating system of the device. It will take some time to complete the scan, depending on the size of the target range and the number of devices connected to it.
+
+- Let's see how to perform a ping scan:
+
+  ![](../imgs/Screenshot%202025-08-09%20at%203.56.13 PM.png)
+
+
+- Here, we can see what kind of device is connected to the network, what operating system it is running. As, we can see here, we have 3 VMware devices connected to the network, and one of them is running an Unknown OS. 
+
+- In a similare way we can perform quick scan as well:
+
+  ![](../imgs/Screenshot%202025-08-09%20at%205.54.42 PM.png)
+
+- It shows open ports on each one of the discovered devices, along with the services running on those ports. For example, we can see that port `22` is open on the device with IP.
+
+### Gathering More Sensitive Information(Services, OS, etc.)
+
+- 
