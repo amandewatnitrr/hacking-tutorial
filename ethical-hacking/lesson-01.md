@@ -1,5 +1,6 @@
 # Getting Started with Ethical Hacking
 
+![](../imgs/212750155-3ceddfbd-19d3-40a3-87af-8d329c8323c4.gif)
 
 <!-- TOC -->
 - [Getting Started with Ethical Hacking](#getting-started-with-ethical-hacking)
