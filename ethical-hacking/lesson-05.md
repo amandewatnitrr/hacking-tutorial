@@ -90,4 +90,14 @@
 
 ### Gathering More Sensitive Information(Services, OS, etc.)
 
-- 
+  ![](../imgs/quick%20scan%20plus.png)
+
+- As here we can clearly see, that the device has it's IP, MAC Address, and the services running on it. We can also see the operating system of the device. 
+
+- It also shows us the program running on the open ports, and the versions of these programs, like here we can see the Apple device has Postgres on port `5432`, and the version is `9.6.0` or later.
+
+- We can check for the exploits for the version of the program/service running on the open ports. For example, we can search for exploits for `Postgres 9.6.0` or later. And, we will be able to gain access to the device using these exploits.
+
+- We can also categorize discovered clients based on the services running on them.
+
+  ![](../imgs/service_view_zenmap.png)
