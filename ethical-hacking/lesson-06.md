@@ -75,11 +75,14 @@ sequenceDiagram
   
   So, what the client does is it uses the ARP Protocol. Basically, it sends an ARP Request to all the clients on the network saying "Who has XX.XX.XX.XX??". So, all the devices will ignore the packet except the one that has the IP address XX.XX.XX.XX, which is C in this case. As, a result `C` will respond with an ARP Response, and will say "I have XX.XX.XX.XX, and my MAC address is XX:XX:XX:XX:XX:XX". Now, `A` has the MAC address of `C`, and it can communicate with it. So, this is how ARP works.
 
-- Each computer has it's own ARP Table, which links IP Address on the same network to their MAC Addresses.
+- Each computer has it's own ARP Table, which links IP Address on the same network to their MAC Addresses. YOu can get it on Kali Linux by using the command:
+
+  ```bash
+  root@kali:~# arp -a
+  ```
   
   For example:
-  
-  
+
   ```bash
   root@kali:~# arp -a
   _gateway (IP_1) at MAC_1 [ether] on eth0
