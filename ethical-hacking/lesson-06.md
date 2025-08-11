@@ -4,7 +4,7 @@
 
 - MITM stands for Man In The Middle. It is a type of attack where the attacker intercepts communication between two parties without their knowledge. The attacker can then eavesdrop on the conversation, modify the data being sent, or even impersonate one of the parties.
 
-## MITM: Layman sequence
+#### MITM: Layman sequence
 
 A simple view showing the attacker silently sitting between a client and a server.
 
@@ -19,6 +19,8 @@ sequenceDiagram
     A-->>C: Forwards/optionally alters response
     note over A: Can listen and potentially change messages
 ```
+
+#### MITM: Detailed sequence
 
 A more detailed flow including the network gateway and encryption considerations.
 
