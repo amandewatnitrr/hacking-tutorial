@@ -91,12 +91,23 @@ sequenceDiagram
   ```
 
 - If we do the same on windows we get the following output:
+
   ```cmd
   C:\Users\IEUser>arp -a
   
-  Interface: 192.168.175.130 --- 0x7
+  Interface: Interface_IP --- 0x7
     Internet Address      Physical Address      Type
-    IP_1        MAC_1     dynamic
-    IP_2       MAC_2     dynamic
-    IP_3       MAC_3     static
+    IP_1                  MAC_1                 dynamic
+    IP_2                  MAC_2                 dynamic
+    IP_3                  MAC_3                 static
   ```
+
+  We can clearly see that it's mapping the IP addresses to their MAC addresses respectively. This MAC Address can be easily modified by using the ARP Protocol.
+
+- So, what we can do is we will exploit the ARP Protocol, and send 2 ARP responses. One to the client and one to the gateway. The ARP response to the client will say "The MAC address of the gateway is XX:XX:XX:XX:XX:XX", and the ARP response to the gateway will say "The MAC address of the client is XX:XX:XX:XX:XX:XX". This way, we can redirect the flow of packets in the network, and perform a MITM attack.
+
+### Why ARP Spoofing is Possible
+
+- ARP is a stateless protocol, meaning it does not verify the authenticity of the sender. This allows attackers to send false ARP messages without any verification.
+
+- Client accepts the response even if they didnot make the request. This means that if an attacker sends a false ARP response, the client will accept it without verifying if it was expecting a response.
