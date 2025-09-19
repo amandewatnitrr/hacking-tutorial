@@ -262,6 +262,8 @@ sequenceDiagram
 
   - Also, when we check the output for `arp -a` on the Windows VM, we can see that the MAC address of the gateway has been changed to the MAC address of the attacker. This means that all the packets that are intended for the gateway will now be sent to the attacker.
 
+The same can be performed using our automated script as well which is at the specified [location](../python-scripts/bettercap_arp_spoofing_script.py).
+
 ### Spying on Network Devices 
 
 - So, far we have learnt how to perform ARP spoofing using bettercap. Now, we will see how to spy on the network devices using bettercap.
