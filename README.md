@@ -42,7 +42,7 @@ Contributions are welcome! To contribute:
 ### Security Warning
 
 **Avoid using the `python_crypto` library or any other cryptographic or hacking-related libraries that are unmaintained, deprecated, or suspicious.**
-git p
+
 - Always use reputable, well-maintained libraries and tools.
 - If you are unsure about a dependency, open an issue or ask before using it.
 
