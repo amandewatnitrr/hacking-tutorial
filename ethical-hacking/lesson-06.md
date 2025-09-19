@@ -1,5 +1,18 @@
 # Network Hacking Post Connection Attacks - MITM Attacks
 
+- [Network Hacking Post Connection Attacks - MITM Attacks](#network-hacking-post-connection-attacks---mitm-attacks)
+      - [MITM: Layman sequence](#mitm-layman-sequence)
+      - [MITM: Detailed sequence](#mitm-detailed-sequence)
+  - [ARP Spoofing or ARP Poisoning](#arp-spoofing-or-arp-poisoning)
+    - [Why ARP Spoofing is Possible](#why-arp-spoofing-is-possible)
+  - [Intercepting Traffic using ARP Spoofing](#intercepting-traffic-using-arp-spoofing)
+    - [Why use `arpspoof` ??](#why-use-arpspoof-)
+  - [Bettercap basics](#bettercap-basics)
+    - [ARP Spoofing using Bettercap](#arp-spoofing-using-bettercap)
+      - [`bettercap` parameters in ARP Spoofing](#bettercap-parameters-in-arp-spoofing)
+    - [Spying on Network Devices](#spying-on-network-devices)
+
+
 ![](../imgs/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif)
 
 - MITM stands for Man In The Middle. It is a type of attack where the attacker intercepts communication between two parties without their knowledge. The attacker can then eavesdrop on the conversation, modify the data being sent, or even impersonate one of the parties.
