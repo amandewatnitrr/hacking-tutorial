@@ -111,3 +111,41 @@ sequenceDiagram
 - ARP is a stateless protocol, meaning it does not verify the authenticity of the sender. This allows attackers to send false ARP messages without any verification.
 
 - Client accepts the response even if they didnot make the request. This means that if an attacker sends a false ARP response, the client will accept it without verifying if it was expecting a response.
+
+## Intercepting Traffic using ARP Spoofing
+
+- In order to do so, we need to know the IP addresses of the client and the gateway. We can use the `netdiscover` tool to find the IP addresses of the devices on the network.
+
+  ```bash
+  root@kali:~# netdiscover -i wlan0
+  ```
+
+  Once, the IP addresses are known, we can use the `arpspoof` tool to send the false ARP responses to the client and the gateway.
+
+  ```bash
+  root@kali:~# arpspoof -i <interface_name> -t client_ip gateway_ip
+  ```
+
+  ```bash
+  root@kali:~# arpspoof -i <interface_name> -t gateway_ip client_ip
+  ```
+
+  It would look something like this:
+
+  ![](../imgs/Screenshot%20(6).png)
+  ![](../imgs/Screenshot%20(7).png)
+
+- As, you can clearly see the MAC Address of the gateway has been changed to the MAC Address of the attacker. This means that all the packets that are intended for the gateway will now be sent to the attacker.
+
+- Now we need to allow packets to be forwarded. This can be done by enabling IP forwarding on the attacker's machine.
+
+  ```bash
+  root@kali:~# echo 1 > /proc/sys/net/ipv4/ip_forward
+  ```
+
+### Why use `arpspoof` ??
+
+- We could have used `ettercap` to perform the ARP spoofing, but the reason we are using `arpspoof` is because it is a lightweight tool that does not have a GUI. This means that it does not consume a lot of resources, and it is easier to use in a script.
+
+## Bettercap basics
+
