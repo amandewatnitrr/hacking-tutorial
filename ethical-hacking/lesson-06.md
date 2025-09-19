@@ -167,7 +167,7 @@ sequenceDiagram
 - Let's say we want to scan for the devices on the network, we can use the `net.probe on` command to scan for the devices on the network.
 
   ```bash
-  bettercap > net.probe on
+  net.probe on
   ```
 
 - This will scan for the devices on the network and display their IP addresses, MAC addresses, and hostnames.
@@ -182,3 +182,73 @@ sequenceDiagram
   192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as 00:50:56:c0:00:08 (VMware, Inc.).
   192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 00:0c:29:23:e8:71 (VMware, Inc.) lost.
   ```
+
+  This is another way of discovering connected clients quickly using bettercap. What we didn't notice is when we started the `net.probe on` command, it automatically started the `net.recon` command as a requirement for `net.probe`. This means that it is continuously scanning for new devices on the network. So, now if you do `help` again, you will see that the `net.recon` command is also running.
+
+  ![](../imgs/Screenshot%20(8).png)
+
+  The reason for this is because the net.probe sends probe request to all possible IPs, and than if we get a response the net.recon will be the one detecting the response by monitoring my ARP Cache, and than adding all of these IPs in a nice list, so we can target them.
+
+- We can use `net.show` command to see the list of devices on the network.
+
+  ```bash
+  net.show
+  ```
+
+  This will display the list of devices on the network along with their IP addresses, MAC addresses, and hostnames.
+
+  ![](../imgs/Screenshot%20(9).png)
+
+  Here, we can see there IPs, corresponding MAC Addresses, and it can also show you information about each one of these IPs. 
+  
+### ARP Spoofing using Bettercap
+
+  Now to perform the ARP spoofing, we can use the `arp.spoof` command to enable ARP spoofing. Let's first see how to activate this command.
+
+  ![](../imgs/Screenshot%20(10).png)
+
+  So, here we can clearly seedsad   that we can use the `arp.spoof on` command to turn this module on. We can do `arp.ban on` this will literally just cut the connection to the target. We can do `arp.spoof off` to turn it off.
+
+#### `bettercap` parameters in ARP Spoofing
+
+- Anything under the parameters is something we can set in the module. So, now we will be seeing how to modify some of these option. Let's go through one of the options `arp.spoof.fullduplex`.
+
+- If it is set to `true`, it will perform a full duplex attack, meaning it will spoof both the target and the gateway. If it is set to `false`, it will only spoof the target. It is set to `false` by default because if the ARP Spoofing Protection is enabled on the gateway, it will detect the ARP spoofing attack and will block the attacker from sending ARP responses to the gateway.
+
+- If you want to set it to `true`, you can use the following command:
+
+  ```bash
+  set arp.spoof.fullduplex true
+  ```
+
+  In a similar fashion, we need to set the target as well.
+
+  ```bash
+  set arp.spoof.targets <target_ip>
+  ```
+
+- Now, we can use the `arp.spoof on` command to start the ARP spoofing attack.
+
+  ```bash
+  arp.spoof on
+  ```
+
+- If we want to run this as 1 command, we can use the following command:
+
+  ```bash
+  set arp.spoof.fullduplex true;set arp.spoof.targets <target_ip>;arp.spoof on
+  ```
+
+  ![](../imgs/Screenshot%20(12).png)
+
+  Now, if we check the Target Windows Vm, we can clearly see, the MACs changed.
+
+  ![](../imgs/Screenshot%20(11).png)
+
+  - If we see, the output of `help` it clearly shows `arp.spoof` is running.
+
+  - Also, when we check the output for `arp -a` on the Windows VM, we can see that the MAC address of the gateway has been changed to the MAC address of the attacker. This means that all the packets that are intended for the gateway will now be sent to the attacker.
+
+### Spying on Network Devices 
+
+- So, far we have learnt how to perform ARP spoofing using bettercap. Now, we will see how to spy on the network devices using bettercap.
