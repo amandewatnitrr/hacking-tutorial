@@ -171,3 +171,14 @@ sequenceDiagram
   ```
 
 - This will scan for the devices on the network and display their IP addresses, MAC addresses, and hostnames.
+
+
+  ```bash
+  192.168.175.0/24 > 192.168.175.129  » net.probe on
+  [06:29:59] [sys.log] [inf] net.probe starting net.recon as a requirement for net.probe
+  [06:29:59] [endpoint.new] endpoint 192.168.175.254 detected as 00:50:56:e5:67:d9 (VMware, Inc.).
+  [06:29:59] [endpoint.new] endpoint 192.168.175.130 detected as 00:0c:29:23:e8:71 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [sys.log] [inf] net.probe probing 256 addresses on 192.168.175.0/24
+  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as 00:50:56:c0:00:08 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 00:0c:29:23:e8:71 (VMware, Inc.) lost.
+  ```
