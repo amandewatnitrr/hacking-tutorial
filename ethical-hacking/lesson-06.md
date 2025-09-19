@@ -149,3 +149,25 @@ sequenceDiagram
 
 ## Bettercap basics
 
+- `bettercap` is a powerful, flexible and portable tool created to perform various types of MITM attacks against a network, manipulate HTTP, HTTPS and TCP traffic in real-time, sniff for credentials and much more.
+- It is a complete rewrite of the well known `ettercap` tool, and it is written in Go programming language. It can not only perform ARP spoofing, but it can also perform DNS spoofing, HTTP/HTTPS manipulation, and much more.
+
+- To start using `bettercap`, we need to start the `bettercap` tool with the following command:
+
+  ```bash
+  root@kali:~# bettercap -iface <interface_name>
+  ```
+
+- This will start the `bettercap` tool and open the interactive shell. We can then use the `help` command to see the list of available commands.
+
+  ```bash
+  bettercap > help
+  ```
+
+- Let's say we want to scan for the devices on the network, we can use the `net.probe on` command to scan for the devices on the network.
+
+  ```bash
+  bettercap > net.probe on
+  ```
+
+- This will scan for the devices on the network and display their IP addresses, MAC addresses, and hostnames.
