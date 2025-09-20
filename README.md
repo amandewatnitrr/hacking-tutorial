@@ -30,6 +30,12 @@ This repository is a comprehensive tutorial series for ethical hacking and penet
    - Example scripts are available in the `python-scripts/` directory.
    - Use a safe, isolated environment (such as a VM or test network) for all practical exercises.
 
+## Resources
+
+- <a href="https://zsecurity.org/download-custom-kali/">Kali Linux VM</a>
+- <a href="https://ln5.sync.com/dl/a524d0280/view/default/23995984090004?sync_id=0#fgbzw355-bzuq9n6t-yypf24kv-7rfsi8xu">VMware Workstation</a>
+-  
+
 ## Contributing
 
 Contributions are welcome! To contribute:
@@ -53,4 +59,3 @@ This project is for educational purposes only. All activities described should b
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
-
