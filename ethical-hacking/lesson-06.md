@@ -266,4 +266,20 @@ The same can be performed using our automated script as well which is at the spe
 
 ### Spying on Network Devices 
 
-- So, far we have learnt how to perform ARP spoofing using bettercap. Now, we will see how to spy on the network devices using bettercap.
+- So, far we have learnt how to perform ARP spoofing using bettercap. Now, we will see how to spy on the network devices using bettercap. To do so we can use the command `net.sniff on`. This will start sniffing the network traffic and will display the packets in real-time.
+
+  ```bash
+  net.sniff on
+  ```
+
+>[!NOTE]
+> `net.sniff` will only work for HTTP Connections. It will not work for HTTPS connections as they are encrypted. To sniff HTTPS connections, requires advanced techniques which we will cover in a later lesson.
+
+  - Once, executed we can see all the HTTP requests and responses in real-time. Including all the icons, images, CSS files, JS files, etc.
+
+  - Now, when we login into a HTTP Website with a username and password, we can see the username and password in the output of `net.sniff`, as shown below:
+
+  ![](../imgs/Screenshot%20(14).png)
+  ![](../imgs/Screenshot%20(13).png)
+
+- In this way we can spy on the network devices using bettercap. We can see all the HTTP requests and responses in real-time, including the username and password for HTTP websites.
