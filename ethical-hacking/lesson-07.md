@@ -1,21 +1,21 @@
 # Phishing Toolkits: A Deep Dive for Ethical Hacking and Defense
 
-  - [Phishing Toolkits: A Deep Dive for Ethical Hacking and Defense](https://www.google.com/search?q=%23phishing-toolkits-a-deep-dive-for-ethical-hacking-and-defense)
-      - [What is a Phishing Toolkit?](https://www.google.com/search?q=%23what-is-a-phishing-toolkit)
-          - [The Dual-Use Nature of Phishing Tools](https://www.google.com/search?q=%23the-dual-use-nature-of-phishing-tools)
-      - [How a Phishing Attack Works: From Start to End](https://www.google.com/search?q=%23how-a-phishing-attack-works-from-start-to-end)
-      - [Anatomy of a Phishing Kit](https://www.google.com/search?q=%23anatomy-of-a-phishing-kit)
-          - [1. Website Cloner](https://www.google.com/search?q=%231-website-cloner)
-          - [2. Email Spoofing Module](https://www.google.com/search?q=%232-email-spoofing-module)
-          - [3. Credential Harvester](https://www.google.com/search?q=%233-credential-harvester)
-          - [4. Redirector](https://www.google.com/search?q=%234-redirector)
-      - [Popular Phishing Frameworks](https://www.google.com/search?q=%23popular-phishing-frameworks)
-          - [Social-Engineer Toolkit (SET)](https://www.google.com/search?q=%23social-engineer-toolkit-set)
-          - [Gophish](https://www.google.com/search?q=%23gophish)
-          - [Evilginx2 (Advanced)](https://www.google.com/search?q=%23evilginx2-advanced)
-      - [Comprehensive Detection and Prevention Strategies](https://www.google.com/search?q=%23comprehensive-detection-and-prevention-strategies)
-          - [For Individuals: Building a Human Firewall](https://www.google.com/search?q=%23for-individuals-building-a-human-firewall)
-          - [For Organizations: A Layered Defense](https://www.google.com/search?q=%23for-organizations-a-layered-defense)
+  - [Phishing Toolkits: A Deep Dive for Ethical Hacking and Defense](#phishing-toolkits-a-deep-dive-for-ethical-hacking-and-defense)
+      - [What is a Phishing Toolkit?](#what-is-a-phishing-toolkit)
+          - [The Dual-Use Nature of Phishing Tools](#the-dual-use-nature-of-phishing-tools)
+      - [How a Phishing Attack Works: From Start to End](#how-a-phishing-attack-works-from-start-to-end)
+      - [Anatomy of a Phishing Kit](#anatomy-of-a-phishing-kit)
+          - [1. Website Cloner](#1-website-cloner)
+          - [2. Email Spoofing Module](#2-email-spoofing-module)
+          - [3. Credential Harvester](#3-credential-harvester)
+          - [4. Redirector](#4-redirector)
+      - [Popular Phishing Frameworks](#popular-phishing-frameworks)
+          - [Social-Engineer Toolkit (SET)](#social-engineer-toolkit-set)
+          - [Gophish](#gophish)
+          - [Evilginx2 (Advanced)](#evilginx2-advanced)
+      - [Comprehensive Detection and Prevention Strategies](#comprehensive-detection-and-prevention-strategies)
+          - [For Individuals: Building a Human Firewall](#for-individuals-building-a-human-firewall)
+          - [For Organizations: A Layered Defense](#for-organizations-a-layered-defense)
 
 -----
 
@@ -25,7 +25,7 @@ A **Phishing Toolkit** is a collection of software and scripts that automates th
 
 These toolkits are essential for cybersecurity professionals (often called "ethical hackers" or "pentesters") to simulate real-world attacks. By launching controlled phishing campaigns against an organization, security teams can measure the effectiveness of their technical defenses and, more importantly, assess the security awareness of their employees. The results are then used to provide targeted training and strengthen the overall security posture.
 
-> [\!IMPORTANT]
+> [!IMPORTANT]
 >
 >   * **Primary Goal:** Steal sensitive information through deception.
 >   * **Methodology:** A sophisticated form of social engineering.
@@ -78,7 +78,7 @@ sequenceDiagram
 
 Modern phishing toolkits are modular, with each component handling a specific part of the attack.
 
-### 1\. Website Cloner
+### 1. Website Cloner
 
 This utility automates the creation of a fraudulent website. It downloads the target's login page, including all HTML, CSS, JavaScript, and images, to create a perfect replica. Simple tools might use a command like `wget`, while more advanced kits can dynamically proxy content to ensure the fake site is always up-to-date.
 
