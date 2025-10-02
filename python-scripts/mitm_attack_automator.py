@@ -17,6 +17,7 @@ def discover_devices(interface):
             text=True
         )
  
+ 
      # time.sleep(10)  # Allow some time for discovery not needed this much
         stdout, stderr = process.communicate(timeout=60) # Set a timeout
         
