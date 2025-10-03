@@ -98,7 +98,13 @@ From this scan, you now know:
 Your next authorized action in a real test would be to use a web vulnerability scanner to probe the website on port 80 for common flaws.
 
 ---
+Screenshots
+![l1](../imgs/l1.png)
+![l2](../imgs/l2.png)
+![l3](../imgs/l3.png)
+![l4](../imgs/l4.png)
 
+---
 ## Where to Read More
 
 To continue your learning, check out the official documentation. The CLI (Command-Line Interface) guide is especially useful for learning how to automate your scans.
