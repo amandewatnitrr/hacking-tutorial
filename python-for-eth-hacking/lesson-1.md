@@ -2,25 +2,25 @@
 
   ![What is a MAC Address](./../imgs/What-is-MAC-Address.jpeg)
 
-- MAC stands for `Media Access Control`. It is a permantent, physical and unique address assigned to netowrk interfaces by the device manufacutrer.
-- So, whether you have a wireless card or wired or ether net card, each of them come with a specific address that is unique to the card, so there is no 2 devices in the world with same MAC Address.
-- This address will always be the same to this specific device, even if we unplug it from our computer, and connect it to other computer. Than this netowrk device will always have the smae address.
-- IP Address is used to identify computer in the netowrk, and communicate between the deivces on the iinternet.
-- The MAC Address is used within the netowrk to identify devices and transfer data b/w them. So, each piece of data or packet that is sent within the network contains a source MAC and Destination MAC. Therefore, this packet will flow from the Source MAC to Destination MAC.
+- MAC stands for `Media Access Control`. It is a permanent, physical and unique address assigned to network interfaces by the device manufacturer.
+- So, whether you have a wireless card or wired or ethernet card, each of them come with a specific address that is unique to the card, so there are no 2 devices in the world with the same MAC Address.
+- This address will always be the same to this specific device, even if we unplug it from our computer, and connect it to another computer. Then this network device will always have the same address.
+- IP Address is used to identify computers in the network, and communicate between the devices on the Internet.
+- The MAC Address is used within the network to identify devices and transfer data b/w them. So, each piece of data or packet that is sent within the network contains a source MAC and Destination MAC. Therefore, this packet will flow from the Source MAC to Destination MAC.
 
 ## Why change MAC Address??
 
-- Because, this is a unique physical address to each interface, to each netowrk device, and used to identify devices, `changing it will make you anonymous on the netowrk`.
-- Let's you impersonate as other device, and allow you to do things you might not be able to do.
-- It makes this able to bypass filters and connect netowrks that only specific devices with specific MAC Addresses can only connect to, and also able to hide your identity.
+- Because this is a unique physical address to each interface, to each network device, and used to identify devices, changing it will make you anonymous on the network.
+- Lets you impersonate another device, and allows you to do things you might not be able to do.
+- It makes it able to bypass filters and connect networks that only specific devices with specific MAC Addresses can only connect to, and also able to hide your identity.
 
 ## How to change MAC Address??
 
-- Run `ifconfig` command on the computer. This will list all the interfaces available on the computer. When we say interface, we mean a network card. When we exectue the command it shows `eth0` which is a virtual interface.
+- Run `ifconfig` command on the computer. This will list all the interfaces available on the computer. When we say interface, we mean a network card. When we execute the command it shows `eth0` which is a virtual interface.
 
     ![ifconfig output showing network interfaces](../imgs/Screenshot%202025-07-24%20at%204.58.09 AM.png)
 
-- `eth0` is not real is created by the virtual box, because the VM is set to use a NAT network, by default. It thinks that it is connected to a wired network. All this is done using a Virtual Interface connected to the Virtual Wired Network.
+- `eth0` is not real. It is created by the virtual box, because the VM is set to use a NAT network, by default. It thinks that it is connected to a wired network. All this is done using a Virtual Interface connected to the Virtual Wired Network.
 - We can also see `lo` which is also a virtual interface created by `linux`.
 
 - The `ifconfig` command also lists down the detailed information about each of these interfaces.
@@ -31,7 +31,7 @@
   ifconfig ${interface_name} down
   ```
 
-  If you don't see any erors, it means the command got executed properly. Now, that the interface is disabled, we can modify it's options. And, the option that we want to modify in our case is the `ether`, which is the MAC Address.
+  If you don't see any errors, it means the command got executed properly. Now that the interface is disabled, we can modify its options. And, the option that we want to modify in our case is the `ether`, which is the MAC Address.
 
 - We can now change the MAC Address using the command:
 
@@ -45,7 +45,7 @@
   ifconfig ${interface_name} up
   ```
 
-  If we don't see the error it means the command got exectued properly.
+  If we don't see the error it means the command got executed properly.
 
 - Now, use `ifconfig` command again to check if the MAC Address has changed again or not. Now, if you look at the `ether` option of the `interface_name` we have been using so far, it's been modified to what we have set.
 
@@ -103,8 +103,8 @@
 
 - We can use Python Modules to execute system commands.
 - The `subprocess` module contains a number of functions for this purpose.
-- It can execute any command, doesn't nessecarily have to be a linux command.
-- If we execute the script from Windows, it will allow us to exeucte windows commands. If we run scripts on mac, it will allow you to execute mac commands. If you run from linux, it let's you run linux based commands.
+- It can execute any command, doesn't necessarily have to be a linux command.
+- If we execute the script from Windows, it will allow us to execute windows commands. If we run scripts on mac, it will allow you to execute mac commands. If you run from linux, it let's you run linux based commands.
 - In our case, we will be using the `subprocess` module to execute the `ifconfig` command, and change the MAC Address of the interface.
 - The `subprocess` module contains a number of functions for this purpose. All of them are used to execute system commands, and return the output of the command, but in different ways.
 - For example, some of them will run commands in the background, some in foreground, some will return the output of the command, some will not, some will return the error if any, some will not.
@@ -163,3 +163,5 @@
     ```
 
 - In the program, we didn't use `shell=True` in the `subprocess.call()` function. This is because we are passing the command and its arguments as a list, which is the recommended way to avoid shell injection vulnerabilities. If you use `shell=True`, you should be very careful about the input to avoid executing arbitrary commands.
+
+

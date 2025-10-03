@@ -4,7 +4,7 @@
 - [Network Hacking - Pre Connection Attacks](#network-hacking---pre-connection-attacks)
   - [Packet Sniffing Basics](#packet-sniffing-basics)
   - [Wifi Bands](#wifi-bands)
-  - [Tageted Packet Sniffing](#tageted-packet-sniffing)
+  - [Targeted Packet Sniffing](#targeted-packet-sniffing)
   - [Deauthentication Attack](#deauthentication-attack)
 <!-- /TOC -->
 ---
@@ -14,12 +14,13 @@
 ## Packet Sniffing Basics
 
 - Packet sniffing is the process of capturing and analyzing network packets to gather information about the network traffic.
-- This is used to analyze and view detailed info about netwrok around us.
-- Now, that we have monitor mode enabled on our wireless interface, we are able to capture all the wifi packets sent within our range, even if the packet is not directed to our device, even if we are not connected to the target network or even without knowing the key/password of the target network.
-- So, right now all we need is a program that can capture and analyze these packets.
+- This is used to analyze and view detailed information about the network around us.
+- Now that we have monitor mode enabled on our wireless interface, we are able to capture all the wifi packets sent within our range. 
+- We can capture them even if the packet is not directed to our device, if we are not connected to the target network, or without knowing the key/password of the target network.
+- Now all we need is a program that can capture and analyze these packets.
 
 >[!IMPORTANT]
->The one we are using is `airodump-ng`, which is a part of the Aircrack-ng suite. It is a packet snifffer, a program designed to capture packets hwile in monitor mode. So, it allows us to see all the wireless netowkrs around us, and show us detailed information about it's MAC Address, it's channel, it's encryption, the clients connected to the network, and more.
+>The program we are using is `airodump-ng`, which is a part of the Aircrack-ng suite. It is a packet sniffer; a program designed to capture packets while in monitor mode. Iit allows us to see all the wireless networks around us, and show us detailed information about its MAC Address, its channel, its encryption, the clients connected to the network, and more.
 
 - To run the program use the command:
 
@@ -55,22 +56,22 @@
 - Now, let's analyze the output to understand what it's actually showing:
 
   - **ESSID**: The name of the wireless network.
-  - **BSSID**: The MAC address of the Target Network.
+  - **BSSID**: The MAC address of the target network.
   - **PWR**: The signal strength of the network.
   - **Beacons**: The number of beacon frames sent by the network in order to announce its presence.
   - **#Data**: The number of data packets captured from the network.
   - **#/s**: The number of data packets captured per second.
-  - **CH**: The channel on which the network iworks on.
+  - **CH**: The channel on which the network broadcasts and receives on.
   - **MB**: The maximum speed of the network.
-  - **ENC**: The encryption type used by the network (e.g., WPA2, WPA3).
+  - **ENC**: The encryption type used by the network (e.g. WPA2, WPA3).
   - **CIPHER**: The cipher used for encryption.
-  - **AUTH**: The authentication method used by the network (e.g., PSK
+  - **AUTH**: The authentication method used by the network (e.g. PSK)
 
 ## Wifi Bands
 
-- The Band of the netowkr defines what freuqency it can use to broadcast the signal. This means it alos defines the frequency that the clients or the computers need to be able to support and use inorder to be able to connect to this network.
-- The main used in WiFi networks are `2.4GHz` and `5GHz` bands.
-- When we initially executed the `airodump-ng` command, we saw the networks listed but they were all 2.4GHz networks. This is because the wireless adapter we are using only supports the 2.4GHz band and 5GHHz as well. But, it's default channel is set to 2.4GHz.
+- The band of the network defines what frequency it can use to broadcast the signal. This means it also defines the frequency that the clients or the computers need to be able to support and use in order to be able to connect to this network.
+- The main bands used in WiFi networks are `2.4GHz` and `5GHz`.
+- When we initially executed the `airodump-ng` command, we saw the networks listed but they were all 2.4GHz networks. Although the wireless adapter we are using supports both the 2.4GHz and 5GHz bands, its default channel is set to 2.4GHz.
 - To see the networks on the 5GHz band, we can use the `--band` option with `airodump-ng`:
 - So, the modified command would be:
 
@@ -81,7 +82,7 @@
     `a` stands for 5GHz and `b` stands for 2.4GHz.
     `abg` means we want to see both 2.4GHz and 5GHz networks.
 
-    And, the output will show the networks on the 5GHz band networks as well.
+   The output will show the networks on the 5GHz band networks as well.
 
     ```bash
     CH 60 ][ Elapsed: 1 min ][ 2025-07-25 12:54 
@@ -107,25 +108,25 @@
 
     ```
 
-- Now, if you see we see much more networks than before, and we can see the networks on the 5GHz band as well.
-- Also, keep in mind that in order to sniff data on 5GHz frequency, your wireless adapter must support 5GHz band. If it doesn't, you won't be able to see the networks on that band.
+- We see many more networks than before because we can see the networks on the 5GHz band as well.
+- Keep in mind that in order to sniff data on the 5GHz frequency, your wireless adapter must support the 5GHz band. If it doesn't, you won't be able to see the networks on that band.
 
-## Tageted Packet Sniffing
+## Targeted Packet Sniffing
 
 - In order to capture packets from a specific network, we can use the `--bssid` option with `airodump-ng` command.
 - The `--bssid` option allows us to specify the MAC address of the target network we want to capture packets from.
-- So, we will now modify our command as:
+- We modify our command to be:
 
     ```bash
     root@kali:~# airodump-ng --bssid <BSSID> --channel <CHANNEL> --write <FILENAME> wlan0
     ```
 
-- What this command does is, it will capture packets from the specified `bssid` or `MAC Address` of the target network, on the specified `channel`, and save the captured packets to a file with the specified `filename` using `wlan0` as the wireless interface.
+- This command will capture packets from the specified `bssid` or `MAC Address` of the target network, on the specified `channel`, and save the captured packets to a file with the given `filename` using `wlan0` as the wireless interface.
 
-- So, when we run a command like this, we get the following output:
+- When we run a command like this, we get the following output:
 
     ```bash
-    oot@kali:~# airodump-ng --bssid 8C:DC:02:8A:72:D0 --channel 12 --write test wlan0
+    root@kali:~# airodump-ng --bssid 8C:DC:02:8A:72:D0 --channel 12 --write test wlan0
     20:28:55  Created capture file "test-02.cap".
 
     CH 12 ][ Elapsed: 1 min ][ 2025-07-25 20:30 
@@ -143,7 +144,7 @@
     Quitting...
     ```
 
-- Now, we have some new files in our current working directory, which contain the data that we captured. So, now if we do `ls -a`, we will see the following files:
+- We have some new files in our current working directory, which contain the data that we captured. If we do `ls -a`, we will see the following files:
 
     ```bash
     root@kali:~# ls -a
@@ -159,20 +160,20 @@
     .dbus             .profile.bak      Pictures         test-01.kismet.netxml
     ```
 
-- So, you we have a `csv` file, a `cap` file, a `kismet.netxml` file, and a `kismet.csv` file. The main file that we will be using here is the `cap` file, which contains the raw packets that we captured from the target network.
-- The `cap` file contains the data that we captured from the target network during the period. And, should contain everything that was sent to/from the target network during that time. It should contain URLs, chat mesasages, usernames, passwords or anything that any of these devices did on the internet, because anything that they have to do will have to be sent to the router.
+- We have a `csv` file, a `cap` file, a `kismet.netxml` file, and a `kismet.csv` file. The main file that we will be using here is the `cap` file.
+- The `cap` file contains the data that we captured from the target network during the period. It should contain everything that was sent to/from the target network during that time. It should contain URLs, chat messages, usernames, passwords or anything that any of these devices did on the internet, because anything that they have to do will have to be sent to the router.
 - The only problem is that our target network is encrypted with `WPA2`, which means that the data is encrypted and we cannot read it directly.
-- But, still we can analyze the packets using a tool called `Wireshark`, which is a network protocol analyzer that can read and analyze the packets in the `cap` file.
+- But we can analyze the packets using a tool called `Wireshark`, which is a network protocol analyzer that can read and analyze the packets in the `cap` file.
 
 ## Deauthentication Attack
 
 - The Deauthentication attack allows us to disconnect a client from a wireless network by sending deauthentication frames to the target client.
-- For, this we will be pretending to be the client that we want to disconnect by changing our MAC Address to the MAC Address of the client, and tell the router that, we want to disconnect from you. Than we are going to pretend to be the router, by changing our MAC Address to the MAC Address of the router, and tell the client that, we want to disconnect you.
-- This will succesfully allow us to disconnect or deauthenticate any client from any network.
+- For this we will be pretending to be the client that we want to disconnect by changing our MAC Address to the MAC Address of the client, and tell the router that we want to disconnect from it. Then we are going to pretend to be the router, by changing our MAC Address to the MAC Address of the router, and tell the client that we want to disconnect it.
+- This will successfully allow us to disconnect or deauthenticate any client from any network.
 
 - For this we will be using the `aireplay-ng` command, which is a part of the `aircrack-ng` suite. It allows us to send deauthentication frames to the target client.
 
-- In order to do so use the command:
+- In order to do so, use the command:
 
     ```bash
     root@kali:~# aireplay-ng --deauth 100000000 -a <BSSID> -c <CLIENT_MAC> -D wlan0
@@ -180,7 +181,7 @@
 
   - Remove `-D` if the target network is 2.4GHz Network.
 
-- I tested this on my mobile, and my mobile got disconnected from the network, and it tried to reconnect to the network, but it failed to do so. And, it kept trying to reconnect for a while, but it failed to do so.
+- I tested this on my mobile, and my mobile got disconnected from the network. It tried to reconnect to the network, but it failed to do so. It kept trying to reconnect for a while, but it failed to do so.
 
 - Below are the logs:
 
@@ -280,4 +281,6 @@
     Quitting...
     ```
 
-- The `Probe` showing the `WIFI_NAME` is the mobile trying to reconnect to the network, and it is sending probe requests to the network, but it is not able to connect to the network because we have disconnected it using the deauthentication attack.
+- The `Probe` showing the `WIFI_NAME` is the mobile trying to reconnect to the network. It is sending probe requests to the network but it is not able to connect to the network because we have disconnected it using the deauthentication attack.
+
+
