@@ -36,6 +36,8 @@ This repository is a comprehensive tutorial series for ethical hacking and penet
 - <a href="https://ln5.sync.com/dl/a524d0280/view/default/23995984090004?sync_id=0#fgbzw355-bzuq9n6t-yypf24kv-7rfsi8xu">VMware Workstation</a>
 - <a href="https://drive.google.com/file/d/1-TIp1Jnj5avio3v_hpLiWrZgKXIDAZIU/view">Windows 10 VM - Google Drive Server</a>
 - <a href="https://ln5.sync.com/dl/69a8cb2b0/view/default/11829848200004?sync_id=0#k2xyv9ke-qevy6hgz-tavwxu3c-78858267">Windows 10 VM - Sync.com Server</a>
+- <a href="https://github.com/DhanushNehru/Ultimate-Cybersecurity-Resources">Cybersecurity Resources</a>
+
 
 ## Contributing
 
