@@ -10,6 +10,7 @@
   - [Connecting Wireless adapter to Kali ](#connecting-wireless-adapter-to-kali-)
   - [Wireless Modes](#wireless-modes)
     - [Enabling Monitor Mode on Wireless Adapter](#enabling-monitor-mode-on-wireless-adapter)
+    - [Path](#path)
 <!-- /TOC -->
 ---
 
@@ -200,3 +201,12 @@
 
 - Finally, we enable the Wireless Adapter again using `ifconfig wlan0 up`.
 - Now, if we run `iwconfig` again, we can see that the mode of the Wireless Adapter has been changed to `Monitor Mode`.
+
+---
+
+
+### Path
+
+<b>
+[Next Lesson: Network Hacking: Pre-Connection Attacks](./lesson-02.md)
+</b>
