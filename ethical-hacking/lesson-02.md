@@ -290,6 +290,5 @@
 ### Path
 
 <b>
-<- [Previous Lesson: Ethical Hacking for Beginners](./lesson-01.md)
-[Next Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md) ->
+<- [Previous Lesson: Ethical Hacking for Beginners](./lesson-01.md) <br/> [Next Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md) ->
 </b>

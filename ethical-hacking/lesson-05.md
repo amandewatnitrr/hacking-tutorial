@@ -6,6 +6,7 @@
   - [Discovering Devices Connected to the Same Network](#discovering-devices-connected-to-the-same-network)
   - [Gathering Sensitive Information about Connected Devices](#gathering-sensitive-information-about-connected-devices)
     - [Gathering More Sensitive Information(Services, OS, etc.)](#gathering-more-sensitive-informationservices-os-etc)
+    - [Path](#path)
 
 
 ## Discovering Devices Connected to the Same Network
@@ -106,3 +107,11 @@
 - We can also categorize discovered clients based on the services running on them.
 
   ![](../imgs/service_view_zenmap.png)
+
+---
+
+### Path
+
+<b>
+<- [Previous Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md) <br/> [Next Lesson: Network Hacking Post Connection Attacks - MITM Attacks](./lesson-06.md) ->
+</b>

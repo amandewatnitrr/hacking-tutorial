@@ -11,6 +11,7 @@
   - [Creating a Wordlist](#creating-a-wordlist)
   - [Cracking WPA/WPA2 Key using a Wordlist Attack](#cracking-wpawpa2-key-using-a-wordlist-attack)
   - [Configuring Wireless Settings for Maximum Security](#configuring-wireless-settings-for-maximum-security)
+    - [Path](#path)
 
 
 ---
@@ -714,3 +715,11 @@
 - Make sure WPS is disabled on your access point. WPS is a feature that allows users to easily connect to a wireless network by pressing a button on the router, but it can also be exploited by attackers to gain access to the network.
 - Use a strong password for your wireless network. A strong password should be at least 12 characters long, and should include a mix of uppercase and lowercase letters, numbers, and special characters.
 - Use a unique SSID for your wireless network. Avoid using default SSIDs, as they can be easily guessed by attackers.
+
+---
+
+### Path
+
+<b>
+<- [Previous Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md) <br/> [Next Lesson: Network Hacking Post Connection Attacks - Information Gathering](./lesson-05.md) ->
+</b>
