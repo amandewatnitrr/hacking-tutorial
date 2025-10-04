@@ -86,7 +86,25 @@ Magic: thanks to modular arithmetic, this always works!
 
 ---
 
-![ll2](../imgs/ll2.png)
+``` mermaid
+flowchart TD
+
+    A[🔐 Start: RSA Key Generation] --> B[✨ Pick two large primes p & q]
+    B --> C[🔲 Compute modulus n = p * q]
+    C --> D[🧑‍🏫 Compute Euler's totient φ of n = p-1 * q-1]
+    D --> E[🔑 Choose public exponent e = 3 or 65537]
+    E --> F[🧙 Find private exponent d such that d * e ≡ 1 mod φ of n]
+    F --> G[🎉 Keys Ready]
+
+    G --> H1[🌍 Public Key: e , n]
+    G --> H2[🔒 Private Key: d , n]
+
+    H1 --> I1[📤 Encryption: C = M^e mod n]
+    H2 --> I2[📥 Decryption: M = C^d mod n]
+
+    I1 --> J[🔄 Message securely transmitted]
+    I2 --> J
+```
 
 ## Toy Example (Small Numbers)
 
