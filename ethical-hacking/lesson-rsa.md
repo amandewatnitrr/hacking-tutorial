@@ -86,6 +86,8 @@ Magic: thanks to modular arithmetic, this always works!
 
 ---
 
+![ll2](../imgs/ll2.png)
+
 ## Toy Example (Small Numbers)
 
 ⚠️ Don’t try this at home with real secrets — small numbers are too easy to crack. This is just a classroom demo.  
