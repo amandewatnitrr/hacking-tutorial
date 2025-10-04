@@ -10,7 +10,7 @@
   - [Connecting Wireless adapter to Kali ](#connecting-wireless-adapter-to-kali-)
   - [Wireless Modes](#wireless-modes)
     - [Enabling Monitor Mode on Wireless Adapter](#enabling-monitor-mode-on-wireless-adapter)
-  - [Extras - Learning Section -🔐 RSA Encryption](#extras---learning-section---rsa-encryption)
+- [Extras - Learning Section -🔐 RSA Encryption](#extras---learning-section---rsa-encryption)
     - [📌 What is RSA?](#-what-is-rsa)
   - [🧮 The Math Behind RSA (Step by Step)](#-the-math-behind-rsa-step-by-step)
       - [Step 1: Pick Two Large Primes ✨](#step-1-pick-two-large-primes-)
@@ -218,7 +218,7 @@
 
 ---
 
-## Extras - Learning Section -🔐 RSA Encryption
+# Extras - Learning Section -🔐 RSA Encryption
 
 ### 📌 What is RSA?
 
