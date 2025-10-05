@@ -6,6 +6,7 @@
   - [WEP Capturing Basics](#wep-capturing-basics)
   - [Fake Authentication Attack](#fake-authentication-attack)
     - [ARP Request Replay Attack](#arp-request-replay-attack)
+    - [Path](#path)
 
 ---
 
@@ -286,3 +287,11 @@ sequenceDiagram
     ```
 
 - `-b` is the BSSID of the target network, and `-h` is the MAC address of the hacker's adapter.
+
+---
+
+### Path
+
+<b>
+<- [Previous Lesson: Network Hacking - Pre Connection Attacks](./lesson-02.md) <br/> [Next Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md) ->
+</b>

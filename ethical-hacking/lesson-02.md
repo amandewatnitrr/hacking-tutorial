@@ -6,6 +6,7 @@
   - [Wifi Bands](#wifi-bands)
   - [Targeted Packet Sniffing](#targeted-packet-sniffing)
   - [Deauthentication Attack](#deauthentication-attack)
+    - [Path](#path)
 <!-- /TOC -->
 ---
 
@@ -284,3 +285,10 @@
 - The `Probe` showing the `WIFI_NAME` is the mobile trying to reconnect to the network. It is sending probe requests to the network but it is not able to connect to the network because we have disconnected it using the deauthentication attack.
 
 
+---
+
+### Path
+
+<b>
+<- [Previous Lesson: Ethical Hacking for Beginners](./lesson-01.md) <br/> [Next Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md) ->
+</b>
