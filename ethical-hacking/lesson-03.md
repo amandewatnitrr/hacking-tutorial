@@ -292,6 +292,4 @@ sequenceDiagram
 
 ### Path
 
-<b>
-<- [Previous Lesson: Network Hacking - Pre Connection Attacks](./lesson-02.md) <br/> [Next Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md) ->
-</b>
+<- [Previous Lesson: Network Hacking - Pre Connection Attacks](./lesson-02.md)  |  [Next Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md) ->
