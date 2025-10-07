@@ -112,6 +112,4 @@
 
 ### Path
 
-<b>
-<- [Previous Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md) <br/> [Next Lesson: Network Hacking Post Connection Attacks - MITM Attacks](./lesson-06.md) ->
-</b>
+<- [Previous Lesson: Network Hacking - Gaining Access - WPA/WPA2 Cracking](./lesson-04.md)  |  [Next Lesson: Network Hacking Post Connection Attacks - MITM Attacks](./lesson-06.md) ->

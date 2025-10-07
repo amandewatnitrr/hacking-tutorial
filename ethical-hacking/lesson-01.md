@@ -398,6 +398,4 @@ RSA is strong in theory, but weak in practice if misused:
 
 ## Path
 
-<b>
 [Next Lesson: Network Hacking: Pre-Connection Attacks](./lesson-02.md)
-</b>
