@@ -720,6 +720,4 @@
 
 ### Path
 
-<b>
-<- [Previous Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md) <br/> [Next Lesson: Network Hacking Post Connection Attacks - Information Gathering](./lesson-05.md) ->
-</b>
+<- [Previous Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md)  |  [Next Lesson: Network Hacking Post Connection Attacks - Information Gathering](./lesson-05.md) ->
