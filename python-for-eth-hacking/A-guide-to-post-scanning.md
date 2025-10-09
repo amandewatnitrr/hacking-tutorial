@@ -57,7 +57,7 @@ What to look for
 
 * Pick the IPv4 address that belongs to your machine and note the subnet (e.g., `192.168.1.15/24 in the screenshot`).
 
-![OUTPUT1](./../imgs/1.png)
+![OUTPUT1](./../imgs/port-scanning1.png)
 
 ---
 
@@ -85,7 +85,7 @@ nmap -sn 192.168.1.15/24
 ```
 * `-sn` = host discovery only 
 
-![OUTPUT2](./../imgs/2.png)
+![OUTPUT2](./../imgs/port-scanning1.png)
 
 B) Full port range on localhost
 
@@ -95,7 +95,7 @@ nmap -sT -p 1-65535 127.0.0.1
 * `-sT` performs full TCP handshakes and is easy to understand for beginners.
 * Slow but useful to see everything listening on your own machine.
 
-![OUTPUT3](./../imgs/3.png)
+![OUTPUT3](./../imgs/port-scanning1.png)
 
 ### Before we proceed, install & start an SSH server so that we can see a real port open in the scan
 ```bash
@@ -111,7 +111,7 @@ nmap -sT -sV --top-ports 50 192.168.1.15
 
 * `-sV` probes services to guess software/version.
 
-![OUTPUT4](./../imgs/4.png)
+![OUTPUT4](./../imgs/port-scanning1.png)
 
 ---
 
