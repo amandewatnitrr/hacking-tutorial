@@ -44,7 +44,7 @@ python bettercap_controller.py wlan0
 
 Below is a screenshot from an actual test session showing the script in operation:
 
-![Live Demo Session](images/bettercap_arp_op.jpg)
+![Live Demo Session](images/bettercap_arp_op.png)
 
 The demonstration shows:
 - **Device Discovery Phase**: Automatic network scanning and device enumeration
