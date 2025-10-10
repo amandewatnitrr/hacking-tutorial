@@ -20,7 +20,7 @@ The scanner connects to one or more hosts and ports concurrently, attempts to re
 
 The diagram below shows the end-to-end sequence: CLI parsing, host collection, async scheduling with a semaphore, banner grabbing, fingerprinting, and result collection/output.
 
-![Async Port Scanner Architecture](async_port_scanner_flow_edges.jpg)
+![Async Port Scanner Architecture](python-scripts/images/async_port_scanner_flow_edges.jpg)
 
 Key steps:
 
@@ -52,9 +52,9 @@ This scans the listed ports on 127.0.0.1, printing open ports, banners, and the 
 
 Below are screenshots from a real demo session: one shows the JSON results, the other the console summary.
 
-![JSON Output Example](async2.jpg)
+![JSON Output Example](python-scripts/images/async2.jpg)
 
-![Summary Output Example](async.jpg)
+![Summary Output Example](python-scripts/images/async.jpg)
 
 Representative raw JSON:
 
@@ -147,24 +147,3 @@ Do not use on unauthorized networks.
 
 ---
 
-## Repository setup
-
-To ensure the images render on GitHub (or other web viewers), place the following files in your repository:
-
-- `async_port_scanner_flow_edges.jpg`
-- `async2.jpg`
-- `async.jpg`
-
-The image references in this README use relative paths, so the images should be in the same directory as the README file.
-
-If you prefer to organize assets in a folder, create an `images/` directory and update the Markdown references:
-
-```markdown
-![Async Port Scanner Architecture](images/async_port_scanner_flow_edges.jpg)
-![JSON Output Example](images/async2.jpg)
-![Summary Output Example](images/async.jpg)
-```
-
----
-
-License: MIT
