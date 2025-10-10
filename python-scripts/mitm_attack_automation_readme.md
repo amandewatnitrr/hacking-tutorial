@@ -6,7 +6,7 @@ A streamlined Python automation tool that combines netdiscover network enumerati
 System Architecture
 The diagram illustrates the complete automation workflow from network discovery through active MITM operations.
 
-![MITM Attack Automation - System Architecture](images Execution Flow
+![MITM Attack Automation - System Architecture](
 
 Input Validation → Interface argument and permission checks
 
@@ -25,7 +25,7 @@ Live Monitoring → Real-time traffic display with graceful shutdown
 Live Demonstration
 Below is a screenshot from an actual test session showing the complete workflow in action:
 
-![MITM Attack Demo Session](images/mitm_automation:
+![MITM Attack Demo Session](images/mitm_automation_:
 
 Automated Discovery: netdiscover finding 3 devices with gateway identification
 
@@ -163,7 +163,14 @@ Report findings through proper channels
 
 Follow applicable local and federal laws
 
-
+Repository Structure
+text
+mitm-attack-automation/
+├── README.md
+├── mitm_attack_automator.py
+└── images/
+    ├── mitm_attack_flow.jpg
+    └── mitm_automation_op.jpg
 Educational Value
 This project demonstrates:
 
@@ -204,4 +211,18 @@ Install from official sources
 
 Verify PATH includes bettercap location
 
-License: MIT - Educational and authorized testing purposes only
+Contributing
+Contributions are welcome! Please ensure all contributions:
+
+Maintain educational focus and ethical guidelines
+
+Include comprehensive error handling
+
+Follow security best practices
+
+Provide clear documentation and examples
+
+License
+MIT License - Educational and authorized testing purposes only
+
+Disclaimer: This tool is designed for educational purposes and authorized security testing only. Users are solely responsible for complying with applicable laws and obtaining proper authorization before use.
