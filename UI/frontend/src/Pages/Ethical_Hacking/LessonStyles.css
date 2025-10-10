@@ -1,0 +1,182 @@
+/* Lesson Page Styles */
+.lesson-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-left: 300px; /* Account for sidebar width */
+  margin-top: 100px;  /* Account for navbar height */
+  color: #00ff00;
+  background-color: #000000;
+  min-height: calc(100vh - 100px);
+}
+
+.lesson-page h1 {
+  color: #00ff00;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid #00ff00;
+  padding-bottom: 1rem;
+  font-weight: bold;
+}
+
+.lesson-page h2 {
+  color: #00ff00;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.lesson-page h3 {
+  color: #00ff00;
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
+.lesson-page h4 {
+  color: #00ff00;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.lesson-page p {
+  color: #00cc00;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.lesson-page ul, .lesson-page ol {
+  color: #00cc00;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.lesson-page li {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.lesson-page strong {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.lesson-page code {
+  background-color: #111111;
+  color: #00ff00;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #00ff00;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.code-block {
+  background-color: #111111;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+  white-space: pre-wrap;
+  font-weight: bold;
+}
+
+.lesson-content section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #0a0a0a;
+  border: 1px solid #003300;
+  border-radius: 8px;
+}
+
+.memory-layout {
+  background-color: #111111;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.memory-layout h3 {
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.memory-layout ul {
+  list-style: none;
+  padding: 0;
+}
+
+.memory-layout li {
+  background-color: #002200;
+  margin: 0.2rem 0;
+  padding: 0.5rem;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.warning-box {
+  background-color: #1a0a00;
+  border: 2px solid #ff6600;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.warning-box h3 {
+  color: #ff6600;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.warning-box ul {
+  color: #ffaa66;
+}
+
+.warning-box li {
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lesson-page {
+    padding: 1rem;
+    margin-left: 220px; /* Account for smaller sidebar on mobile */
+  }
+  
+  .lesson-page h1 {
+    font-size: 2rem;
+  }
+  
+  .lesson-page h2 {
+    font-size: 1.5rem;
+  }
+  
+  .lesson-page h3 {
+    font-size: 1.3rem;
+  }
+  
+  .code-block {
+    font-size: 12px;
+  }
+}

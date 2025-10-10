@@ -1,0 +1,237 @@
+/* Hacker Theme - Black & Green */
+* {
+  font-weight: bold; /* Make all fonts thicker */
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #000000;
+  color: #00ff00;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #000000;
+}
+
+.home-button{
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 1rem;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  border-bottom: 2px solid #00ff00;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 255, 0, 0.3);
+}
+
+.home-title{
+  padding: 0;
+  margin: 0;
+  font-size: 1.8rem;
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.home-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-button a {
+  margin-right: 2%;
+  color: #00ff00;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.home-button a:hover {
+  color: #000000;
+  background-color: #00ff00;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+.home-title:hover{
+  color: #000000;
+}
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 280px;
+  height: calc(100vh - 80px);
+  background-color: #000000;
+  border-right: 2px solid #00ff00;
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 999;
+  box-shadow: 2px 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.dropdown-container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #111111;
+  color: #00ff00;
+  cursor: pointer;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.dropdown-header:hover {
+  background-color: #001a00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.arrow {
+  transition: transform 0.3s;
+  font-size: 12px;
+  color: #00ff00;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  background-color: #111111;
+  border: 1px solid #00ff00;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  margin-top: 0;
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+}
+
+.lesson-item {
+  padding: 10px 16px;
+  color: #00cc00;
+  cursor: pointer;
+  border-bottom: 1px solid #003300;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.lesson-item:hover {
+  background-color: #002200;
+  color: #00ff00;
+}
+
+.lesson-item:last-child {
+  border-bottom: none;
+}
+
+.main-content {
+  margin-left: 300px;
+  margin-top: 100px;
+  padding: 2rem;
+  text-align: left;
+  background-color: #000000;
+  color: #00ff00;
+  min-height: calc(100vh - 100px);
+}
+
+.main-content h2 {
+  color: #00ff00;
+  font-size: 2rem;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.main-content p {
+  color: #00cc00;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.lesson-content {
+  margin-top: 20px;
+}
+
+.markdown-content {
+  background-color: #111111;
+  border: 1px solid #00ff00;
+  border-radius: 8px;
+  padding: 20px;
+  color: #00ff00;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font-weight: bold;
+}
+
+.welcome-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #111111;
+  border: 1px solid #00ff00;
+  border-radius: 8px;
+}
+
+.welcome-info h3 {
+  color: #00ff00;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.welcome-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.welcome-info li {
+  color: #00cc00;
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #001a00;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    margin-left: 220px;
+  }
+  
+  .home-title {
+    font-size: 1.4rem;
+  }
+}
