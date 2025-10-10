@@ -20,7 +20,7 @@ The scanner connects to one or more hosts and ports concurrently, attempts to re
 
 The diagram below shows the end-to-end sequence: CLI parsing, host collection, async scheduling with a semaphore, banner grabbing, fingerprinting, and result collection/output.
 
-![Async Port Scanner Architecture](python-scripts/images/async_port_scanner_flow_edges.jpg)
+![Async Port Scanner Architecture](python-scripts/images/async_port_scanner_flow_edges.png)
 
 Key steps:
 
@@ -52,9 +52,9 @@ This scans the listed ports on 127.0.0.1, printing open ports, banners, and the 
 
 Below are screenshots from a real demo session: one shows the JSON results, the other the console summary.
 
-![JSON Output Example](python-scripts/images/async2.jpg)
+![JSON Output Example](python-scripts/images/async2.png)
 
-![Summary Output Example](python-scripts/images/async.jpg)
+![Summary Output Example](python-scripts/images/async.png)
 
 Representative raw JSON:
 
