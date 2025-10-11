@@ -1,6 +1,6 @@
 # Emacs Lessons: Novice Level
 
-![Alt text for the image](../assets/images/emacs-logo-png.png "Emacs Official Logo")
+<img src="../assets/images/emacs-logo-png.png" width="400">
 
 Welcome to the **Novice Level** of our Emacs learning series.  
 This stage introduces you to the basics of Emacs and helps you feel comfortable working inside the editor.  
