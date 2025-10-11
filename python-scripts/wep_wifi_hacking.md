@@ -108,3 +108,9 @@ sequenceDiagram
     OS-->>Script: Processes Terminated
     Script->>Script: Final File Cleanup
     Script->>OS: Exit
+                  
+---
+
+### Screenshots
+
+![wep_wifi_hacking.py running](/imgs/wep_wifi_hacking.png)

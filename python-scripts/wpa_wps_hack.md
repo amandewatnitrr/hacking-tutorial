@@ -96,3 +96,7 @@ sequenceDiagram
     Script->>Reaver: Terminate Process (proc.terminate())
     Script->>OS: Process cleanup (proc.wait())
     Script->>OS: Exit
+                      
+---
+
+### Screenshots

@@ -101,3 +101,15 @@ sequenceDiagram
     Script->>OS: save_report(format=...)
     OS-->>Script: Report file saved
     Script->>User: Final confirmation and report path
+    
+---
+
+### Screenshots
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap1.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap2.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap3.png)

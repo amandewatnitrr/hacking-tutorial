@@ -82,3 +82,9 @@ sequenceDiagram
     Script->>OS: subprocess.call(["ifconfig", "eth0"])
     OS-->>Script: Display current interface config
     Script->>User: Print Verification Output
+          
+---
+
+### Screenshots
+
+![mac_address_change.py running](/imgs/mac_address_change.jpg)

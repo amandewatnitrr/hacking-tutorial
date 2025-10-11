@@ -92,3 +92,11 @@ sequenceDiagram
     TestServers-->>Loop: Cleanup complete
     Loop->>Script: Event loop finished
     Script->>User: Display "Demo finished" and Exit
+          
+---
+
+### Screenshots
+
+![portscanner_test.py running](/imgs/portscanner_test.png)
+
+![portscanner_test.py running](/imgs/portscanner_test2.png)

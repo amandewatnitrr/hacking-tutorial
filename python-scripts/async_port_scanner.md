@@ -113,3 +113,9 @@ sequenceDiagram
         CLI->>CLI: Write all results to --output JSON file
     end
     CLI-->>User: Display output and Exit (0)
+
+---
+
+### Screenshots
+
+![async_por_scanner.py running](/imgs/async_port_scanner.jpg)

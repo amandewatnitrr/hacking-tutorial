@@ -113,3 +113,11 @@ sequenceDiagram
     FS-->>Script: File successfully written
     Script->>User: Wrote X entries to mylist.txt
     Script->>OS: Exit with code 0 (Success)
+                  
+---
+
+### Screenshots
+
+![wordlist_generator.py running](/imgs/wordlist_generator.jpg)
+
+![wordlist_generator.py running](/imgs/wordlist_generator2.jpg)

@@ -106,3 +106,13 @@ sequenceDiagram
     
     User->>Script: Manual Termination (Ctrl+C)
     Script->>Script: Exit
+      
+---
+
+### Screenshots
+
+![ids_probe.py running](/imgs/ids_probe.png)
+
+![ids_probe.py running](/imgs/ids_probe1.png)
+
+![ids_probe.py running](/imgs/ids_probe2.png)

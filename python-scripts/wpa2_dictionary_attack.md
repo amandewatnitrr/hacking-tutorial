@@ -117,3 +117,9 @@ sequenceDiagram
     end
     
     MainScript->>OS: Exit
+                      
+---
+
+### Screenshots
+
+![wpa2_dictionary_attack.py running](/imgs/wpa2_dictionary_attack.png)
