@@ -58,7 +58,7 @@ The script's execution is controlled by the `main()` function, which is called w
 
 ### Screenshots
 
-![bettercap_arp_spoofing_script.py running](/imgs/bettercap_arp_spoofing_script.png)
+![bettercap_arp_spoofing_script.py running](../imgs/bettercap_arp_spoofing_script.png)
 
 ---
 
@@ -94,7 +94,7 @@ sequenceDiagram
     User->>Script: Input target indices & full-duplex choice
     Script-->>Script: Return targets_str, fullduplex
     Script->>Script: Call run_attack(proc, targets, fullduplex)
-    Script->>Bettercap: Send final command (set arp.spoof...; arp.spoof on; net.sniff on)
+    Script->>Bettercap: Send final command (set arp.spoof...)
     Bettercap-->>Script: Begin attack/sniffing and stream logs
     Script->>Script: Loop: Print bettercap output
     User->>Script: Press Ctrl+C (KeyboardInterrupt)

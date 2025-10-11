@@ -76,7 +76,7 @@ The script's execution flow is managed by the standard Python entry point:
 
 ### Screenshots
 
-![async_por_scanner.py running](/imgs/async_port_scanner.jpg)
+![async_por_scanner.py running](../imgs/async_port_scanner.jpg)
 
 ---
 

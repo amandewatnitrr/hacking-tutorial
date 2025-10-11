@@ -63,13 +63,13 @@ The script follows a sequential, four-step flow managed by the `main` function (
 
 ### Screenshots
 
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap.png)
+![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap.png)
 
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap1.png)
+![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap1.png)
 
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap2.png)
+![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap2.png)
 
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap3.png)
+![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap3.png)
 
 ---
 
@@ -78,38 +78,67 @@ The script follows a sequential, four-step flow managed by the `main` function (
 ```mermaid
 sequenceDiagram
     participant User
-    participant Script as https_data_fetcher_bettercap.py
+    participant Main as https_data_fetcher_bettercap.py (main)
+    participant RequestsLib as requests/bs4/cryptography
+    participant Bettercap as bettercap Process
     participant OS as Operating System
-    participant Bettercap
     participant TargetServer as Target HTTPS Server
+    participant FileSystem as Report Filesystem
 
-    User->>Script: Execute Script <url> <iface> [options]
-    Script->>Script: Parse arguments, Start scan timer
+    User->>Main: Execute (sudo python script.py <url> <iface>)
+    Main->>Main: Parse arguments, Start scan timer
 
-    box Analysis Phase 1: Web
-        Script->>TargetServer: fetch_https_data() - HTTP Request (requests library)
-        TargetServer-->>Script: HTTP Response (Headers & HTML Content)
-        Script->>Script: Parse HTML (bs4), analyze headers/cookies/CSP
-        Script->>TargetServer: get_ssl_info() - TLS Handshake via socket
-        TargetServer-->>Script: SSL Certificate & Handshake Details
-        Script->>Script: Check SSL/TLS vulnerabilities (cryptography)
+    activate Main
+    
+    Note over Main: [STEP 1] HTTPS analysis...
+
+    Note over Main,TargetServer: --- Phase 1: Web Analysis Start ---
+    Main->>RequestsLib: fetch_https_data(url, verify_ssl)
+    RequestsLib->>TargetServer: HTTP/S GET Request
+    TargetServer-->>RequestsLib: HTTP/S Response
+    RequestsLib->>RequestsLib: Parse HTML & detect_technologies
+    RequestsLib->>TargetServer: get_ssl_info() (TLS Handshake)
+    TargetServer-->>RequestsLib: SSL Certificate Details
+    RequestsLib->>Main: Return url_data
+    Note over Main,TargetServer: --- Phase 1: Web Analysis End ---
+    
+    Note over Main: [STEP 2] Network analysis...
+
+    Main->>OS: start_bettercap(interface)
+    OS->>Bettercap: Start bettercap Process
+    Bettercap-->>Main: Return bettercap_proc
+
+    alt Bettercap Started
+    
+        Note over Main: [STEP 3] Traffic capture...
+
+        Note over Main,TargetServer: --- Phase 2: Network Capture Start ---
+        Main->>Main: capture_traffic(proc, url, timeout)
+        Main->>Bettercap: Send commands (net.sniff on)
+        Main->>TargetServer: Generate controlled traffic
+        TargetServer-->>Bettercap: Network Traffic Stream
+        Bettercap->>Main: stdout Stream (Parse events)
+        Main->>Bettercap: Send commands (net.sniff off)
+        Bettercap-->>Main: Return network_data
+        Note over Main,TargetServer: --- Phase 2: Network Capture End ---
+        
+        Main->>Bettercap: proc.terminate()
+        Bettercap->>OS: Terminate Process
+        
+    else Bettercap Failed
+        Main->>Main: Skip network capture
     end
+    
+    Note over Main: [STEP 4] Analysis and reporting...
 
-    box Analysis Phase 2: Network
-        Script->>OS: start_bettercap() - subprocess.Popen(sudo bettercap -iface...)
-        OS->>Bettercap: Launch process with necessary modules
-        Bettercap-->>Script: Process Handle/Ready Status
-        Script->>Script: Start capture_traffic() thread
-        Script->>TargetServer: Generate controlled traffic (e.g., extra requests)
-        TargetServer-->>Bettercap: Network Traffic (DNS, TCP, TLS)
-        Bettercap->>Script: stdout: Real-time captured events
-        Script->>Script: Process Bettercap output & perform GeoIP lookup
-        Script->>OS: Terminate Bettercap process
-    end
+    Main->>Main: analyze_and_report(url_data, network_data)
+    Main->>Main: calculate_vulnerability_score()
+    
+    Main->>User: print_summary(report)
+    
+    Main->>FileSystem: save_report(format, dir)
+    FileSystem-->>Main: Report file saved
+    
+    Main->>User: Print final confirmation
 
-    Script->>Script: analyze_and_report()
-    Script->>Script: calculate_vulnerability_score() (Assign Score/Risk Level)
-    Script->>User: print_summary() to console
-    Script->>OS: save_report(format=...)
-    OS-->>Script: Report file saved
-    Script->>User: Final confirmation and report path
+    deactivate Main

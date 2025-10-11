@@ -62,11 +62,11 @@ The script's execution is controlled by the `main()` function, which is the stan
 
 ### Screenshots
 
-![ids_probe.py running](/imgs/ids_probe.png)
+![ids_probe.py running](../imgs/ids_probe.png)
 
-![ids_probe.py running](/imgs/ids_probe1.png)
+![ids_probe.py running](../imgs/ids_probe1.png)
 
-![ids_probe.py running](/imgs/ids_probe2.png)
+![ids_probe.py running](../imgs/ids_probe2.png)
 
 ---
 

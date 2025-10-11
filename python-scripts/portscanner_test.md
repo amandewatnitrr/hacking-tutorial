@@ -54,9 +54,9 @@ The script's execution is initialized by the standard Python entry point, which 
 
 ### Screenshots
 
-![portscanner_test.py running](/imgs/portscanner_test.png)
+![portscanner_test.py running](../imgs/portscanner_test.png)
 
-![portscanner_test.py running](/imgs/portscanner_test2.png)
+![portscanner_test.py running](../imgs/portscanner_test2.png)
 
 ---
 
@@ -64,39 +64,38 @@ The script's execution is initialized by the standard Python entry point, which 
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Script as portscanner_test.py
-    participant Loop as Async Event Loop
-    participant TestServers as Local Test Servers (9001-9004)
+    autonumber
+    participant Main as __main__
+    participant Demo as run_demo()
+    participant ServerSetup as start_servers()
+    participant HTTP as http_server()
+    participant SSH as ssh_server()
+    participant SMTP as smtp_server()
+    participant MySQL as mysql_like_server()
     participant Scanner as AsyncPortScanner
+    participant Scan as scan_multiple()
 
-    User->>Script: Execute Script
-    Script->>Loop: Calls asyncio.run(run_demo())
-    Loop->>Script: Execute run_demo() coroutine
+    Main->>Demo: asyncio.run(run_demo())
+    Demo->>ServerSetup: start_servers(port_map)
+    ServerSetup-->>Demo: retorna lista de servidores
 
-    Script->>Loop: Calls start_servers(port_map)
-    Loop->>TestServers: Bind & Start 4 Server Handlers (HTTP, SSH, SMTP, MySQL)
-    TestServers-->>Loop: Servers are listening (non-blocking)
-    Loop-->>Script: Returns server objects
-
-    Script->>Scanner: Instantiate AsyncPortScanner
-    Script->>Loop: Calls scanner.scan_multiple(["127.0.0.1"], ports)
-
-    loop Concurrent Scanning
-        Scanner->>Loop: Initiate Connection to TestServer X
-        Loop->>TestServers: Connect to Port X
-        TestServers->>Scanner: Send Banner / Receive Probe & Send Response
-        Scanner->>Loop: Close Connection
+    loop Para cada servidor
+        Demo->>HTTP: Inicia servidor em 9001
+        Demo->>SSH: Inicia servidor em 9002
+        Demo->>SMTP: Inicia servidor em 9003
+        Demo->>MySQL: Inicia servidor em 9004
     end
 
-    Loop-->>Scanner: Scan Complete
-    Scanner-->>Script: Returns results dictionary
+    Demo->>Scanner: Instancia AsyncPortScanner(timeout, concurrency, read_bytes)
 
-    Script->>Script: Prints JSON Results
-    Script->>Script: Prints Summary of Open Ports/Banners
+    Demo->>Scan: scan_multiple(["127.0.0.1"], ports)
+    Scan-->>Demo: Retorna resultados JSON
 
-    Script->>Loop: Calls s.close() and s.wait_closed() for all servers
-    Loop->>TestServers: Shut down and unbind ports
-    TestServers-->>Loop: Cleanup complete
-    Loop->>Script: Event loop finished
-    Script->>User: Display "Demo finished" and Exit
+    Demo->>Demo: Exibe resultados JSON e resumo
+
+    loop Encerramento dos servidores
+        Demo->>ServerSetup: s.close()
+        Demo->>ServerSetup: await s.wait_closed()
+    end
+
+    Main-->>Main: Fim da execução
