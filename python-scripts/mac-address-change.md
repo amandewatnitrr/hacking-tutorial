@@ -49,6 +49,12 @@ The script follows a standard Python entry point structure to ensure the main lo
 2.  **Function Call:** It calls the main procedure, `change_mac(interface, new_mac)`, passing the user-provided values, thus executing the MAC address spoofing sequence.
 3.  **Verification (1):** It prints a summary message confirming the intended change.
 4.  **Verification (2):** It executes a final system command: `subprocess.call(["ifconfig", interface])`. This command displays the current configuration details of the interface, allowing the user to visually confirm that the `ether` or `HWaddr` value (the MAC address) has been successfully updated.
+          
+---
+
+### Screenshots
+
+![mac_address_change.py running](/imgs/mac_address_change.jpg)
 
 ---
 
@@ -82,9 +88,3 @@ sequenceDiagram
     Script->>OS: subprocess.call(["ifconfig", "eth0"])
     OS-->>Script: Display current interface config
     Script->>User: Print Verification Output
-          
----
-
-### Screenshots
-
-![mac_address_change.py running](/imgs/mac_address_change.jpg)

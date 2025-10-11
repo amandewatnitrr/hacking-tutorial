@@ -56,6 +56,12 @@ The script's execution is controlled by the `main()` function, which is called w
 
 ---
 
+### Screenshots
+
+![bettercap_arp_spoofing_script.py running](/imgs/bettercap_arp_spoofing_script.png)
+
+---
+
 ### Sequence Diagram
 
 ```mermaid
@@ -94,9 +100,3 @@ sequenceDiagram
     User->>Script: Press Ctrl+C (KeyboardInterrupt)
     Script->>Bettercap: proc.terminate()
     Script->>OS: Exit
-    
----
-
-### Screenshots
-
-![bettercap_arp_spoofing_script.py running](/imgs/bettercap_arp_spoofing_script.png)

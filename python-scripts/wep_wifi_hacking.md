@@ -60,6 +60,12 @@ The overall flow is:
     * If the key is found, or the user presses `Ctrl+C`, the `finally` block executes.
     * It uses **`sudo killall`** to forcefully stop all active `airodump-ng`, `aireplay-ng`, and `aircrack-ng` processes running in the background.
     * A final cleanup removes all remaining `.cap`, `.csv`, and related capture files.
+                      
+---
+
+### Screenshots
+
+![wep_wifi_hacking.py running](/imgs/wep_wifi_hacking.png)
 
 ---
 
@@ -108,9 +114,3 @@ sequenceDiagram
     OS-->>Script: Processes Terminated
     Script->>Script: Final File Cleanup
     Script->>OS: Exit
-                  
----
-
-### Screenshots
-
-![wep_wifi_hacking.py running](/imgs/wep_wifi_hacking.png)

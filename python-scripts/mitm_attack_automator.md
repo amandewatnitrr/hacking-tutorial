@@ -50,6 +50,12 @@ The script's primary control flow is managed within the `if __name__ == "__main_
 3.  **Step 2: Input Collection:** The user is prompted to select a **Target Device** by number. The script validates the input and uses the discovered IP. The user is then asked to confirm the **Gateway IP** (the guessed value is presented as a default).
 4.  **Step 3: Attack Execution:** With all three necessary parameters (`interface`, `client_ip`, `router_ip`) validated, the `run_mitm_attack()` function is called, which immediately launches the configured `bettercap` command.
 5.  **Attack Phase:** The script remains blocked while `bettercap` is running. It handles the `KeyboardInterrupt` (`Ctrl+C`) when the user decides to stop the attack.
+          
+---
+
+### Screenshots
+
+![mitm_attack_automator.py running](/imgs/mitm_attack_automator.png)
 
 ---
 
@@ -85,9 +91,3 @@ sequenceDiagram
     OS->>Script: Return from subprocess.run()
     Script->>User: Display "[+] Attack stopped by user. Exiting."
     Script->>OS: Exit
-          
----
-
-### Screenshots
-
-![mitm_attack_automator.py running](/imgs/mitm_attack_automator.png)

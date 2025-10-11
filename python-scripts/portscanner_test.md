@@ -49,6 +49,14 @@ The script's execution is initialized by the standard Python entry point, which 
 3.  **Scanner Execution:** An instance of `AsyncPortScanner` is created with fast local settings (e.g., `timeout=1.0`). The `await scanner.scan_multiple(...)` method is called, which runs the concurrent scan against the local ports. The script pauses here until all network probes complete.
 4.  **Reporting:** The script prints the complete scan results (`results`) in a formatted JSON structure. It then iterates over the results, filtering only the **open ports** to display a concise summary of the discovered service and banner for each.
 5.  **Cleanup:** A loop executes `s.close()` and `await s.wait_closed()` for every running server. This ensures all network resources are released cleanly before the script exits, completing the demonstration.
+          
+---
+
+### Screenshots
+
+![portscanner_test.py running](/imgs/portscanner_test.png)
+
+![portscanner_test.py running](/imgs/portscanner_test2.png)
 
 ---
 
@@ -92,11 +100,3 @@ sequenceDiagram
     TestServers-->>Loop: Cleanup complete
     Loop->>Script: Event loop finished
     Script->>User: Display "Demo finished" and Exit
-          
----
-
-### Screenshots
-
-![portscanner_test.py running](/imgs/portscanner_test.png)
-
-![portscanner_test.py running](/imgs/portscanner_test2.png)

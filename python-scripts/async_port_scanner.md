@@ -74,6 +74,12 @@ The script's execution flow is managed by the standard Python entry point:
 
 ---
 
+### Screenshots
+
+![async_por_scanner.py running](/imgs/async_port_scanner.jpg)
+
+---
+
 ### Sequence Diagram
 
 This diagram illustrates the main flow of a scan operation, from user input to final output.
@@ -113,9 +119,3 @@ sequenceDiagram
         CLI->>CLI: Write all results to --output JSON file
     end
     CLI-->>User: Display output and Exit (0)
-
----
-
-### Screenshots
-
-![async_por_scanner.py running](/imgs/async_port_scanner.jpg)

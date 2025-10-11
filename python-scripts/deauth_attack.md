@@ -45,6 +45,10 @@ The script's execution begins within the `if __name__ == "__main__":` block, whi
 3.  **Attack Execution:** The `deauth_attack()` function is called. This function immediately executes the `aireplay-ng` command with root privileges (`sudo`).
 4.  **Blocking/Waiting:** At this point, the Python script **pauses** (`subprocess.call` blocks) and waits for the `aireplay-ng` process to finish. Since the attack is set to run "infinitely," the user must manually stop the attack in the terminal (usually via **`Ctrl+C`**).
 5.  **Completion:** Once the `aireplay-ng` process is terminated by the user, the script unblocks and prints the final status message: `[+] Deauthentication attack completed`.
+ 
+---
+
+### Screenshots
 
 ---
 
@@ -80,7 +84,3 @@ sequenceDiagram
     
     Script->>User: Display "[+] Deauthentication attack completed"
     Script->>OS: Exit
-    
----
-
-### Screenshots

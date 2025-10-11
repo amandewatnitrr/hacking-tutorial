@@ -71,6 +71,16 @@ The script initiates execution through the `main()` function, called by the `if 
 4.  **Output:** The structured result dictionary is returned to `main()`.
 5.  **Serialization:** `main()` uses `json.dumps(..., indent=2)` to print the final data structure in a human-readable JSON format to the user's console.
 6.  **Exit:** The script exits with status **0** if the remote collection succeeded (no overall error), or **1** if the remote command/collection process failed.
+              
+---
+
+### Screenshots
+
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh.jpg)
+
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh2.jpg)
+
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh3.jpg)
 
 ---
 
@@ -111,13 +121,3 @@ sequenceDiagram
     LocalScript->>LocalScript: 13. Aggregate full result (JSON Dict)
     LocalScript-->>User: 14. Print final result (JSON to stdout)
     LocalScript->>LocalOS: 15. Exit (Code 0 or 1)
-              
----
-
-### Screenshots
-
-![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh.jpg)
-
-![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh2.jpg)
-
-![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh3.jpg)

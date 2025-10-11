@@ -61,6 +61,12 @@ The script's primary control flow is managed within the `if __name__ == "__main_
 5.  **Synchronization Point:** The script waits for the user to press **Enter**. This is the critical moment where the user confirms the WPA handshake has appeared in the `airodump-ng` terminal output.
 6.  **Stop Capture:** The user's input triggers **`stop_event.set()`**, signaling the background thread to stop the `airodump-ng` process. The main thread then calls **`capture_thread.join()`**, blocking until the capture thread has gracefully terminated.
 7.  **Cracking:** The script verifies the existence of the captured file (`wpa_handshake_capture-01.cap`). If found, it prompts for the wordlist path and calls `crack_password` to initiate the final attack phase.
+                      
+---
+
+### Screenshots
+
+![wpa2_dictionary_attack.py running](/imgs/wpa2_dictionary_attack.png)
 
 ---
 
@@ -117,9 +123,3 @@ sequenceDiagram
     end
     
     MainScript->>OS: Exit
-                      
----
-
-### Screenshots
-
-![wpa2_dictionary_attack.py running](/imgs/wpa2_dictionary_attack.png)

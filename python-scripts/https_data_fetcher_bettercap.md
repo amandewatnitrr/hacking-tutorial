@@ -58,6 +58,18 @@ The script follows a sequential, four-step flow managed by the `main` function (
 2.  **HTTPS Web Scan (Passive):** It calls `fetch_https_data()`. If the data retrieval is successful, it proceeds to perform detailed analyses on headers, cookies, CSP, and SSL/TLS configuration using the respective sub-functions.
 3.  **Bettercap Capture (Active):** It attempts to start the Bettercap process via `start_bettercap()`. If successful, it enters the `capture_traffic()` phase, where it runs concurrently with the web analysis to gather network logs for the specified duration. The Bettercap process is explicitly terminated before proceeding.
 4.  **Reporting and Output:** The collected `url_data` and `network_data` are passed to `analyze_and_report()`. This function generates the final vulnerability score and risk assessment. A summary is printed to the console (`print_summary`), and the full, detailed report is saved to a file using `save_report()` in the user-specified format (JSON, CSV, or HTML).
+    
+---
+
+### Screenshots
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap1.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap2.png)
+
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap3.png)
 
 ---
 
@@ -101,15 +113,3 @@ sequenceDiagram
     Script->>OS: save_report(format=...)
     OS-->>Script: Report file saved
     Script->>User: Final confirmation and report path
-    
----
-
-### Screenshots
-
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap.png)
-
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap1.png)
-
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap2.png)
-
-![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap3.png)

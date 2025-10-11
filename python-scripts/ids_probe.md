@@ -57,6 +57,16 @@ The script's execution is controlled by the `main()` function, which is the stan
 5.  **Packet Processing:** The `sniff` function executes continuously, passing every captured packet object to the `packet_handler(pkt)` function.
 6.  **Continuous Analysis:** The `packet_handler` routes the packet data to the relevant detection functions (`check_port_scan` and `check_http_user_agent`), which in turn call `write_alert()` if a threat is detected.
 7.  **Termination:** The script continues to run indefinitely until the user manually terminates the process (usually via **`Ctrl+C`**), or an unexpected error occurs (like `PermissionError` if not run with sufficient privileges).
+      
+---
+
+### Screenshots
+
+![ids_probe.py running](/imgs/ids_probe.png)
+
+![ids_probe.py running](/imgs/ids_probe1.png)
+
+![ids_probe.py running](/imgs/ids_probe2.png)
 
 ---
 
@@ -106,13 +116,3 @@ sequenceDiagram
     
     User->>Script: Manual Termination (Ctrl+C)
     Script->>Script: Exit
-      
----
-
-### Screenshots
-
-![ids_probe.py running](/imgs/ids_probe.png)
-
-![ids_probe.py running](/imgs/ids_probe1.png)
-
-![ids_probe.py running](/imgs/ids_probe2.png)

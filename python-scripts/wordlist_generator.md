@@ -68,6 +68,14 @@ The script's execution begins within the `if __name__ == "__main__":` block, whi
 6.  **Finalization:** All generated variants from all base words are combined into a single list (`words`).
 7.  **De-duplication and Limiting:** The final list is de-duplicated using `list(dict.fromkeys(words))` to preserve order, and then truncated using array slicing (`[: args.limit]`) to enforce the user's size limit (default 5000).
 8.  **Output:** The final, limited list is written to the output file using `write_wordlist()`, and the script exits.
+                  
+---
+
+### Screenshots
+
+![wordlist_generator.py running](/imgs/wordlist_generator.jpg)
+
+![wordlist_generator.py running](/imgs/wordlist_generator2.jpg)
 
 ---
 
@@ -113,11 +121,3 @@ sequenceDiagram
     FS-->>Script: File successfully written
     Script->>User: Wrote X entries to mylist.txt
     Script->>OS: Exit with code 0 (Success)
-                  
----
-
-### Screenshots
-
-![wordlist_generator.py running](/imgs/wordlist_generator.jpg)
-
-![wordlist_generator.py running](/imgs/wordlist_generator2.jpg)

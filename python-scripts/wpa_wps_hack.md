@@ -52,6 +52,10 @@ The script starts execution in the standard entry point, the **`if __name__ == "
 4.  **Attack Execution:** The `run_reaver` function is called, which launches the `reaver` process.
 5.  **Monitoring:** The script enters a `try...finally` block within `run_reaver` to continuously read and print the logs from `reaver`'s `stdout`. This provides real-time feedback to the user.
 6.  **Cleanup:** The `finally` block ensures that the `reaver` process is terminated and waited for (`proc.terminate()` and `proc.wait()`) when the user stops the script (e.g., with `Ctrl+C`).
+                      
+---
+
+### Screenshots
 
 ---
 
@@ -96,7 +100,3 @@ sequenceDiagram
     Script->>Reaver: Terminate Process (proc.terminate())
     Script->>OS: Process cleanup (proc.wait())
     Script->>OS: Exit
-                      
----
-
-### Screenshots
