@@ -1,5 +1,7 @@
 # Emacs Lessons: Novice Level
 
+<img src="../assets/images/emacs-logo-png.png" alt= "Emacs Logo" width="400" height="200">
+
 Welcome to the **Novice Level** of our Emacs learning series.  
 This stage introduces you to the basics of Emacs and helps you feel comfortable working inside the editor.  
 By the end, you’ll be able to open, edit, save, and navigate text files confidently from the command line.
@@ -41,7 +43,7 @@ Unlike visual editors, Emacs gives you total control through keyboard commands.
 
 ## 2. Installing Emacs
 
-You can install Emacs on most systems using your package manager.
+You can install Emacs on most systems using your [package manager](https://en.wikipedia.org/wiki/Package_manager). If you have any issues with the latest version of emacs to install, you can check their offical [website ](https://www.gnu.org/software/emacs/emacs.html)
 
 **Ubuntu or Debian**
 ```bash
@@ -58,18 +60,43 @@ sudo dnf install emacs
 ```bash
 brew install emacs
 ```
+After a successful installation, use the command below to check the version of Emacs you're using.
 
+```bash
+emacs --version
+```
+You'll get an output like so, which confirms that you have Emacs installed.
+<img src="../assets/images/check-emacs-version.png" alt="check Emacs version" width="">
 
 ## 3. Starting and Exiting Emacs
+
+Once you are ready to use Emacs, type the command in the terminal. And the result will be a nice old looking interface ready at your service.
+
+```bash
+emacs 
+```
+
+<img src="../assets/images/emacs-with-window.png" alt="Emacs UI" height="300px" width="500">
+
+For those who want to remain in the terminal, use the command below to open emacs directly in the terminal
+
+```bash
+emacs -nw
+```  
+<img src="../assets/images/emacs-in-terminal.png" alt="Emacs no UI" height="300px" width="500">
+
 
 To open Emacs with a new or existing file:
 
 ```bash
 emacs filename.txt
 ```
+<img src="../assets/images/emacs-editing-a-file.png" height="300px" width="500">
 
 * If the file exists, it opens in Emacs.
 * If it doesn’t, Emacs will create it once you save.
+
+**Note**: Emacs can work as a standalone editor with its own UI and with just a little changes you can setup emacs to work only in the terminal.
 
 To exit Emacs:
 
@@ -92,10 +119,11 @@ That’s your *escape key* when you make a mistake.
 ## 4. Understanding the Interface
 
 When Emacs starts, you’ll see several areas:
+<img src="../assets/images/emacs-interface.png" height="300px" width="500px">
 
-* **Editing Area:** Where you type and edit your text.
-* **Mode Line:** Displays the file name, current mode, and other details.
-* **Mini Buffer:** The small line at the bottom for messages and commands.
+**1. Editing Area:** Where you type and edit your text.  
+**2. Mode Line:** Displays the file name, current mode, and other details.  
+**3. Mini Buffer:** The small line at the bottom for messages and commands.  
 
 Most actions in Emacs use keyboard shortcuts rather than menus, which keeps your hands on the keyboard and speeds up your workflow.
 
