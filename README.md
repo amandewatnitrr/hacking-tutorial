@@ -52,7 +52,31 @@ Contributions are welcome! To contribute:
 3. Ensure your contributions follow ethical guidelines and do not promote illegal activity.
 4. Open a pull request with a clear description of your changes.
 
-### Security Warning
+## Analytics & Privacy Guidelines
+
+If you want to add analytics or visitor tracking to the site, please follow these guidelines:
+
+- Only use analytics services that respect user privacy, e.g., Plausible or Fathom.
+- Do **not** collect sensitive user information.
+- Clearly inform users if any tracking is enabled.
+- Follow GDPR/CCPA rules if your users are in regions that require them.
+- Any analytics code should be added in a separate, well-commented file (e.g., `analytics.js`) and imported only in production.
+
+Example (using Plausible):
+
+```js
+// src/analytics.js
+if (process.env.NODE_ENV === 'production') {
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://plausible.io/js/plausible.js';
+    s.async = true; s.defer = true; s.setAttribute('data-domain', 'yourdomain.com');
+    d.head.appendChild(s);
+  })();
+}
+```
+
+## Security Warning
 
 **Avoid using the `python_crypto` library or any other cryptographic or hacking-related libraries that are unmaintained, deprecated, or suspicious.**
 
