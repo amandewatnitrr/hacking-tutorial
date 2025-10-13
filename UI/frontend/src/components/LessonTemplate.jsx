@@ -122,6 +122,19 @@ export default function LessonTemplate({ lesson, navigation }) {
                 <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
                   {children} <span className="external-link-icon">↗</span>
                 </a>
+              ) : href?.startsWith('#') ? (
+                <a
+                  href={href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const id = href.slice(1);
+                    const element = document.getElementById(id);
+                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  {...props}
+                >
+                  {children}
+                </a>
               ) : (
                 <a href={href} {...props}>{children}</a>
               );
