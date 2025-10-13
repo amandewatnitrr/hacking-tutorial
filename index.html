@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Tutorial - Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .info-box h2 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box code {
+            background: #edf2f7;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(72, 187, 120, 0.3);
+        }
+
+        .steps {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .steps ol {
+            padding-left: 1.5rem;
+        }
+
+        .steps li {
+            margin: 1rem 0;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .warning {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning p {
+            color: #742a2a;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Hacking Tutorial Platform</h1>
+        <p class="subtitle">Comprehensive Learning Platform for Ethical Hacking & Security</p>
+
+        <div class="info-box">
+            <h2>📚 Welcome!</h2>
+            <p>This is a multi-course learning platform covering ethical hacking, penetration testing, CLI tools, and more.</p>
+            <p>To get started with the full interactive experience, you need to run the development server.</p>
+        </div>
+
+        <div class="steps">
+            <h2>🚀 Quick Start Guide</h2>
+            <ol>
+                <li>Open a terminal in the project directory</li>
+                <li>Navigate to the frontend folder:
+                    <br><code>cd hacking-tutorial/UI/frontend</code>
+                </li>
+                <li>Install dependencies (first time only):
+                    <br><code>npm install</code>
+                </li>
+                <li>Start the development server:
+                    <br><code>npm run dev</code>
+                </li>
+                <li>Open the URL shown in the terminal (usually <code>http://localhost:5173</code>)</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h2>✨ Features</h2>
+            <p>• <strong>Multiple Courses:</strong> Ethical Hacking, CLI Editors, Web Security, and more</p>
+            <p>• <strong>Interactive Lessons:</strong> Step-by-step tutorials with code examples</p>
+            <p>• <strong>Organized Content:</strong> Easy navigation between courses and lessons</p>
+            <p>• <strong>Responsive Design:</strong> Works on desktop, tablet, and mobile</p>
+        </div>
+
+        <div class="warning">
+            <p><strong>⚠️ Educational Purpose Only:</strong> All content is for educational purposes. Always practice ethical hacking in controlled, legal environments.</p>
+        </div>
+
+        <div class="button-group">
+            <a href="hacking-tutorial/UI/frontend/index.html" class="btn btn-primary">
+                📖 View Static Version
+            </a>
+            <a href="https://github.com/amandewatnitrr/hacking-tutorial" class="btn btn-secondary" target="_blank">
+                🔗 GitHub Repository
+            </a>
+        </div>
+
+        <div class="info-box" style="margin-top: 2rem;">
+            <h2>📂 Project Structure</h2>
+            <p><strong>hacking-tutorial/</strong> - Main project folder</p>
+            <p style="padding-left: 1rem;">├── <strong>ethical-hacking/</strong> - Ethical hacking course content</p>
+            <p style="padding-left: 1rem;">├── <strong>cli-editors-tutorials/</strong> - CLI editors course</p>
+            <p style="padding-left: 1rem;">└── <strong>UI/frontend/</strong> - React application</p>
+        </div>
+    </div>
+</body>
+</html>
