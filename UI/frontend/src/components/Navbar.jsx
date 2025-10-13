@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
           <a 
-            href="https://github.com/HarzhMehta/hacking-tutorial_fork" 
+            href="https://github.com/amandewatnitrr/hacking-tutorial.git" 
             target="_blank" 
             rel="noopener noreferrer"
             className="nav-link github-link"
