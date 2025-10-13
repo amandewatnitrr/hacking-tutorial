@@ -1,7 +1,6 @@
 /* Lesson Page Styles */
 .lesson-page {
   padding: 2rem;
-  max-width: 1200px;
   margin: 0 auto;
   margin-left: 300px; /* Account for sidebar width */
   margin-top: 100px;  /* Account for navbar height */
