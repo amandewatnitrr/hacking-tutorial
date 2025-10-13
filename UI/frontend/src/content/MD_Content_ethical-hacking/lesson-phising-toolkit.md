@@ -151,4 +151,4 @@ A robust defense against phishing requires both technology and vigilant users.
 
 ### Path
 
-<- [Previous Lesson: Password Cracking](./lesson-passwordcracking.md)  |  [Next Lesson: Introduction to Binary Exploitation](./Binary-Exploitation.MD) ->
+<- [Previous Lesson: Password Cracking](/lesson-passwordcracking.md)  |  [Next Lesson: Introduction to Binary Exploitation](/Binary-Exploitation.MD) ->

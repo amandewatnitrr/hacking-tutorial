@@ -73,9 +73,9 @@ The script's execution begins within the `if __name__ == "__main__":` block, whi
 
 ### Screenshots
 
-![wordlist_generator.py running](../imgs/wordlist_generator.jpg)
+![wordlist_generator.py running](/imgs/wordlist_generator.jpg)
 
-![wordlist_generator.py running](../imgs/wordlist_generator2.jpg)
+![wordlist_generator.py running](/imgs/wordlist_generator2.jpg)
 
 ---
 

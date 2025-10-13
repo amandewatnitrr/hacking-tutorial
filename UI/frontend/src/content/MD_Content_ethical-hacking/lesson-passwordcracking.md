@@ -178,4 +178,4 @@ cat Done.txt
 
 ### Path
 
-<- [Previous Lesson: Password Attacks & Hash Cracking](./lesson-password_attack-and_hashcracking.md)  |  [Next Lesson: Phishing Toolkits](./lesson-phising-toolkit.md) ->
+<- [Previous Lesson: Password Attacks & Hash Cracking](/lesson-password_attack-and_hashcracking.md)  |  [Next Lesson: Phishing Toolkits](/lesson-phising-toolkit.md) ->

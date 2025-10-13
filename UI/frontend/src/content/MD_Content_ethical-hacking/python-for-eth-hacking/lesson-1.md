@@ -9,7 +9,7 @@ next: "ids-probe-lesson"
 
 # Writing A MAC Address Changer
 
-  ![What is a MAC Address](./../imgs/What-is-MAC-Address.jpeg)
+  ![What is a MAC Address](/imgs/What-is-MAC-Address.jpeg)
 
 - MAC stands for `Media Access Control`. It is a permanent, physical and unique address assigned to network interfaces by the device manufacturer.
 - So, whether you have a wireless card or wired or ethernet card, each of them come with a specific address that is unique to the card, so there are no 2 devices in the world with the same MAC Address.
@@ -27,7 +27,7 @@ next: "ids-probe-lesson"
 
 - Run `ifconfig` command on the computer. This will list all the interfaces available on the computer. When we say interface, we mean a network card. When we execute the command it shows `eth0` which is a virtual interface.
 
-    ![ifconfig output showing network interfaces](../imgs/Screenshot%202025-07-24%20at%204.58.09 AM.png)
+    ![ifconfig output showing network interfaces](/imgs/Screenshot%202025-07-24%20at%204.58.09 AM.png)
 
 - `eth0` is not real. It is created by the virtual box, because the VM is set to use a NAT network, by default. It thinks that it is connected to a wired network. All this is done using a Virtual Interface connected to the Virtual Wired Network.
 - We can also see `lo` which is also a virtual interface created by `linux`.
@@ -58,7 +58,7 @@ next: "ids-probe-lesson"
 
 - Now, use `ifconfig` command again to check if the MAC Address has changed again or not. Now, if you look at the `ether` option of the `interface_name` we have been using so far, it's been modified to what we have set.
 
-  ![ifconfig output showing changed MAC address](../imgs/Screenshot%202025-07-24%20at%206.49.53 AM.png)
+  ![ifconfig output showing changed MAC address](/imgs/Screenshot%202025-07-24%20at%206.49.53 AM.png)
 
 - Following are the proof for proper execution of these statements:
 
@@ -177,6 +177,6 @@ next: "ids-probe-lesson"
 
 ### Path
 
-<- [Previous Lesson: IP & Port Scanning](./A-guide-to-port-scanning.md)
+<- [Previous Lesson: IP & Port Scanning](/A-guide-to-port-scanning.md)
 
 

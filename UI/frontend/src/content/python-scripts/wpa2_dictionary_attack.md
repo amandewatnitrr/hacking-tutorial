@@ -66,7 +66,7 @@ The script's primary control flow is managed within the `if __name__ == "__main_
 
 ### Screenshots
 
-![wpa2_dictionary_attack.py running](../imgs/wpa2_dictionary_attack.png)
+![wpa2_dictionary_attack.py running](/imgs/wpa2_dictionary_attack.png)
 
 ---
 
