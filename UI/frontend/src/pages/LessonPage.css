@@ -1,0 +1,75 @@
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 0.5rem;
+  }
+}
+
+nav.home-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.home-title-link {
+  text-decoration: none;
+  color:aqua;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-title {
+  color: var(--accent-green);
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+  transition: color 0.2s;
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-title-link:hover .home-title {
+  background:rgb(255, 255, 255);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+nav.home-button a {
+  color: var(--text-primary);
+  font-size: 1rem;
+  text-decoration: none;
+  margin-left: 2rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--accent-green);
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+nav.home-button a:hover {
+  background: var(--accent-green);
+  color: #0a0e1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
