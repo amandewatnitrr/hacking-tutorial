@@ -63,13 +63,13 @@ The script follows a sequential, four-step flow managed by the `main` function (
 
 ### Screenshots
 
-![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap.png)
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap.png)
 
-![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap1.png)
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap1.png)
 
-![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap2.png)
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap2.png)
 
-![https_data_fetcher_bettercap.py running](../imgs/https_data_fetcher_bettercap3.png)
+![https_data_fetcher_bettercap.py running](/imgs/https_data_fetcher_bettercap3.png)
 
 ---
 

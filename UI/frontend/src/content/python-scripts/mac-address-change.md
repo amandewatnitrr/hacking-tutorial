@@ -54,7 +54,7 @@ The script follows a standard Python entry point structure to ensure the main lo
 
 ### Screenshots
 
-![mac_address_change.py running](../imgs/mac_address_change.jpg)
+![mac_address_change.py running](/imgs/mac_address_change.jpg)
 
 ---
 

@@ -149,6 +149,6 @@ next: "lesson-passwordcracking"
 
 ### Path
 
-<- [Previous Lesson: Introduction to Network Scanning with Fing](./lesson-fing.md)  |  [Next Lesson: Password Cracking](./lesson-passwordcracking.md) ->
+<- [Previous Lesson: Introduction to Network Scanning with Fing](/lesson-fing.md)  |  [Next Lesson: Password Cracking](/lesson-passwordcracking.md) ->
 
  Updated: 2025-10-07

@@ -108,10 +108,10 @@ Your next authorized action in a real test would be to use a web vulnerability s
 
 ---
 Screenshots
-![l1](../imgs/l1.png)
-![l2](../imgs/l2.png)
-![l3](../imgs/l3.png)
-![l4](../imgs/l4.png)
+![l1](/imgs/l1.png)
+![l2](/imgs/l2.png)
+![l3](/imgs/l3.png)
+![l4](/imgs/l4.png)
 
 ---
 ## Where to Read More
@@ -126,4 +126,4 @@ To continue your learning, check out the official documentation. The CLI (Comman
 
 ### Path
 
-<- [Previous Lesson: CyberChef – The Cyber Swiss Army Knife](./lesson-cyberchef.md)  |  [Next Lesson: Password Attacks & Hash Cracking](./lesson-password_attack-and_hashcracking.md) ->
+<- [Previous Lesson: CyberChef – The Cyber Swiss Army Knife](/lesson-cyberchef.md)  |  [Next Lesson: Password Attacks & Hash Cracking](/lesson-password_attack-and_hashcracking.md) ->

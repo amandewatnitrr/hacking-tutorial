@@ -9,7 +9,7 @@ next: "lesson-05"
 
 # Network Hacking - Gaining Access - WPA/WPA2 Cracking
 
-![](../imgs/06f21a161921919.63cd7887d0a70.gif)
+![](/imgs/06f21a161921919.63cd7887d0a70.gif)
 
 ---
 
@@ -551,7 +551,7 @@ next: "lesson-05"
 
 - **We will use the WPA-PSK at the end of the `reaver` logs to connect to the wifi. Below is the video proof that we can connect to the wifi using the cracked WPA-PSK.**
 
-    [![Watch the video](../imgs/238353467-897cd757-ea1f-492d-aaf9-6d1674177e08.gif)](https://youtu.be/stE-FNupm0o)
+    [![Watch the video](/imgs/238353467-897cd757-ea1f-492d-aaf9-6d1674177e08.gif)](https://youtu.be/stE-FNupm0o)
 
 - Also, you might be thinking, why we needed to run a fake authentication attack using `aireplay-ng`? The answer is simple, we needed to associate with the access point to be able to send EAPOL packets, if not associated the network would have just ignored us.
 
@@ -713,7 +713,7 @@ next: "lesson-05"
 
 - You can use this password to connect to the target network. Here's the proof of my Wifi Password.
 
-  ![](../imgs/WhatsApp%20Image%202025-07-28%20at%2019.40.07.jpeg)
+  ![](/imgs/WhatsApp%20Image%202025-07-28%20at%2019.40.07.jpeg)
 
 
 ## Configuring Wireless Settings for Maximum Security
@@ -729,4 +729,4 @@ next: "lesson-05"
 
 ### Path
 
-<- [Previous Lesson: Network Hacking: Gaining Access WEP Cracking](./lesson-03.md)  |  [Next Lesson: Network Hacking Post Connection Attacks - Information Gathering](./lesson-05.md) ->
+<- [Previous Lesson: Network Hacking: Gaining Access WEP Cracking](/lesson-03.md)  |  [Next Lesson: Network Hacking Post Connection Attacks - Information Gathering](/lesson-05.md) ->
