@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "question": "Why are parameterized queries safer than string concatenation?",
+    "answer_hint": "They send query structure and data separately to the database driver.",
+    "learn_more": "https://owasp.org/www-community/attacks/SQL_Injection"
+  },
+  {
+    "id": 2,
+    "question": "Name one runtime measure that can help detect blind SQLi attacks.",
+    "answer_hint": "Look for abnormal timing or repeated, patterned requests from the same client.",
+    "learn_more": "https://portswigger.net/web-security/sql-injection"
+  }
+]
