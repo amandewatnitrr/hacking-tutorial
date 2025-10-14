@@ -1,16 +1,39 @@
 import matter from 'gray-matter';
 
-// Import all .md files from the MD_Content_ethical-hacking folder and its subfolders
+// Import all .md files from various folders outside the UI directory
 // Using Vite's import.meta.glob for dynamic imports
-const mdFiles = import.meta.glob('/src/content/MD_Content_ethical-hacking/**/*.md', { 
+// Paths are relative to this file: UI/frontend/src/utils/
+const ethicalHackingFiles = import.meta.glob('../../../../ethical-hacking/*.md', { 
   query: '?raw',
   import: 'default',
   eager: true 
 });
 
+const binaryExploitationFiles = import.meta.glob('../../../../intro-to-binary-exploitation/*.md', { 
+  query: '?raw',
+  import: 'default',
+  eager: true 
+});
+
+const pythonHackingFiles = import.meta.glob('../../../../python-for-eth-hacking/*.md', { 
+  query: '?raw',
+  import: 'default',
+  eager: true 
+});
+
+// Merge all markdown files into a single object
+const mdFiles = {
+  ...ethicalHackingFiles,
+  ...binaryExploitationFiles,
+  ...pythonHackingFiles
+};
+
 // Debug: Log what files were found
 console.log('📁 Markdown files found:', Object.keys(mdFiles));
 console.log('📊 Total files:', Object.keys(mdFiles).length);
+console.log('🔍 Ethical Hacking files:', Object.keys(ethicalHackingFiles));
+console.log('🔍 Binary Exploitation files:', Object.keys(binaryExploitationFiles));
+console.log('🔍 Python Hacking files:', Object.keys(pythonHackingFiles));
 
 /**
  * Get all lessons from markdown files

@@ -105,9 +105,23 @@ export default function LessonTemplate({ lesson, navigation }) {
             },
             // Custom rendering for images with lazy loading
             img({ src, alt, ...props }) {
+              // Transform relative image paths to absolute paths
+              let imageSrc = src;
+              
+              // Handle relative paths like ../imgs/ or ./imgs/
+              if (src && (src.startsWith('../imgs/') || src.startsWith('./imgs/'))) {
+                // Remove ../ or ./ prefix and get just the filename
+                const filename = src.replace(/^\.\.\/imgs\/|^\.\/imgs\//, '');
+                imageSrc = `/${filename}`;
+              } else if (src && src.startsWith('./../imgs/')) {
+                // Handle ./../imgs/ paths
+                const filename = src.replace(/^\.\.\/\.\.\/imgs\//, '');
+                imageSrc = `/${filename}`;
+              }
+              
               return (
                 <img 
-                  src={src} 
+                  src={imageSrc} 
                   alt={alt || 'Lesson image'} 
                   loading="lazy"
                   {...props}
