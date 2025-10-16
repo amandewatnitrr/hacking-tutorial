@@ -26,11 +26,11 @@ const LessonTemplate = ({ lesson }) => {
 
     const isImageNode = node?.tagName === 'img';
     const isRelativeImage =
-      url.startsWith('../imgs/') || url.startsWith('./imgs/') || url.startsWith('./../imgs/');
+      url.startsWith('/imgs/') || url.startsWith('/imgs/') || url.startsWith('/imgs/');
 
     if (isImageNode && isRelativeImage) {
       const imageName = url.split('/').pop();
-      return `/src/content/imgs/${imageName}`;
+      return `/imgs/${imageName}`;
     }
 
     return url;

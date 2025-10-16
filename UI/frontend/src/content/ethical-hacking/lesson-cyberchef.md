@@ -74,7 +74,7 @@ Here's a simple example of how a recipe works.
     48656c6c6f
     ```
 
-![ll1](../imgs/ll1.png)
+![ll1](/imgs/ll1.png)
 
 If you then add the `From Hex` operation to the recipe, it will convert the hex back to the original text, `Hello`. This shows how you can chain multiple steps to build a complex data processing pipeline.
 

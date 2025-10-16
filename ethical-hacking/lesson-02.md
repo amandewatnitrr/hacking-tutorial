@@ -10,7 +10,7 @@
 <!-- /TOC -->
 ---
 
-![Packet Sniffing Illustration](../imgs/What-is-Packet-Sniffing-01.png.webp)
+![Packet Sniffing Illustration](/imgs/What-is-Packet-Sniffing-01.png.webp)
 
 ## Packet Sniffing Basics
 
@@ -214,7 +214,7 @@
     Quitting...
     ```
 
-    ![Screenshot of mobile trying to reconnect to the network](../imgs/WhatsApp%20Image%202025-07-26%20at%2007.47.53.jpeg)
+    ![Screenshot of mobile trying to reconnect to the network](/imgs/WhatsApp%20Image%202025-07-26%20at%2007.47.53.jpeg)
 
 - Let's write down a Python script to automate this process of deauthentication attack. The script will take the wireless interface name, target client MAC address, and gateway (AP) MAC address as input and perform the deauthentication attack.
 

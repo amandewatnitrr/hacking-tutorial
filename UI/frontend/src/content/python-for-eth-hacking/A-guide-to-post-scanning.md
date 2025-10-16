@@ -8,7 +8,7 @@ next: null
 ---
 
 # IP & Port Scanning
-<img src="./../imgs/main.jpg" width="1920" height="1080" style="object-fit:cover;">
+<img src="/imgs/main.jpg" width="1920" height="1080" style="object-fit:cover;">
 
 * **IP** stands for `Internet Protocol`. an IP address (IPv4 or IPv6) identifies a host on a network so packets can be routed to it.
 * **Ports** are numeric endpoints on a host that services listen on (for example, 80 for HTTP, 22 for SSH). A single IP can host many services distinguished by port numbers.
@@ -66,7 +66,7 @@ What to look for
 
 * Pick the IPv4 address that belongs to your machine and note the subnet (e.g., `192.168.1.15/24 in the screenshot`).
 
-![OUTPUT1](./../imgs/port-scanning1.png)
+![OUTPUT1](/imgs/port-scanning1.png)
 
 ---
 
@@ -94,7 +94,7 @@ nmap -sn 192.168.1.15/24
 ```
 * `-sn` = host discovery only 
 
-![OUTPUT2](./../imgs/port-scanning1.png)
+![OUTPUT2](/imgs/port-scanning1.png)
 
 B) Full port range on localhost
 
@@ -104,7 +104,7 @@ nmap -sT -p 1-65535 127.0.0.1
 * `-sT` performs full TCP handshakes and is easy to understand for beginners.
 * Slow but useful to see everything listening on your own machine.
 
-![OUTPUT3](./../imgs/port-scanning1.png)
+![OUTPUT3](/imgs/port-scanning1.png)
 
 ### Before we proceed, install & start an SSH server so that we can see a real port open in the scan
 ```bash
@@ -120,7 +120,7 @@ nmap -sT -sV --top-ports 50 192.168.1.15
 
 * `-sV` probes services to guess software/version.
 
-![OUTPUT4](./../imgs/port-scanning1.png)
+![OUTPUT4](/imgs/port-scanning1.png)
 
 ---
 

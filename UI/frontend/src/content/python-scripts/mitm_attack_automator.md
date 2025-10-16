@@ -64,7 +64,7 @@ The script's primary control flow is managed within the `if __name__ == "__main_
 
 ### Screenshots
 
-![mitm_attack_automator.py running](../imgs/mitm_attack_automator.png)
+![mitm_attack_automator.py running](/imgs/mitm_attack_automator.png)
 
 ---
 

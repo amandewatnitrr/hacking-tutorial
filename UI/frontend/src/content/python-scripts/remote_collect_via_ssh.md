@@ -85,11 +85,11 @@ The script initiates execution through the `main()` function, called by the `if 
 
 ### Screenshots
 
-![remote_collect_via_ssh.py running](../imgs/remote_collect_via_ssh.jpg)
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh.jpg)
 
-![remote_collect_via_ssh.py running](../imgs/remote_collect_via_ssh2.jpg)
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh2.jpg)
 
-![remote_collect_via_ssh.py running](../imgs/remote_collect_via_ssh3.jpg)
+![remote_collect_via_ssh.py running](/imgs/remote_collect_via_ssh3.jpg)
 
 ---
 

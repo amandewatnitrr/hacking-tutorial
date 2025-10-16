@@ -1,6 +1,6 @@
 # Network Hacking Post Connection Attacks - Information Gathering
 
-![](../imgs/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif)
+![](/imgs/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif)
 
 - [Network Hacking Post Connection Attacks - Information Gathering](#network-hacking-post-connection-attacks---information-gathering)
   - [Discovering Devices Connected to the Same Network](#discovering-devices-connected-to-the-same-network)
@@ -71,32 +71,32 @@
   root@kali:~# zenmap
   ```
 
-  ![](../imgs/Screenshot%202025-08-09%20at%203.38.18 PM.png)
+  ![](/imgs/Screenshot%202025-08-09%20at%203.38.18 PM.png)
 
 - It has a very simple interface. You can enter the target IP address or hostname in the "Target" field, and then select the type of scan you want to perform from the "Profile" dropdown menu.
 
 - Enter the target range in the "Target" field, for example `XX.XX.XX.1/24`, and select the "Intense Scan" profile from the dropdown menu. Then click on the "Scan" button to start the scan.
 
-  ![](../imgs/Screenshot%202025-08-09%20at%203.47.22 PM.png)
+  ![](/imgs/Screenshot%202025-08-09%20at%203.47.22 PM.png)
 
 - As you can see here, it is scanning the target range for open ports, services running on those ports, and even the operating system of the device. It will take some time to complete the scan, depending on the size of the target range and the number of devices connected to it.
 
 - Let's see how to perform a ping scan:
 
-  ![](../imgs/Screenshot%202025-08-09%20at%203.56.13 PM.png)
+  ![](/imgs/Screenshot%202025-08-09%20at%203.56.13 PM.png)
 
 
 - Here, we can see what kind of device is connected to the network, what operating system it is running. As, we can see here, we have 3 VMware devices connected to the network, and one of them is running an Unknown OS. 
 
 - In a similare way we can perform quick scan as well:
 
-  ![](../imgs/Screenshot%202025-08-09%20at%205.54.42 PM.png)
+  ![](/imgs/Screenshot%202025-08-09%20at%205.54.42 PM.png)
 
 - It shows open ports on each one of the discovered devices, along with the services running on those ports. For example, we can see that port `22` is open on the device with IP.
 
 ### Gathering More Sensitive Information(Services, OS, etc.)
 
-  ![](../imgs/quick%20scan%20plus.png)
+  ![](/imgs/quick%20scan%20plus.png)
 
 - As here we can clearly see, that the device has it's IP, MAC Address, and the services running on it. We can also see the operating system of the device. 
 
@@ -106,7 +106,7 @@
 
 - We can also categorize discovered clients based on the services running on them.
 
-  ![](../imgs/service_view_zenmap.png)
+  ![](/imgs/service_view_zenmap.png)
 
 ---
 

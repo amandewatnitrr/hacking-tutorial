@@ -1,6 +1,6 @@
 # Getting Started with Ethical Hacking
 
-![](../imgs/212750155-3ceddfbd-19d3-40a3-87af-8d329c8323c4.gif)
+![](/imgs/212750155-3ceddfbd-19d3-40a3-87af-8d329c8323c4.gif)
 
 <!-- TOC -->
 - [Getting Started with Ethical Hacking](#getting-started-with-ethical-hacking)
@@ -29,7 +29,7 @@
 ---
 
 
-![](./imgs/b1b55f18288795.562c702fe9883.gif)
+![](/imgs/b1b55f18288795.562c702fe9883.gif)
 
 - Hacking is getting unauthorized access to a system.
 - Hackers generally are of three types:
@@ -59,7 +59,7 @@
 
 ### Virtualization
 
-  ![](./imgs/vmw-virtualization-defined.jpg)
+  ![](/imgs/vmw-virtualization-defined.jpg)
 
 - What we are utilising here to have these VMs is called Virtualization. Virtualization allows you to Run Guest OS on top of Hypervisor over Host OS. This is different from concept of Containerizartion, where we run apps over the Docker Engine, and all apps sharing a common Host OS. This is not the case with Virtualization.
 
@@ -88,7 +88,7 @@
 
 - It will recieve `google.com` from the internet, and will forward that response to our computer, and as a result we will see the website loading on our browser.
 
-    ![](./imgs/Screenshot%202025-07-21%20at%2011.11.34 AM.png)
+    ![](/imgs/Screenshot%202025-07-21%20at%2011.11.34 AM.png)
 
 
 ## Connecting Wireless adapter to Kali ![](https://skillicons.dev/icons?i=kali)

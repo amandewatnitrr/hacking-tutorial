@@ -108,10 +108,10 @@ Your next authorized action in a real test would be to use a web vulnerability s
 
 ---
 Screenshots
-![l1](../imgs/l1.png)
-![l2](../imgs/l2.png)
-![l3](../imgs/l3.png)
-![l4](../imgs/l4.png)
+![l1](/imgs/l1.png)
+![l2](/imgs/l2.png)
+![l3](/imgs/l3.png)
+![l4](/imgs/l4.png)
 
 ---
 ## Where to Read More

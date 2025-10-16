@@ -10,7 +10,7 @@
 
 ---
 
-![WEP encryption algorithm diagram](../imgs/WEP-encryption-algorithm-37.ppm.png)
+![WEP encryption algorithm diagram](/imgs/WEP-encryption-algorithm-37.ppm.png)
 
 - Everything we did so for now didn't require us to have access/connection to the network.
 - Now, once we connect to the network, we can not only start to see the data being transmitted, but we can also start to manipulate it.
@@ -206,7 +206,7 @@ sequenceDiagram
 
 - **Proof, this image will take you to the video where you can see me enter hex password on mobile device and connect to the network:**
 
-    [![Watch the video](../imgs/242390692-0b335028-1d3d-4ee5-b5b3-a373d499be7e.gif)](https://youtu.be/sLQRBuHkpw4)
+    [![Watch the video](/imgs/242390692-0b335028-1d3d-4ee5-b5b3-a373d499be7e.gif)](https://youtu.be/sLQRBuHkpw4)
 
 ## Fake Authentication Attack
 

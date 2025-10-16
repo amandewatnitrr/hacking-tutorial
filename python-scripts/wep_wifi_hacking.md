@@ -65,7 +65,7 @@ The overall flow is:
 
 ### Screenshots
 
-![wep_wifi_hacking.py running](../imgs/wep_wifi_hacking.png)
+![wep_wifi_hacking.py running](/imgs/wep_wifi_hacking.png)
 
 ---
 

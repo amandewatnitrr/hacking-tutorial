@@ -13,7 +13,7 @@
     - [Spying on Network Devices](#spying-on-network-devices)
 
 
-![](../imgs/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif)
+![](/imgs/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif)
 
 - MITM stands for Man In The Middle. It is a type of attack where the attacker intercepts communication between two parties without their knowledge. The attacker can then eavesdrop on the conversation, modify the data being sent, or even impersonate one of the parties.
 
@@ -145,8 +145,8 @@ sequenceDiagram
 
   It would look something like this:
 
-  ![](../imgs/Screenshot%20(6).png)
-  ![](../imgs/Screenshot%20(7).png)
+  ![](/imgs/Screenshot%20(6).png)
+  ![](/imgs/Screenshot%20(7).png)
 
 - As, you can clearly see the MAC Address of the gateway has been changed to the MAC Address of the attacker. This means that all the packets that are intended for the gateway will now be sent to the attacker.
 
@@ -198,7 +198,7 @@ sequenceDiagram
 
   This is another way of discovering connected clients quickly using bettercap. What we didn't notice is when we started the `net.probe on` command, it automatically started the `net.recon` command as a requirement for `net.probe`. This means that it is continuously scanning for new devices on the network. So, now if you do `help` again, you will see that the `net.recon` command is also running.
 
-  ![](../imgs/Screenshot%20(8).png)
+  ![](/imgs/Screenshot%20(8).png)
 
   The reason for this is because the net.probe sends probe request to all possible IPs, and than if we get a response the net.recon will be the one detecting the response by monitoring my ARP Cache, and than adding all of these IPs in a nice list, so we can target them.
 
@@ -210,7 +210,7 @@ sequenceDiagram
 
   This will display the list of devices on the network along with their IP addresses, MAC addresses, and hostnames.
 
-  ![](../imgs/Screenshot%20(9).png)
+  ![](/imgs/Screenshot%20(9).png)
 
   Here, we can see there IPs, corresponding MAC Addresses, and it can also show you information about each one of these IPs. 
   
@@ -218,7 +218,7 @@ sequenceDiagram
 
   Now to perform the ARP spoofing, we can use the `arp.spoof` command to enable ARP spoofing. Let's first see how to activate this command.
 
-  ![](../imgs/Screenshot%20(10).png)
+  ![](/imgs/Screenshot%20(10).png)
 
   So, here we can clearly seedsad   that we can use the `arp.spoof on` command to turn this module on. We can do `arp.ban on` this will literally just cut the connection to the target. We can do `arp.spoof off` to turn it off.
 
@@ -252,11 +252,11 @@ sequenceDiagram
   set arp.spoof.fullduplex true;set arp.spoof.targets <target_ip>;arp.spoof on
   ```
 
-  ![](../imgs/Screenshot%20(12).png)
+  ![](/imgs/Screenshot%20(12).png)
 
   Now, if we check the Target Windows Vm, we can clearly see, the MACs changed.
 
-  ![](../imgs/Screenshot%20(11).png)
+  ![](/imgs/Screenshot%20(11).png)
 
   - If we see, the output of `help` it clearly shows `arp.spoof` is running.
 
@@ -279,7 +279,7 @@ The same can be performed using our automated script as well which is at the spe
 
   - Now, when we login into a HTTP Website with a username and password, we can see the username and password in the output of `net.sniff`, as shown below:
 
-  ![](../imgs/Screenshot%20(14).png)
-  ![](../imgs/Screenshot%20(13).png)
+  ![](/imgs/Screenshot%20(14).png)
+  ![](/imgs/Screenshot%20(13).png)
 
 - In this way we can spy on the network devices using bettercap. We can see all the HTTP requests and responses in real-time, including the username and password for HTTP websites.

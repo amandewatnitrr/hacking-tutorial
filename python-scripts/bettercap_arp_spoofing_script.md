@@ -58,7 +58,7 @@ The script's execution is controlled by the `main()` function, which is called w
 
 ### Screenshots
 
-![bettercap_arp_spoofing_script.py running](../imgs/bettercap_arp_spoofing_script.png)
+![bettercap_arp_spoofing_script.py running](/imgs/bettercap_arp_spoofing_script.png)
 
 ---
 

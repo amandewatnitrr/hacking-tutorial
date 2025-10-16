@@ -54,9 +54,9 @@ The script's execution is initialized by the standard Python entry point, which 
 
 ### Screenshots
 
-![portscanner_test.py running](../imgs/portscanner_test.png)
+![portscanner_test.py running](/imgs/portscanner_test.png)
 
-![portscanner_test.py running](../imgs/portscanner_test2.png)
+![portscanner_test.py running](/imgs/portscanner_test2.png)
 
 ---
 
