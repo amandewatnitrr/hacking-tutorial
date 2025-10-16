@@ -1,0 +1,6 @@
+{
+  "username": "string",
+  "completed": ["01-intro", "02-sqli-types"],
+  "score": 0,
+  "last_updated": "YYYY-MM-DD"
+}

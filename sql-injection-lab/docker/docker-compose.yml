@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  sql-lab:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: bind
+        source: ../app
+        target: /app/app
+    restart: "no"
