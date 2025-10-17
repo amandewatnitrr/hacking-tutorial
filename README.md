@@ -76,6 +76,66 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
+---
+
+## SQL Injection Learning Lab (safe & interactive)
+
+> A beginner-friendly, **isolated** sandbox that teaches SQL Injection *concepts*, detection, and mitigation — without providing exploit payloads or instructions for attacking live systems.
+
+### What learners will get
+- Short conceptual exercises covering SQLi types and detection.
+- A tiny demo app showing an **illustrative** vulnerable pattern (non-executable) and a **safe** implementation using parameterized queries.
+- A local progress tracker (JSON) + small trivia rewards linking to further reading.
+- Docker support so learners can run the lab in an isolated container.
+
+### Why this is useful
+- Hands-on, practical learning focused on **defense** and secure coding.
+- Designed to be safe for classrooms, workshops, and self-study when run locally.
+
+### Demo 
+Index (lab started successfully):
+![Lab index screenshot](sql-injection-lab/assets/screenshots/index.png)
+
+Safe search example (`/safe/search?q=alice`) showing seeded results:
+![Safe search result](sql-injection-lab/assets/screenshots/safe_search_alice.png)
+
+> Screenshots contain only benign output (no payloads, no sensitive data).
+
+### Quick start — run locally (Python venv)
+```bash
+# from repo root
+cd sql-injection-lab
+python -m venv venv
+# Windows (PowerShell)
+.\venv\Scripts\Activate.ps1
+# Unix
+# source venv/bin/activate
+pip install -r requirements.txt
+
+# run the lab
+python -m app.run
+
+# open in browser:
+# http://127.0.0.1:8000/
+
+## Quick start using Docker
+cd sql-injection-lab/docker
+docker-compose up --build
+# then open http://localhost:8000/
+
+## Endpoints to try
+
+/ → index (lab info & endpoints)
+/exercises/01-intro.md → conceptual lesson
+/safe/search?q=<username> → safe parameterized query demo (seeded users: alice, bob, charlie)
+/vulnerable/ → illustrative vulnerable pattern (non-executable demonstration)
+
+## Safety & ethics 
+
+-Only run this lab in an environment you control (local machine, VM, or Docker).
+-The lab is intentionally non-actionable: it demonstrates unsafe patterns as strings and provides safe alternatives.
+-Do not use the examples to attack third‑party systems. See sql-injection-lab/LICENSE_NOTE.md for details.##
+
 ## Security Warning
 
 **Avoid using the `python_crypto` library or any other cryptographic or hacking-related libraries that are unmaintained, deprecated, or suspicious.**
