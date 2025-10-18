@@ -30,7 +30,7 @@ const LessonTemplate = ({ lesson }) => {
 
     if (isImageNode && isRelativeImage) {
       const imageName = url.split('/').pop();
-      return `/src/content/imgs/${imageName}`;
+      return `/imgs/${imageName}`;
     }
 
     return url;
