@@ -66,21 +66,32 @@
   fill: currentColor;
 }
 
+.bg-transparent {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     padding: 1rem;
   }
-  
+
   .navbar-brand {
     font-size: 1.2rem;
   }
-  
+
   .navbar-links {
     gap: 0.5rem;
   }
-  
+
   .nav-link {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
   }
+
+  .bg-transparent {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+
 }
