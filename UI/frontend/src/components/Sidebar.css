@@ -1,0 +1,164 @@
+.hl-sidebar {
+  z-index: 30;
+}
+
+.hl-sidebar__panel {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 64px);
+  overflow: auto;
+  width: 300px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  transition: transform 220ms ease-in-out;
+}
+
+.hl-sidebar__header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hl-sidebar__title {
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.hl-sidebar__close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.hl-sidebar__sections {
+  padding: 0.5rem;
+}
+
+.hl-sidebar__heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 0.75rem 0 0.25rem 0.25rem;
+}
+
+.hl-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hl-sidebar__item {
+  margin: 0;
+}
+
+.hl-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.5rem 0.45rem 0.6rem;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+.hl-sidebar__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.hl-sidebar__link.is-active {
+  background: rgba(102, 126, 234, 0.18);
+  color: var(--text-primary);
+}
+
+.hl-sidebar__bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+}
+
+.hl-sidebar__link.is-active .hl-sidebar__bullet {
+  background: var(--accent-green);
+}
+
+.hl-sidebar__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mobile slide-over */
+.hl-sidebar {
+  position: relative;
+}
+
+.hl-sidebar__backdrop {
+  display: none;
+}
+
+/* Desktop: allow hide animation by translating left when closed */
+.hl-sidebar--closed .hl-sidebar__panel {
+  transform: translateX(-100%);
+}
+
+@media (max-width: 1024px) {
+
+  /* Use display toggling to avoid full-screen invisible overlay when closed */
+  .hl-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    pointer-events: none;
+    width: 100%;
+  }
+
+  .hl-sidebar__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    display: none;
+    pointer-events: none;
+  }
+
+  .hl-sidebar--open .hl-sidebar__backdrop {
+    /* display: block; */
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .hl-sidebar__panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    pointer-events: auto;
+    transform: translateX(-100%);
+    transition: transform 220ms ease-in-out;
+  }
+
+  .hl-sidebar--open {
+    pointer-events: auto;
+  }
+
+  .hl-sidebar--open .hl-sidebar__panel {
+    transform: translateX(0);
+  }
+}
