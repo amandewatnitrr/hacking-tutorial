@@ -19,7 +19,7 @@ A streamlined Python automation tool that combines **netdiscover** network enume
 
 The diagram illustrates the complete automation workflow from network discovery through active MITM operations.
 
-![MITM Attack Automation - System Architecture](images/mitm_attack_flow.png)
+![MITM Attack Automation - System Architecture](../imgs/mitm_attack_automator.png)
 
 ### Execution Flow
 
@@ -37,7 +37,7 @@ The diagram illustrates the complete automation workflow from network discovery 
 
 Below is a screenshot from an actual test session showing the complete workflow in action:
 
-![MITM Attack Demo Session](images/mitm_automation_op.png)
+![MITM Attack Demo Session](../imgs/mitm_attack_automator.png)
 
 The demonstration shows:
 - **Automated Discovery**: netdiscover finding 3 devices with gateway identification

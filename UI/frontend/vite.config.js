@@ -11,4 +11,19 @@ export default defineConfig({
       protocolImports: true,
     }),
   ],
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..']
+    }
+  },
+  build: {
+    // Ensure static assets are properly handled
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]'
+      }
+    }
+  }
 })

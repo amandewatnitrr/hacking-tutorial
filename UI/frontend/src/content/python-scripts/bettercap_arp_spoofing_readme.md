@@ -28,7 +28,7 @@ A professional Python automation script for controlling **Bettercap** operations
 
 The script follows a structured workflow with clear separation of concerns and professional error handling.
 
-![Bettercap Controller - System Architecture](images/bettercap_controller_flow_professional.png)
+![Bettercap Controller - System Architecture](../imgs/bettercap_arp_spoofing_script.png)
 
 ### Execution Flow
 
@@ -53,7 +53,7 @@ python bettercap_controller.py wlan0
 
 Below is a screenshot from an actual test session showing the script in operation:
 
-![Live Demo Session](images/bettercap_arp_op.png)
+![Live Demo Session](../imgs/bettercap_arp_spoofing_script.png)
 
 The demonstration shows:
 - **Device Discovery Phase**: Automatic network scanning and device enumeration

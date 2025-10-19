@@ -30,7 +30,7 @@ An educational workflow that demonstrates how to capture a WPA/WPA2 four-way han
 
 The diagram illustrates the end-to-end sequence: interface setup, handshake capture, optional deauth, file verification, and offline cracking.
 
-![WPA/WPA2 Flow](images/wpa_dictionary_attack_flow.png)
+![WPA/WPA2 Flow](../imgs/wpa2_dictionary_attack.png)
 
 ---
 
@@ -38,11 +38,11 @@ The diagram illustrates the end-to-end sequence: interface setup, handshake capt
 
 - **Aircrack-ng cracking session** – shows dictionary attack progress and recovered keys:
 
-![Crack Demo](images/wpa_wpa2op.png)
+![Crack Demo](../imgs/wpa2_dictionary_attack.png)
 
 - **Capture workflow** – interface setup, deauth prompt, handshake monitoring:
 
-![Capture Demo](images/wpa_wpa2_2op.png)
+![Capture Demo](../imgs/wpa2_dictionary_attack.png)
 
 ---
 
