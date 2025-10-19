@@ -1,2 +1,5 @@
+# include core requirements from root
+-r ../requirements.txt
+# lab-specific additions
 Flask>=2.0
 pytest>=7.0

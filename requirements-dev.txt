@@ -1,0 +1,7 @@
+-r requirements.txt
+pytest>=7.0
+black
+isort
+mypy
+pre-commit
+pip-audit

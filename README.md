@@ -22,11 +22,14 @@ This repository is a comprehensive tutorial series for ethical hacking and penet
    cd hacking-tutorial
    ```
 
-2. **Explore the lessons:**
+2. **Set up the environment:**
+   Follow the detailed setup instructions in [SETUP.md](SETUP.md) to configure your development environment with all required dependencies.
+
+3. **Explore the lessons:**
    - Lessons are organized in the `ethical-hacking/` and `python-for-eth-hacking/` folders.
    - Each lesson contains step-by-step instructions, code samples, and explanations.
 
-3. **Try the scripts:**
+4. **Try the scripts:**
    - Example scripts are available in the `python-scripts/` directory.
    - Use a safe, isolated environment (such as a VM or test network) for all practical exercises.
 
