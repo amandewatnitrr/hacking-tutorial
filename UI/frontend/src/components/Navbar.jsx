@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react'; // 1. Import useState
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
+  // 2. Add state for the menu toggle
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -11,20 +14,21 @@ const Navbar = () => {
           <span className="brand-text">HackLearn</span>
         </Link>
 
-        <div className="navbar-links">
-            <button
-              type="button"
-              className="nav-link bg-transparent"
-              onClick={() => {
-                try {
-                  window.dispatchEvent(new CustomEvent('open-sidebar'));
-                } catch { }
-              }}
-              aria-label="Open lessons sidebar"
-              title="Lessons"
-            >
-              Lessons
-            </button>
+        {/* 3. Add the 'active' class conditionally */}
+        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+          <button
+            type="button"
+            className="nav-link bg-transparent"
+            onClick={() => {
+              try {
+                window.dispatchEvent(new CustomEvent('open-sidebar'));
+              } catch { }
+            }}
+            aria-label="Open lessons sidebar"
+            title="Lessons"
+          >
+            Lessons
+          </button>
           <Link to="/" className="nav-link">Home</Link>
           <a
             href="https://github.com/amandewatnitrr/hacking-tutorial.git"
@@ -38,6 +42,19 @@ const Navbar = () => {
             GitHub
           </a>
         </div>
+
+        {/* 4. Add the hamburger menu button */}
+        <button
+          className="mobile-menu-button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)} // This toggles the state
+          aria-label="Toggle navigation menu"
+        >
+          {/* You can swap this SVG for a 'close' icon when open */}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+
       </div>
     </nav>
   );
