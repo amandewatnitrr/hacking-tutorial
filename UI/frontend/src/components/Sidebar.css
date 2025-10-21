@@ -4,7 +4,7 @@
 
 .hl-sidebar__panel {
   position: sticky;
-  top: 0;
+  top: 64px;
   height: calc(100vh - 64px);
   overflow: auto;
   width: 300px;
@@ -146,9 +146,9 @@
   .hl-sidebar__panel {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 64px;
     bottom: 0;
-    height: 100vh;
+    height: calc(100vh - 64px);
     pointer-events: auto;
     transform: translateX(-100%);
     transition: transform 220ms ease-in-out;
