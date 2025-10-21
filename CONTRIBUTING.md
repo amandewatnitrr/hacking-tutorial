@@ -21,7 +21,7 @@ _This notice should stay as the first item in the `CONTRIBUTING.md` file._
 ```bash
 # Clone the repo
 git clone https://github.com/amandewatnitrr/hacking-tutorial.git
-cd hacking-tutorial
+cd hacking-tutorial/UI/frontend
 
 # Install dependencies
 npm install
