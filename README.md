@@ -75,6 +75,11 @@ if (process.env.NODE_ENV === 'production') {
   })();
 }
 ```
+## Safety & ethics 
+
+-Only run this lab in an environment you control (local machine, VM, or Docker).
+-The lab is intentionally non-actionable: it demonstrates unsafe patterns as strings and provides safe alternatives.
+-Do not use the examples to attack third‑party systems. See sql-injection-lab/LICENSE_NOTE.md for details.##
 
 ## Security Warning
 

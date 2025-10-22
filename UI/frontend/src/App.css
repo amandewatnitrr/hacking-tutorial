@@ -1,87 +1,57 @@
-/* Hacker Theme - Black & Green */
+/* Dark Hacker Theme with Green Accents */
 * {
-  font-weight: bold; /* Make all fonts thicker */
+  box-sizing: border-box;
 }
 
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #000000;
-  color: #00ff00;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
-  font-weight: bold;
 }
 
 #root {
   max-width: 100%;
   margin: 0;
   padding: 0;
-  text-align: center;
-  background-color: #000000;
-}
-
-.home-button{
-  position: fixed;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 1rem;
-  text-align: left;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #000000;
-  border-bottom: 2px solid #00ff00;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 255, 0, 0.3);
-}
-
-.home-title{
-  padding: 0;
-  margin: 0;
-  font-size: 1.8rem;
-  color: #00ff00;
-  font-weight: bold;
-}
-
-.home-title-link {
-  text-decoration: none;
-  color: inherit;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
 }
 
 .home-button a {
   margin-right: 2%;
-  color: #00ff00;
+  color: var(--accent-green);
   font-size: 1rem;
   text-decoration: none;
   padding: 8px 16px;
-  border: 1px solid #00ff00;
+  border: 1px solid var(--accent-green);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .home-button a:hover {
   color: #000000;
-  background-color: #00ff00;
-  box-shadow: 0 0 15px #00ff00;
+  background-color: var(--accent-green);
+  box-shadow: 0 0 15px var(--accent-green);
 }
 
 .home-title:hover{
-  color: #000000;
+  color: var(--accent-green-light);
 }
+
 .sidebar {
   position: fixed;
   top: 80px;
   left: 0;
   width: 280px;
   height: calc(100vh - 80px);
-  background-color: #000000;
-  border-right: 2px solid #00ff00;
+  background-color: var(--bg-secondary);
+  border-right: 2px solid var(--accent-green);
   padding: 1rem;
   overflow-y: auto;
   z-index: 999;
-  box-shadow: 2px 0 10px rgba(0, 255, 0, 0.2);
+  box-shadow: 2px 0 10px rgba(0, 255, 136, 0.2);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -99,24 +69,24 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background-color: #111111;
-  color: #00ff00;
+  background-color: var(--bg-tertiary);
+  color: var(--accent-green);
   cursor: pointer;
-  border: 1px solid #00ff00;
+  border: 1px solid var(--accent-green);
   border-radius: 4px;
   transition: all 0.3s ease;
   font-weight: bold;
 }
 
 .dropdown-header:hover {
-  background-color: #001a00;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  background-color: rgba(0, 255, 136, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
 .arrow {
   transition: transform 0.3s;
   font-size: 12px;
-  color: #00ff00;
+  color: var(--accent-green);
 }
 
 .arrow.open {
@@ -124,27 +94,27 @@ body {
 }
 
 .dropdown-content {
-  background-color: #111111;
-  border: 1px solid #00ff00;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--accent-green);
   border-top: none;
   border-radius: 0 0 4px 4px;
   margin-top: 0;
-  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
 }
 
 .lesson-item {
   padding: 10px 16px;
-  color: #00cc00;
+  color: var(--text-secondary);
   cursor: pointer;
-  border-bottom: 1px solid #003300;
+  border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
   text-decoration: none;
   display: block;
 }
 
 .lesson-item:hover {
-  background-color: #002200;
-  color: #00ff00;
+  background-color: rgba(0, 255, 136, 0.1);
+  color: var(--accent-green);
 }
 
 .lesson-item:last-child {
@@ -152,29 +122,38 @@ body {
 }
 
 .main-content {
-  margin-left: 300px;
-  margin-top: 100px;
-  padding: 2rem;
+  margin: 0;
+  margin-top: 2.5rem;
+  padding: 0;
   text-align: left;
-  background-color: #000000;
-  color: #00ff00;
-  min-height: calc(100vh - 100px);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: calc(100vh - 2.5rem);
+  width: 100%;
 }
 
 .main-content h2 {
-  color: #00ff00;
+  color: var(--accent-green);
   font-size: 2rem;
-  border-bottom: 2px solid #00ff00;
+  border-bottom: 2px solid var(--accent-green);
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
 .main-content p {
-  color: #00cc00;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 15px;
-  font-weight: bold;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0;
+  }
 }
 
 .lesson-content {
@@ -182,30 +161,30 @@ body {
 }
 
 .markdown-content {
-  background-color: #111111;
-  border: 1px solid #00ff00;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--accent-green);
   border-radius: 8px;
   padding: 20px;
-  color: #00ff00;
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-x: auto;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .welcome-info {
   margin-top: 30px;
   padding: 20px;
-  background-color: #111111;
-  border: 1px solid #00ff00;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--accent-green);
   border-radius: 8px;
 }
 
 .welcome-info h3 {
-  color: #00ff00;
+  color: var(--accent-green);
   margin-bottom: 15px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .welcome-info ul {
@@ -214,12 +193,12 @@ body {
 }
 
 .welcome-info li {
-  color: #00cc00;
+  color: var(--text-secondary);
   margin-bottom: 10px;
   padding: 8px;
-  background-color: #001a00;
+  background-color: var(--bg-tertiary);
   border-radius: 4px;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {
@@ -228,7 +207,10 @@ body {
   }
   
   .main-content {
-    margin-left: 220px;
+    margin-left: 0;
+    width: 100%;
+    margin-top: 60px;
+    padding: 1rem;
   }
   
   .home-title {

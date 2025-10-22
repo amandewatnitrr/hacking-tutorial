@@ -1,0 +1,154 @@
+.navbar {
+  background-color: var(--bg-secondary);
+  border-bottom: 2px solid var(--accent-green);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--accent-green);
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--accent-green-light);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.brand-icon {
+  font-family: 'Courier New', monospace;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link:hover {
+  color: var(--accent-green);
+  border-color: var(--accent-green);
+  background-color: rgba(0, 255, 136, 0.1);
+}
+
+.github-link svg {
+  fill: currentColor;
+}
+
+.bg-transparent {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+/* --- ADD THIS SECTION --- */
+/* Hamburger Button (Hidden on Desktop by default) */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-primary);
+  z-index: 101; /* Keep it above the menu */
+}
+
+.mobile-menu-button svg {
+  width: 24px;
+  height: 24px;
+}
+/* --- END ADD --- */
+
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem;
+    /* Ensure z-index allows button to be on top */
+    position: relative;
+    z-index: 1001;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  /* --- MODIFY THIS SECTION --- */
+
+  .navbar-links {
+    /* Hide menu by default */
+    display: none;
+
+    /* Style as a dropdown */
+    flex-direction: column;
+    position: absolute;
+    top: 65px; /* Adjust to be below your navbar */
+    right: 1rem;
+    width: 90%;
+    max-width: 320px;
+
+    /* Appearance */
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--accent-green);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    
+    /* Overrides from desktop */
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  /* This is the magic! Show the menu when it has the .active class */
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 0.8rem 0.5rem;
+    font-size: 1rem;
+    width: 100%; /* Make links fill the dropdown */
+  }
+
+  /* Show the hamburger button on mobile */
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  /* --- END MODIFY --- */
+
+  .bg-transparent {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+}

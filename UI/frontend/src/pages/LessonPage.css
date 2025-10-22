@@ -1,0 +1,133 @@
+.lesson-page {
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 0.5rem;
+  }
+}
+
+nav.home-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.home-title-link {
+  text-decoration: none;
+  color:aqua;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-title {
+  color: var(--accent-green);
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+  transition: color 0.2s;
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-title-link:hover .home-title {
+  background:rgb(255, 255, 255);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+nav.home-button a {
+  color: var(--text-primary);
+  font-size: 1rem;
+  text-decoration: none;
+  margin-left: 2rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--accent-green);
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+nav.home-button a:hover {
+  background: var(--accent-green);
+  color: #0a0e1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Sidebar layout and toggle */
+.lesson-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.lesson-layout.lesson-layout--sidebar-hidden {
+  grid-template-columns: 0 1fr;
+}
+
+.main-content {
+  min-height: calc(100vh - 64px);
+  padding: 1rem 1.25rem;
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .lesson-layout { display: block; }
+  .sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.75rem 1rem 0 1rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 200ms ease-in-out, border-color 200ms ease-in-out;
+  }
+  .sidebar-toggle:hover { background: rgba(255,255,255,0.06); }
+}
+
+/* Show the hamburger on desktop when sidebar is hidden */
+.lesson-page.sidebar-hidden .sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 1rem 0 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 200ms ease-in-out, border-color 200ms ease-in-out;
+}
+.lesson-page.sidebar-hidden .sidebar-toggle:hover { background: rgba(255,255,255,0.06); }
