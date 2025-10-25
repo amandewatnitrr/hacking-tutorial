@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -7,9 +7,21 @@ import { getLessonBySlug } from '../utils/markdownloader';
 import './LessonTemplate.css';
 
 const LessonTemplate = ({ lesson }) => {
+  const [theme, setTheme] = useState('dark'); // sync with App theme
+
+  useEffect(() => {
+    // Listen for global theme changes
+    const observer = new MutationObserver(() => {
+      const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+      setTheme(currentTheme);
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
   if (!lesson) {
     return (
-      <div className="lesson-template">
+      <div className={`lesson-template ${theme}`}>
         <div className="lesson-not-found">
           <h1>Lesson Not Found</h1>
           <p>The requested lesson could not be found.</p>
@@ -20,19 +32,14 @@ const LessonTemplate = ({ lesson }) => {
   }
 
   const transformMarkdownUrl = (url, key, node) => {
-    if (typeof url !== 'string') {
-      return url;
-    }
-
+    if (typeof url !== 'string') return url;
     const isImageNode = node?.tagName === 'img';
     const isRelativeImage =
       url.startsWith('../imgs/') || url.startsWith('./imgs/') || url.startsWith('./../imgs/');
-
     if (isImageNode && isRelativeImage) {
       const imageName = url.split('/').pop();
       return `/imgs/${imageName}`;
     }
-
     return url;
   };
 
@@ -40,7 +47,7 @@ const LessonTemplate = ({ lesson }) => {
   const nextLesson = lesson.next ? getLessonBySlug(lesson.next) : null;
 
   const NavigationBar = ({ position }) => (
-    <nav className={`lesson-navigation lesson-navigation--${position}`}>
+    <nav className={`lesson-navigation lesson-navigation--${position} ${theme}`}>
       <div className="nav-section nav-section--left">
         {prevLesson ? (
           <Link to={`/lessons/${prevLesson.slug}`} className="nav-button">
@@ -72,7 +79,7 @@ const LessonTemplate = ({ lesson }) => {
   );
 
   return (
-    <div className="lesson-template">
+    <div className={`lesson-template ${theme}`}>
       <header className="lesson-header">
         <h1>{lesson.title}</h1>
       </header>
@@ -86,7 +93,6 @@ const LessonTemplate = ({ lesson }) => {
           urlTransform={transformMarkdownUrl}
           components={{
             code({ node, inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || '');
               return !inline ? (
                 <pre className={className}>
                   <code className={className} {...props}>
