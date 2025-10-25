@@ -9,13 +9,22 @@ import './LessonPage.css';
 const LessonPage = () => {
   const { slug } = useParams();
   const lesson = getLessonBySlug(slug);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(()=>window.innerWidth < 1024 ? false : true);
 
   // Listen for navbar "open-sidebar" events
   React.useEffect(() => {
     const handler = () => setIsSidebarOpen(true);
     window.addEventListener('open-sidebar', handler);
     return () => window.removeEventListener('open-sidebar', handler);
+  }, []);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) setIsSidebarOpen(false);
+      else setIsSidebarOpen(true);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (

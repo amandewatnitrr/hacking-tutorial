@@ -158,5 +158,6 @@ logs/
 # Temporary files
 *.tmp
 *.temp
- 3 changes: 0 additions & 3 deletions3  
+.idea/.gitignore
+
 .idea/.gitignore
