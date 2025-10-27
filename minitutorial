@@ -1,0 +1,14 @@
+python-for-eth-hacking/introducao_ao_hashing.md
+
+## Introdução ao Hashing em Python 
+**Autor:** @Debora0Martins
+
+O hashing é usado em segurança para transformar dados sensíveis (como senhas) em códigos irreversíveis.
+
+### Exemplo básico em Python
+```python
+import hashlib
+
+senha = "minhaSenha123"
+resultado = hashlib.sha256(senha.encode()).hexdigest()
+print("SHA-256:", resultado)
