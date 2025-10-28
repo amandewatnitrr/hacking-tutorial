@@ -102,8 +102,6 @@
     font-size: 1.2rem;
   }
 
-  /* --- MODIFY THIS SECTION --- */
-
   .navbar-links {
     /* Hide menu by default */
     display: none;
