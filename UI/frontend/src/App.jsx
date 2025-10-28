@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LessonPage from './pages/LessonPage';
+import ScrollToTop from './components/ScrollToTop';
 import { getAllLessons } from './utils/markdownloader';
 import './App.css';
 
@@ -55,6 +56,7 @@ codeBlocks.forEach((block) => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Redirect root to first lesson */}
         <Route
@@ -78,11 +80,11 @@ codeBlocks.forEach((block) => {
         <Route
           path="*"
           element={
-            <div style={{ padding: '2rem', textAlign: 'center' }}>
+            <div style={{ padding: '1rem', textAlign: 'center' }}>
               <h1>404 - Page Not Found</h1>
               <p>The page you're looking for doesn't exist.</p>
               {firstLesson && (
-                <a href={`/lessons/${firstLesson.slug}`} style={{ color: '#667eea' }}>
+                <a href={`/lessons/${firstLesson.slug}`} style={{ color: '#4d869fff' }}>
                   Go to First Lesson
                 </a>
               )}
