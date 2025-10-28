@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -7,10 +7,15 @@ import { getLessonBySlug } from '../utils/markdownloader';
 import './LessonTemplate.css';
 
 const LessonTemplate = ({ lesson }) => {
-  const [theme, setTheme] = useState('dark'); // sync with App theme
+  const [theme, setTheme] = useState('dark');
+  const location = useLocation();
 
+  // ✅ Only show when the route starts with /lessons/
+  const isLessonPage = location.pathname.startsWith('/lessons/');
+  if (!isLessonPage) return null;
+
+  // Sync with global theme
   useEffect(() => {
-    // Listen for global theme changes
     const observer = new MutationObserver(() => {
       const currentTheme = document.body.getAttribute('data-theme') || 'dark';
       setTheme(currentTheme);
