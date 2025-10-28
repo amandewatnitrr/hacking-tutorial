@@ -133,6 +133,10 @@ body {
     z-index: 1001;
   }
 
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
   .navbar-links {
     display: none;
     flex-direction: column;
