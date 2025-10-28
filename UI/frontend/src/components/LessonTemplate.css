@@ -212,8 +212,9 @@
 }
 
 .nav-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   padding: 0.9rem 1.25rem;
   border-radius: 999px;
@@ -243,6 +244,18 @@
   cursor: default;
   pointer-events: none;
 }
+
+
+.nav-button--right {
+  justify-content: space-between;
+  padding: .9rem 1.5rem;     
+  padding-left: 2.4rem;   
+}
+
+.nav-section--left .nav-arrow {
+  margin-right: 0.5rem;
+}
+
 
 .nav-arrow {
   font-size: 1.4rem;
