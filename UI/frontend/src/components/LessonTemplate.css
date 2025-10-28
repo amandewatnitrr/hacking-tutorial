@@ -27,7 +27,7 @@
 
 @media (max-width: 768px) {
   .lesson-header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -135,7 +135,7 @@
   padding: 1.5rem;
   border-radius: 8px;
   overflow-x: auto;
-  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
   font-size: 0.9rem;
   line-height: 1.6;
   margin-top: 2rem;
@@ -143,7 +143,7 @@
 }
 
 .lesson-content code {
-  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
 }
 
 .lesson-content :not(pre) > code {
@@ -215,16 +215,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.9rem 1.25rem;
-  border-radius: 999px;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;   
+  height: auto;
+  border-radius: 10px;   
   background: rgba(102, 255, 170, 0.12);
   border: 1px solid rgba(102, 255, 170, 0.4);
   color: var(--accent-green-light);
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.2s ease;
-  max-width: 320px;
+  transition: all 0.3s ease;
+  width: auto;
 }
 
 .nav-button:hover {
@@ -245,17 +246,15 @@
   pointer-events: none;
 }
 
-
 .nav-button--right {
   justify-content: space-between;
-  padding: .9rem 1.5rem;     
-  padding-left: 2.4rem;   
+  padding: 0.6rem 1rem;
+  padding-left: 1.9rem;
 }
 
 .nav-section--left .nav-arrow {
   margin-right: 0.5rem;
 }
-
 
 .nav-arrow {
   font-size: 1.4rem;
@@ -276,7 +275,7 @@
 }
 
 .nav-title {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--text-primary);
 }
 
