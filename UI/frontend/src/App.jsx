@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LessonPage from './pages/LessonPage';
 import ScrollToTop from './components/ScrollToTop';
 import { getAllLessons } from './utils/markdownloader';
+import ThemeToggle from "./components/ThemeToggle";
+
 import './App.css';
 
 const App = () => {

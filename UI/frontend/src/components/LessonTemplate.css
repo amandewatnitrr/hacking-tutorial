@@ -27,7 +27,7 @@
 
 @media (max-width: 768px) {
   .lesson-header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -135,7 +135,7 @@
   padding: 1.5rem;
   border-radius: 8px;
   overflow-x: auto;
-  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
   font-size: 0.9rem;
   line-height: 1.6;
   margin-top: 2rem;
@@ -143,7 +143,7 @@
 }
 
 .lesson-content code {
-  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
 }
 
 .lesson-content :not(pre) > code {
@@ -180,27 +180,25 @@
 }
 
 /* Navigation */
+/* Professional Lesson Navigation */
 .lesson-navigation {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  margin: 2.5rem 0;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.lesson-navigation--top {
-  margin-top: 1rem;
-}
-
-.lesson-navigation--bottom {
-  margin-bottom: 0;
+  margin: 2rem 0;
+  padding: 1rem 2rem;
+  background-color: var(--card); /* dark card background by default */
+  /*border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);*/
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-section {
-  flex: 1;
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-section--left {
@@ -214,140 +212,89 @@
 .nav-button {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text);
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.9rem 1.25rem;
-  border-radius: 999px;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;   
+  height: auto;
+  border-radius: 10px;   
   background: rgba(102, 255, 170, 0.12);
   border: 1px solid rgba(102, 255, 170, 0.4);
   color: var(--accent-green-light);
   text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  max-width: 320px;
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-button:hover {
-  background: rgba(102, 255, 170, 0.22);
-  border-color: rgba(102, 255, 170, 0.6);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-green);
   transform: translateY(-1px);
 }
 
-.nav-button--right {
-  justify-content: flex-end;
-}
-
 .nav-button--disabled {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  border-color: var(--border);
   color: var(--text-secondary);
-  cursor: default;
+  cursor: not-allowed;
   pointer-events: none;
 }
 
-
 .nav-button--right {
   justify-content: space-between;
-  padding: .9rem 1.5rem;     
-  padding-left: 2.4rem;   
+  padding: 0.6rem 1rem;
+  padding-left: 1.9rem;
 }
 
 .nav-section--left .nav-arrow {
   margin-right: 0.5rem;
 }
 
-
 .nav-arrow {
-  font-size: 1.4rem;
-  line-height: 1;
-}
-
-.nav-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  font-size: 1.2rem;
 }
 
 .nav-label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
 .nav-title {
   font-size: 0.95rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
-/* Lesson Not Found */
-.lesson-not-found {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+/* Light theme overrides */
+.lesson-template.light .lesson-navigation,
+.lesson-template.light .nav-button {
+  background-color: var(--light-bg-secondary);
+  border-color: var(--light-border-color);
+  color: var(--light-text-primary);
 }
 
-.lesson-not-found h1 {
-  font-size: 2rem;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
+.lesson-template.light .nav-button:hover {
+  background-color: var(--light-bg-tertiary);
+  color: var(--accent-green-dark);
 }
 
-.lesson-not-found p {
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
+.lesson-template.light .nav-label {
+  color: var(--light-text-secondary);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .lesson-navigation {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .nav-section {
-    width: 100%;
-  }
-
-  .nav-button {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .lesson-content pre {
-    padding: 1rem;
-    font-size: 0.85rem;
-  }
-
-  .lesson-content {
-    font-size: 1rem;
-  }
+.lesson-template.light .nav-title {
+  color: var(--light-text-primary);
 }
-
-/* Dark mode support (optional) */
-@media (prefers-color-scheme: dark) {
-  .lesson-template {
-    background: #1a1a1a;
-    color: #e0e0e0;
-  }
-
-  .lesson-content blockquote {
-    background: #2a2a2a;
-    border-left-color: #667eea;
-  }
-
-  .lesson-content :not(pre) > code {
-    background: #2a2a2a;
-    color: #ff79c6;
-  }
-
-  .lesson-header {
-    border-bottom-color: #333;
-  }
-
-  .lesson-navigation {
-    border-top-color: #333;
-  }
+/* 👇 Add this at the very end of Lesson.css or relevant CSS file */
+.lesson-navigation {
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
