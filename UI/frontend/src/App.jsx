@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LessonPage from './pages/LessonPage';
 import { getAllLessons } from './utils/markdownloader';
+import ThemeToggle from "./components/ThemeToggle";
+
 import './App.css';
 
 const App = () => {
@@ -55,6 +57,7 @@ codeBlocks.forEach((block) => {
 
   return (
     <BrowserRouter>
+    
       <Routes>
         {/* Redirect root to first lesson */}
         <Route

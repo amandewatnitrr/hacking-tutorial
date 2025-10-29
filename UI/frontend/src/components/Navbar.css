@@ -1,3 +1,40 @@
+/* ========================= */
+/* THEME VARIABLES */
+/* ========================= */
+
+/* 🌙 Default = Dark Theme */
+:root {
+  --bg-primary: #0b1220;
+  --bg-secondary: #121829;
+  --bg-tertiary: #1a2332;
+  --text-primary: #e6e6e6;
+  --accent-green: #00ff88;
+  --accent-green-light: #66ffb3;
+  --border-color: #2b354a;
+}
+
+/* 🌞 Light Theme */
+[data-theme="light"] {
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8ebf0;
+  --text-primary: #0b1220;
+  --accent-green: #007f4f;
+  --accent-green-light: #00b86b;
+  --border-color: #cfd5e3;
+}
+
+/* Smooth transition between themes */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================= */
+/* NAVBAR STYLES */
+/* ========================= */
+
 .navbar {
   background-color: var(--bg-secondary);
   border-bottom: 2px solid var(--accent-green);
@@ -71,8 +108,9 @@
   color: var(--text-primary);
 }
 
-/* --- ADD THIS SECTION --- */
-/* Hamburger Button (Hidden on Desktop by default) */
+/* ========================= */
+/* MOBILE MENU */
+/* ========================= */
 .mobile-menu-button {
   display: none;
   background: none;
@@ -80,20 +118,17 @@
   cursor: pointer;
   padding: 0.5rem;
   color: var(--text-primary);
-  z-index: 101; /* Keep it above the menu */
+  z-index: 101;
 }
 
 .mobile-menu-button svg {
   width: 24px;
   height: 24px;
 }
-/* --- END ADD --- */
-
 
 @media (max-width: 768px) {
   .navbar-container {
     padding: 1rem;
-    /* Ensure z-index allows button to be on top */
     position: relative;
     z-index: 1001;
   }
@@ -103,31 +138,23 @@
   }
 
   .navbar-links {
-    /* Hide menu by default */
     display: none;
-
-    /* Style as a dropdown */
     flex-direction: column;
     position: absolute;
-    top: 65px; /* Adjust to be below your navbar */
+    top: 65px;
     right: 1rem;
     width: 90%;
     max-width: 320px;
-
-    /* Appearance */
     background-color: var(--bg-secondary);
     border: 1px solid var(--accent-green);
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    
-    /* Overrides from desktop */
     gap: 0.5rem;
     align-items: flex-start;
   }
 
-  /* This is the magic! Show the menu when it has the .active class */
   .navbar-links.active {
     display: flex;
   }
@@ -135,15 +162,12 @@
   .nav-link {
     padding: 0.8rem 0.5rem;
     font-size: 1rem;
-    width: 100%; /* Make links fill the dropdown */
+    width: 100%;
   }
 
-  /* Show the hamburger button on mobile */
   .mobile-menu-button {
     display: block;
   }
-  
-  /* --- END MODIFY --- */
 
   .bg-transparent {
     background-color: transparent;

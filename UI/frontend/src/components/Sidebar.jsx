@@ -59,5 +59,3 @@ const Sidebar = ({ isOpen, onClose, currentSlug }) => {
 };
 
 export default Sidebar;
-
-
