@@ -123,7 +123,7 @@ body {
 
 .main-content {
   margin: 0;
-  margin-top: 2.5rem;
+  margin-top: 0;
   padding: 0;
   text-align: left;
   background-color: var(--bg-primary);
@@ -137,7 +137,7 @@ body {
   font-size: 2rem;
   border-bottom: 2px solid var(--accent-green);
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .main-content p {
@@ -157,7 +157,7 @@ body {
 }
 
 .lesson-content {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .markdown-content {
@@ -248,4 +248,57 @@ pre {
   opacity: 1;
   background-color: #3e3e3e;
 }
+/* Remove gap between header and lesson nav */
+.lesson-header,
+.lesson-navigation,
+.lesson-header + .lesson-navigation {
+  margin: 0;
+  padding: 1rem 2rem;
+  background-color: var(--card) !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* adjust lesson-navigation padding */
+.lesson-navigation {
+  padding: 0.5rem 2rem;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lesson-header h1 {
+  margin: 0;
+}
+
+/* also remove borders from any parent wrapper */
+.lesson,
+.lesson-container,
+.lesson-content {
+  border: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+.lesson-header h1 {
+  color: var(--accent-green);
+}
+.lesson-content h1 {
+  margin: 0;
+  padding: 0;
+  color: var(--accent-green);
+}
+.lesson-content h1 {
+  margin-left: 25px;       /* sidebar width ke barabar */
+  padding: 0;
+  color: var(--accent-green);
+}
+
+
+
+
 

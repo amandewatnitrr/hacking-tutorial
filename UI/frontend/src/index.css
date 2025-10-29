@@ -3,20 +3,34 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Dark theme with bright green accents */
-  --bg-primary: #0a0e1a;
+  /* Dark theme (default) */
+  --bg-primary: #0b1220;
   --bg-secondary: #121829;
   --bg-tertiary: #1a2332;
-  --text-primary: #e5e7eb;
+  --text-primary: #e6eef6;
   --text-secondary: #9ca3af;
   --accent-green: #00ff88;
   --accent-green-light: #33ffaa;
   --accent-green-dark: #00cc6a;
   --border-color: #1f2937;
-  
+
+  /* Light theme */
+  --light-bg-primary: #fefcf5;   /* soft cream */
+  --light-bg-secondary: #f8f6ef;
+  --light-bg-tertiary: #f1efe6;
+  --light-text-primary: #1e293b;
+  --light-text-secondary: #4b5563;
+  --light-border-color: #d1d5db;
+
+  /* Theme base vars (default: dark) */
+  --bg: var(--bg-primary);
+  --card: var(--bg-secondary);
+  --text: var(--text-primary);
+  --border: var(--border-color);
+
   color-scheme: dark;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+  color: var(--text);
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,56 +38,131 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme='dark'] {
+  --bg: var(--bg-primary);
+  --card: var(--bg-secondary);
+  --text: var(--text-primary);
+  --border: var(--border-color);
+  --accent-green: #00ff88;
+}
+
+[data-theme='light'] {
+  --bg: var(--light-bg-primary);
+  --card: var(--light-bg-secondary);
+  --text: var(--light-text-primary);
+  --border: var(--light-border-color);
+  --accent-green: #00cc6a; /* slightly muted in light */
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
 a {
   font-weight: 500;
   color: var(--accent-green);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s;
 }
 a:hover {
   color: var(--accent-green-light);
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--bg-primary);
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: var(--text);
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.5em;
   line-height: 1.1;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--card);
+  color: var(--text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s, border-color 0.25s, color 0.3s;
 }
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-color: var(--accent-green);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Navbar, Sidebar, Cards, etc. */
+.navbar, .sidebar, .card, .lesson-header, .lesson-content {
+  background-color: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
+/* Sidebar lessons list */
+.sidebar ul, .sidebar-list {
+  background: var(--bg-tertiary, var(--card));
+  color: var(--text-secondary);
+}
+
+.sidebar li.selected, .sidebar-item.selected {
+  background: var(--accent-green-light);
+  color: var(--light-text-primary);
+}
+
+input, textarea {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.5em;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--card);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* Theme icon button */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--accent-green);
+  font-size: 1.6em;
+  cursor: pointer;
+  padding: 0.2em 0.6em;
+  margin-left: 0.5em;
+  transition: color 0.3s;
+}
+.theme-toggle:hover {
+  color: var(--accent-green-light);
+}
+
+/* Utility: smooth transition everywhere */
+body, button, a, .navbar, .sidebar, .card, input, textarea {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Responsive for mobile */
+@media (max-width: 700px) {
+  h1 { font-size: 2em; }
+  .sidebar { font-size: 0.95em; }
+  .navbar { font-size: 1em; }
+}
+
+/* Add anything custom as needed below! */
