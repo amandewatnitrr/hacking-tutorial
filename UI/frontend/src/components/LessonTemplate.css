@@ -1,3 +1,185 @@
+/* Layout */
+.lesson-template {
+  width: 100%;
+  margin: 0;
+  padding: 2.5rem 3rem 4rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .lesson-template {
+    padding: 1.5rem 1rem 3rem;
+  }
+}
+
+.lesson-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lesson-header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  line-height: 1.2;
+  color: var(--accent-green-light);
+}
+
+@media (max-width: 768px) {
+  .lesson-header h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Lesson Content */
+.lesson-content {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.lesson-content h1,
+.lesson-content h2,
+.lesson-content h3,
+.lesson-content h4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.lesson-content h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  color: var(--accent-green-light);
+}
+
+.lesson-content h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.lesson-content p {
+  margin-bottom: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  color: var(--text-secondary);
+}
+
+.lesson-content li {
+  margin-bottom: 0.5rem;
+}
+
+.lesson-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 1.75rem 0;
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(102, 255, 170, 0.2);
+}
+
+.lesson-content blockquote {
+  border-left: 4px solid var(--accent-green);
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+.lesson-content a {
+  color: var(--accent-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.lesson-content a:hover {
+  color: var(--accent-green-light);
+  border-bottom-color: var(--accent-green-light);
+}
+
+.external-link-icon {
+  font-size: 0.8em;
+  margin-left: 0.2em;
+}
+
+/* Code Blocks */
+.code-block-wrapper {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.code-language {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--accent-green);
+  color: #000000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0 4px 0 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.lesson-content pre {
+  background: var(--bg-secondary);
+  color: #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.lesson-content code {
+  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
+}
+
+.lesson-content :not(pre) > code {
+  background: var(--bg-secondary);
+  color: var(--accent-green-light);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  border: 1px solid var(--border-color);
+}
+
+.lesson-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  display: block;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.lesson-content th,
+.lesson-content td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.lesson-content th {
+  background: var(--bg-tertiary);
+  font-weight: 600;
+  color: var(--accent-green-light);
+}
+
+/* Navigation */
 /* Professional Lesson Navigation */
 .lesson-navigation {
   display: flex;
@@ -38,9 +220,10 @@
   border: 1px solid var(--border);
   color: var(--text);
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.9rem 1.25rem;
-  border-radius: 999px;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;   
+  height: auto;
+  border-radius: 10px;   
   background: rgba(102, 255, 170, 0.12);
   border: 1px solid rgba(102, 255, 170, 0.4);
   color: var(--accent-green-light);
@@ -64,17 +247,15 @@
   pointer-events: none;
 }
 
-
 .nav-button--right {
   justify-content: space-between;
-  padding: .9rem 1.5rem;     
-  padding-left: 2.4rem;   
+  padding: 0.6rem 1rem;
+  padding-left: 1.9rem;
 }
 
 .nav-section--left .nav-arrow {
   margin-right: 0.5rem;
 }
-
 
 .nav-arrow {
   font-size: 1.2rem;
