@@ -1,2 +1,4 @@
+-r ../requirements.txt
+
 Flask>=2.0
 pytest>=7.0

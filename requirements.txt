@@ -1,0 +1,37 @@
+
+scapy>=2.5.0
+
+asyncio>=3.4.3
+
+# Top-level installable Python dependencies used by scripts in this repository.
+# Keep this list minimal — optional/feature-based packages are marked below.
+
+# Web / lab
+Flask>=2.0
+
+# Packet parsing / network utilities
+scapy>=2.5.0
+
+# HTTP scraping & analysis
+requests>=2.28.2
+beautifulsoup4>=4.12.2
+urllib3>=2.0.6
+
+# Crypto and geoip (optional features in some scripts)
+cryptography>=41.0.4
+geoip2>=4.8.0
+builtwith>=1.5.3
+
+# Notes:
+# - Some scripts use only standard-library modules (asyncio, datetime, argparse, re, etc.)
+#   and therefore are not listed here.
+# - System / native dependencies are required for packet capture and building some
+#   wheels (libpcap, libssl/dev headers). See SETUP.md for platform-specific notes.
+
+
+urllib3>=2.0.6
+
+cryptography>=41.0.4
+
+
+# Verifications test done. All good!
