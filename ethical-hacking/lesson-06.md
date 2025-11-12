@@ -437,7 +437,12 @@ The same can be performed using our automated script as well which is at the spe
 
   ```
 
+  ![](../imgs/bettercap_https_to_http_using_caplet1.png)
+  ![](../imgs/bettercap_https_to_http_using_caplet2.png)
+
 - Now, try visiting an HTTPS website on the target machine. You will see that the website is downgraded to HTTP and you can see all the HTTP requests and responses in real-time, including the username and password for HTTPS websites as well. Try with `linkedin.com`.
+
+  ![](../imgs/bettercap_https_to_http_using_caplet3.png)
 
 - You will also see following logs for the downgraded websites in bettercap terminal:
 
@@ -489,4 +494,23 @@ The same can be performed using our automated script as well which is at the spe
      Body
 
   ```
+
+  ![](../imgs/bettercap_https_to_http_using_caplet4.png)
+
+  But, for this to be successfull you must have the caplet with you. You can create your own caplet as well by following the [documentation](https://www.bettercap.org/docs/caplets/).
+
+- The caplet will cause the site to load in HTTP instead of HTTPS, allowing bettercap to intercept and log the traffic. So, anything the user does in the entry field will be visible in bettercap terminal.
+  
+- We can expand the list of target website on `caplet` by setting `dns.spoof.domains` parameter as follows, we will demostrate with netflix.com
+
+  ```bash
+  set dns.spoof.domains netflix.com,*.netflix.com
+  ```
+
+  And, than save it.
+
+> [!NOTE]
+> This technique doesnot work in all scenarios as some websites have implemented HSTS (HTTP Strict Transport Security) which forces the browser to only use HTTPS. In such cases, this technique will not work and the user will see a warning message in the browser indicating that the connection is not secure.
+
+
 
