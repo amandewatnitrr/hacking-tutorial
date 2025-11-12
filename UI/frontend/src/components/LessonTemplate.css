@@ -147,12 +147,12 @@
 }
 
 .lesson-content :not(pre) > code {
-  background: var(--bg-secondary);
+  background: rgba(102, 255, 170, 0.08);
   color: var(--accent-green-light);
-  padding: 0.2rem 0.4rem;
+  padding: 0.15rem 0.35rem;
   border-radius: 3px;
   font-size: 0.9em;
-  border: 1px solid var(--border-color);
+  border: none;
 }
 
 .lesson-content table {
