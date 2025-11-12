@@ -283,3 +283,9 @@ The same can be performed using our automated script as well which is at the spe
   ![](../imgs/Screenshot%20(13).png)
 
 - In this way we can spy on the network devices using bettercap. We can see all the HTTP requests and responses in real-time, including the username and password for HTTP websites.
+
+### Bypassing HTTPS
+
+- Everything we did so far will only work against HTTP pages. The reason why it works against HTTP is because the data in HTTP is sent as plain text. This problem is solved by HTTPS, which encrypts the data using SSL/TLS.
+
+- The only way to bypass HTTPS is to downgrade HTTPS to HTTP. 

@@ -78,25 +78,99 @@ sequenceDiagram
     OS->>Bettercap: Start Process
     Bettercap-->>Script: Return Process Handle (proc)
     Script->>Script: Call discover_devices(proc)
+```
+## bettercap_arp_spoofing_script.py
 
-    Note over Script,Bettercap: Start concurrent output reader thread
-    Script->>Bettercap: Send: net.probe on
-    Script->>User: Print discovery status
-    User->>Script: Press Enter
-    Script->>Bettercap: Send: net.probe off
-    Script->>Bettercap: Send: net.show
-    Bettercap-->>Script: Stream output (stdout)
-    Script->>Script: Stop output thread
-    Script->>Script: Parse output with regex (device_regex)
-    Script-->>Script: Return devices list
-    Script->>Script: Call get_user_choices(devices)
-    Script->>User: Display devices list
-    User->>Script: Input target indices & full-duplex choice
-    Script-->>Script: Return targets_str, fullduplex
-    Script->>Script: Call run_attack(proc, targets, fullduplex)
-    Script->>Bettercap: Send final command (set arp.spoof...)
-    Bettercap-->>Script: Begin attack/sniffing and stream logs
-    Script->>Script: Loop: Print bettercap output
-    User->>Script: Press Ctrl+C (KeyboardInterrupt)
-    Script->>Bettercap: proc.terminate()
-    Script->>OS: Exit
+### Summary
+
+This README describes the actual behavior of `bettercap_arp_spoofing_script.py` (located at `python-scripts/bettercap_arp_spoofing_script.py`). The script is a small Python wrapper around the `bettercap` CLI that automates a few common commands (probe, show, set spoofing options, enable sniffing) and streams `bettercap`'s output to the console.
+
+Important: the script is a helper for controlled security testing only. Do not use it on networks or devices you don't own or don't have explicit authorization to test.
+
+---
+
+### What the script actually does
+
+- Accepts a single command-line argument: the network interface to use (for example `wlan0` or `eth0`).
+- Launches `bettercap` as a subprocess: `bettercap -iface <iface>` (the script does not itself call `sudo`).
+- Sends `net.probe on` and waits 30 seconds to allow discovery of hosts on the network.
+- Sends `net.show` and streams the `bettercap` output to the terminal while the user inspects results.
+- Prompts the user for two inputs:
+    - `fullduplex` (enter `true` or `false`) to set `arp.spoof.fullduplex`.
+    - `target_ip` — the IP address (or comma-separated IPs) to set for `arp.spoof.targets`.
+- Sends the combined command to enable ARP spoofing and starts `net.sniff`:
+    set arp.spoof.fullduplex <true|false>; set arp.spoof.targets <ips>; arp.spoof on
+    net.sniff on
+- Streams `bettercap`'s live output until the user interrupts with Ctrl+C; on KeyboardInterrupt the script terminates the `bettercap` process.
+
+Notes on implementation: the script uses `subprocess.Popen` (with text mode and line-buffering) and a separate thread to print `bettercap` output while waiting for user input. It does not parse `net.show` output programmatically — discovery is left for the user to inspect and decide targets.
+
+---
+
+### Usage
+
+1. Ensure `bettercap` is installed and available on your PATH. On many systems `bettercap` requires root privileges to access interfaces.
+2. Run the script with Python 3 and pass the interface name:
+
+```bash
+python3 python-scripts/bettercap_arp_spoofing_script.py <network_interface>
+```
+
+Example:
+
+```bash
+python3 python-scripts/bettercap_arp_spoofing_script.py wlan0
+```
+
+When the script runs it will:
+
+* start `bettercap`
+* run `net.probe on` and wait ~30s
+* run `net.show` and stream output; press Enter when you're done reviewing
+* prompt for `fullduplex` and `target_ip`
+* send the spoofing commands and show live logs until Ctrl+C
+
+---
+
+### Requirements
+
+* Python 3 (script uses text=True and subprocess APIs available across modern Python 3 versions)
+* `bettercap` installed and accessible on the PATH
+* Appropriate privileges to run `bettercap` (often root)
+
+The script does not require any third-party Python packages.
+
+---
+
+### Security and legal notice
+
+This script automates network interception techniques. Use only on networks and devices for which you have explicit permission. Unauthorized ARP spoofing / MiTM attacks are illegal and unethical. The repository's materials are for education and authorized testing only.
+
+---
+
+### Limitations and suggested improvements
+
+* The script does not run `bettercap` with `sudo` — if your environment requires root, run the script itself under sudo or with an appropriate capability set (for example using `sudo python3 ...`).
+* The script does not parse the output of `net.show` programmatically. It prints the output and prompts the user to type the target IP(s). A future improvement is to parse `net.show` results, present a selectable list, and validate IP input.
+* There is minimal error handling (e.g., if `bettercap` is not installed, the subprocess will fail). Adding explicit checks and clearer error messages would improve UX.
+* Consider adding optional logging to a file, and safer shutdown/cleanup (ensure `arp.spoof` is disabled on exit).
+
+---
+
+### Quick checklist for running (macOS / Linux)
+
+1. Install bettercap (follow official instructions) and confirm it's runnable:
+
+```bash
+bettercap -h
+```
+
+1. Run the script with an interface (use sudo if needed):
+
+```bash
+sudo python3 python-scripts/bettercap_arp_spoofing_script.py wlan0
+```
+
+1. Follow on-screen prompts and press Ctrl+C to stop the session.
+
+---
