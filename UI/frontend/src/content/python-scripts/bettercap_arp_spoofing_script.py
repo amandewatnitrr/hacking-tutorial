@@ -66,23 +66,31 @@ def discover_devices(proc):
     stop_reading.set()
     t.join()
     
-    # this is a pattern to find ip, mac, and name from the output text.
-    device_regex = re.compile(r"^(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?P<mac>([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})\s+(?P<name>.*?)\s+(?P<vendor>.*?)\s+.*")
-    
     print("\n--- Parsing Discovered Devices ---")
-    # goes through each line of the output to find devices.
-    for line in output_lines:
-        match = device_regex.match(line.strip())
-        if match:
-            device_info = match.groupdict()
-            devices.append(device_info)
-    
-    # if no devices were found, exit the script.
+    devices = parse_bettercap_table(output_lines)
     if not devices:
         print("[!] No devices were found. Exiting.")
         proc.terminate()
         sys.exit(1)
+    return devices
 
+def parse_bettercap_table(output_lines):
+    # Matches table row: │ IP │ MAC │ NAME │ VENDOR │ ...
+    # Captures only device rows
+    device_line_re = re.compile(
+        r"^\s*│\s*([\d\.]+)\s*│\s*([0-9a-fA-F:]+)\s*│\s*([^│]*?)\s*│\s*([^│]*?)\s*│"
+    )
+    devices = []
+    for line in output_lines:
+        match = device_line_re.match(line)
+        if match:
+            ip, mac, name, vendor = match.groups()
+            devices.append({
+                "ip": ip.strip(),
+                "mac": mac.strip(),
+                "name": name.strip() if name.strip() else "N/A",
+                "vendor": vendor.strip() if vendor.strip() else "N/A"
+            })
     return devices
 
 # this function shows the list of devices and asks the user what to do.
