@@ -9,13 +9,13 @@ next: "lesson-cyberchef"
 
 # Network Hacking Post Connection Attacks - MITM Attacks
 
-- [Network Hacking Post Connection Attacks - MITM Attacks](#network-hacking-post-connection-attacks---mitm-attacks)
+- [Network Hacking Post Connection Attacks - MITM Attacks](#network-hacking-post-connection-attacks-mitm-attacks)
       - [MITM: Layman sequence](#mitm-layman-sequence)
       - [MITM: Detailed sequence](#mitm-detailed-sequence)
   - [ARP Spoofing or ARP Poisoning](#arp-spoofing-or-arp-poisoning)
     - [Why ARP Spoofing is Possible](#why-arp-spoofing-is-possible)
   - [Intercepting Traffic using ARP Spoofing](#intercepting-traffic-using-arp-spoofing)
-    - [Why use `arpspoof` ??](#why-use-arpspoof-)
+    - [Why use `arpspoof`](#why-use-arpspoof)
   - [Bettercap basics](#bettercap-basics)
     - [ARP Spoofing using Bettercap](#arp-spoofing-using-bettercap)
       - [`bettercap` parameters in ARP Spoofing](#bettercap-parameters-in-arp-spoofing)

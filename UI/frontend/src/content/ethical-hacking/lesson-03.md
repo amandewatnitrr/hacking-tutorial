@@ -10,7 +10,7 @@ next: "lesson-04"
 # Network Hacking - Gaining Access WEP Cracking
 
 <!-- TOC -->
-- [Network Hacking - Gaining Access WEP Cracking](#network-hacking---gaining-access-wep-cracking)
+- [Network Hacking - Gaining Access WEP Cracking](#network-hacking-gaining-access-wep-cracking)
   - [Theory behing cracking WEP Encryption](#theory-behing-cracking-wep-encryption)
   - [WEP Capturing Basics](#wep-capturing-basics)
   - [Fake Authentication Attack](#fake-authentication-attack)
