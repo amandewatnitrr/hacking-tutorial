@@ -98,16 +98,30 @@ const LessonTemplate = ({ lesson }) => {
           urlTransform={transformMarkdownUrl}
           components={{
             code({ node, inline, className, children, ...props }) {
-              return !inline ? (
+              // Determine if this is inline code or a code block
+              // Inline code: single backticks `code`
+              // Code blocks: triple backticks ```code``` or indented blocks
+              const isInline = inline !== false && (
+                !className?.startsWith('language-') && 
+                typeof children === 'string' &&
+                !children.includes('\n')
+              );
+              
+              // Inline code should not be wrapped in <pre>
+              if (isInline) {
+                return (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              }
+              // Block code should be wrapped in <pre>
+              return (
                 <pre className={className}>
                   <code className={className} {...props}>
                     {children}
                   </code>
                 </pre>
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
               );
             },
             img({ node, ...props }) {
