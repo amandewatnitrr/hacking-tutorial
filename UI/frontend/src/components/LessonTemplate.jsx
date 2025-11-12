@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { getLessonBySlug } from '../utils/markdownloader';
 import Mermaid from './Mermaid';
 import './LessonTemplate.css';
@@ -10,10 +12,6 @@ import './LessonTemplate.css';
 const LessonTemplate = ({ lesson }) => {
   const [theme, setTheme] = useState('dark');
   const location = useLocation();
-
-  // ✅ Only show when the route starts with /lessons/
-  const isLessonPage = location.pathname.startsWith('/lessons/');
-  if (!isLessonPage) return null;
 
   // Sync with global theme
   useEffect(() => {
@@ -24,6 +22,25 @@ const LessonTemplate = ({ lesson }) => {
     observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
     return () => observer.disconnect();
   }, []);
+
+  // Handle anchor link navigation when URL hash changes
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      // Wait for content to render, then scroll to the element
+      setTimeout(() => {
+        const id = hash.substring(1); // Remove the # symbol
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location.hash, lesson]);
+
+  // ✅ Only show when the route starts with /lessons/
+  const isLessonPage = location.pathname.startsWith('/lessons/');
+  if (!isLessonPage) return null;
 
   if (!lesson) {
     return (
@@ -95,10 +112,14 @@ const LessonTemplate = ({ lesson }) => {
       <article className="lesson-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
+          rehypePlugins={[
+            rehypeRaw,
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+          ]}
           urlTransform={transformMarkdownUrl}
           components={{
-            code({ node, inline, className, children, ...props }) {
+            code({ inline, className, children, ...props }) {
               // Determine if this is inline code or a code block
               // Inline code: single backticks `code`
               // Code blocks: triple backticks ```code``` or indented blocks
@@ -132,7 +153,7 @@ const LessonTemplate = ({ lesson }) => {
                 </pre>
               );
             },
-            img({ node, ...props }) {
+            img({ ...props }) {
               return (
                 <img
                   {...props}
@@ -142,7 +163,30 @@ const LessonTemplate = ({ lesson }) => {
                 />
               );
             },
-            a({ node, children, href, ...props }) {
+            a({ children, href, ...props }) {
+              // Handle internal anchor links
+              if (href?.startsWith('#')) {
+                return (
+                  <a
+                    href={href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const id = href.substring(1);
+                      const element = document.getElementById(id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Update URL hash without triggering navigation
+                        window.history.pushState(null, '', href);
+                      }
+                    }}
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
+              }
+              
+              // Handle external links
               const isExternal = href?.startsWith('http');
               return (
                 <a
