@@ -1,6 +1,7 @@
 .lesson-page {
   width: 100%;
   background-color: var(--bg-primary);
+  overflow-x: hidden;
 }
 
 .page-content {
@@ -92,6 +93,9 @@ nav.home-button a:hover {
 .main-content {
   min-height: calc(100vh - 64px);
   padding: 1rem 1.25rem;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .sidebar-toggle {
@@ -114,6 +118,27 @@ nav.home-button a:hover {
     transition: background 200ms ease-in-out, border-color 200ms ease-in-out;
   }
   .sidebar-toggle:hover { background: rgba(255,255,255,0.06); }
+  
+  .main-content {
+    padding: 1rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0.75rem;
+  }
+  
+  .lesson-layout {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.5rem;
+  }
 }
 
 /* Show the hamburger on desktop when sidebar is hidden */

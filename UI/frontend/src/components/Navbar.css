@@ -43,6 +43,7 @@ body {
   top: 0;
   z-index: 1000;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .navbar-container {
@@ -52,6 +53,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .navbar-brand {

@@ -17,6 +17,7 @@ body {
   padding: 0;
   background-color: var(--bg-primary);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .home-button a {
@@ -130,6 +131,7 @@ body {
   color: var(--text-primary);
   min-height: calc(100vh - 2.5rem);
   width: 100%;
+  overflow-x: hidden;
 }
 
 .main-content h2 {
@@ -296,6 +298,50 @@ pre {
   margin-left: 25px;       /* sidebar width ke barabar */
   padding: 0;
   color: var(--accent-green);
+}
+
+/* Responsive fixes for images and code blocks */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+code {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ensure all content containers don't overflow */
+article, .lesson-content, .markdown-content {
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
+}
+
+/* Fix for mobile devices */
+@media (max-width: 768px) {
+  .lesson-content h1 {
+    margin-left: 0;
+    padding: 0 1rem;
+  }
+  
+  pre {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+  
+  img {
+    max-width: 100%;
+  }
 }
 
 
