@@ -2,21 +2,21 @@
 
 <!-- TOC -->
 
-- [IDS Probe — Lesson & How-To](#ids-probe---lesson--how-to)
+- [IDS Probe — Lesson & How-To](#ids-probe-lesson-how-to)
   - [What is this script?](#what-is-this-script)
   - [Why we need it](#why-we-need-it)
-  - [Safety & legal note (read first)](#safety--legal-note-read-first)
+  - [Safety & legal note (read first)](#safety-legal-note-read-first)
   - [Files this lesson refers to](#files-this-lesson-refers-to)
-  - [High-level overview — how it works](#high-level-overview---how-it-works)
+  - [High-level overview — how it works](#high-level-overview-how-it-works)
   - [Example alert format](#example-alert-format)
   - [Demo setup (beginner-friendly walkthrough)](#demo-setup-beginner-friendly-walkthrough)
-    - [Step 1 — Create and prepare a Multipass VM](#step-1--create-and-prepare-a-multipass-vm)
-    - [Step 2 — Inside VM: set up environment](#step-2--inside-vm-set-up-environment)
-    - [Step 3 — Start the IDS probe](#step-3--start-the-ids-probe)
-    - [Step 4 — Run a simple HTTP server](#step-4--run-a-simple-http-server)
-    - [Step 5 — From your host: trigger test requests](#step-5--from-your-host-trigger-test-requests)
-    - [Step 6 — View and copy alerts.json](#step-6--view-and-copy-alertsjson)
-  - [Troubleshooting (common issues & fixes)](#troubleshooting-common-issues--fixes)
+    - [Step 1 — Create and prepare a Multipass VM](#step-1-create-and-prepare-a-multipass-vm)
+    - [Step 2 — Inside VM: set up environment](#step-2-inside-vm-set-up-environment)
+    - [Step 3 — Start the IDS probe](#step-3-start-the-ids-probe-window-a-keep-this-open)
+    - [Step 4 — Run a simple HTTP server](#step-4-run-a-simple-http-server-window-b-keep-this-open)
+    - [Step 5 — From your host: trigger test requests](#step-5-from-your-host-trigger-test-requests-window-c)
+    - [Step 6 — View and copy alerts.json](#step-6-view-and-copy-alertsjson)
+  - [Troubleshooting (common issues & fixes)](#troubleshooting-common-issues-fixes)
   <!-- /TOC -->
 
 ---

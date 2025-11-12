@@ -10,7 +10,7 @@ next: "lesson-03"
 # Network Hacking - Pre Connection Attacks
 
 <!-- TOC -->
-- [Network Hacking - Pre Connection Attacks](#network-hacking---pre-connection-attacks)
+- [Network Hacking - Pre Connection Attacks](#network-hacking-pre-connection-attacks)
   - [Packet Sniffing Basics](#packet-sniffing-basics)
   - [Wifi Bands](#wifi-bands)
   - [Targeted Packet Sniffing](#targeted-packet-sniffing)
