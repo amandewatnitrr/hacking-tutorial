@@ -11,7 +11,7 @@ next: "lesson-06"
 
 ![](../imgs/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif)
 
-- [Network Hacking Post Connection Attacks - Information Gathering](#network-hacking-post-connection-attacks---information-gathering)
+- [Network Hacking Post Connection Attacks - Information Gathering](#network-hacking-post-connection-attacks-information-gathering)
   - [Discovering Devices Connected to the Same Network](#discovering-devices-connected-to-the-same-network)
   - [Gathering Sensitive Information about Connected Devices](#gathering-sensitive-information-about-connected-devices)
     - [Gathering More Sensitive Information(Services, OS, etc.)](#gathering-more-sensitive-informationservices-os-etc)

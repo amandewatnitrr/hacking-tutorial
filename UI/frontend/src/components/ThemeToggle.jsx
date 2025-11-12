@@ -21,7 +21,9 @@ export default function ThemeToggle() {
     document.documentElement.setAttribute("data-theme", theme);
     try {
       localStorage.setItem(THEME_KEY, theme);
-    } catch {}
+    } catch {
+      // Ignore localStorage errors (e.g., in private browsing mode)
+    }
   }, [theme]);
 
   const toggle = () => setTheme((t) => (t === LIGHT ? DARK : LIGHT));

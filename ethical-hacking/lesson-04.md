@@ -4,7 +4,7 @@
 
 ---
 
-- [Network Hacking - Gaining Access - WPA/WPA2 Cracking](#network-hacking---gaining-access---wpawpa2-cracking)
+- [Network Hacking - Gaining Access - WPA/WPA2 Cracking](#network-hacking-gaining-access-wpawpa2-cracking)
   - [Introduction to WPA/WPA2 Cracking](#introduction-to-wpawpa2-cracking)
   - [WPS (Wi-Fi Protected Setup) Vulnerability](#wps-wi-fi-protected-setup-vulnerability)
   - [Capturing the Handshake](#capturing-the-handshake)

@@ -18,15 +18,15 @@ By completing this section, you will:
 
 ## 🧭 Table of Contents
 
-1. [Introduction to Emacs](#introduction-to-emacs)  
-2. [Installing Emacs](#installing-emacs)  
-3. [Starting and Exiting Emacs](#starting-and-exiting-emacs)  
-4. [Understanding the Interface](#understanding-the-interface)  
-5. [Basic File Operations](#basic-file-operations)  
-6. [Simple Editing Commands](#simple-editing-commands)  
-7. [Saving and Exiting](#saving-and-exiting)  
-8. [Practice Task](#practice-task)  
-9. [Next Steps](#next-steps)
+1. [Introduction to Emacs](#1-introduction-to-emacs)  
+2. [Installing Emacs](#2-installing-emacs)  
+3. [Starting and Exiting Emacs](#3-starting-and-exiting-emacs)  
+4. [Understanding the Interface](#4-understanding-the-interface)  
+5. [Basic File Operations](#5-basic-file-operations)  
+6. [Simple Editing Commands](#6-simple-editing-commands)  
+7. [Saving and Exiting](#7-saving-and-exiting)  
+8. [Practice Task](#8-practice-task)  
+9. [Next Steps](#9-next-steps)
 
 
 ## 1. Introduction to Emacs
