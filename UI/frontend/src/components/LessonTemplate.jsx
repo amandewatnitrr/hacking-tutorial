@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { getLessonBySlug } from '../utils/markdownloader';
+import Mermaid from './Mermaid';
 import './LessonTemplate.css';
 
 const LessonTemplate = ({ lesson }) => {
@@ -106,6 +107,13 @@ const LessonTemplate = ({ lesson }) => {
                 typeof children === 'string' &&
                 !children.includes('\n')
               );
+              
+              // Check if this is a mermaid diagram
+              const isMermaid = className === 'language-mermaid';
+              
+              if (isMermaid) {
+                return <Mermaid chart={String(children).trim()} theme={theme} />;
+              }
               
               // Inline code should not be wrapped in <pre>
               if (isInline) {
