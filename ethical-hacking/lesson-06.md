@@ -512,5 +512,49 @@ The same can be performed using our automated script as well which is at the spe
 > [!NOTE]
 > This technique doesnot work in all scenarios as some websites have implemented HSTS (HTTP Strict Transport Security) which forces the browser to only use HTTPS. In such cases, this technique will not work and the user will see a warning message in the browser indicating that the connection is not secure.
 
+### What is HSTS ??
+
+- HSTS is a web security policy mechanism that helps to protect websites against downgrade attacks and cookie hijacking. It allows web servers to declare that web browsers (or other complying user agents) should only interact with it using secure HTTPS connections, and never via the insecure HTTP protocol.
+- When a website implements HSTS, it sends a special HTTP header called `Strict-Transport-Security` to the browser. This header tells the browser to only use HTTPS for all future requests to that website for a specified period of time. If the user tries to access the website using HTTP, the browser will automatically redirect the request to HTTPS.
+- Let's try to understand this with a mermaid Sequence diagram, where the attacker is using bettercap to perform ARP spoofing and downgrade HTTPS to HTTP, but fails because the target website has implemented HSTS.
 
 
+  ```mermaid
+  sequenceDiagram
+      participant A as Attacker
+      participant T as Target Browser
+      participant S as Secure Website (HSTS Enabled)
+
+      A->>T: ARP Spoofing (MITM Attack)
+      T->>S: Request HTTPS Connection
+      S->>T: Respond with Strict-Transport-Security Header
+      T->>T: Store HSTS Policy
+      T->>S: Request HTTPS Connection (Enforced by HSTS)
+      S->>T: Respond with Secure Content
+      A->>T: Attempt to Downgrade to HTTP
+      T->>T: Check HSTS Policy
+      T->>S: Request HTTPS Connection (HSTS Enforcement)
+      S->>T: Respond with Secure Content
+  ```
+
+### DNS Spoofing - Controlling DNS Requests on the Network
+
+- In this section, we are going to learn what DNS Spoofing is, and how to perform it.
+- DNS is nothing but a server, that converts domain names to IP Addresses/ IP of the server hosting the service. So, let's assume when we type `www.google.com` in the browser, the browser sends a request to the DNS server to resolve the domain name to an IP address. The DNS server responds with the IP address of the server hosting the service, and the browser connects to that IP address to access the service.
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant D as DNS Server
+    participant S as Web Server
+    B->>D: Request IP for www.google.com
+    D->>B: Respond with IP
+    B->>S: Connect to IP
+    S->>B: Serve Web Page
+```
+
+- Now, when we are the hacker or MITM, we can request for `google.com` will pass through us first, before it goes to the DNS Server. Therefore, instead of giving the IP of the server that is hosting `google.com`, we can actually give any IP we want.
+
+- So, we can redirect them to a fake website with a backdoor or use, evil code to hijack software updates. And, so much more.
+
+- Let's start with a basic DNS Spoofing attack.
