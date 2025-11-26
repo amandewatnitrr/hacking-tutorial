@@ -1,17 +1,19 @@
 # Network Hacking Post Connection Attacks - MITM Attacks
 
-- [Network Hacking Post Connection Attacks - MITM Attacks](#network-hacking-post-connection-attacks-mitm-attacks)
+- [Network Hacking Post Connection Attacks - MITM Attacks](#network-hacking-post-connection-attacks---mitm-attacks)
       - [MITM: Layman sequence](#mitm-layman-sequence)
       - [MITM: Detailed sequence](#mitm-detailed-sequence)
   - [ARP Spoofing or ARP Poisoning](#arp-spoofing-or-arp-poisoning)
     - [Why ARP Spoofing is Possible](#why-arp-spoofing-is-possible)
   - [Intercepting Traffic using ARP Spoofing](#intercepting-traffic-using-arp-spoofing)
-    - [Why use `arpspoof`](#why-use-arpspoof)
+    - [Why use `arpspoof` ??](#why-use-arpspoof-)
   - [Bettercap basics](#bettercap-basics)
     - [ARP Spoofing using Bettercap](#arp-spoofing-using-bettercap)
       - [`bettercap` parameters in ARP Spoofing](#bettercap-parameters-in-arp-spoofing)
     - [Spying on Network Devices](#spying-on-network-devices)
-
+    - [Bypassing HTTPS](#bypassing-https)
+    - [What is HSTS ??](#what-is-hsts-)
+    - [DNS Spoofing - Controlling DNS Requests on the Network](#dns-spoofing---controlling-dns-requests-on-the-network)
 
 ![](../imgs/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif)
 
@@ -542,19 +544,58 @@ The same can be performed using our automated script as well which is at the spe
 - In this section, we are going to learn what DNS Spoofing is, and how to perform it.
 - DNS is nothing but a server, that converts domain names to IP Addresses/ IP of the server hosting the service. So, let's assume when we type `www.google.com` in the browser, the browser sends a request to the DNS server to resolve the domain name to an IP address. The DNS server responds with the IP address of the server hosting the service, and the browser connects to that IP address to access the service.
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant D as DNS Server
-    participant S as Web Server
-    B->>D: Request IP for www.google.com
-    D->>B: Respond with IP
-    B->>S: Connect to IP
-    S->>B: Serve Web Page
-```
+  ```mermaid
+  sequenceDiagram
+      participant B as Browser
+      participant D as DNS Server
+      participant S as Web Server
+      B->>D: Request IP for www.google.com
+      D->>B: Respond with IP
+      B->>S: Connect to IP
+      S->>B: Serve Web Page
+  ```
 
 - Now, when we are the hacker or MITM, we can request for `google.com` will pass through us first, before it goes to the DNS Server. Therefore, instead of giving the IP of the server that is hosting `google.com`, we can actually give any IP we want.
 
+  ```mermaid
+  sequenceDiagram
+      participant B as Browser
+      participant A as Attacker (MITM)
+      participant D as DNS Server
+      participant S as Web Server
+      B->>A: Request IP for www.google.com
+      A->>B: Respond with Fake IP (Attacker's IP)
+      B->>S: Connect to Fake IP
+      S->>B: Serve Fake Web Page
+  ```
+
 - So, we can redirect them to a fake website with a backdoor or use, evil code to hijack software updates. And, so much more.
 
-- Let's start with a basic DNS Spoofing attack.
+- Let's start with a basic DNS Spoofing attack in which we redirect request from a specific website to our own IP address/Website/Server.
+
+- Before, starting `bettercap` we need to decide, where we want to redirect the traffic. Here, for now we will use Kali's own web server. So, first we need to start the web server using the command:
+
+  ```bash
+  service apache2 start
+  ```
+
+- Use the command `ifconfig` to find the IP address of Kali machine. Look for the `inet` field under the interface you are using (e.g., eth0, wlan0).
+
+- Let's say if you want to redirect to Kali's fake web server, make sure to update files in `/var/www/html/index.html` with your fake content. `index.html` is the default file that is served when you access the web server.
+
+- Now, let's start `bettercap` using the command:
+
+  ```bash
+  bettercap -iface <interface_name>; net.probe on; net.recon on; net.sniff on; arp.spoof on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; dns.spoof on; dns.spoof.all true; set dns.spoof.domains www.targetsite.com,*.targetsite.com
+  ```
+  
+> [!NOTE]
+> By default, `dns.spoof.address` is set to Interface IP. So, all the DNS requests will be redirected to the attacker's IP.
+
+- Having `dns.spoof.all` set to `true` will redirect all the DNS requests to the attacker's IP address. If you want to redirect specific domains only, you can set it to `false` and use the `dns.spoof.domains` parameter to specify the domains you want to redirect.
+
+- `dns.spoof.domains` parameter is used to specify the domains you want to redirect. You can specify multiple domains by separating them with commas.
+
+- Now, go to the target machine and try to access the target website (e.g., `www.targetsite.com`). You will see that the website is redirected to the attacker's web server.
+
+- This will work against all websites even if they use https, as we saw earlier, the other website uses https, and it loaded over https by default. The only websites this will not work against are ones that use HSTS, because as I mentioned before, the browser has list of these websites, the list is stored locally, so it doesn't send any request. And, will only load these websites over https.
