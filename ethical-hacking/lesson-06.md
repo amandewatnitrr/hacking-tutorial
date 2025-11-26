@@ -599,3 +599,5 @@ The same can be performed using our automated script as well which is at the spe
 - Now, go to the target machine and try to access the target website (e.g., `www.targetsite.com`). You will see that the website is redirected to the attacker's web server.
 
 - This will work against all websites even if they use https, as we saw earlier, the other website uses https, and it loaded over https by default. The only websites this will not work against are ones that use HSTS, because as I mentioned before, the browser has list of these websites, the list is stored locally, so it doesn't send any request. And, will only load these websites over https.
+
+Let's look at an example output of DNS Spoofing using bettercap:

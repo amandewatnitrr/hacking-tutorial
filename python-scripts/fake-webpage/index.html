@@ -1,0 +1,163 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Portal</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(44,62,80,0.14), 0 1.5px 5px rgba(52,152,219,0.12);
+            max-width: 350px;
+            width: 100%;
+        }
+        .login-container h2 {
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.28rem;
+            color: #555;
+            font-weight: 500;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.68rem;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            background: linear-gradient(90deg, #3498db 60%, #9b59b6 100%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.02rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 0.7rem;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.13);
+        }
+        .login-btn:hover, .login-btn:focus {
+            background: linear-gradient(90deg, #2980b9 0%, #8e44ad 100%);
+        }
+        .msg {
+            text-align: center;
+            color: #27ae60;
+            margin-top: 1.1rem;
+            font-weight: 500;
+        }
+        .error {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Sign in</h2>
+        <form id="loginForm" autocomplete="off">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input 
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                    autofocus
+                />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                />
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <div id="responseMsg" class="msg" style="display:none;"></div>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const responseMsg = document.getElementById('responseMsg');
+
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            responseMsg.style.display = 'none';
+
+            // Save the entries
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            const formData = {
+                username: username,
+                password: password
+            };
+
+            // Send data to your web server (adjust the endpoint as necessary)
+            try {
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await res.json();
+
+                if(res.ok) {
+                    responseMsg.innerText = 'Logged in successfully!';
+                    responseMsg.classList.remove('error');
+                    responseMsg.style.display = 'block';
+                } else {
+                    responseMsg.innerText = result.message || 'Login failed!';
+                    responseMsg.classList.add('error');
+                    responseMsg.style.display = 'block';
+                }
+            } catch (err) {
+                responseMsg.innerText = 'Unable to connect to server. Please try again later.';
+                responseMsg.classList.add('error');
+                responseMsg.style.display = 'block';
+            }
+
+            // Optionally clear the form after submit
+            // loginForm.reset();
+        });
+    </script>
+</body>
+</html>
