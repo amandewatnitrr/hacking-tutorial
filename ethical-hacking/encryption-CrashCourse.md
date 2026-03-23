@@ -5,8 +5,8 @@
   - [Asymmetric Encryption (RSA)](#asymmetric-encryption-rsa)
 
 
-[!NOTE]
-> - Encryption is the process of converting plaintext into ciphertext to protect sensitive information from unauthorized access. It is a fundamental aspect of cybersecurity and is used to secure data in transit and at rest.
+>[!NOTE]
+>Encryption is the process of converting plaintext into ciphertext to protect sensitive information from unauthorized access. It is a fundamental aspect of cybersecurity and is used to secure data in transit and at rest.
 
 - There are 2 main components of encryption: the encryption algorithm and the encryption key. 
   - The algorithm is a mathematical function that takes the plaintext and the key as input and produces the ciphertext as output. 
