@@ -3,13 +3,14 @@
 - [Encryption Crash Course](#encryption-crash-course)
   - [Symmetric Encryption (AES)](#symmetric-encryption-aes)
   - [Asymmetric Encryption (RSA)](#asymmetric-encryption-rsa)
-
+    - [Advantages of Asymmetric Encryption:](#advantages-of-asymmetric-encryption)
+  - [Hash Functions](#hash-functions)
 
 >[!NOTE]
 >Encryption is the process of converting plaintext into ciphertext to protect sensitive information from unauthorized access. It is a fundamental aspect of cybersecurity and is used to secure data in transit and at rest.
 
-- There are 2 main components of encryption: the encryption algorithm and the encryption key. 
-  - The algorithm is a mathematical function that takes the plaintext and the key as input and produces the ciphertext as output. 
+- There are 2 main components of encryption: the encryption algorithm and the encryption key.
+  - The algorithm is a mathematical function that takes the plaintext and the key as input and produces the ciphertext as output.
   - The key is a secret value that is used to control the encryption and decryption process.
 
 - The algorithm and the key combination determines how the plain text will be modified or jumbled up, which is a process of substitution and transposition of the characters. If the algorithm and Key are weak encryption will also be weak.
@@ -97,8 +98,8 @@ Symmetric encryption involves the following steps:
 - Example of Symmetric Encryption:
 
   - We open 2 teerminals one is the sender terminal, and the other is the receiver terminal. We will use AES encryption for this example.
-  -  The sender terminal will ask us for a essage we want to send. The sender terminal will generate the secret, and the use the encryption algorithm to encrypt the message and send it to the receiver terminal. 
-  -  The receiver terminal will ask us for the secret key, and then it will use the decryption algorithm to decrypt the message and display it.
+  - The sender terminal will ask us for a essage we want to send. The sender terminal will generate the secret, and the use the encryption algorithm to encrypt the message and send it to the receiver terminal.
+  - The receiver terminal will ask us for the secret key, and then it will use the decryption algorithm to decrypt the message and display it.
 
   - Here's the `SHELL` code for the sender terminal:
 
@@ -151,13 +152,13 @@ Symmetric encryption involves the following steps:
 
   ![](../imgs/Screenshot%202026-03-15%20at%208.48.22 AM.png)
   ![](../imgs/Screenshot%202026-03-15%20at%208.48.33 AM.png)
-  ![](../imgs/Screenshot%202026-03-15%20at%208.48.44 AM.png)
+  ![](../imgs/Screenshot%202026-03-15%20at%208.48.44 AM.png)dsd
 
 - Some of the mainly used symmetric encryption algorithms include:
   - AES (Advanced Encryption Standard): A widely used encryption algorithm that is considered secure and efficient. It supports key sizes of 128, 192, and 256 bits.
   - DES (Data Encryption Standard): An older encryption algorithm that is now considered weak due to its short key length (56 bits). It has been largely replaced by AES.
   - RC4: A stream cipher that was widely used in the past but is now considered insecure due to vulnerabilities discovered in its design.
-  - Triple DES (3DES): An enhancement of DES that applies the DES algorithm three times to increase security. It is still considered secure but is slower than AES and is being phased out in favor of AES.
+  - Triple DES (3DES): An enhancement of DES that applies the DES algorithm three times cgbto increase secdsadasdsadurity. It is still considered secure but is slower than AES and is being phased out in favor of AES.
   - Blowfish: A symmetric encryption algorithm that is designed to be fast and secure. It supports key sizes of up to 448 bits and is often used in applications where speed is a concern.
   - RC5: A symmetric encryption algorithm that is designed to be simple and efficient. It supports variable block sizes and key sizes, making it flexible for different applications.
   - RC6: An improvement over RC5, designed to be more secure and efficient. It supports block sizes of 128 bits and key sizes of up to 256 bits.
@@ -169,3 +170,126 @@ Symmetric encryption involves the following steps:
 
 ## Asymmetric Encryption (RSA)
 
+>[!NOTE]
+>Asymmetric encryption, also known as public-key cryptography, is a type of encryption that uses a pair of keys: a public key for encryption and a private key for decryption. This allows for secure communication without the need for the sender and receiver to share a secret key beforehand.
+
+```mermaid
+sequenceDiagram
+    participant Sender
+    participant Receiver
+
+    Note right of Receiver: 1. Key Generation
+    Receiver->>Receiver: Generates Key Pair (Public & Private Keys)
+    
+    Note over Sender, Receiver: 2. Key Exchange
+    Receiver->>Sender: Sends Public Key (Open Channel)
+    
+    Note left of Sender: 3. Encryption
+    Sender->>Sender: Encrypts Plaintext using Receiver's Public Key
+    
+    Note over Sender, Receiver: 4. Transmission
+    Sender->>Receiver: Sends Ciphertext (Potentially Insecure Channel)
+    
+    Note right of Receiver: 5. Decryption
+    Receiver->>Receiver: Decrypts Ciphertext using Private Key
+    Receiver->>Receiver: Obtains Original Plaintext
+```
+
+- Asymmetric encryption uses 2 keys: a public key and a private key. The public key is used for encryption, while the private key is used for decryption. The sender encrypts the plaintext using the receiver's public key, and the receiver decrypts the ciphertext using their private key.
+
+- Asymmetric encryption involves the following steps:
+
+  - Key Generation: The receiver generates a pair of keys, a public key and a private key. The public key can be shared openly, while the private key must be kept secret.
+  - Key Exchange: The receiver sends the public key to the sender over an open channel.
+  - Encryption: The sender uses the receiver's public key to encrypt the plaintext message.
+  - Transmission: The sender sends the ciphertext to the receiver over a potentially insecure channel.
+  - Decryption: The receiver uses their private key to decrypt the ciphertext and obtain the original plaintext message.
+
+>[!IMPORTANT] **Note:** The security of asymmetric encryption relies on the difficulty of certain mathematical problems, such as factoring large integers (in the case of RSA) or solving the discrete logarithm problem (in the case of ECC). As long as these problems remain computationally infeasible to solve, asymmetric encryption can provide strong security.
+
+- Some of the mainly used asymmetric encryption algorithms include:
+  - RSA (Rivest-Shamir-Adleman): One of the most widely used asymmetric encryption algorithms. It is based on the difficulty of factoring large integers and is commonly used for secure communication, digital signatures, and key exchange.
+  - ECC (Elliptic Curve Cryptography): An asymmetric encryption algorithm that uses elliptic curves to provide strong security with smaller key sizes compared to RSA. It is often used in mobile devices and other resource-constrained environments.
+  - DSA (Digital Signature Algorithm): An asymmetric encryption algorithm specifically designed for digital signatures. It is based on the discrete logarithm problem and is commonly used for signing documents and verifying the authenticity of messages.
+  - DH (Diffie-Hellman): An asymmetric encryption algorithm used for secure key exchange. It allows two parties to establish a shared secret key over an insecure channel without the need for a pre-shared key.
+
+>[!IMPORTANT]
+>
+> - If you encrypt with the public key, you can only decrypt with the private key. This means confidentiality is what matters the most. This is called Open Message Confidentiality (OMC). It is used to ensure that only the intended recipient can read the message. If the sender encrypts the message with the receiver's public key, only the receiver can decrypt it with their private key, thus ensuring confidentiality.
+> - If you encrypt with the private key, you can only decrypt with the public key. This means authentication is what matters the most. This is called Open Message Authentication (OMA). It is used to verify the authenticity of the sender. If the sender encrypts the message with their private key, anyone can decrypt it with the sender's public key, but only the sender could have encrypted it in the first place, thus verifying their identity.
+
+- Why Emails don't use Asymmetric Encryption?
+
+  - Asymmetric encryption is computationally intensive and slower than symmetric encryption. Encrypting large email messages with asymmetric encryption would result in significant performance issues.
+  - Instead, emails typically use PGP (Pretty Good Privacy) or S/MIME (Secure/Multipurpose Internet Mail Extensions), which combine asymmetric encryption for key exchange and symmetric encryption for the actual message content. This allows for secure email communication while maintaining performance.
+
+### Advantages of Asymmetric Encryption:
+
+- Better Key Distribution: Asymmetric encryption allows for easier key distribution since the public key can be shared openly, while the private key remains secure. This eliminates the need for secure channels to exchange keys, which is a major challenge in symmetric encryption.
+- Scalability: Asymmetric encryption is more scalable than symmetric encryption, as it does not require the sender and receiver to share a secret key beforehand. This makes it suitable for large-scale applications such as secure communication over the internet.
+- Authentication and nonrepudiation: Asymmetric encryption can provide authentication and nonrepudiation, as the sender can sign the message with their private key, and the receiver can verify the signature with the sender's public key. This ensures that the message has not been tampered with and that the sender cannot deny sending the message.
+- Slower than Symmetric Encryption: Asymmetric encryption is generally slower than symmetric encryption due to the mathematical complexity of the algorithms involved. This makes it less suitable for encrypting large amounts of data, but it is often used for encrypting small amounts of data, such as digital signatures and key exchange.
+- Mathematically Complex: Asymmetric encryption relies on complex mathematical problems, such as factoring large integers or solving the discrete logarithm problem. This makes it more secure against brute-force attacks, but it also means that it requires more computational resources compared to symmetric encryption.
+
+## Hash Functions
+
+>[!NOTE]
+>A hash function is a mathematical function that takes an input (or "message") and produces a fixed-size string of bytes, typically a digest that is unique to the input. Hash functions are commonly used in cryptography for various purposes, including data integrity verification, password hashing, and digital signatures.
+
+- Hash functions have several important properties:
+  - Deterministic: The same input will always produce the same output.
+  - Fast to compute: Hash functions should be efficient to compute for any given input.
+  - Pre-image resistance: It should be computationally infeasible to reverse-engineer the original input from its hash output.
+  - Collision resistance: It should be computationally infeasible to find two different inputs that produce the same hash output.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant HashFunction
+    participant Database
+    User->>HashFunction: Input Data (e.g., Password)
+    HashFunction->>HashFunction: Compute Hash Digest
+    HashFunction->>Database: Store Hash Digest
+    User->>Database: Login Attempt with Password
+    Database->>HashFunction: Retrieve Stored Hash Digest
+    HashFunction->>HashFunction: Compute Hash Digest of Login Attempt
+    HashFunction->>Database: Compare Hash Digests
+    Database->>User: Authentication Result (Success/Failure)
+```
+
+- Let's see this with an example:
+
+  - We will create a simple password hashing system using the SHA-256 hash function. The user will input a password, which will be hashed and stored in a database (simulated with a file). When the user attempts to log in, they will input their password again, and the system will hash it and compare it to the stored hash to verify their identity.
+
+  - Here's the `SHELL` code for the password hashing system:
+
+    ```bash
+    #!/bin/sh
+    echo "Enter your password:"
+    read -r password
+    # Hash the password using SHA-256
+    hashed_password=$(echo -n "$password" | openssl dgst -sha256)
+    # Store the hashed password in a file (simulating a database)
+    echo "$hashed_password" > password.hash
+    echo "Password hashed and stored."
+
+    echo "Login attempt. Enter your password:"
+    read -r login_password
+    # Hash the login attempt password
+    hashed_login_password=$(echo -n "$login_password" | openssl dgst -sha256)
+    # Retrieve the stored hashed password
+    stored_hashed_password=$(cat password.hash)
+
+    if [ "$hashed_login_password" = "$stored_hashed_password" ]; then
+        echo "Authentication successful!"
+    else
+        echo "Authentication failed!"
+    fi
+    ```
+
+- This is how it works:
+  - The user is prompted to enter a password, which is then hashed using the SHA-256 algorithm and stored in a file called `password.hash`.
+  - When the user attempts to log in, they are prompted to enter their password again. The system hashes this input and compares it to the stored hash.
+  - If the hashes match, authentication is successful; otherwise, it fails.
+
+  ![](../imgs/hash-function.gif)
