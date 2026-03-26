@@ -205,7 +205,8 @@ sequenceDiagram
   - Transmission: The sender sends the ciphertext to the receiver over a potentially insecure channel.
   - Decryption: The receiver uses their private key to decrypt the ciphertext and obtain the original plaintext message.
 
->[!IMPORTANT] **Note:** The security of asymmetric encryption relies on the difficulty of certain mathematical problems, such as factoring large integers (in the case of RSA) or solving the discrete logarithm problem (in the case of ECC). As long as these problems remain computationally infeasible to solve, asymmetric encryption can provide strong security.
+>[!IMPORTANT] 
+>**Note:** The security of asymmetric encryption relies on the difficulty of certain mathematical problems, such as factoring large integers (in the case of RSA) or solving the discrete logarithm problem (in the case of ECC). As long as these problems remain computationally infeasible to solve, asymmetric encryption can provide strong security.
 
 - Some of the mainly used asymmetric encryption algorithms include:
   - RSA (Rivest-Shamir-Adleman): One of the most widely used asymmetric encryption algorithms. It is based on the difficulty of factoring large integers and is commonly used for secure communication, digital signatures, and key exchange.
