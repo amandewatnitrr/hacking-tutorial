@@ -42,6 +42,7 @@ This repository is a comprehensive tutorial series for ethical hacking and penet
 ## Tutorial Guide
 
  - [Ethical Hacking for Beginners](./ethical-hacking/lesson-01.md)
+ - [Encryption Crash Course](./ethical-hacking/encryption-CrashCourse.md)
 
 ## Contributing
 
