@@ -323,3 +323,67 @@ sequenceDiagram
 >[!IMPORTANT]
 >Digital signatures are a cryptographic mechanism used to verify the authenticity and integrity of digital messages or documents. They provide a way to ensure that a message has not been altered and that it was indeed sent by the claimed sender.
 
+- The Digital Signatures are created when the sender generates a hash of the message and then encrypts that hash with their private key. The resulting encrypted hash is the digital signature, which is sent along with the original message.
+
+- The hash of the message is created using a hash function, which produces a fixed-size output that is unique to the input message. This hash serves as a fingerprint of the message, allowing the receiver to verify that the message has not been altered.
+
+- Let's try to understand this through an example. We have a sender shell script that generates a digital signature for a message and a receiver shell script that verifies the digital signature.
+
+- Here's the `SHELL` code for the sender terminal:
+
+  ```bash
+  #!/bin/sh
+  echo "Enter the message you want to sign:"
+  read -r message
+  # Generate a hash of the message
+  message_hash=$(echo -n "$message" | openssl dgst -sha256)
+  # Generate Private and Public Key Pair (if not already generated)
+  if [ ! -f sender_private.key ]; then
+      openssl genpkey -algorithm RSA -out sender_private.key -pkeyopt rsa_keygen_bits:2048
+      openssl rsa -pubout -in sender_private.key -out sender_public.key
+  fi
+  # Encrypt the hash with the senders private key to create the digital signature
+  digital_signature=$(echo -n "$message_hash" | openssl rsautl -sign -inkey sender_private.key)
+  # Save the message and digital signature to files to simulate sending
+  echo "$message" > message.txt
+  echo "$digital_signature" > signature.bin
+  echo "Message signed and sent."
+  ```
+
+- Here's the `SHELL` code for the receiver terminal:
+
+  ```bash
+  #!/bin/sh
+  echo "Waiting for message and signature (timeout 5 minutes)..."
+  timeout=300
+  elapsed=0
+  echo "Verifying public key exists..."
+  while [ $elapsed -lt $timeout ]; do
+      if [ -f "sender_public.key" ] && [ -f "message.txt" ] && [ -f "signature.bin" ]; then
+          # Read the message and digital signature from files
+          message=$(cat message.txt)
+          digital_signature=$(cat signature.bin)
+          # Generate a hash of the received message
+          message_hash=$(echo -n "$message" | openssl dgst -sha256)
+          # Decrypt the digital signature using the sender's public key to retrieve the original hash
+          decrypted_hash=$(echo -n "$digital_signature" | openssl rsautl -verify -inkey sender_public.key -pubin)
+          # Compare the decrypted hash with the hash of the received message
+          if [ "$decrypted_hash" = "$message_hash" ]; then
+              echo "Digital signature is valid. Message is authentic and has not been altered."
+          else
+              echo "Digital signature is invalid. Message may have been tampered with or sender's identity cannot be verified."
+          fi
+          echo "Received Message: $message"
+          # Clean up the temporary files
+          rm sender_public.key message.txt signature.bin
+          exit 0
+      fi
+      sleep 1
+      elapsed=$((elapsed + 1))
+  done  
+  echo "Timeout reached. No message received."
+  ```
+- Both of the terminals were running simultaneously, and the sender terminal was used to input a message, which was then hashed and signed with the sender's private key. The receiver terminal waited for the message and signature, then verified the signature using the sender's public key and compared the hash of the received message with the decrypted hash from the signature to confirm authenticity.
+
+  ![](../imgs/sender-digi-demo.gif)
+  ![](../imgs/reciever-digi-demo.gif)
