@@ -6,6 +6,7 @@
     - [Advantages of Asymmetric Encryption:](#advantages-of-asymmetric-encryption)
   - [Hash Functions](#hash-functions)
   - [Digital Signatures](#digital-signatures)
+  - [SSL(Secure Sockets Layer) \& TLS(Transport Layer Security)](#sslsecure-sockets-layer--tlstransport-layer-security)
 
 ![](../imgs/SSLs-Blog-59-Asymmetric-vs-Symmetric-Encryption.png)
 
@@ -387,3 +388,41 @@ sequenceDiagram
 
   ![](../imgs/sender-digi-demo.gif)
   ![](../imgs/reciever-digi-demo.gif)
+
+## SSL(Secure Sockets Layer) & TLS(Transport Layer Security)
+
+>[!IMPORTANT]
+>SSL stands for Secure Sockets Layer, and TLS stands for Transport Layer Security. Both SSL and TLS are cryptographic protocols designed to provide secure communication over a computer network. TLS is the successor to SSL and is more secure and efficient than its predecessor.
+
+- `TLS v1.3` is the latest version of the TLS protocol, which was finalized in 2018. It offers improved security and performance compared to previous versions of TLS and SSL. TLS v1.3 removes support for older, less secure cryptographic algorithms and introduces new features to enhance security and reduce latency.
+
+- TLS is the most important protocol for securing communication on the internet. It not only encrypts the data but also ensures data integrity and authentication. TLS is an End to End encryption protocol, which means that the data is encrypted from the sender to the receiver, and only the intended recipient can decrypt it. This makes it an essential component of secure communication on the internet, especially for sensitive transactions such as online banking, e-commerce, and secure email communication.
+
+- TLS supports functionality of Confedentiality, privacy, authentication & integrity. 
+  - The connection is private because a symmetric algorithm such as AES is used to encrpt the data transmitted. 
+  - The keys for this symmetric encryption are uniquely generated for each connection or session based on the needs of the application, based on a secret negotiated at the start of the connection. 
+  - The server and client negotiate the details of which encryption algorithm, and cryptographic keys to use before even a single byte of data is transmitted.
+  - The negotiation of a shared secret cannot be read by eavsdroppers, even by an attacker who places himself in the middle of the connection.
+  - The connection is also reliable in that no attacker can modify the communication during the negotiation without being detected. The identity of the communicating parties can be authenticated using publuc key cryptography, certificates and digital signatures.
+  - This authentication can be made optional, but is generally required for at least one of the parties usually the server.
+  - The connection is reliable because each message transmitted includes a message integrity check. Using a Message Authentication Code (MAC), to prevent undected loss or alteration of the data during transmission. If any message is modified, the connection is immediately terminated.
+
+- TLS supports many different methods for exchanging keys, encrypting data and authenticating message integrity. As, a result secure configuration of TLS requires many configurable parameters, and not all choices provide the security services of privacy authentication and integrity.
+
+>[!NOTE]
+> The best Authentication & Key Exchanging Algorithm to use are ECDHE (Elliptic Curve Diffie-Hellman Ephemeral) for key exchange and ECDSA (Elliptic Curve Digital Signature Algorithm) for authentication. These algorithms provide strong security while also being efficient in terms of performance. ECDHE allows for perfect forward secrecy, which means that even if the server's private key is compromised in the future, past communications remain secure. ECDSA provides a secure method for verifying the identity of the communicating parties without the need for a trusted third party.
+
+![](../imgs/1*qY5TtUCN9TYfvvsUlippqg.png)
+
+>[!WARNING]
+> But the problem is you don't always get the choice. A server will support only certain authentication * key exchange algorithms only.
+
+- The reason thatt the ones mentioned are the preffered options is because of the fact that they use Diffie-Hellman key exchange, which can ensure property of privacy called Perfect Forward Secrecy (PFS). This means that even if the server's private key is compromised in the future, past communications remain secure because the session keys used for encryption are not derived from the server's private key. This provides an additional layer of security and protects against future attacks on the server's private key. Additionally, ECDHE and ECDSA are based on elliptic curve cryptography, which offers strong security with smaller key sizes compared to traditional algorithms like RSA, making them more efficient and suitable for modern applications.
+
+![](../imgs/Elliptic-Curve-Diffie-Hellman-ECDH-Key-Exchange-Protocol-Two-users-Alice-and-Bob.jpg)
+
+- Now, this property ensures that your session keys are not compromised even if the server's private key is compromised in the future. This is because the session keys are generated using a key exchange algorithm that does not rely on the server's private key, such as Diffie-Hellman. 
+
+- As a result, even if an attacker gains access to the server's private key, they would not be able to decrypt past communications that were encrypted with session keys generated through a secure key exchange process. This provides an additional layer of security and helps protect against future attacks on the server's private key.
+
+- Even if compromise of a single session key will not affect any data other than that exchange in that specific session protected by that particular key. PFS represents a big step forward in protecting data on the transport layer. 
