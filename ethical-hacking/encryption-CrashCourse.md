@@ -5,6 +5,9 @@
   - [Asymmetric Encryption (RSA)](#asymmetric-encryption-rsa)
     - [Advantages of Asymmetric Encryption:](#advantages-of-asymmetric-encryption)
   - [Hash Functions](#hash-functions)
+  - [Digital Signatures](#digital-signatures)
+
+![](../imgs/SSLs-Blog-59-Asymmetric-vs-Symmetric-Encryption.png)
 
 >[!NOTE]
 >Encryption is the process of converting plaintext into ciphertext to protect sensitive information from unauthorized access. It is a fundamental aspect of cybersecurity and is used to secure data in transit and at rest.
@@ -69,6 +72,8 @@
     </td>
   </tr>
 </table>
+
+![](../imgs/symmetric-and-asymmetric-key-1-2.webp)
 
 ## Symmetric Encryption (AES)
 
@@ -294,3 +299,27 @@ sequenceDiagram
   - If the hashes match, authentication is successful; otherwise, it fails.
 
   ![](../imgs/hash-function.gif)
+
+- There are many hash functions available, each with its own characteristics and use cases. Some of the most commonly used hash functions include:
+  - MD5 (Message Digest Algorithm 5): An older hash function that produces a 128-bit hash value. It is now considered weak due to vulnerabilities that allow for collision attacks.
+  - SHA-1 (Secure Hash Algorithm 1): A hash function that produces a 160-bit hash value. It is also considered weak due to vulnerabilities that allow for collision attacks.
+  - SHA-256 (Secure Hash Algorithm 256): A widely used hash function that produces a 256-bit hash value. It is currently considered secure and is commonly used in various applications, including password hashing and digital signatures.
+  - SHA-3 (Secure Hash Algorithm 3): The latest member of the SHA family, designed to provide improved security and performance. It supports variable output sizes and is based on the Keccak algorithm.
+  - HAVAL: A hash function that allows for variable output sizes (128, 160, 192, 224, or 256 bits) and is designed to be fast and secure.
+
+- Crypto systems today use SHA-256 or abovw for hashing, and MD5 and SHA-1 are considered weak and should be avoided for secure applications.
+
+- Hash functions are used for various purposes in cryptography, including:
+  - Data integrity verification: Hash functions can be used to verify that data has not been tampered with. By comparing the hash of the original data with the hash of the received data, you can determine if the data has been altered.
+  - Password hashing: Hash functions are commonly used to securely store passwords. Instead of storing the plaintext password, systems store the hash of the password. When a user attempts to log in, their input is hashed and compared to the stored hash for authentication.
+  - Digital signatures: Hash functions are used in digital signature algorithms to create a unique representation of a message. The sender hashes the message and then encrypts the hash with their private key to create a digital signature. The receiver can verify the signature by decrypting it with the sender's public key and comparing it to their own hash of the message.
+
+- Let's take an example where we downloaded a ISO file from the internet, and we want to verify its integrity. We can use a hash function to compute the hash of the downloaded file and compare it to the hash provided by the source. If the hashes match, we can be confident that the file has not been tampered with during the download process.
+
+## Digital Signatures
+
+![](../imgs/How%20does%20a%20digital%20signature%20work.png)
+
+>[!IMPORTANT]
+>Digital signatures are a cryptographic mechanism used to verify the authenticity and integrity of digital messages or documents. They provide a way to ensure that a message has not been altered and that it was indeed sent by the claimed sender.
+
