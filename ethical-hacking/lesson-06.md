@@ -520,7 +520,6 @@ The same can be performed using our automated script as well which is at the spe
 - When a website implements HSTS, it sends a special HTTP header called `Strict-Transport-Security` to the browser. This header tells the browser to only use HTTPS for all future requests to that website for a specified period of time. If the user tries to access the website using HTTP, the browser will automatically redirect the request to HTTPS.
 - Let's try to understand this with a mermaid Sequence diagram, where the attacker is using bettercap to perform ARP spoofing and downgrade HTTPS to HTTP, but fails because the target website has implemented HSTS.
 
-
   ```mermaid
   sequenceDiagram
       participant A as Attacker
@@ -635,7 +634,7 @@ Let's look at an example output of DNS Spoofing using bettercap:
 
 ### Injecting JavaScript Code
 
-- Once, we have become the man in the middle, we can also modify the components of the web page, that is being loaded on browser of the target machine. We can insert any piece of code we want, and the browser will execute it. 
+- Once, we have become the man in the middle, we can also modify the components of the web page, that is being loaded on browser of the target machine. We can insert any piece of code we want, and the browser will execute it.
 
 - HTML is only responsible for rendering only the elements that we see on the web page. It doesn't really allow us to do much. But, modern browsers can execute Javascript code.
 
@@ -685,7 +684,7 @@ Let's look at an example output of DNS Spoofing using bettercap:
 
 - For the default username and password is:
 
-  ```secret 
+  ```secret
   username: user
   password: pass
   ```
@@ -722,3 +721,4 @@ Let's look at an example output of DNS Spoofing using bettercap:
 - Click on play button to load the caplet. This will start the `hstshijack` module.
 
 - From the `advanced` on the top navigation bar, We can look for the commands, we want to run, we can directly click on them and execute them.
+- 
