@@ -158,6 +158,7 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+./idea
 .idea/.gitignore
 
 .idea/.gitignore
