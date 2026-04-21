@@ -48,7 +48,7 @@ graph TD
 - By implementing corrective actions based on FMEA findings, organizations can reduce the likelihood of failures, improve product quality, enhance customer satisfaction, and ultimately increase profitability.
 
 >[!NOTE]
-> ## When to conduct FMEA & why??
+> ## When & why??
 > FMEA should be conducted during the feasibility, design or development phase of a product.
 > A general flow of product looks like this:
 > 1. Concept/Feasibility
