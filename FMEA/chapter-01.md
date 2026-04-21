@@ -13,7 +13,8 @@
 
 ## Introduction
 
->[!IMPORTANT] FMEA (Failure Mode and Effects Analysis) is a systematic method for identifying potential failure modes in a system, product, or process, and assessing their impact on performance. It helps organizations prioritize risks and implement corrective actions to mitigate them.
+>[!IMPORTANT] 
+> FMEA (Failure Mode and Effects Analysis) is a systematic method for identifying potential failure modes in a system, product, or process, and assessing their impact on performance. It helps organizations prioritize risks and implement corrective actions to mitigate them.
 
 - FMEA is not a individual one time activity, but rather a team effort that involves cross-functional collaboration.
 - It is typically performed during the design phase of a product or process, but can also be applied to existing products or processes for continuous improvement.
@@ -46,7 +47,8 @@ graph TD
 - FMEA promotes cross-functional collaboration and communication, fostering a culture of continuous improvement and risk awareness within the organization.
 - By implementing corrective actions based on FMEA findings, organizations can reduce the likelihood of failures, improve product quality, enhance customer satisfaction, and ultimately increase profitability.
 
->[!NOTE] # When to conduct FMEA & why??
+>[!NOTE]
+> ## When to conduct FMEA & why??
 > FMEA should be conducted during the feasibility, design or development phase of a product.
 > A general flow of product looks like this:
 > 1. Concept/Feasibility
