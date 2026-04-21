@@ -26,8 +26,8 @@
 graph TD
     GH["Global Hazards"] --> PR["Product Risk RAC - (System FMEA)"]
     PR --> CMT["Product Risk Mitigation"]
-    CMT --> PRO["Process Risk"]
-    CMT --> DES["dFMEA - Design Risk Subsystem Component"]
+    CMT --> PRO["Process Risks"]
+    CMT --> DES["dFMEA"]
     CMT --> USA["Usability Risks"]
     
     PRO --> MDS["Manufacturing, Distribution and Service Process"]
