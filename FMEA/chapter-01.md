@@ -36,8 +36,8 @@ graph TD
     PRO <--> DES
     DES <--> USA
     
-    style SRC fill:#90EE90,stroke:#333,stroke-width:1px
-    style MDS fill:#90EE90,stroke:#333,stroke-width:1px
+    style SRC fill:#238636,color:#ffffff,stroke:#2ea043,stroke-width:1px
+    style MDS fill:#238636,color:#ffffff,stroke:#2ea043,stroke-width:1px
 ```
 
 ## Why is FMEA Important?
