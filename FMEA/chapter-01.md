@@ -13,7 +13,7 @@
 
 ## Introduction
 
->[!IMPORTANT] 
+>[!IMPORTANT]
 > FMEA (Failure Mode and Effects Analysis) is a systematic method for identifying potential failure modes in a system, product, or process, and assessing their impact on performance. It helps organizations prioritize risks and implement corrective actions to mitigate them.
 
 - FMEA is not a individual one time activity, but rather a team effort that involves cross-functional collaboration.
@@ -67,14 +67,14 @@ graph TD
 ## How to implement FMEA?
 
 - The FMEA process typically can be covered in 3 big buckets:
-    1. `Pre-work/Planning`
+    1. `Planning`
     2. `FMEA Analysis`
     3. `Post-work/Action Plan/Follow-up`
 
 <br>
 
-- The `pre-work/planning` phase involves:
-  - `defining` scope of the FMEA, acceptance criteria for risk prioritization, and assembling a cross-functional team with relevant expertise.
+- The `planning` phase involves:
+  - `defining` scope of FMEA, acceptance criteria for risk prioritization, and assembling a cross-functional team with relevant expertise.
   - `Identifying` strategies, divisions, functions, processes, sequences & iterations, and potential failure modes, analyzing the effects and causes of each failure mode, and assigning risk priority numbers (RPNs) based on severity, occurrence, and detection ratings. And, based on that suggesting mitigations and corrective actions to reduce the risk of failure.
   - `Data` collection and review of historical data of failure data from similar devices.
 
