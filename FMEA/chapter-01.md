@@ -1,9 +1,13 @@
 # FMEA - Failure Mode and Effects Analysis
 
+---
+
 - [FMEA - Failure Mode and Effects Analysis](#fmea---failure-mode-and-effects-analysis)
   - [Introduction](#introduction)
   - [Why is FMEA Important?](#why-is-fmea-important)
+  - [How to Conduct FMEA?](#how-to-conduct-fmea)
 
+---
 
 ![](../imgs/FMEA.png)
 
@@ -19,11 +23,11 @@
 
 ```mermaid
 graph TD
-    GH["Global Hazards"] --> PR["Product Risk RAC (System FMEA)"]
+    GH["Global Hazards"] --> PR["Product Risk RAC - (System FMEA)"]
     PR --> CMT["Product CMT (Cause Mitigation Table)"]
-    CMT --> PRO["Process Risk (PFMEA)"]
-    CMT --> DES["dFMEA (Design Risk Subsystem Component)"]
-    CMT --> USA["Usability Risks (UFMEA or task Analysis)"]
+    CMT --> PRO["Process Risk"]
+    CMT --> DES["dFMEA - Design Risk Subsystem Component"]
+    CMT --> USA["Usability Risks"]
     
     PRO --> MDS["Manufacturing, Distribution and Service Process"]
     DES --> SRC["Software Risk and Cybersecurity"]
@@ -42,3 +46,43 @@ graph TD
 - FMEA promotes cross-functional collaboration and communication, fostering a culture of continuous improvement and risk awareness within the organization.
 - By implementing corrective actions based on FMEA findings, organizations can reduce the likelihood of failures, improve product quality, enhance customer satisfaction, and ultimately increase profitability.
 
+>[!NOTE] # When to conduct FMEA & why??
+> FMEA should be conducted during the feasibility, design or development phase of a product.
+> A general flow of product looks like this:
+> 1. Concept/Feasibility
+> 2. Design/Development
+> 3. Validation/Verification
+> 4. Development/Manufacturing
+> 5. Testing/Release
+> 6. Manufacturing
+> 7. Distribution/Service <br>
+> FMEA is most effective when conducted early in the design or development phase, as it allows for the identification and mitigation of potential failure modes before they become costly or difficult to address. By conducting FMEA during the early stages of product development, organizations can proactively manage risks, improve product quality, and enhance customer satisfaction. It also helps companies and organisations avoid costly recalls, warranty claims, and damage to their reputation by identifying and addressing potential failure modes before they reach the market.
+
+- Imagine a worst case scenario, where a device has to be recalled. These recalls can be costly for companies, both in terms of financial losses and damage to their reputation. By conducting FMEA during the design or development phase, companies can identify potential failure modes and implement corrective actions to mitigate them, reducing the likelihood of recalls and associated costs. Additionally, FMEA can help companies improve product quality and customer satisfaction by proactively managing risks and addressing potential issues before they reach the market.
+
+- FMEAs must be revisited timely often to avoid any costly mistakes.
+
+## How to Conduct FMEA?
+
+- The FMEA process typically can be covered in 3 big buckets:
+    1. `Pre-work/Planning`
+    2. `FMEA Analysis`
+    3. `Post-work/Action Plan/Follow-up`
+
+<br>
+
+- The `pre-work/planning` phase involves:
+  - `defining` scope of the FMEA, acceptance criteria for risk prioritization, and assembling a cross-functional team with relevant expertise.
+  - `Identifying` strategies, divisions, functions, processes, sequences & iterations, and potential failure modes, analyzing the effects and causes of each failure mode, and assigning risk priority numbers (RPNs) based on severity, occurrence, and detection ratings. And, based on that suggesting mitigations and corrective actions to reduce the risk of failure.
+  - `Data` collection and review of historical data of failure data from similar devices.
+
+- `FMEA analysis` phase involves:
+  - `analyzing` flowchart for System/Features/Functions/Process.
+  - `identify` potential failures, effects, causes and controls.
+  - `Asses & Evaluate` the severity & risk caused by each failure mod. It's occurence to know how frequently the failure mode is likely to occur, and detection to know how likely it is that the failure mode will be detected before it reaches the customer.
+
+- `Post-work/action plan/follow-up` phase involves:
+  - `Mitigation` of the identified failure modes by implementing corrective actions to reduce the risk of failure.
+  - `Follow-up` to ensure that the corrective actions are effective and that the risks have been mitigated.
+
+---
