@@ -5,7 +5,7 @@
 - [FMEA - Failure Mode and Effects Analysis](#fmea---failure-mode-and-effects-analysis)
   - [Introduction](#introduction)
   - [Why is FMEA Important?](#why-is-fmea-important)
-  - [How to Conduct FMEA?](#how-to-conduct-fmea)
+  - [How to implement FMEA?](#how-to-implement-fmea)
 
 ---
 
@@ -64,7 +64,7 @@ graph TD
 
 - FMEAs must be revisited timely often to avoid any costly mistakes.
 
-## How to Conduct FMEA?
+## How to implement FMEA?
 
 - The FMEA process typically can be covered in 3 big buckets:
     1. `Pre-work/Planning`
