@@ -59,4 +59,6 @@ There are 3 main contexts in a FMEA:
   - Internal Defect
   - Customer Feedback
 
+- For the learner's reference, we have attached a sample dFMEA template here: [dFMEA Template](./IC-FMEA-Spreadsheet-12192_Template.xlsx)
+
 ---
