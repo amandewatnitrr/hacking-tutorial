@@ -39,7 +39,7 @@ flowchart LR
 >[!IMPORTANT]
 >`Failure Mode Effect` is a immediate consequence of a component or process failure.
 
-- When considering `Failure Mode Effects`, one must conside both internal and external users. And each of these can have multiple effects on the system, product, or process.
+- When considering `Failure Mode Effects`, one must consider both internal and external users. And each of these can have multiple effects on the system, product, or process.
 
 - For example, a failure mode in a car's braking system could have effects on the internal components of the braking system, as well as external effects on the safety of the driver and passengers.
 

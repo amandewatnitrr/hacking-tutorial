@@ -69,7 +69,7 @@ graph TD
 - The FMEA process typically can be covered in 3 big buckets:
     1. `Planning`
     2. `FMEA Analysis`
-    3. `Post-work/Action Plan`
+    3. `Post-work/Action`
 
 <br>
 
@@ -83,7 +83,7 @@ graph TD
   - `identify` potential failures, effects, causes and controls.
   - `Asses & Evaluate` the severity & risk caused by each failure mod. It's occurence to know how frequently the failure mode is likely to occur, and detection to know how likely it is that the failure mode will be detected before it reaches the customer.
 
-- `Post-work/action plan` phase involves:
+- `Post-work/Action planning` phase involves:
   - `Mitigation` of the identified failure modes by implementing corrective actions to reduce the risk of failure.
   - `Follow-up` to ensure that the corrective actions are effective and that the risks have been mitigated.
 
