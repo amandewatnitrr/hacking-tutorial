@@ -44,4 +44,9 @@
 
 ## Failure Mode Detection Ranking
 
+>[!IMPORTANT]
+> `Failure Mode Detection Ranking` is a measure of probabitlity that the detection controls set to monitor the failure mode will either discover the failure mode or the cause of the failure mode.
 
+- This assesss the products/system/components ability to detect & identify the defect during the session of operation.
+- Each Failure Mode and Failure Mode Cause is ranked separately for detection, and that is a critical factor in determining the risk priority number (RPN) for each failure mode.
+- 100% inspection doesn't mean 100% effectiveness, because there can be human error in the inspection process, or the inspection process itself may not be designed to effectively detect the failure mode.
