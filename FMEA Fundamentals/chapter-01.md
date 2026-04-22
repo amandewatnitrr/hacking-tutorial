@@ -14,11 +14,11 @@
 ## Introduction
 
 >[!IMPORTANT]
-> FMEA (Failure Mode and Effects Analysis) is a systematic method for identifying potential failure modes in a system, product, or process, and assessing their impact on performance. It helps organizations prioritize risks and implement corrective actions to mitigate them.
+> FMEA (Failure Mode and Effects Analysis) is a step-by-step approach to figure out what might go wrong in a product, system, or process, and how bad those problems could be. It helps teams decide which risks to tackle first and what steps to take to prevent them.
 
-- FMEA is not a individual one time activity, but rather a team effort that involves cross-functional collaboration.
-- It is typically performed during the design phase of a product or process, but can also be applied to existing products or processes for continuous improvement.
-- The main goal of FMEA is to identify and prioritize potential failure modes based on their severity, occurrence, and detection, and to implement corrective actions to reduce the risk of failure.
+- FMEA isn't a one-person job or a one-time task; it requires ongoing teamwork from people with different backgrounds and skills.
+- It is usually done early when a product is being designed, but it can also be used to improve things that are already in use.
+- The main goal is to spot potential issues, rank them (based on how severe they are, how often they happen, and how easily they can be caught), and take action to stop them from happening.
 
 <b> Requirements on Design/Process Risk Management </b>
 
@@ -75,17 +75,17 @@ graph TD
 <br>
 
 - The `planning` phase involves:
-  - `defining` scope of FMEA, acceptance criteria for risk prioritization, and assembling a cross-functional team with relevant expertise.
-  - `Identifying` strategies, divisions, functions, processes, sequences & iterations, and potential failure modes, analyzing the effects and causes of each failure mode, and assigning risk priority numbers (RPNs) based on severity, occurrence, and detection ratings. And, based on that suggesting mitigations and corrective actions to reduce the risk of failure.
-  - `Data` collection and review of historical data of failure data from similar devices.
+  - `Setting the boundaries` — decide what the FMEA will cover, set clear criteria for what counts as an acceptable risk, and bring together people from different teams who understand the system.
+  - `Mapping out the work` — list the key functions, steps, and workflows involved, then brainstorm what could go wrong at each step. For every potential failure, figure out what the impact would be, what might cause it, and calculate a Risk Priority Number (RPN) using three scores: how serious it is (severity), how likely it is to happen (occurrence), and how easy it is to catch (detection).
+  - `Learning from the past` — gather and review data from similar products or processes to understand what has gone wrong before.
 
-- `FMEA analysis` phase involves:
-  - `analyzing` flowchart for System/Features/Functions/Process.
-  - `identify` potential failures, effects, causes and controls.
-  - `Asses & Evaluate` the severity & risk caused by each failure mod. It's occurence to know how frequently the failure mode is likely to occur, and detection to know how likely it is that the failure mode will be detected before it reaches the customer.
+- The `FMEA analysis` phase involves:
+  - `Walking through the system` — use a flowchart to map out how the system, features, or process works step by step.
+  - `Spotting problems` — for each step, ask: what could fail? What would happen if it did? What might cause it? What safeguards already exist?
+  - `Scoring the risk` — rate each failure on severity (how bad the impact is), occurrence (how often it is likely to happen), and detection (how likely it is to be caught before reaching the end user). Together, these scores help prioritize which failures need the most attention.
 
-- `Post-work/Action planning` phase involves:
-  - `Mitigation` of the identified failure modes by implementing corrective actions to reduce the risk of failure.
-  - `Follow-up` to ensure that the corrective actions are effective and that the risks have been mitigated.
+- The `post-work / action planning` phase involves:
+  - `Taking action` — put fixes in place to reduce or eliminate the highest-priority failure modes identified during the analysis.
+  - `Checking the results` — revisit the changes made to confirm they actually lowered the risk and that no new issues were introduced.
 
 ---
