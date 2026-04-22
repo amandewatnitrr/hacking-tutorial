@@ -39,18 +39,18 @@ flowchart LR
 >[!IMPORTANT]
 >`Failure Mode Effect` is a immediate consequence of a component or process failure.
 
-- When considering `Failure Mode Effects`, one must consider both internal and external users. And each of these can have multiple effects on the system, product, or process.
+- When thinking about `Failure Mode Effects`, it's important to look at both internal users (such as teams working on the system) and external users (such as customers or end users). A single failure can produce different effects depending on who is impacted.
 
-- For example, a failure mode in a car's braking system could have effects on the internal components of the braking system, as well as external effects on the safety of the driver and passengers.
+- For example, if the braking system in a car fails, it could damage internal parts like brake pads or calipers, but it could also put the driver and passengers at serious risk — these are two very different kinds of effects from the same failure.
 
 ### Identification of Failure Mode Effects
 
-- When identifying failure mode effects, it's important to not only consider the safety, but the system/product reliability itself.
-- They are independednt of the factor of our ability/inability to detect them.
-- They are independent of the probability of it's occurence or how frequently a user faces it.
-- Absolutely no control of which effect occurs, and how severe it is. We can only control the failure mode itself, and try to mitigate it.
-- Effects decide the severity of the failure mode, and that is a critical factor in determining the risk priority number (RPN) for each failure mode.
-- The resulting consequences may or may not be immediately apparent, and may require further analysis to fully understand the impact of the failure mode on the system, product, or process.
+- When listing failure mode effects, think beyond just safety — also consider how the failure affects the reliability and overall functionality of the system or product.
+- Effects are assessed independently of whether the failure can be detected — even an undetectable failure can have serious consequences.
+- Effects are also assessed independently of how often a failure occurs — a rare failure can still have a severe effect when it does happen.
+- We have no control over which effect occurs or how bad it turns out to be. What we *can* control is the failure mode itself — by designing safeguards and mitigations to prevent it.
+- The effect of a failure is what drives its severity score, which in turn is one of the key inputs to the Risk Priority Number (RPN).
+- Some effects show up immediately and are easy to observe; others may only become apparent later or after further investigation. Both types need to be accounted for.
 
 ## Severity
 
@@ -59,9 +59,9 @@ flowchart LR
 >[!IMPORTANT]
 > `Severity` is a measure of the impact of a failure mode effect on the system, product, or process, and it's user.
 
-- When assessing severity, consider the most severe effect of the failure mode effect first.
-- Severity of a failure mode effect is independent of its probability of occurrence or our ability to detect it.
-- Severity ranking is the biggest X factor in determining the action plan.
+- Always start by evaluating the worst-case effect a failure could have — this ensures the most critical risks are not underestimated.
+- A severity score reflects the impact of the effect itself, not how often the failure happens or whether it can be caught — those are separate scores.
+- Of the three FMEA scores (severity, occurrence, detection), severity carries the most weight when deciding what actions to prioritize.
 
 ### Assigning Severity Ratings
 
@@ -79,11 +79,11 @@ flowchart LR
 >[!IMPORTANT]
 > `Failure Causes` are the underlying reasons or factors that lead to the occurrence of a failure mode.
 
-- Failure Causes are the root causes of a failure mode, and not the subsequent symptoms or effects of the failure mode.
-- Failure Modes can have multiple causes, and it's important to identify all of them to effectively mitigate the risk associated with the failure mode.
-- Failure Causes and Failure Modes can't be same.
-- Failure Causes cannot be ambiguous, and should be specific and actionable. For example, "improper installation" is a more specific and actionable failure cause than "human error".
-- A Failure Mode is a component or sub system or dependency can be a Failure Cause for another Failure Mode in the overall system.
+- A failure cause is the underlying "why" behind a failure — not the symptom or the consequence that follows from it.
+- A single failure mode can have more than one cause. Listing all of them is important, because missing a cause means missing an opportunity to prevent the failure.
+- A failure cause and a failure mode are always two distinct things — they cannot be the same entry.
+- Causes must be specific enough to act on. "Human error" is too vague; "incorrect torque applied during assembly" gives the team something concrete to address.
+- A failure mode in one component or sub-system can itself be the cause of a failure mode in another part of the overall system — so connections between levels of the system matter.
 
 ## Probability of Occurrence of Failure Mode
 
@@ -92,6 +92,6 @@ flowchart LR
 >[!IMPORTANT]
 > `Probability of Occurrence` is a measure of how likely it is for a failure mode to occur, based on historical data, expert judgment, or other relevant information.
 
-- When data is not available, consider data fronm similar products, processes, or systems to estimate the probability of occurrence, and preventive controls that are in place to reduce the likelihood of occurrence.
-- Failure Mode Causes are ranked seprately, and have their own probability of occurrence ratings in FMEA.
-- This helps us assess the systems/processes/components capacity to prevent the failure mode from occurring, and identify areas for improvement in the design or process to reduce the likelihood of occurrence.
+- If direct data isn't available, look to comparable products, processes, or systems for reference — and take into account any existing controls that are already in place to reduce the chance of the failure occurring.
+- Each failure cause gets its own occurrence rating in FMEA — they are scored separately, not grouped together under the failure mode.
+- This scoring helps reveal how well the current design or process is set up to prevent failures, and points to where improvements are most needed.

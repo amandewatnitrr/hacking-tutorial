@@ -6,7 +6,7 @@
 - [FMEA - Control \& Detectibility](#fmea---control--detectibility)
   - [Preventive \& Detection Controls](#preventive--detection-controls)
   - [Preventive vs Detective Controls](#preventive-vs-detective-controls)
-  - [Failure Mode Detection Ranking](#failure-mode-detection-ranking)
+  - [Failure Detection Ranking](#failure-detection-ranking)
 
 ---
 
@@ -42,15 +42,15 @@
     </tr>
 </table>
 
-## Failure Mode Detection Ranking
+## Failure Detection Ranking
 
 >[!IMPORTANT]
-> `Failure Mode Detection Ranking` is a measure of probabitlity that the detection controls set to monitor the failure mode will either discover the failure mode or the cause of the failure mode.
+> `Failure Detection Ranking` is a measure of probabitlity that the detection controls set to monitor the failure mode will either discover the failure mode or the cause of the failure mode.
 
-- This assesss the products/system/components ability to detect & identify the defect during the session of operation.
+- This assesses how well the system, product, or component is able to catch and flag a defect while it is still within the production or operational process.
 
-- Each Failure Mode and Failure Mode Cause is ranked separately for detection, and that is a critical factor in determining the risk priority number (RPN) for each failure mode.
+- Each failure mode and its associated cause are given their own separate detection rating — this individual scoring is an important input to the Risk Priority Number (RPN).
 
-- 100% inspection doesn't mean 100% effectivity of the detection process, because there can be human error in the inspection process, or the inspection process itself may not be designed to effectively detect the failure mode.
+- Inspecting every single item does not guarantee that all defects will be found. Human error during inspection, or an inspection method that wasn't designed with a specific failure in mind, can still let defects slip through.
 
 ---
