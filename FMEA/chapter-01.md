@@ -25,10 +25,10 @@
 ```mermaid
 graph TD
     GH["Global Hazards"] --> PR["Product Risk RAC - (System FMEA)"]
-    PR --> CMT["Product Risk Mitigation"]
-    CMT --> PRO["Process Risks"]
-    CMT --> DES["dFMEA"]
-    CMT --> USA["Usability Risks"]
+    PR --> PRM["Product Risk Mitigation"]
+    PRM --> PRO["Process Risks"]
+    PRM --> DES["dFMEA"]
+    PRM --> USA["Usability Risks"]
     
     PRO --> MDS["Manufacturing, Distribution and Service Process"]
     DES --> SRC["Software Risk and Cybersecurity"]
