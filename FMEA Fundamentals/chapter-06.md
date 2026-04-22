@@ -46,7 +46,7 @@
 
 ## Priortizing Actions
 
-- Never, ever prioritize actions based on RPN alone. Always look at Critical RPN which is `S * O`.
+- Never, ever prioritize actions based on RPN alone. Always look at `S * O`.
 - Look for easy ways to fix the design, process, or system to reduce the severity of the failure mode, and that will have a huge impact on the RPN.
 - Find causes that can be easily mitigated, with pre-exisitng easy to follow methods.
 - Understand the Failure Modes effect on the Business Model and the User Experience, and prioritize actions based on that.
