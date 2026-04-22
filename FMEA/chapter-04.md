@@ -1,5 +1,26 @@
 # FMEA: Effects & Severity
 
+```mermaid
+flowchart LR
+    A((1. Components<br>& Functions)) --> B((2. Identify<br>Failure Modes))
+    B --> C((3. Effects<br>& Severity))
+    C --> D((4. Causes<br>& Occurrence))
+    D --> E((5. Controls<br>& Detection))
+    E --> F((6. Calculate<br>RPN))
+    F --> G((7. Action<br>Plan))
+    G --> H((8. Mitigations))
+    H -->|Continuous Improvement| A
+
+    style A fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style B fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style C fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style D fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style E fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style F fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style G fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+    style H fill:#2D3748,color:#F7FAFC,stroke:#4299E1,stroke-width:2px
+```
+
 ---
 - [FMEA: Effects \& Severity](#fmea-effects--severity)
   - [Failure Mode Effect](#failure-mode-effect)
