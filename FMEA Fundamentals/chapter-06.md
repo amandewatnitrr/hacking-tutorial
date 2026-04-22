@@ -46,19 +46,19 @@
 
 ## Priortizing Actions
 
-- Never, ever prioritize actions based on RPN alone. Always look at `S * O`.
-- Look for easy ways to fix the design, process, or system to reduce the severity of the failure mode, and that will have a huge impact on the RPN.
-- Find causes that can be easily mitigated, with pre-exisitng easy to follow methods.
-- Understand the Failure Modes effect on the Business Model and the User Experience, and prioritize actions based on that.
+- Do not use the RPN alone to decide what to fix first. Always factor in `S × O` (Severity × Occurrence) — this pairing gives a clearer picture of the actual risk than the full RPN number.
+- Look for straightforward design or process changes that can bring down the severity score — even a small reduction in severity can make a significant difference to the overall RPN.
+- Identify causes that can be addressed using well-established, easy-to-implement methods — these are often the quickest wins.
+- Consider how each failure mode affects the end user and the broader business before deciding what to tackle first — not everything high on the RPN scale will have the same real-world impact.
 
 ## Action Purpose
 
-- The purpose of the action plan is to mitigate the identified failure modes by implementing corrective actions to reduce the risk of failure. This should result in a lower RPN for the Failure Mode Cause of the one we are dealing with.
+- The goal of the action plan is to address the identified failure modes through targeted fixes that bring down the overall risk. A successful action should result in a lower RPN for the failure mode cause being addressed.
 
-- They must be properly audited and maintained with follow up from the team to ensure that the corrective actions are effective and that the risks have been mitigated.
+- Every action taken must be tracked, reviewed, and followed up on by the team to confirm it actually worked — and that the risk has genuinely been reduced, not just documented.
 
-- FMEA is used to analyze, identify and mark issues not correct them. The Actions are outside the scope of the FMEA, and need to be done separately. These actions performed must be validated and verified with legit evidence to ensure that they are effective in mitigating the identified failure modes and reducing the associated risks.
+- FMEA's job is to surface and prioritize problems, not to fix them. The actual corrective actions happen outside the FMEA itself, and any changes made must be backed by solid evidence that they are effective.
 
-- Changes to action plan in the future should be done with proper change providing a logical rationale for the change, and should be properly documented and communicated to all relevant stakeholders to ensure that everyone is aware of the changes and their implications. This helps maintain the integrity of the FMEA process and ensures that the action plan remains effective in mitigating risks and improving safety, reliability, and customer satisfaction.
+- Any future updates to the action plan should come with a clear reason for the change. These updates must be documented and shared with everyone involved, so the team stays aligned and the integrity of the FMEA is preserved.
 
-- Actions must be prioritized based on feasible timeline because not everything can be atmost priority, and we need to be realistic about the resources and time available to implement corrective actions.
+- Not everything can be treated as the highest priority. Actions should be scheduled based on what is realistically achievable given the time and resources available.
