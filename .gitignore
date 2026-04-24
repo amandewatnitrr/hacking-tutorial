@@ -160,5 +160,6 @@ logs/
 *.temp
 ./idea
 .idea/.gitignore
-
+.idea
+.vscode
 .idea/.gitignore
