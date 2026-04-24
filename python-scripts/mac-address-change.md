@@ -88,3 +88,4 @@ sequenceDiagram
     Script->>OS: subprocess.call(["ifconfig", "eth0"])
     OS-->>Script: Display current interface config
     Script->>User: Print Verification Output
+```
