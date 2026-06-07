@@ -21,3 +21,29 @@
 > <br>
 > When a device wants to communicate with another device on the same LAN, it sends an ARP request to the network, asking for the MAC address associated with the target IP address. The device that owns the target IP address responds with an ARP reply, providing its MAC address. This process allows the sender to establish a connection and transmit data to the correct destination on the network.
 
+```python
+import scapy.all as scapy
+
+def scan(ip):
+    arp_request = scapy.arping(ip)
+
+
+
+if __name__ == "__main__":
+    ip = input("Enter the IP to scan: ")
+    # For scanning a range of IP addresses, you can use: XX.XX.XX.XX/24
+    scan(ip)
+```
+
+The output of the above code will be:
+
+```shell
+Enter the IP to scan:
+XX.XX.XX.XX/24
+Begin emission:
+Finished to send 1 packets.
+*
+Received X packets, got X answers, remaining X packets
+  XX:XX:XX:XX:XX:XX XX.XX.XX.XX
+```
+
