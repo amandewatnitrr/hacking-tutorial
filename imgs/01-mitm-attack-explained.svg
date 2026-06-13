@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">MITM Attack Explained</title>
+  <desc id="desc">A friendly Xiaohei illustration explaining a man-in-the-middle attack: Alice and Bob think they have a direct conversation, but an attacker quietly relays and changes the messages between them.</desc>
+  <defs>
+    <style>
+      .ink { fill: none; stroke: #111; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #111; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+      .hair { fill: none; stroke: #111; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .blue { fill: none; stroke: #2f7dd1; stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+      .orange { fill: none; stroke: #f28c28; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+      .orangeLight { fill: none; stroke: #f28c28; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .red { fill: none; stroke: #d9362b; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin: round; }
+      .title { font: 800 56px "Comic Sans MS", "Marker Felt", "Trebuchet MS", sans-serif; fill: #111; letter-spacing: 0; }
+      .label { font: 700 29px "Comic Sans MS", "Marker Felt", "Trebuchet MS", sans-serif; fill: #111; letter-spacing: 0; }
+      .small { font-size: 24px; }
+      .tiny { font-size: 20px; }
+      .blueText { fill: #2f7dd1; }
+      .orangeText { fill: #f28c28; }
+      .redText { fill: #d9362b; }
+    </style>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2f7dd1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#f28c28"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#d9362b"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#fff"/>
+
+  <text class="title" x="530" y="92">MITM Attack Explained</text>
+  <path class="thin" d="M536 111 C690 132 897 132 1066 112"/>
+  <text class="label small" x="386" y="150">Alice and Bob think they are talking directly.</text>
+  <text class="label small redText" x="1038" y="150">They are not.</text>
+
+  <!-- Thought bubble: what people believe -->
+  <path class="blue" d="M349 258 C505 185 1081 184 1248 258" marker-end="url(#arrowBlue)"/>
+  <text class="label small blueText" x="656" y="203">what they think</text>
+  <path class="hair" d="M620 214 C696 232 892 232 980 213"/>
+
+  <!-- Alice -->
+  <g transform="translate(162 375)">
+    <path class="ink" d="M38 205 C82 224 194 224 238 205"/>
+    <path class="ink" d="M68 200 L207 200 L183 110 L93 110 Z"/>
+    <path class="thin" d="M88 118 C120 134 153 135 181 120"/>
+    <path class="ink" d="M112 105 C100 72 117 43 147 43 C177 43 193 73 180 106"/>
+    <circle cx="136" cy="73" r="4" fill="#111"/>
+    <circle cx="160" cy="73" r="4" fill="#111"/>
+    <path class="thin" d="M95 124 C70 152 53 176 39 202"/>
+    <path class="thin" d="M185 124 C211 154 229 178 246 205"/>
+    <path class="thin" d="M110 201 C95 242 78 278 62 314"/>
+    <path class="thin" d="M167 201 C186 243 205 279 222 314"/>
+    <text class="label" x="86" y="363">Alice</text>
+  </g>
+
+  <!-- Bob -->
+  <g transform="translate(1212 375)">
+    <path class="ink" d="M38 205 C82 224 194 224 238 205"/>
+    <path class="ink" d="M68 200 L207 200 L183 110 L93 110 Z"/>
+    <path class="thin" d="M88 118 C120 134 153 135 181 120"/>
+    <path class="ink" d="M112 105 C100 72 117 43 147 43 C177 43 193 73 180 106"/>
+    <circle cx="136" cy="73" r="4" fill="#111"/>
+    <circle cx="160" cy="73" r="4" fill="#111"/>
+    <path class="thin" d="M95 124 C70 152 53 176 39 202"/>
+    <path class="thin" d="M185 124 C211 154 229 178 246 205"/>
+    <path class="thin" d="M110 201 C95 242 78 278 62 314"/>
+    <path class="thin" d="M167 201 C186 243 205 279 222 314"/>
+    <text class="label" x="102" y="363">Bob</text>
+  </g>
+
+  <!-- Hidden real route -->
+  <path class="orange" d="M357 545 C470 474 579 476 683 521" marker-end="url(#arrowOrange)"/>
+  <path class="orange" d="M917 521 C1021 475 1135 474 1243 545" marker-end="url(#arrowOrange)"/>
+  <text class="label small orangeText" x="429" y="462">message</text>
+  <text class="label small orangeText" x="1076" y="462">copy</text>
+
+  <!-- Center booth and Xiaohei attacker -->
+  <g>
+    <path class="ink" d="M648 285 C724 231 876 232 950 286 C1006 327 1011 578 948 657 C880 742 718 739 653 655 C592 577 593 327 648 285 Z"/>
+    <path class="thin" d="M658 349 C726 374 872 374 941 349"/>
+    <path class="thin" d="M621 612 C703 582 893 582 980 612"/>
+    <path class="thin" d="M700 675 C748 721 861 721 908 676"/>
+
+    <path d="M731 379 C699 422 701 544 736 589 C775 640 863 637 899 586 C931 541 924 422 892 379 C855 330 767 330 731 379 Z" fill="#111"/>
+    <circle cx="783" cy="458" r="9" fill="#fff"/>
+    <circle cx="842" cy="458" r="9" fill="#fff"/>
+    <path class="thin" d="M743 581 C723 648 705 692 688 738"/>
+    <path class="thin" d="M891 580 C911 646 930 692 948 738"/>
+    <path class="thin" d="M669 739 C695 754 718 752 741 740"/>
+    <path class="thin" d="M929 739 C953 754 977 752 1002 739"/>
+    <path class="thin" d="M727 478 C674 470 635 488 604 526"/>
+    <path class="thin" d="M906 478 C961 470 1000 488 1031 526"/>
+
+    <path class="ink" d="M681 526 L945 526 L945 623 L681 623 Z"/>
+    <path class="thin" d="M683 528 L813 591 L944 528"/>
+    <path class="red" d="M744 572 C780 545 849 546 887 574" marker-end="url(#arrowRed)"/>
+    <path class="red" d="M768 610 L863 546"/>
+    <path class="red" d="M864 610 L768 546"/>
+  </g>
+
+  <!-- Center labels -->
+  <text class="label redText" x="672" y="285">attacker in the middle</text>
+  <path class="red" d="M801 296 C803 313 804 328 805 342" marker-end="url(#arrowRed)"/>
+  <text class="label small redText" x="686" y="674">reads and changes it</text>
+
+  <!-- Small identity masks -->
+  <path class="thin" d="M535 333 C499 313 460 317 426 340 C465 359 503 354 535 333 Z"/>
+  <circle cx="470" cy="338" r="4" fill="#111"/>
+  <circle cx="503" cy="336" r="4" fill="#111"/>
+  <text class="label tiny redText" x="424" y="300">pretends to be Bob</text>
+  <path class="red" d="M494 305 C491 318 486 327 478 337" marker-end="url(#arrowRed)"/>
+
+  <path class="thin" d="M1068 333 C1104 313 1143 317 1177 340 C1138 359 1100 354 1068 333 Z"/>
+  <circle cx="1100" cy="336" r="4" fill="#111"/>
+  <circle cx="1133" cy="338" r="4" fill="#111"/>
+  <text class="label tiny redText" x="1066" y="300">pretends to be Alice</text>
+  <path class="red" d="M1110 305 C1114 318 1120 328 1129 337" marker-end="url(#arrowRed)"/>
+
+  <!-- Minimal packet crumbs -->
+  <path class="hair" d="M505 597 L560 569 L611 598 L556 626 Z"/>
+  <path class="hair" d="M992 598 L1048 569 L1100 599 L1044 627 Z"/>
+  <path class="hair" d="M471 641 C510 658 566 659 614 639"/>
+  <path class="hair" d="M991 640 C1041 662 1097 658 1137 638"/>
+
+  <!-- Bottom takeaway -->
+  <text class="label" x="533" y="806">The direct chat is secretly split into two chats.</text>
+  <path class="thin" d="M526 825 C670 850 930 852 1078 826"/>
+  <path class="orangeLight" d="M513 742 C617 706 720 711 785 745"/>
+  <path class="orangeLight" d="M817 745 C887 710 990 706 1094 742"/>
+  <text class="label tiny orangeText" x="589" y="707">Alice to attacker</text>
+  <text class="label tiny orangeText" x="884" y="707">attacker to Bob</text>
+</svg>
