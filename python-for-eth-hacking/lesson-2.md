@@ -3,6 +3,8 @@
 ---
 - [Writing a Network Scanner in Python](#writing-a-network-scanner-in-python)
   - [Introduction to ARP (Address Resolution Protocol)](#introduction-to-arp-address-resolution-protocol)
+  - [Algorithm to discover clients on the same network](#algorithm-to-discover-clients-on-the-same-network)
+    - [Step 1: Create ARP Request directed to broadcast MAC asking for IP](#step-1-create-arp-request-directed-to-broadcast-mac-asking-for-ip)
 
 ---
 
@@ -47,3 +49,22 @@ Received X packets, got X answers, remaining X packets
   XX:XX:XX:XX:XX:XX XX.XX.XX.XX
 ```
 
+- So, far the script we have made so far is really cool, it can list all the clients on the same network as ours with their IP and MAC addresses, using `scapy` function from `arping`.
+
+## Algorithm to discover clients on the same network
+
+- So, for designing a network scanner, we need to have some steps in mind. Let's go through the steps we need to take to design a network scanner:
+
+  - Create ARP Request directed to broadcast MAC asking for IP.
+  - Send Packet and receive response.
+  - Parse the response and extract IP and MAC addresses.
+  - Display the results in a user-friendly format.
+
+### Step 1: Create ARP Request directed to broadcast MAC asking for IP
+
+- This has 2 main parts:
+
+  - Use ARP to ask who has target IP.
+  - Set destination MAC to broadcast MAC.
+
+- 
