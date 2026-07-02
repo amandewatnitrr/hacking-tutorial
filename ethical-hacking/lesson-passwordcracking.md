@@ -34,61 +34,61 @@ Starts with simple passwords and gradually increases complexity based on defined
 
 ## 🛠️ Getting Started in Kali Linux
 
-### Step 1: In Kali Linux, the John the Ripper tool is pre-installed, but if you are facing any issues, then you can install it again using the following command
+- Step 1: In Kali Linux, the John the Ripper tool is pre-installed, but if you are facing any issues, then you can install it again using the following command
 
-```bash
-sudo apt install john
-```
+    ```bash
+    sudo apt install john
+    ```
 
-![Step1](https://media.geeksforgeeks.org/wp-content/uploads/20240608112608/0InstallUpdateJohn.jpg)
+    ![Step1](https://media.geeksforgeeks.org/wp-content/uploads/20240608112608/0InstallUpdateJohn.jpg)
 
-### Step 2: Now using following command we can check the john the ripper version and other related information
+- Step 2: Now using following command we can check the john the ripper version and other related information
 
-```bash
-john
-```
+    ```bash
+    john
+    ```
 
-![Step2](https://media.geeksforgeeks.org/wp-content/uploads/20240608113054/1John.jpg)
+    ![Step2](https://media.geeksforgeeks.org/wp-content/uploads/20240608113054/1John.jpg)
 
-### Step 3: For our testing and demo purpose we have hash file which consists hash password in diffirent diffirent format and also we have custom wordlist for dictionary attack using john the ripper. For listing everything and seeing we can use following command
+- Step 3: For our testing and demo purpose we have hash file which consists hash password in diffirent diffirent format and also we have custom wordlist for dictionary attack using john the ripper. For listing everything and seeing we can use following command
 
-```bash
-ls
-```
+    ```bash
+    ls
+    ```
 
-![Step3](https://media.geeksforgeeks.org/wp-content/uploads/20240608113227/11Ls.jpg)
+    ![Step3](https://media.geeksforgeeks.org/wp-content/uploads/20240608113227/11Ls.jpg)
 
-### Step 4: Now for findig password using dictionary attack we can use following command where rockyou.txt file is wordlist which exists by default in kali linux and alpha.txt is our hash stored file which contains our real password in MD5 hash format. Using following command we can see we cracked the password which is abcd
+- Step 4: Now for findig password using dictionary attack we can use following command where rockyou.txt file is wordlist which exists by default in kali linux and alpha.txt is our hash stored file which contains our real password in MD5 hash format. Using following command we can see we cracked the password which is abcd
 
-```bash
-john --wordlist=/usr/share/wordlists/rockyou.txt  alpha.txt  --format=raw-md5
-```
+    ```bash
+    john --wordlist=/usr/share/wordlists/rockyou.txt  alpha.txt  --format=raw-md5
+    ```
 
-![Step4](https://media.geeksforgeeks.org/wp-content/uploads/20240608113554/2John.jpg)
+    ![Step4](https://media.geeksforgeeks.org/wp-content/uploads/20240608113554/2John.jpg)
 
-### Step 5: In another file num.txt we have MD5 hash format . We can also use incremental mode for cracking this password file where our john the ripper tool increment its value one by one and tries to match password one by one and when it matches it give us result that password has been found out
+- Step 5: In another file num.txt we have MD5 hash format . We can also use incremental mode for cracking this password file where our john the ripper tool increment its value one by one and tries to match password one by one and when it matches it give us result that password has been found out
 
-```bash
-john --format=raw-md5 num.txt --incremental
-```
+    ```bash
+    john --format=raw-md5 num.txt --incremental
+    ```
 
-![Step5](https://media.geeksforgeeks.org/wp-content/uploads/20240608114130/3Incremental.jpg)
+    ![Step5](https://media.geeksforgeeks.org/wp-content/uploads/20240608114130/3Incremental.jpg)
 
-### Step 6: Now in this step we will use our custom dictionary file instead of pre saved file in kali linux. This method can be very useful when we have list of passwords in which one is correct
+- Step 6: Now in this step we will use our custom dictionary file instead of pre saved file in kali linux. This method can be very useful when we have list of passwords in which one is correct
 
-```bash
-john --wordlist=customwc.txt hash1.txt --format=raw-md5
-```
+    ```bash
+    john --wordlist=customwc.txt hash1.txt --format=raw-md5
+    ```
 
-![Step6](https://media.geeksforgeeks.org/wp-content/uploads/20240608114430/4Cusotom.jpg)
+    ![Step6](https://media.geeksforgeeks.org/wp-content/uploads/20240608114430/4Cusotom.jpg)
 
-### Step 7: In john the ripper we can use multiple type of hash format for cracking the passwords. Following is example for cracking the password of SHA1 type hash using john the ripper in kali linux
+- Step 7: In john the ripper we can use multiple type of hash format for cracking the passwords. Following is example for cracking the password of SHA1 type hash using john the ripper in kali linux
 
-```bash
-john --wordlist=customwc.txt hashsha.txt --format=raw-sha1
-```
+    ```bash
+    john --wordlist=customwc.txt hashsha.txt --format=raw-sha1
+    ```
 
-![Step7](https://media.geeksforgeeks.org/wp-content/uploads/20240608115020/5CustomSha.jpg)
+    ![Step7](https://media.geeksforgeeks.org/wp-content/uploads/20240608115020/5CustomSha.jpg)
 
 ---
 
