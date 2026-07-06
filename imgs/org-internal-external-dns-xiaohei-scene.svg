@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">Organization DNS resolution from a Linux terminal</title>
+  <desc id="desc">A clean technical Xiaohei-style diagram showing Linux name resolution files and how an organization DNS resolver handles internal and external names differently.</desc>
+  <defs>
+    <style>
+      .ink{fill:none;stroke:#111;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+      .thin{fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+      .orange{fill:none;stroke:#e77722;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+      .blue{fill:none;stroke:#2c70b8;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+      .red{fill:none;stroke:#d93a2f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .label{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:30px;fill:#111}
+      .small{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:22px;fill:#111}
+      .tiny{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:18px;fill:#111}
+      .note-orange{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:21px;fill:#e77722}
+      .note-blue{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:21px;fill:#2c70b8}
+      .note-red{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:21px;fill:#d93a2f}
+      .mono{font-family:"SFMono-Regular","Menlo","Consolas",monospace;font-size:19px;fill:#111}
+    </style>
+    <marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#e77722" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#2c70b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#d93a2f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#fff"/>
+
+  <!-- Linux terminal -->
+  <text x="80" y="96" class="label">Linux terminal</text>
+  <path class="ink" d="M78 124 L358 124 L358 342 L78 342 Z"/>
+  <path class="thin" d="M78 166 L358 166"/>
+  <circle cx="107" cy="145" r="5" fill="#111"/>
+  <circle cx="132" cy="145" r="5" fill="#111"/>
+  <circle cx="157" cy="145" r="5" fill="#111"/>
+  <text x="103" y="216" class="mono">$ getent hosts api.corp.local</text>
+  <text x="103" y="257" class="mono">$ getent hosts example.com</text>
+  <text x="92" y="382" class="small">program asks the OS resolver</text>
+
+  <!-- OS resolver pipeline -->
+  <text x="470" y="96" class="label">Linux lookup order</text>
+
+  <path class="ink" d="M468 128 L724 128 L724 226 L468 226 Z"/>
+  <text x="492" y="174" class="small">/etc/nsswitch.conf</text>
+  <text x="492" y="207" class="mono">hosts: files dns</text>
+
+  <path class="ink" d="M468 298 L724 298 L724 396 L468 396 Z"/>
+  <text x="518" y="345" class="small">/etc/hosts</text>
+  <text x="500" y="378" class="tiny">local static names</text>
+
+  <path class="ink" d="M468 468 L724 468 L724 566 L468 566 Z"/>
+  <text x="500" y="514" class="small">/etc/resolv.conf</text>
+  <text x="492" y="548" class="mono">nameserver 10.0.0.53</text>
+
+  <!-- Xiaohei and org DNS -->
+  <path class="ink" d="M820 256 L1096 256 L1096 610 L820 610 Z"/>
+  <path class="thin" d="M820 316 L1096 316"/>
+  <text x="852" y="300" class="label">Org DNS resolver</text>
+
+  <path d="M902 442 C884 406 900 366 938 354 C978 342 1019 365 1026 407 C1033 447 1008 484 968 490 C937 494 915 476 902 442 Z" fill="#111"/>
+  <circle cx="936" cy="408" r="6" fill="#fff"/>
+  <circle cx="977" cy="407" r="6" fill="#fff"/>
+  <path class="ink" d="M906 455 C882 469 856 473 832 467"/>
+  <path class="ink" d="M1022 430 C1048 421 1067 405 1081 382"/>
+  <path class="ink" d="M935 490 L914 546"/>
+  <path class="ink" d="M981 489 L1005 546"/>
+  <text x="871" y="582" class="small">Xiaohei applies split DNS</text>
+
+  <path class="thin" d="M848 344 C848 320 1030 320 1030 344 L1030 395 C1030 420 848 420 848 395 Z"/>
+  <path class="thin" d="M848 344 C848 368 1030 368 1030 344"/>
+  <text x="881" y="385" class="small">cache + zones</text>
+
+  <!-- Decision -->
+  <path class="ink" d="M1170 390 L1242 318 L1314 390 L1242 462 Z"/>
+  <text x="1205" y="384" class="small">name</text>
+  <text x="1197" y="414" class="small">type?</text>
+
+  <!-- Internal destination -->
+  <text x="1306" y="154" class="label">Internal zone</text>
+  <path class="ink" d="M1320 184 C1320 158 1488 158 1488 184 L1488 254 C1488 281 1320 281 1320 254 Z"/>
+  <path class="thin" d="M1320 184 C1320 210 1488 210 1488 184"/>
+  <text x="1360" y="232" class="small">corp.local</text>
+  <path class="ink" d="M1330 310 L1480 310 L1480 416 L1330 416 Z"/>
+  <path class="thin" d="M1352 342 L1458 342"/>
+  <path class="thin" d="M1352 374 L1458 374"/>
+  <circle cx="1363" cy="330" r="5" fill="#111"/>
+  <circle cx="1363" cy="362" r="5" fill="#111"/>
+  <text x="1334" y="456" class="small">api.corp.local</text>
+  <text x="1338" y="486" class="note-blue">10.20.5.17</text>
+
+  <!-- External destination -->
+  <text x="1300" y="574" class="label">External DNS</text>
+  <path class="ink" d="M1302 610 C1346 578 1435 582 1478 614 C1512 640 1500 686 1458 707 C1405 732 1330 724 1299 690 C1276 665 1278 629 1302 610 Z"/>
+  <text x="1341" y="666" class="small">Public DNS</text>
+  <text x="1316" y="738" class="tiny">root / TLD / authoritative</text>
+  <path class="ink" d="M1328 774 L1484 774 L1484 838 L1328 838 Z"/>
+  <path class="thin" d="M1352 798 L1462 798"/>
+  <path class="thin" d="M1352 820 L1435 820"/>
+  <text x="1346" y="870" class="small">example.com</text>
+
+  <!-- Forward path with non-overlapping routed arrows -->
+  <path class="orange" marker-end="url(#arrow-orange)" d="M358 210 L450 178"/>
+  <text x="382" y="146" class="note-orange">1. read NSS</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M596 226 L596 288"/>
+  <text x="614" y="266" class="note-orange">2. files</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M596 396 L596 458"/>
+  <text x="614" y="436" class="note-orange">3. dns</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M724 518 L808 518"/>
+  <text x="746" y="496" class="note-orange">4. query org DNS</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M1096 390 L1158 390"/>
+  <text x="1114" y="368" class="note-orange">5. classify</text>
+
+  <path class="blue" marker-end="url(#arrow-blue)" d="M1242 318 L1242 224 L1310 224"/>
+  <text x="1132" y="226" class="note-blue">internal name</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M1242 462 L1242 646 L1290 646"/>
+  <text x="1134" y="626" class="note-orange">external name</text>
+
+  <!-- Return paths, separated from forward paths -->
+  <path class="blue" marker-end="url(#arrow-blue)" d="M1330 386 L1188 386 L1188 522 L1108 522"/>
+
+  <path class="red" marker-end="url(#arrow-red)" d="M1302 690 L1160 690 L1160 566 L1108 566"/>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M820 584 L380 584 L380 342"/>
+  <text x="406" y="618" class="note-orange">6. OS gives IP back to the command</text>
+
+  <!-- Final connection lane -->
+  <path class="blue" marker-end="url(#arrow-blue)" d="M235 390 L235 812 L1318 812"/>
+  <text x="396" y="848" class="note-blue">7. terminal command connects to the returned IP</text>
+
+</svg>

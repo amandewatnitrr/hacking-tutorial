@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">DNS functioning as a structured Xiaohei scene</title>
+  <desc id="desc">A clean hand-drawn Xiaohei scene explaining DNS resolution from browser query to resolver cache, root DNS, TLD DNS, authoritative DNS, IP return, and final web server connection.</desc>
+  <defs>
+    <style>
+      .ink{fill:none;stroke:#111;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .thin{fill:none;stroke:#111;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+      .orange{fill:none;stroke:#e77722;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+      .blue{fill:none;stroke:#2c70b8;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .red{fill:none;stroke:#d93a2f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .label{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:30px;fill:#111}
+      .small{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:23px;fill:#111}
+      .tiny{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:19px;fill:#111}
+      .note-orange{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:22px;fill:#e77722}
+      .note-blue{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:22px;fill:#2c70b8}
+      .note-red{font-family:"Comic Sans MS","Bradley Hand","Trebuchet MS",sans-serif;font-size:22px;fill:#d93a2f}
+    </style>
+    <marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#e77722" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#2c70b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#d93a2f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#fff"/>
+
+  <!-- Browser client -->
+  <path class="ink" d="M112 324 L302 324 L302 442 L112 442 Z"/>
+  <path class="thin" d="M112 356 L302 356"/>
+  <circle cx="136" cy="340" r="5" fill="#111"/>
+  <circle cx="157" cy="340" r="5" fill="#111"/>
+  <path class="thin" d="M165 395 L249 395"/>
+  <path class="thin" d="M188 442 L170 484 L246 484 L228 442"/>
+  <text x="144" y="294" class="label">Browser</text>
+  <text x="118" y="526" class="small">example.com</text>
+  <text x="132" y="556" class="tiny">human-readable name</text>
+
+  <!-- Query packet -->
+  <path class="thin" d="M360 355 L486 315 L527 369 L400 410 Z"/>
+  <path class="thin" d="M385 365 L493 331"/>
+  <text x="399" y="376" class="tiny">DNS query</text>
+  <text x="404" y="400" class="tiny">A record?</text>
+
+  <!-- Local resolver box -->
+  <path class="ink" d="M612 274 C578 286 560 315 562 358 L562 494 C562 535 596 560 652 564 L805 564 C858 558 888 529 889 486 L889 348 C886 304 850 279 789 274 Z"/>
+  <path class="thin" d="M583 330 L862 330"/>
+  <text x="604" y="316" class="label">Local DNS resolver</text>
+  <text x="628" y="606" class="small">recursive lookup</text>
+
+  <!-- Xiaohei as operator -->
+  <path d="M690 432 C674 398 689 358 724 347 C760 335 799 356 805 395 C811 433 788 468 752 473 C724 477 703 461 690 432 Z" fill="#111"/>
+  <circle cx="724" cy="398" r="6" fill="#fff"/>
+  <circle cx="762" cy="397" r="6" fill="#fff"/>
+  <path class="ink" d="M696 446 C668 459 640 462 612 455"/>
+  <path class="ink" d="M800 431 C825 421 844 407 858 389"/>
+  <path class="ink" d="M721 472 L701 522"/>
+  <path class="ink" d="M766 472 L788 523"/>
+  <path class="thin" d="M640 386 L674 386"/>
+  <path class="thin" d="M640 411 L670 411"/>
+  <path class="thin" d="M821 365 L852 365"/>
+  <text x="668" y="537" class="tiny">Xiaohei resolves</text>
+
+  <!-- Cache database cylinder -->
+  <path class="ink" d="M637 665 C637 637 807 637 807 665 L807 756 C807 786 637 786 637 756 Z"/>
+  <path class="thin" d="M637 665 C637 693 807 693 807 665"/>
+  <path class="thin" d="M637 710 C637 738 807 738 807 710"/>
+  <text x="683" y="729" class="label">Cache</text>
+  <text x="648" y="812" class="note-blue">TTL controls reuse</text>
+
+  <!-- DNS hierarchy -->
+  <path class="ink" d="M984 168 C1024 139 1104 141 1146 171 C1181 196 1173 239 1134 260 C1087 286 1015 280 982 250 C956 227 958 188 984 168 Z"/>
+  <text x="1018" y="221" class="label">Root DNS</text>
+  <text x="1016" y="278" class="small">where is .com?</text>
+
+  <path class="ink" d="M1232 335 C1270 304 1355 307 1395 340 C1427 367 1416 408 1378 428 C1331 453 1255 444 1228 412 C1207 387 1209 354 1232 335 Z"/>
+  <text x="1268" y="388" class="label">TLD DNS</text>
+  <text x="1252" y="446" class="small">where is example?</text>
+
+  <path class="ink" d="M984 573 C1028 543 1129 547 1172 580 C1205 606 1194 650 1151 670 C1100 695 1017 687 983 653 C958 628 959 594 984 573 Z"/>
+  <path class="thin" d="M1023 609 L1135 609"/>
+  <path class="thin" d="M1023 635 L1100 635"/>
+  <text x="1004" y="555" class="small">zone file</text>
+  <text x="1012" y="621" class="label">Authoritative</text>
+  <text x="1049" y="655" class="small">DNS</text>
+
+  <!-- Web server -->
+  <path class="ink" d="M1308 635 L1488 635 L1488 775 L1308 775 Z"/>
+  <path class="thin" d="M1330 666 L1462 666"/>
+  <path class="thin" d="M1330 704 L1462 704"/>
+  <path class="thin" d="M1330 742 L1462 742"/>
+  <circle cx="1342" cy="654" r="5" fill="#111"/>
+  <circle cx="1342" cy="692" r="5" fill="#111"/>
+  <circle cx="1342" cy="730" r="5" fill="#111"/>
+  <text x="1324" y="608" class="label">Web server</text>
+  <text x="1300" y="818" class="small">HTTP starts after DNS</text>
+
+  <!-- Main query path -->
+  <path class="orange" marker-end="url(#arrow-orange)" d="M302 383 C370 368 451 358 555 360"/>
+  <text x="339" y="336" class="note-orange">1. ask for IP</text>
+
+  <path class="blue" marker-end="url(#arrow-blue)" d="M704 563 C688 596 683 622 690 647"/>
+  <text x="535" y="645" class="note-blue">2. cache first</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M846 332 C895 262 936 218 975 206"/>
+  <text x="838" y="252" class="note-orange">3. root</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M1146 220 C1195 246 1243 286 1276 324"/>
+  <text x="1178" y="278" class="note-orange">4. .com</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M1314 436 C1267 506 1210 559 1167 588"/>
+  <text x="1232" y="530" class="note-orange">5. owner</text>
+
+  <path class="red" marker-end="url(#arrow-red)" d="M987 633 C926 635 870 617 816 566"/>
+  <text x="840" y="675" class="note-red">6. IP = 93.184.216.34</text>
+
+  <path class="orange" marker-end="url(#arrow-orange)" d="M623 532 C513 546 401 524 303 448"/>
+  <text x="366" y="576" class="note-orange">7. return IP to browser</text>
+
+  <path class="blue" marker-end="url(#arrow-blue)" d="M257 492 C542 808 1027 827 1303 718"/>
+  <text x="462" y="852" class="note-blue">8. browser connects directly to the server</text>
+
+  <!-- Minimal CS symbols -->
+  <path class="thin" d="M103 618 L289 618 L289 704 L103 704 Z"/>
+  <path class="thin" d="M130 648 L183 648"/>
+  <path class="thin" d="M130 674 L254 674"/>
+  <text x="116" y="742" class="tiny">IP packet after lookup</text>
+
+  <path class="thin" d="M908 414 L965 372 L1022 414 L965 456 Z"/>
+  <text x="934" y="420" class="tiny">NS</text>
+  <path class="thin" d="M1065 350 L1115 350 L1115 396 L1065 396 Z"/>
+  <path class="thin" d="M1077 365 L1102 365"/>
+  <path class="thin" d="M1077 381 L1096 381"/>
+  <text x="1056" y="424" class="tiny">referral</text>
+</svg>
