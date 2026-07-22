@@ -1,0 +1,92 @@
+<svg width="100%" viewBox="0 0 680 448" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Hand-drawn doodle of the SNI handshake flow</title>
+<desc>A sketchy doodle flowchart showing a browser sending a ClientHello with the SNI hostname to an edge server, which extracts the hostname, checks it against three certificates hosted on the same IP — crossing out the two that don't match and checking off example.com — then completing the encrypted handshake.</desc>
+
+<g fill="none" stroke="rgb(11,11,11)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Box 1: Client (browser) -->
+<path d="M218,38 Q301,34 366,39 Q449,35 473,46 Q476,53 469,64 Q475,77 467,87 Q371,90 293,83 Q236,89 207,76 Q204,69 211,59 Q206,47 218,38 Z"/>
+<path d="M218,38 Q301,34 366,39 Q449,35 473,46 Q476,53 469,64 Q475,77 467,87 Q371,90 293,83 Q236,89 207,76 Q204,69 211,59 Q206,47 218,38 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 2: ClientHello sent / SNI: example.com -->
+<path d="M218,102 Q301,98 366,103 Q449,99 473,110 Q476,121 469,135 Q475,152 467,163 Q371,166 293,159 Q236,165 207,152 Q204,140 211,128 Q206,112 218,102 Z"/>
+<path d="M218,102 Q301,98 366,103 Q449,99 473,110 Q476,121 469,135 Q475,152 467,163 Q371,166 293,159 Q236,165 207,152 Q204,140 211,128 Q206,112 218,102 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 3: Edge server / Extracts hostname from SNI -->
+<path d="M198,178 Q295,173 375,179 Q473,174 493,186 Q496,197 489,211 Q495,228 487,239 Q376,242 262,235 Q219,241 187,228 Q184,216 191,204 Q186,188 198,178 Z"/>
+<path d="M198,178 Q295,173 375,179 Q473,174 493,186 Q496,197 489,211 Q495,228 487,239 Q376,242 262,235 Q219,241 187,228 Q184,216 191,204 Q186,188 198,178 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 4a: siteb.com / Not selected -->
+<path d="M118,254 Q159,250 194,255 Q233,251 253,262 Q256,273 249,287 Q255,304 247,315 Q197,318 138,311 Q124,317 107,304 Q104,292 111,280 Q106,264 118,254 Z"/>
+<path d="M118,254 Q159,250 194,255 Q233,251 253,262 Q256,273 249,287 Q255,304 247,315 Q197,318 138,311 Q124,317 107,304 Q104,292 111,280 Q106,264 118,254 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 4b: example.com / Matched cert -->
+<path d="M278,254 Q319,250 354,255 Q393,251 413,262 Q416,273 409,287 Q415,304 407,315 Q357,318 298,311 Q284,317 267,304 Q264,292 271,280 Q266,264 278,254 Z"/>
+<path d="M278,254 Q319,250 354,255 Q393,251 413,262 Q416,273 409,287 Q415,304 407,315 Q357,318 298,311 Q284,317 267,304 Q264,292 271,280 Q266,264 278,254 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 4c: sitec.com / Not selected -->
+<path d="M438,254 Q479,250 514,255 Q553,251 573,262 Q576,273 569,287 Q575,304 567,315 Q517,318 458,311 Q444,317 427,304 Q424,292 431,280 Q426,264 438,254 Z"/>
+<path d="M438,254 Q479,250 514,255 Q553,251 573,262 Q576,273 569,287 Q575,304 567,315 Q517,318 458,311 Q444,317 427,304 Q424,292 431,280 Q426,264 438,254 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Box 5: Handshake continues / Session encrypted -->
+<path d="M198,352 Q295,347 375,353 Q473,348 493,360 Q496,371 489,385 Q495,402 487,413 Q376,416 262,409 Q219,415 187,402 Q184,390 191,378 Q186,362 198,352 Z"/>
+<path d="M198,352 Q295,347 375,353 Q473,348 493,360 Q496,371 489,385 Q495,402 487,413 Q376,416 262,409 Q219,415 187,402 Q184,390 191,378 Q186,362 198,352 Z" transform="translate(3,2)" opacity="0.35"/>
+
+<!-- Arrow: Box1 -> Box2 -->
+<path d="M340,87 Q344,95 340,101"/>
+<path d="M334,97 L346,97 L340,105 Z" fill="rgb(11,11,11)"/>
+
+<!-- Arrow: Box2 -> Box3 -->
+<path d="M340,163 Q336,171 340,177"/>
+<path d="M334,173 L346,173 L340,181 Z" fill="rgb(11,11,11)"/>
+
+<!-- Arrow: Box3 -> Box4a -->
+<path d="M328,241 Q250,247 184,251"/>
+<path d="M178,243 L190,243 L184,251 Z" fill="rgb(11,11,11)"/>
+
+<!-- Arrow: Box3 -> Box4b -->
+<path d="M340,240 Q340,247 340,252"/>
+<path d="M334,244 L346,244 L340,252 Z" fill="rgb(11,11,11)"/>
+
+<!-- Arrow: Box3 -> Box4c -->
+<path d="M352,241 Q430,247 494,251"/>
+<path d="M494,246 L506,246 L500,254 Z" fill="rgb(11,11,11)"/>
+
+<!-- Arrow: Box4b -> Box5 -->
+<path d="M340,314 Q343,330 340,346"/>
+<path d="M334,340 L346,340 L340,348 Z" fill="rgb(11,11,11)"/>
+
+</g>
+
+<!-- Checkmark on matched cert (box 4b) -->
+<path d="M375,278 L381,286 L394,264" fill="none" stroke="#0F6E56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- Cross-outs on not-selected certs -->
+<circle cx="232" cy="270" r="11" fill="none" stroke="rgb(82,81,78)" stroke-width="1.5"/>
+<path d="M225,263 L239,277 M239,263 L225,277" stroke="rgb(82,81,78)" stroke-width="1.5" stroke-linecap="round"/>
+
+<circle cx="552" cy="270" r="11" fill="none" stroke="rgb(82,81,78)" stroke-width="1.5"/>
+<path d="M545,263 L559,277 M559,263 L545,277" stroke="rgb(82,81,78)" stroke-width="1.5" stroke-linecap="round"/>
+
+<!-- Labels -->
+<text x="340" y="62" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">Client (browser)</text>
+
+<text x="340" y="126" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">ClientHello sent</text>
+<text x="340" y="144" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">SNI: example.com</text>
+
+<text x="340" y="202" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">Edge server</text>
+<text x="340" y="220" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">Extracts hostname from SNI</text>
+
+<text x="180" y="278" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">siteb.com</text>
+<text x="180" y="296" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">Not selected</text>
+
+<text x="340" y="278" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">example.com</text>
+<text x="340" y="296" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">Matched cert</text>
+
+<text x="500" y="278" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">sitec.com</text>
+<text x="500" y="296" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">Not selected</text>
+
+<text x="340" y="374" text-anchor="middle" dominant-baseline="central" fill="rgb(11,11,11)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="14" font-weight="500">Handshake continues</text>
+<text x="340" y="392" text-anchor="middle" dominant-baseline="central" fill="rgb(82,81,78)" font-family="&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif" font-size="12">Session encrypted for example.com</text>
+
+</svg>
