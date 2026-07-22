@@ -1,5 +1,7 @@
 # Writing a Network Scanner in Python
 
+![](../imgs/network_scanner_process_flow.png)
+
 ---
 - [Writing a Network Scanner in Python](#writing-a-network-scanner-in-python)
   - [Introduction to ARP (Address Resolution Protocol)](#introduction-to-arp-address-resolution-protocol)
@@ -67,4 +69,28 @@ Received X packets, got X answers, remaining X packets
   - Use ARP to ask who has target IP.
   - Set destination MAC to broadcast MAC.
 
-- 
+- For this we will be using `scapy` library again, with which we will create a ARP Request. We will this time create a object.
+- `scapy.ARP().summary()` allows us to print the summary of the current object, that we just created.
+- So, when we set ip=dest inside the ARP object, it will set the destination IP address to the target IP address we want to scan. 
+- When we set op=1, it indicates that this is an ARP request, which means we are asking for the MAC address associated with the target IP address. Finally, when we set pdst=dest, it specifies the destination IP address that we want to send the ARP request to.
+
+```python
+import scapy.all as scapy
+
+def scan(ip):
+    # Create ARP Request/Object
+    arp_request = scapy.ARP(pdst=ip, op=1)
+    print(arp_request.summary())
+
+input_ip = input("Enter the IP to scan: ")
+# Append /24 to the IP address to scan the entire subnet
+input_ip = input_ip + "/24"
+scan(input_ip)
+```
+
+- Putting the full algorithm together end-to-end — broadcast, per-host response (or silence), and how the scanner collects the answers — looks like this:
+
+![](../imgs/network_scanner_process_flow.png)
+
+[Open the interactive version](../imgs/network_scanner_process_flow.html) — has a copy/PNG/PDF export toolbar.
+

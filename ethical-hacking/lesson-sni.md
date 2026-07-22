@@ -20,6 +20,10 @@
 
 ![](../imgs/sni_handshake_flow_doodle.svg)
 
+![](../imgs/sni_handshake_process_flow.png)
+
+[Open the interactive version](../imgs/sni_handshake_process_flow.html) — has a certificate-mismatch failure path and a copy/PNG/PDF export toolbar.
+
 - Let's say we have a 3 web pages abcd.com/home, efg.com/home, and xyz.com/home hosted on the same server with the same IP address.
 
 - When a client wants to connect to one of these websites, it sends a request to the server with the hostname included in the SNI extension. The server then uses this information to determine which SSL/TLS certificate to present for the connection.
