@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNI Handshake - Process Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrains Mono', monospace; background: #020617; min-height: 100vh; padding: 2rem; color: white; }
+    .container { max-width: 1548px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .pulse-dot { width: 12px; height: 12px; background: #a78bfa; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-left: 1.75rem; }
+    .diagram-container { background: rgba(15, 23, 42, 0.5); border-radius: 1rem; border: 1px solid #1e293b; padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1500px; display: block; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .card { background: rgba(15, 23, 42, 0.5); border-radius: 0.75rem; border: 1px solid #1e293b; padding: 1.25rem; }
+    .card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-dot.cyan { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet { background: #a78bfa; }
+    .card-dot.amber { background: #fbbf24; }
+    .card-dot.rose { background: #fb7185; }
+    .card-dot.slate { background: #94a3b8; }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { list-style: none; color: #94a3b8; font-size: 0.75rem; }
+    .card li { margin-bottom: 0.375rem; }
+    .footer { text-align: center; margin-top: 1.5rem; color: #475569; font-size: 0.75rem; }
+    .toolbar { display: flex; gap: 0.5rem; margin-left: auto; flex-shrink: 0; align-items: center; }
+    .toolbar-toggle { background: transparent; border: none; color: #475569; cursor: pointer; font-size: 1.25rem; line-height: 1; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: color 0.2s, background 0.2s; }
+    .toolbar-toggle:hover { color: #94a3b8; background: rgba(30, 41, 59, 0.5); }
+    .toolbar-actions { display: none; gap: 0.5rem; }
+    .toolbar.expanded .toolbar-actions { display: flex; }
+    .toolbar-actions button { background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; color: #94a3b8; padding: 0.375rem 0.75rem; border-radius: 0.375rem; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .toolbar-actions button:hover { background: rgba(51, 65, 85, 0.8); color: white; border-color: #475569; }
+    @media print { body { background: #020617; padding: 1rem; } .toolbar { display: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="container" id="report-container">
+    <div class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>SNI (Server Name Indication) — TLS Handshake Flow</h1>
+        <div class="toolbar">
+          <div class="toolbar-actions">
+            <button onclick="copyAsImage(this)">📋 Copy</button>
+            <button onclick="downloadPNG(this)">🖼️ PNG</button>
+            <button onclick="downloadPDF(this)">📄 PDF</button>
+          </div>
+          <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">⋯</button>
+        </div>
+      </div>
+      <p class="subtitle">How an edge server picks the right certificate from a plaintext SNI hostname during ClientHello</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1500 520">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+          </marker>
+          <marker id="arrowhead-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="arrowhead-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" />
+          </marker>
+          <marker id="arrowhead-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24" />
+          </marker>
+          <marker id="arrowhead-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Prerequisites -->
+        <rect x="30" y="20" width="1440" height="70" rx="8" fill="rgba(30, 41, 59, 0.2)" stroke="#64748b" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="50" y="42" fill="#94a3b8" font-size="10" font-weight="600">PREREQUISITES</text>
+        <text x="50" y="62" fill="#64748b" font-size="9">• TLS 1.2+/1.3 client</text>
+        <text x="320" y="62" fill="#64748b" font-size="9">• Multiple certs hosted on same IP</text>
+        <text x="640" y="62" fill="#64748b" font-size="9">• Edge server / reverse proxy configured</text>
+        <text x="1000" y="62" fill="#64748b" font-size="9">• Valid cert issued for each hostname</text>
+
+        <!-- Start -->
+        <rect x="30" y="150" width="100" height="40" rx="20" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="80" y="175" fill="white" font-size="11" font-weight="600" text-anchor="middle">TLS connect</text>
+        <line x1="130" y1="170" x2="185" y2="180" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- Step 1 -->
+        <circle cx="200" cy="135" r="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="200" y="139" fill="white" font-size="10" font-weight="600" text-anchor="middle">1</text>
+        <text x="280" y="128" fill="#a78bfa" font-size="8" text-anchor="middle">⚡ Client / Browser</text>
+        <rect x="200" y="140" width="160" height="80" rx="8" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="280" y="168" fill="white" font-size="11" font-weight="600" text-anchor="middle">Send ClientHello</text>
+        <text x="280" y="186" fill="#94a3b8" font-size="9" text-anchor="middle">SNI: example.com</text>
+        <text x="280" y="200" fill="#94a3b8" font-size="9" text-anchor="middle">sent in cleartext</text>
+
+        <line x1="360" y1="180" x2="415" y2="180" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead-violet)"/>
+        <text x="387" y="172" fill="#94a3b8" font-size="8" text-anchor="middle">hostname</text>
+
+        <!-- Step 2 -->
+        <circle cx="420" cy="135" r="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="420" y="139" fill="white" font-size="10" font-weight="600" text-anchor="middle">2</text>
+        <text x="500" y="128" fill="#a78bfa" font-size="8" text-anchor="middle">⚡ Edge server</text>
+        <rect x="420" y="140" width="160" height="80" rx="8" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="500" y="168" fill="white" font-size="11" font-weight="600" text-anchor="middle">Extract SNI</text>
+        <text x="500" y="186" fill="#94a3b8" font-size="9" text-anchor="middle">Parses hostname from</text>
+        <text x="500" y="200" fill="#94a3b8" font-size="9" text-anchor="middle">ClientHello extension</text>
+
+        <line x1="580" y1="180" x2="635" y2="180" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead-violet)"/>
+        <text x="607" y="172" fill="#94a3b8" font-size="8" text-anchor="middle">lookup</text>
+
+        <!-- Step 3 -->
+        <circle cx="640" cy="135" r="12" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="640" y="139" fill="white" font-size="10" font-weight="600" text-anchor="middle">3</text>
+        <text x="720" y="128" fill="#fbbf24" font-size="8" text-anchor="middle">🔗 Cert store</text>
+        <rect x="640" y="140" width="160" height="80" rx="8" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="720" y="168" fill="white" font-size="11" font-weight="600" text-anchor="middle">Check certificates</text>
+        <text x="720" y="186" fill="#94a3b8" font-size="9" text-anchor="middle">siteb.com / example.com</text>
+        <text x="720" y="200" fill="#94a3b8" font-size="9" text-anchor="middle">/ sitec.com — same IP</text>
+
+        <line x1="800" y1="180" x2="885" y2="180" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- Decision -->
+        <g transform="translate(940, 180)">
+          <rect x="-45" y="-45" width="90" height="90" rx="4" transform="rotate(45)" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+          <text x="0" y="-5" fill="white" font-size="10" font-weight="600" text-anchor="middle">SNI match</text>
+          <text x="0" y="9" fill="white" font-size="10" font-weight="600" text-anchor="middle">found?</text>
+        </g>
+
+        <!-- Yes -->
+        <line x1="995" y1="180" x2="1055" y2="180" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead-emerald)"/>
+        <text x="1025" y="172" fill="#34d399" font-size="9" font-weight="600" text-anchor="middle">Yes</text>
+
+        <!-- No: certificate mismatch / routing failure path -->
+        <line x1="940" y1="225" x2="940" y2="345" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arrowhead-rose)"/>
+        <text x="955" y="290" fill="#fb7185" font-size="9" font-weight="600">No</text>
+
+        <circle cx="860" cy="342" r="0" fill="none"/>
+        <text x="940" y="342" fill="#fb7185" font-size="8" text-anchor="middle">✗ Edge server</text>
+        <rect x="860" y="350" width="160" height="70" rx="8" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="940" y="375" fill="white" font-size="11" font-weight="600" text-anchor="middle">No SNI match</text>
+        <text x="940" y="392" fill="#fecdd3" font-size="9" text-anchor="middle">No cert configured for</text>
+        <text x="940" y="406" fill="#fecdd3" font-size="9" text-anchor="middle">requested SNI hostname</text>
+
+        <line x1="1020" y1="385" x2="1045" y2="385" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arrowhead-rose)"/>
+
+        <text x="1130" y="342" fill="#fb7185" font-size="8" text-anchor="middle">🔍 Client / Browser</text>
+        <rect x="1050" y="350" width="160" height="70" rx="8" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="1130" y="375" fill="white" font-size="11" font-weight="600" text-anchor="middle">Hostname mismatch</text>
+        <text x="1130" y="392" fill="#fecdd3" font-size="9" text-anchor="middle">SNI hostname ≠</text>
+        <text x="1130" y="406" fill="#fecdd3" font-size="9" text-anchor="middle">certificate CN/SAN</text>
+
+        <line x1="1210" y1="385" x2="1235" y2="385" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arrowhead-rose)"/>
+
+        <rect x="1240" y="365" width="160" height="40" rx="20" fill="rgba(136, 19, 55, 0.2)" stroke="#fb7185" stroke-width="2"/>
+        <text x="1320" y="380" fill="white" font-size="10" font-weight="600" text-anchor="middle">Handshake aborted</text>
+        <text x="1320" y="392" fill="white" font-size="9" text-anchor="middle">SNI / cert mismatch</text>
+
+        <!-- Step 4 -->
+        <circle cx="1070" cy="135" r="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1070" y="139" fill="white" font-size="10" font-weight="600" text-anchor="middle">4</text>
+        <text x="1150" y="128" fill="#a78bfa" font-size="8" text-anchor="middle">⚡ Edge server</text>
+        <rect x="1070" y="140" width="160" height="80" rx="8" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1150" y="168" fill="white" font-size="11" font-weight="600" text-anchor="middle">Present matched cert</text>
+        <text x="1150" y="186" fill="#94a3b8" font-size="9" text-anchor="middle">Serves the example.com</text>
+        <text x="1150" y="200" fill="#94a3b8" font-size="9" text-anchor="middle">certificate</text>
+
+        <line x1="1230" y1="180" x2="1285" y2="180" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead-violet)"/>
+
+        <!-- Step 5 -->
+        <circle cx="1300" cy="135" r="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1300" y="139" fill="white" font-size="10" font-weight="600" text-anchor="middle">5</text>
+        <text x="1380" y="128" fill="#a78bfa" font-size="8" text-anchor="middle">⚡ Client + Server</text>
+        <rect x="1300" y="140" width="160" height="80" rx="8" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1380" y="168" fill="white" font-size="11" font-weight="600" text-anchor="middle">Complete handshake</text>
+        <text x="1380" y="186" fill="#94a3b8" font-size="9" text-anchor="middle">Key exchange &amp;</text>
+        <text x="1380" y="200" fill="#94a3b8" font-size="9" text-anchor="middle">session keys derived</text>
+
+        <line x1="1380" y1="220" x2="1380" y2="275" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- End -->
+        <rect x="1320" y="280" width="120" height="40" rx="20" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="1380" y="300" fill="white" font-size="10" font-weight="600" text-anchor="middle">Session encrypted</text>
+        <text x="1380" y="312" fill="white" font-size="9" text-anchor="middle">for example.com</text>
+
+        <!-- Legend -->
+        <text x="50" y="300" fill="white" font-size="10" font-weight="600">Legend</text>
+
+        <rect x="50" y="315" width="16" height="10" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="72" y="323" fill="#94a3b8" font-size="8">Automated Step</text>
+
+        <rect x="50" y="332" width="16" height="10" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="72" y="340" fill="#94a3b8" font-size="8">Integration / cert store</text>
+
+        <rect x="50" y="349" width="16" height="10" rx="5" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="72" y="357" fill="#94a3b8" font-size="8">Start / End</text>
+
+        <rect x="220" y="315" width="10" height="10" rx="1" transform="rotate(45, 225, 320)" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="242" y="323" fill="#94a3b8" font-size="8">Decision</text>
+
+        <rect x="220" y="332" width="16" height="10" rx="2" fill="rgba(30, 41, 59, 0.3)" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="242" y="340" fill="#94a3b8" font-size="8">Prerequisite</text>
+
+        <rect x="380" y="315" width="16" height="10" rx="2" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="402" y="323" fill="#94a3b8" font-size="8">Cert mismatch / failure path</text>
+
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot slate"></div>
+          <h3>Prerequisites</h3>
+        </div>
+        <ul>
+          <li>• TLS 1.2 or 1.3 stack on client</li>
+          <li>• Edge server hosting multiple certs on one IP</li>
+          <li>• Reverse proxy / load balancer SNI routing enabled</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot violet"></div>
+          <h3>Inputs → Outputs</h3>
+        </div>
+        <ul>
+          <li>• Input: ClientHello with SNI hostname</li>
+          <li>• Output (match): matched X.509 certificate</li>
+          <li>• Output (no match): aborted handshake, cert CN mismatch</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot amber"></div>
+          <h3>Tools &amp; Integrations</h3>
+        </div>
+        <ul>
+          <li>• TLS stack (OpenSSL / BoringSSL)</li>
+          <li>• Edge proxy (nginx, Envoy, ALB, Cloudflare)</li>
+          <li>• Certificate store / SNI dictionary</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer">
+      SNI (Server Name Indication) Handshake • TLS 1.2/1.3 • Ethical Hacking Lesson
+    </p>
+  </div>
+
+  <script>
+    async function copyAsImage(btn) {
+      const orig = btn.textContent;
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        btn.textContent = '✓ Copied!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+
+    async function downloadPNG(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const link = document.createElement('a');
+        link.download = 'process-flow.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.textContent = '✓ Done!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+
+    async function downloadPDF(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const orientation = canvas.width > canvas.height ? 'landscape' : 'portrait';
+        const pdf = new jsPDF({ orientation, unit: 'px', format: [canvas.width, canvas.height], hotfixes: ['px_scaling'] });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save('process-flow.pdf');
+        btn.textContent = '✓ Done!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+  </script>
+</body>
+</html>
