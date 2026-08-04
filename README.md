@@ -9,6 +9,15 @@
 [![Python](https://img.shields.io/badge/Python-e94560?style=for-the-badge&logo=python&logoColor=white)](./python-scripts)
 [![Ethics First](https://img.shields.io/badge/Ethics-First-16213e?style=for-the-badge&logo=shieldsdotio&logoColor=white)](#safety--ethics)
 
+[![Stars](https://img.shields.io/github/stars/amandewatnitrr/hacking-tutorial?style=flat-square&color=e94560&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/stargazers)
+[![Forks](https://img.shields.io/github/forks/amandewatnitrr/hacking-tutorial?style=flat-square&color=0f3460&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/network/members)
+[![Last Commit](https://img.shields.io/github/last-commit/amandewatnitrr/hacking-tutorial?style=flat-square&color=e94560&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/commits/main)
+[![Repo Size](https://img.shields.io/github/repo-size/amandewatnitrr/hacking-tutorial?style=flat-square&color=0f3460&labelColor=1a1a2e)](.)
+
+<br/>
+
+![Python](https://skillicons.dev/icons?i=python,bash,linux,docker,git,vim)
+
 </div>
 
 ---
@@ -151,6 +160,22 @@ This project is for educational purposes only. All activities described should b
 ## License
 
 This project is licensed under the GNU General Public License v3.0. See [LICENSE](./LICENSE) for details.
+
+## Contributors
+
+<div align="center">
+<a href="https://github.com/amandewatnitrr/hacking-tutorial/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=amandewatnitrr/hacking-tutorial&max=10" />
+</a>
+</div>
+
+## Star History
+
+<div align="center">
+<a href="https://star-history.com/#amandewatnitrr/hacking-tutorial&Date">
+<img src="https://api.star-history.com/svg?repos=amandewatnitrr/hacking-tutorial&type=Date" width="600"/>
+</a>
+</div>
 
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f3460,100:1a1a2e&height=100&section=footer" width="100%"/>
