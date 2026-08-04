@@ -13,6 +13,7 @@
 [![Forks](https://img.shields.io/github/forks/amandewatnitrr/hacking-tutorial?style=flat-square&color=0f3460&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/network/members)
 [![Last Commit](https://img.shields.io/github/last-commit/amandewatnitrr/hacking-tutorial?style=flat-square&color=e94560&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/commits/main)
 [![Repo Size](https://img.shields.io/github/repo-size/amandewatnitrr/hacking-tutorial?style=flat-square&color=0f3460&labelColor=1a1a2e)](.)
+[![Open Issues](https://img.shields.io/github/issues/amandewatnitrr/hacking-tutorial?style=flat-square&color=e94560&labelColor=1a1a2e)](https://github.com/amandewatnitrr/hacking-tutorial/issues)
 
 <br/>
 
@@ -58,6 +59,14 @@ Everything here is meant to be run in labs you control. No shortcuts to third-pa
 - Best practices for ethical hacking and responsible disclosure
 
 ## Repository Structure
+
+**Quick nav:**
+[![ethical-hacking](https://img.shields.io/badge/ethical--hacking-1a1a2e?style=flat-square)](./ethical-hacking)
+[![python-for-eth-hacking](https://img.shields.io/badge/python--for--eth--hacking-0f3460?style=flat-square)](./python-for-eth-hacking)
+[![python-scripts](https://img.shields.io/badge/python--scripts-1a1a2e?style=flat-square)](./python-scripts)
+[![sql-injection-lab](https://img.shields.io/badge/sql--injection--lab-0f3460?style=flat-square)](./sql-injection-lab)
+[![intro-to-binary-exploitation](https://img.shields.io/badge/binary--exploitation-1a1a2e?style=flat-square)](./intro-to-binary-exploitation)
+[![cli-editors-tutorials](https://img.shields.io/badge/cli--editors--tutorials-0f3460?style=flat-square)](./cli-editors-tutorials)
 
 | Folder | Description |
 |---|---|
@@ -169,14 +178,16 @@ This project is licensed under the GNU General Public License v3.0. See [LICENSE
 </a>
 </div>
 
-## Star History
+## Activity
 
 <div align="center">
-<a href="https://star-history.com/#amandewatnitrr/hacking-tutorial&Date">
-<img src="https://api.star-history.com/svg?repos=amandewatnitrr/hacking-tutorial&type=Date" width="600"/>
-</a>
+<img src="https://github-readme-activity-graph.vercel.app/graph?repo=amandewatnitrr/hacking-tutorial&theme=react-dark&hide_border=true&bg_color=1a1a2e&color=e94560&line=e94560&point=ffffff" width="100%"/>
 </div>
 
 <div align="center">
+
+<img src="https://hits.sh/github.com/amandewatnitrr/hacking-tutorial.svg?style=flat-square&label=visitors&color=e94560&labelColor=1a1a2e" alt="visitors"/>
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f3460,100:1a1a2e&height=100&section=footer" width="100%"/>
+
 </div>
