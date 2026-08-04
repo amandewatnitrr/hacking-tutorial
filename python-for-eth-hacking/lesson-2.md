@@ -1,12 +1,14 @@
 # Writing a Network Scanner in Python
 
 ![](../imgs/network_scanner_process_flow.png)
+[Open the interactive version](../imgs/network_scanner_process_flow.html) — has a copy/PNG/PDF export toolbar.
 
 ---
 - [Writing a Network Scanner in Python](#writing-a-network-scanner-in-python)
   - [Introduction to ARP (Address Resolution Protocol)](#introduction-to-arp-address-resolution-protocol)
   - [Algorithm to discover clients on the same network](#algorithm-to-discover-clients-on-the-same-network)
     - [Step 1: Create ARP Request directed to broadcast MAC asking for IP](#step-1-create-arp-request-directed-to-broadcast-mac-asking-for-ip)
+    - [Step 2: Set destination MAC to broadcast MAC](#step-2-set-destination-mac-to-broadcast-mac)
 
 ---
 
@@ -88,9 +90,24 @@ input_ip = input_ip + "/24"
 scan(input_ip)
 ```
 
-- Putting the full algorithm together end-to-end — broadcast, per-host response (or silence), and how the scanner collects the answers — looks like this:
+### Step 2: Set destination MAC to broadcast MAC
 
-![](../imgs/network_scanner_process_flow.png)
+- The next thing on the list is to set the destination MAC to broadcast MAC to make sure that the ARP request is sent to all clients on the same network. In order to do this we need to create an Ethernet frame with the destination MAC address set to the broadcast address (ff:ff:ff:ff:ff:ff). This will ensure that the ARP request is sent to all devices on the local network.
 
-[Open the interactive version](../imgs/network_scanner_process_flow.html) — has a copy/PNG/PDF export toolbar.
+```python
+import scapy.all as scapy
 
+def scan(ip):
+    # Create ARP Request/Object
+    arp_request = scapy.ARP(pdst=ip, op=1)
+    # Create Ethernet frame with broadcast MAC
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    # Combine Ethernet frame and ARP request
+    arp_request_broadcast = broadcast/arp_request
+    print(arp_request_broadcast.summary())
+
+input_ip = input("Enter the IP to scan: ")
+# Append /24 to the IP address to scan the entire subnet
+input_ip = input_ip + "/24"
+scan(input_ip)
+```
