@@ -178,12 +178,6 @@ This project is licensed under the GNU General Public License v3.0. See [LICENSE
 </a>
 </div>
 
-## Activity
-
-<div align="center">
-<img src="https://github-readme-activity-graph.vercel.app/graph?repo=amandewatnitrr/hacking-tutorial&theme=react-dark&hide_border=true&bg_color=1a1a2e&color=e94560&line=e94560&point=ffffff" width="100%"/>
-</div>
-
 <div align="center">
 
 <img src="https://hits.sh/github.com/amandewatnitrr/hacking-tutorial.svg?style=flat-square&label=visitors&color=e94560&labelColor=1a1a2e" alt="visitors"/>
