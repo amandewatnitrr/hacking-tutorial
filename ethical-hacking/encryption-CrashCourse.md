@@ -2,11 +2,18 @@
 
 - [Encryption Crash Course](#encryption-crash-course)
   - [Symmetric Encryption (AES)](#symmetric-encryption-aes)
+    - [Block Cipher Modes of Operation](#block-cipher-modes-of-operation)
   - [Asymmetric Encryption (RSA)](#asymmetric-encryption-rsa)
     - [Advantages of Asymmetric Encryption:](#advantages-of-asymmetric-encryption)
+  - [Diffie-Hellman Key Exchange](#diffie-hellman-key-exchange)
   - [Hash Functions](#hash-functions)
+  - [HMAC (Hash-Based Message Authentication Code)](#hmac-hash-based-message-authentication-code)
+  - [Key Derivation Functions \& Password Hashing](#key-derivation-functions--password-hashing)
   - [Digital Signatures](#digital-signatures)
+  - [One-Time Pad](#one-time-pad)
+  - [Public Key Infrastructure (PKI) \& Certificates](#public-key-infrastructure-pki--certificates)
   - [SSL(Secure Sockets Layer) \& TLS(Transport Layer Security)](#sslsecure-sockets-layer--tlstransport-layer-security)
+  - [Post-Quantum Cryptography](#post-quantum-cryptography)
 
 ![](../imgs/SSLs-Blog-59-Asymmetric-vs-Symmetric-Encryption.png)
 
@@ -112,10 +119,10 @@ Symmetric encryption involves the following steps:
 
 - Example of Symmetric Encryption:
 
-    - We open 2 teerminals one is the sender terminal, and the other is the receiver terminal. We will use AES
+    - We open 2 terminals — one is the sender terminal, and the other is the receiver terminal. We will use AES
       encryption for this example.
-    - The sender terminal will ask us for a essage we want to send. The sender terminal will generate the secret, and
-      the use the encryption algorithm to encrypt the message and send it to the receiver terminal.
+    - The sender terminal will ask us for a message we want to send. The sender terminal will generate the secret, and
+      then use the encryption algorithm to encrypt the message and send it to the receiver terminal.
     - The receiver terminal will ask us for the secret key, and then it will use the decryption algorithm to decrypt the
       message and display it.
 
@@ -170,7 +177,7 @@ Symmetric encryption involves the following steps:
 
   ![](../imgs/Screenshot%202026-03-15%20at%208.48.22 AM.png)
   ![](../imgs/Screenshot%202026-03-15%20at%208.48.33 AM.png)
-  ![](../imgs/Screenshot%202026-03-15%20at%208.48.44 AM.png)dsd
+  ![](../imgs/Screenshot%202026-03-15%20at%208.48.44 AM.png)
 
 - Some of the mainly used symmetric encryption algorithms include:
     - AES (Advanced Encryption Standard): A widely used encryption algorithm that is considered secure and efficient. It
@@ -179,8 +186,8 @@ Symmetric encryption involves the following steps:
       length (56 bits). It has been largely replaced by AES.
     - RC4: A stream cipher that was widely used in the past but is now considered insecure due to vulnerabilities
       discovered in its design.
-    - Triple DES (3DES): An enhancement of DES that applies the DES algorithm three times cgbto increase
-      secdsadasdsadurity. It is still considered secure but is slower than AES and is being phased out in favor of AES.
+    - Triple DES (3DES): An enhancement of DES that applies the DES algorithm three times to increase
+      security. It is still considered secure but is slower than AES and is being phased out in favor of AES.
     - Blowfish: A symmetric encryption algorithm that is designed to be fast and secure. It supports key sizes of up to
       448 bits and is often used in applications where speed is a concern.
     - RC5: A symmetric encryption algorithm that is designed to be simple and efficient. It supports variable block
@@ -197,6 +204,48 @@ Symmetric encryption involves the following steps:
     - ChaCha20-Poly1305: A modern symmetric encryption algorithm that combines the ChaCha20 stream cipher with the
       Poly1305 message authentication code. It is designed to be fast and secure, and is used in applications such as
       TLS 1.3 and Google's QUIC protocol.
+
+### Block Cipher Modes of Operation
+
+> [!NOTE]
+> AES itself only knows how to encrypt one fixed-size block of data (16 bytes) at a time. A **mode of operation** is the
+> recipe for stitching many blocks together to encrypt a real message of any length. Picking the wrong mode can leak
+> information even though the underlying cipher (AES) is perfectly secure.
+
+- **ECB (Electronic Codebook)**: Encrypts every block independently with the same key. Simple, but identical plaintext
+  blocks produce identical ciphertext blocks — patterns in the input (like a solid-color image) leak straight through.
+  **Never use this in real systems.**
+- **CBC (Cipher Block Chaining)**: XORs each plaintext block with the previous ciphertext block before encrypting, using
+  a random Initialization Vector (IV) to start the chain. Hides patterns, but needs padding and is vulnerable to
+  padding-oracle attacks if implemented carelessly.
+- **CTR (Counter Mode)**: Turns the block cipher into a stream cipher by encrypting an incrementing counter and XOR-ing
+  the result with the plaintext. Fast, parallelizable, and avoids padding — but reusing a counter/nonce with the same
+  key is catastrophic.
+- **GCM (Galois/Counter Mode)**: CTR mode plus a built-in authentication tag. It gives you confidentiality **and**
+  integrity in one pass, which is why it's the default choice for TLS, SSH, and most modern protocols.
+
+- **Quick example** — watch ECB leak a repeated block, and CBC hide it:
+
+  ```bash
+  # A fixed key/IV so the demo is reproducible — generate your own with
+  # openssl rand -hex 32 (key) and openssl rand -hex 16 (IV) in practice
+  KEY=b54971c7f30209393d8f460a0e2834a2334842fa1d109856ed05565689b5cabe
+  IV=7e17a6f53e8066d4c8c74bbaa3687fa5
+
+  # Two identical 16-byte blocks back to back
+  echo -n "SECRET_BLOCK_XYZSECRET_BLOCK_XYZ" | openssl enc -aes-256-ecb -K "$KEY" | xxd
+  # rows 1 and 2 of the output are IDENTICAL — that's the leak
+
+  echo -n "SECRET_BLOCK_XYZSECRET_BLOCK_XYZ" | openssl enc -aes-256-cbc -K "$KEY" -iv "$IV" | xxd
+  # every row is different, even though the plaintext blocks repeat
+  ```
+
+  ![](../imgs/cipher_modes_demo.gif)
+
+> [!TIP]
+> Rule of thumb: prefer an **AEAD (Authenticated Encryption with Associated Data)** mode like AES-GCM or
+> ChaCha20-Poly1305 over plain CBC or CTR. AEAD modes detect tampering automatically instead of relying on you to add a
+> separate integrity check.
 
 ## Asymmetric Encryption (RSA)
 
@@ -296,6 +345,30 @@ sequenceDiagram
   integers or solving the discrete logarithm problem. This makes it more secure against brute-force attacks, but it also
   means that it requires more computational resources compared to symmetric encryption.
 
+## Diffie-Hellman Key Exchange
+
+> [!NOTE]
+> Diffie-Hellman (DH) is not an encryption algorithm at all — it's a way for two parties to agree on a shared secret
+> **over a public channel** that an eavesdropper, watching every message, still cannot compute. That shared secret then
+> becomes the key for a symmetric algorithm like AES.
+
+![](../imgs/diffie_hellman_process_flow.png)
+
+*[Open the interactive diagram](../imgs/diffie_hellman_process_flow.html) — exportable as PNG/PDF.*
+
+- **The paint-mixing analogy**: Imagine Alice and Bob publicly agree on a common paint color (visible to everyone).
+  Each of them privately mixes in a secret color of their own and sends the mixed result to the other, still in public
+  view. Each then adds their own secret color again to the mixture they received. Both end up at the *same final
+  color*, but anyone watching only saw the public color and two mixed blends — not enough to reverse-engineer either
+  secret. The math version uses modular exponentiation instead of paint, but the intuition is identical.
+- **Why it matters**: DH solves the "chicken and egg" problem of symmetric encryption — you need a shared key to talk
+  securely, but you need a secure channel to share that key. DH breaks the loop.
+- **ECDHE (Elliptic Curve Diffie-Hellman Ephemeral)**: The modern variant used in TLS. "Ephemeral" means a brand-new
+  key pair is generated for every session, which is what gives TLS its **Perfect Forward Secrecy** (see the [SSL/TLS
+  section](#sslsecure-sockets-layer--tlstransport-layer-security) below).
+- **Limitation**: Plain Diffie-Hellman gives you a shared secret, but not identity. It doesn't tell you *who* you're
+  talking to — that's why TLS pairs DH with certificates and digital signatures for authentication.
+
 ## Hash Functions
 
 > [!NOTE]
@@ -382,7 +455,7 @@ sequenceDiagram
     - HAVAL: A hash function that allows for variable output sizes (128, 160, 192, 224, or 256 bits) and is designed to
       be fast and secure.
 
-- Crypto systems today use SHA-256 or abovw for hashing, and MD5 and SHA-1 are considered weak and should be avoided for
+- Crypto systems today use SHA-256 or above for hashing, and MD5 and SHA-1 are considered weak and should be avoided for
   secure applications.
 
 - Hash functions are used for various purposes in cryptography, including:
@@ -400,6 +473,76 @@ sequenceDiagram
 - Let's take an example where we downloaded a ISO file from the internet, and we want to verify its integrity. We can
   use a hash function to compute the hash of the downloaded file and compare it to the hash provided by the source. If
   the hashes match, we can be confident that the file has not been tampered with during the download process.
+
+## HMAC (Hash-Based Message Authentication Code)
+
+> [!NOTE]
+> A plain hash proves data hasn't changed, but it doesn't prove *who* sent it — anyone can recompute a SHA-256 hash. An
+> **HMAC** fixes this by mixing a shared secret key into the hashing process, so only someone who knows the key could
+> have produced that specific hash.
+
+- HMAC combines a hash function (like SHA-256) with a secret key using a specific construction: roughly
+  `HMAC(key, message) = hash((key XOR opad) + hash((key XOR ipad) + message))`. You don't need to memorize the formula
+  — just remember it's "hash the message, but salted with a secret key in a very specific, collision-resistant way."
+- **What it gives you**: Both integrity (the message wasn't altered) and authenticity (only someone with the key could
+  have created it) — in one cheap operation. This is much faster than a full digital signature.
+- **Where it's used**: API request signing (e.g., AWS Signature V4), JWT tokens (the `HS256` algorithm), securing
+  webhooks, and as the integrity check inside older TLS cipher suites.
+- **Quick example** — generating and verifying an HMAC with OpenSSL:
+
+  ```bash
+  # Sign a message with a shared secret
+  echo -n "hello world" | openssl dgst -sha256 -hmac "supersecretkey"
+
+  # The receiver, who also knows "supersecretkey", recomputes the same HMAC
+  # and checks it matches — if it does, the message is both untampered and
+  # confirmed to have come from someone who holds the shared key.
+  ```
+
+  Try it yourself — same command, same key, twice in a row, then a wrong key:
+
+  ![](../imgs/hmac_demo.gif)
+
+> [!IMPORTANT]
+> HMAC uses a **shared secret** (symmetric), while digital signatures use a **private/public key pair** (asymmetric).
+> That's the key distinction: HMAC is faster but both sides must already trust each other with the same key; digital
+> signatures are slower but let anyone with the public key verify authenticity, with no shared secret required.
+
+## Key Derivation Functions & Password Hashing
+
+> [!NOTE]
+> Generic hash functions like SHA-256 are built to be *fast* — great for checksums, terrible for passwords. A GPU can
+> try billions of SHA-256 guesses per second. **Key Derivation Functions (KDFs)** are deliberately slow and
+> memory-hungry hash functions designed specifically to make password cracking expensive.
+
+- **Salting**: Before hashing, a random value (the "salt") is mixed into the password. This ensures two users with the
+  same password get completely different hashes, and defeats precomputed lookup tables (rainbow tables).
+- **PBKDF2 (Password-Based Key Derivation Function 2)**: Repeatedly re-hashes the password thousands of times
+  (an adjustable "iteration count") to slow down brute-force attempts. Widely supported but purely CPU-bound, which
+  makes it easier to accelerate on custom hardware (GPUs/ASICs) than the options below.
+- **bcrypt**: Built specifically for password hashing, with a tunable "cost factor" that you increase over time as
+  hardware gets faster. A long-standing, battle-tested default for web application login systems.
+- **scrypt**: Like PBKDF2, but also deliberately consumes a lot of memory, which makes it far more expensive to
+  parallelize on GPUs or custom cracking hardware.
+- **Argon2**: Winner of the 2015 Password Hashing Competition and the current recommended default. Tunable across
+  three dimensions — time, memory, and parallelism — giving you fine control over the cost of cracking attempts.
+
+- **Quick example** — timing a fast hash against bcrypt (requires the Apache `htpasswd` utility, preinstalled on most
+  Linux/macOS systems — `apt install apache2-utils` if it's missing):
+
+  ```bash
+  # A generic hash: near-instant, which is exactly the problem for passwords
+  time (echo -n "password123" | openssl dgst -sha256)
+
+  # bcrypt at cost factor 12: deliberately slow, on purpose
+  time (htpasswd -bnBC 12 "" "password123")
+  ```
+
+  ![](../imgs/kdf_password_hashing_demo.gif)
+
+> [!TIP]
+> Rule of thumb for new projects: use **Argon2id** if available, otherwise **bcrypt**. Never store passwords with a
+> plain hash function like SHA-256 or MD5, even with a salt — they're simply too fast to brute-force at scale.
 
 ## Digital Signatures
 
@@ -483,6 +626,64 @@ sequenceDiagram
   ![](../imgs/sender-digi-demo.gif)
   ![](../imgs/reciever-digi-demo.gif)
 
+## One-Time Pad
+
+> [!NOTE]
+> The One-Time Pad (OTP) is the only encryption scheme ever mathematically proven to be **unbreakable** — not just
+> "hard to break with today's computers," but unbreakable even with infinite computing power. It's also, in practice,
+> almost never used. Understanding why is a great lesson in the gap between theoretical and practical security.
+
+- **How it works**: Generate a truly random key that is exactly as long as the message. XOR each character of the
+  plaintext with the corresponding character of the key to get the ciphertext. To decrypt, XOR again with the same
+  key.
+- **Why it's unbreakable**: Because the key is random and used only once, every possible plaintext is equally likely
+  given the ciphertext. There's no statistical pattern for an attacker to exploit, no matter how much time or
+  computing power they have.
+- **Why nobody uses it for everyday communication**:
+    - The key must be **as long as the message itself** — encrypting a 1GB file needs a 1GB random key.
+    - The key must be **truly random**, not generated by a predictable algorithm.
+    - The key can **never be reused**. Reusing an OTP key even once is a well-known, devastating break (this is
+      exactly the mistake that made the VENONA project able to partially decrypt Soviet cables in the 1940s).
+    - Both parties need a way to securely share that huge key beforehand — which is the same key-distribution problem
+      symmetric encryption already has, just worse.
+- **Where it's still relevant**: High-assurance diplomatic and military communications historically used physical
+  one-time pads. Today, it mostly survives as the theoretical benchmark cryptographers compare other ciphers against.
+
+## Public Key Infrastructure (PKI) & Certificates
+
+> [!NOTE]
+> Asymmetric encryption solves *how* to encrypt without a shared secret, but it leaves one big question open: when you
+> receive someone's public key, how do you know it actually belongs to them and not to an attacker impersonating them?
+> **PKI** is the trust system that answers that question — it's what makes the padlock icon in your browser meaningful.
+
+![](../imgs/pki_chain_of_trust_process_flow.png)
+
+*[Open the interactive diagram](../imgs/pki_chain_of_trust_process_flow.html) — exportable as PNG/PDF.*
+
+- **Digital certificate**: A file (following the X.509 standard) that binds a public key to an identity — a domain
+  name, an organization, a person. It's essentially a digitally signed statement: *"I, the issuer, vouch that this
+  public key belongs to this identity."*
+- **Certificate Authority (CA)**: A trusted third party (e.g., Let's Encrypt, DigiCert) that verifies an identity and
+  signs its certificate. Your browser and OS ship with a built-in list of trusted root CAs.
+- **Chain of trust**: Certificates are typically issued in a chain — a **root CA** signs an **intermediate CA**, which
+  signs the **end-entity certificate** for a specific website. Your browser walks this chain back to a trusted root
+  it already knows, so no single website has to be individually trusted in advance.
+- **Revocation**: If a private key is compromised, its certificate must be invalidated before its expiry date. This is
+  checked via CRLs (Certificate Revocation Lists) or the newer, faster OCSP (Online Certificate Status Protocol).
+- **Quick example** — inspecting a live website's certificate chain from the terminal:
+
+  ```bash
+  echo | openssl s_client -connect example.com:443 -servername example.com 2>/dev/null | openssl x509 -noout -subject -issuer -dates
+  ```
+
+  ![](../imgs/pki_certificate_chain_demo.gif)
+
+> [!TIP]
+> This is the missing piece that connects everything in this lesson: Diffie-Hellman establishes a shared secret,
+> AES/ChaCha20 encrypts the data with it, HMAC/AEAD modes check integrity, and **PKI/certificates** confirm you
+> negotiated that secret with the right party in the first place, not an attacker. TLS, covered next, wires all of
+> these pieces together into one protocol.
+
 ## SSL(Secure Sockets Layer) & TLS(Transport Layer Security)
 
 > [!IMPORTANT]
@@ -500,21 +701,21 @@ sequenceDiagram
   component of secure communication on the internet, especially for sensitive transactions such as online banking,
   e-commerce, and secure email communication.
 
-- TLS supports functionality of Confedentiality, privacy, authentication & integrity.
-    - The connection is private because a symmetric algorithm such as AES is used to encrpt the data transmitted.
+- TLS supports functionality of confidentiality, privacy, authentication & integrity.
+    - The connection is private because a symmetric algorithm such as AES is used to encrypt the data transmitted.
     - The keys for this symmetric encryption are uniquely generated for each connection or session based on the needs of
       the application, based on a secret negotiated at the start of the connection.
     - The server and client negotiate the details of which encryption algorithm, and cryptographic keys to use before
       even a single byte of data is transmitted.
-    - The negotiation of a shared secret cannot be read by eavsdroppers, even by an attacker who places himself in the
+    - The negotiation of a shared secret cannot be read by eavesdroppers, even by an attacker who places himself in the
       middle of the connection.
     - The connection is also reliable in that no attacker can modify the communication during the negotiation without
-      being detected. The identity of the communicating parties can be authenticated using publuc key cryptography,
+      being detected. The identity of the communicating parties can be authenticated using public key cryptography,
       certificates and digital signatures.
     - This authentication can be made optional, but is generally required for at least one of the parties usually the
       server.
     - The connection is reliable because each message transmitted includes a message integrity check. Using a Message
-      Authentication Code (MAC), to prevent undected loss or alteration of the data during transmission. If any message
+      Authentication Code (MAC), to prevent undetected loss or alteration of the data during transmission. If any message
       is modified, the connection is immediately terminated.
 
 - TLS supports many different methods for exchanging keys, encrypting data and authenticating message integrity. As, a
@@ -534,7 +735,7 @@ sequenceDiagram
 > But the problem is you don't always get the choice. A server will support only certain authentication * key exchange
 > algorithms only.
 
-- The reason thatt the ones mentioned are the preffered options is because of the fact that they use Diffie-Hellman key
+- The reason that the ones mentioned are the preferred options is because of the fact that they use Diffie-Hellman key
   exchange, which can ensure property of privacy called Perfect Forward Secrecy (PFS). This means that even if the
   server's private key is compromised in the future, past communications remain secure because the session keys used for
   encryption are not derived from the server's private key. This provides an additional layer of security and protects
@@ -554,3 +755,32 @@ sequenceDiagram
 
 - Even if compromise of a single session key will not affect any data other than that exchange in that specific session
   protected by that particular key. PFS represents a big step forward in protecting data on the transport layer.
+
+## Post-Quantum Cryptography
+
+> [!WARNING]
+> Everything asymmetric covered in this lesson — RSA, Diffie-Hellman, ECDHE, ECDSA — relies on math problems (factoring
+> large integers, discrete logarithms) that are hard for *classical* computers. A sufficiently powerful **quantum
+> computer** running Shor's Algorithm could solve those same problems efficiently, breaking all of them at once.
+
+- **What's actually at risk**: Only the asymmetric algorithms used for key exchange and signatures. Symmetric
+  algorithms like AES aren't broken outright by quantum computers — Grover's Algorithm only halves their effective key
+  strength, which is why AES-256 (not AES-128) is the recommended long-term choice.
+- **"Harvest now, decrypt later"**: This is the reason to care today, not in 20 years. An adversary can record
+  encrypted traffic now and simply store it, waiting until quantum computers are powerful enough to break the key
+  exchange and decrypt it retroactively. Long-lived secrets (medical records, state secrets, source code) are already
+  exposed to this risk.
+- **NIST's standardized replacements** (finalized in 2024): algorithms believed to resist both classical and quantum
+  attacks.
+    - **ML-KEM / CRYSTALS-Kyber**: For key exchange, replacing RSA/ECDHE.
+    - **ML-DSA / CRYSTALS-Dilithium**: For digital signatures, replacing RSA/ECDSA.
+    - Both are based on lattice mathematics, a different hard problem than factoring or discrete logarithms.
+- **What's happening in practice**: Browsers and TLS implementations (e.g., Chrome, Cloudflare) have already started
+  rolling out **hybrid key exchange** — combining a classical algorithm like ECDHE with a post-quantum one like Kyber
+  in the same handshake, so the connection stays secure even if only one of the two approaches turns out to be
+  breakable.
+
+> [!TIP]
+> You don't need to change anything in your own projects today, but it's worth knowing the direction the industry is
+> moving: symmetric crypto (AES-256, SHA-256/384) is already considered quantum-resistant enough; asymmetric crypto is
+> in the middle of a multi-year migration to lattice-based algorithms.
