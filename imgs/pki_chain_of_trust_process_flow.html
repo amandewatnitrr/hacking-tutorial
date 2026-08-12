@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PKI Chain of Trust - Process Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrains Mono', monospace; background: #020617; min-height: 100vh; padding: 2rem; color: white; }
+    .container { max-width: 1528px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .pulse-dot { width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-left: 1.75rem; }
+    .diagram-container { background: rgba(15, 23, 42, 0.5); border-radius: 1rem; border: 1px solid #1e293b; padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1480px; display: block; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .card { background: rgba(15, 23, 42, 0.5); border-radius: 0.75rem; border: 1px solid #1e293b; padding: 1.25rem; }
+    .card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-dot.cyan { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet { background: #a78bfa; }
+    .card-dot.amber { background: #fbbf24; }
+    .card-dot.rose { background: #fb7185; }
+    .card-dot.slate { background: #94a3b8; }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { list-style: none; color: #94a3b8; font-size: 0.75rem; }
+    .card li { margin-bottom: 0.375rem; }
+    .footer { text-align: center; margin-top: 1.5rem; color: #475569; font-size: 0.75rem; }
+    .toolbar { display: flex; gap: 0.5rem; margin-left: auto; flex-shrink: 0; align-items: center; }
+    .toolbar-toggle { background: transparent; border: none; color: #475569; cursor: pointer; font-size: 1.25rem; line-height: 1; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: color 0.2s, background 0.2s; }
+    .toolbar-toggle:hover { color: #94a3b8; background: rgba(30, 41, 59, 0.5); }
+    .toolbar-actions { display: none; gap: 0.5rem; }
+    .toolbar.expanded .toolbar-actions { display: flex; }
+    .toolbar-actions button { background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; color: #94a3b8; padding: 0.375rem 0.75rem; border-radius: 0.375rem; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .toolbar-actions button:hover { background: rgba(51, 65, 85, 0.8); color: white; border-color: #475569; }
+    @media print { body { background: #020617; padding: 1rem; } .toolbar { display: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="container" id="report-container">
+    <div class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>PKI Chain of Trust</h1>
+        <div class="toolbar">
+          <div class="toolbar-actions">
+            <button onclick="copyAsImage(this)">📋 Copy</button>
+            <button onclick="downloadPNG(this)">🖼️ PNG</button>
+            <button onclick="downloadPDF(this)">📄 PDF</button>
+          </div>
+          <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">⋯</button>
+        </div>
+      </div>
+      <p class="subtitle">How your browser decides a website's public key is genuine, without ever meeting the website in person</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1480 520">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+          </marker>
+          <marker id="arrowhead-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="arrowhead-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24" />
+          </marker>
+          <marker id="arrowhead-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Prerequisites -->
+        <rect x="30" y="20" width="1420" height="60" rx="8" fill="rgba(30, 41, 59, 0.2)" stroke="#64748b" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="50" y="42" fill="#94a3b8" font-size="10" font-weight="600">PREREQUISITE</text>
+        <text x="50" y="62" fill="#64748b" font-size="9">• Your OS / browser ships with a built-in list of trusted Root CA public keys — this is the one thing you have to trust in advance</text>
+
+        <!-- Start -->
+        <rect x="30" y="150" width="100" height="40" rx="20" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="80" y="175" fill="white" font-size="11" font-weight="600" text-anchor="middle">Start</text>
+        <line x1="130" y1="170" x2="195" y2="170" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead-cyan)"/>
+
+        <!-- Step 1: Root signs Intermediate -->
+        <circle cx="200" cy="125" r="12" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="200" y="129" fill="white" font-size="10" font-weight="600" text-anchor="middle">1</text>
+        <text x="280" y="118" fill="#fbbf24" font-size="8" text-anchor="middle">🏛️ Root CA</text>
+        <rect x="200" y="130" width="160" height="80" rx="8" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="280" y="158" fill="white" font-size="11" font-weight="600" text-anchor="middle">Signs Intermediate CA</text>
+        <text x="280" y="176" fill="#94a3b8" font-size="9" text-anchor="middle">Root's private key signs the</text>
+        <text x="280" y="190" fill="#94a3b8" font-size="9" text-anchor="middle">intermediate's public key</text>
+
+        <line x1="360" y1="170" x2="425" y2="170" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead-amber)"/>
+
+        <!-- Step 2: Intermediate signs Leaf -->
+        <circle cx="430" cy="125" r="12" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="430" y="129" fill="white" font-size="10" font-weight="600" text-anchor="middle">2</text>
+        <text x="510" y="118" fill="#fbbf24" font-size="8" text-anchor="middle">🏛️ Intermediate CA</text>
+        <rect x="430" y="130" width="160" height="80" rx="8" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="510" y="158" fill="white" font-size="11" font-weight="600" text-anchor="middle">Signs Leaf Certificate</text>
+        <text x="510" y="176" fill="#94a3b8" font-size="9" text-anchor="middle">Signs the website's public</text>
+        <text x="510" y="190" fill="#94a3b8" font-size="9" text-anchor="middle">key + domain name</text>
+
+        <line x1="590" y1="170" x2="655" y2="170" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead-amber)"/>
+
+        <!-- Step 3: Server presents chain -->
+        <circle cx="660" cy="125" r="12" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+        <text x="660" y="129" fill="white" font-size="10" font-weight="600" text-anchor="middle">3</text>
+        <text x="740" y="118" fill="#34d399" font-size="8" text-anchor="middle">🌐 Web Server</text>
+        <rect x="660" y="130" width="160" height="80" rx="8" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="740" y="158" fill="white" font-size="11" font-weight="600" text-anchor="middle">Presents Chain</text>
+        <text x="740" y="176" fill="#94a3b8" font-size="9" text-anchor="middle">Sends its leaf cert +</text>
+        <text x="740" y="190" fill="#94a3b8" font-size="9" text-anchor="middle">intermediate cert to you</text>
+
+        <line x1="820" y1="170" x2="875" y2="170" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- Decision: Chain valid? -->
+        <g transform="translate(940, 170)">
+          <rect x="-45" y="-45" width="90" height="90" rx="4" transform="rotate(45)" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+          <text x="0" y="-4" fill="white" font-size="10" font-weight="600" text-anchor="middle">Chain Valid,</text>
+          <text x="0" y="10" fill="white" font-size="10" font-weight="600" text-anchor="middle">Reaches Trusted Root?</text>
+        </g>
+
+        <!-- Yes path -->
+        <line x1="1000" y1="170" x2="1065" y2="170" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead-emerald)"/>
+        <text x="1032" y="162" fill="#34d399" font-size="9" font-weight="600" text-anchor="middle">Yes</text>
+
+        <!-- Step 4: TLS session secured -->
+        <circle cx="1070" cy="125" r="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1070" y="129" fill="white" font-size="10" font-weight="600" text-anchor="middle">4</text>
+        <text x="1150" y="118" fill="#a78bfa" font-size="8" text-anchor="middle">🔒 Browser</text>
+        <rect x="1070" y="130" width="160" height="80" rx="8" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1150" y="158" fill="white" font-size="11" font-weight="600" text-anchor="middle">Session Secured</text>
+        <text x="1150" y="176" fill="#94a3b8" font-size="9" text-anchor="middle">Continues the TLS</text>
+        <text x="1150" y="190" fill="#94a3b8" font-size="9" text-anchor="middle">handshake as normal</text>
+
+        <line x1="1230" y1="170" x2="1285" y2="170" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead-cyan)"/>
+
+        <!-- End: secure -->
+        <rect x="1290" y="145" width="160" height="50" rx="25" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="1370" y="166" fill="white" font-size="11" font-weight="600" text-anchor="middle">🔒 Secure Connection</text>
+        <text x="1370" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">padlock shown to user</text>
+
+        <!-- No path -->
+        <line x1="940" y1="225" x2="940" y2="270" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arrowhead-rose)"/>
+        <text x="958" y="252" fill="#fb7185" font-size="9" font-weight="600">No</text>
+        <rect x="850" y="275" width="180" height="50" rx="25" fill="rgba(8, 51, 68, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="940" y="296" fill="white" font-size="11" font-weight="600" text-anchor="middle">⚠️ Certificate Warning</text>
+        <text x="940" y="312" fill="#94a3b8" font-size="8" text-anchor="middle">connection blocked</text>
+
+        <!-- Legend -->
+        <text x="80" y="380" fill="white" font-size="10" font-weight="600">Legend</text>
+        <rect x="80" y="395" width="16" height="10" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="102" y="403" fill="#94a3b8" font-size="8">Certificate Authority signs</text>
+        <rect x="290" y="395" width="16" height="10" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1"/>
+        <text x="312" y="403" fill="#94a3b8" font-size="8">Web server / TLS handshake</text>
+        <rect x="500" y="395" width="16" height="10" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="522" y="403" fill="#94a3b8" font-size="8">Browser-side verification</text>
+        <rect x="710" y="395" width="10" height="10" rx="1" transform="rotate(45, 715, 400)" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="732" y="403" fill="#94a3b8" font-size="8">Decision</text>
+        <rect x="820" y="395" width="16" height="10" rx="5" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="842" y="403" fill="#94a3b8" font-size="8">Start / End</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot slate"></div>
+          <h3>Prerequisites</h3>
+        </div>
+        <ul>
+          <li>• Trusted Root CA store, pre-installed by OS/browser vendor</li>
+          <li>• X.509 certificate format for every link in the chain</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot amber"></div>
+          <h3>Inputs → Outputs</h3>
+        </div>
+        <ul>
+          <li>• Input: leaf cert + intermediate cert from server</li>
+          <li>• Output: verified identity, or a blocked connection</li>
+          <li>• Revocation checked via CRL / OCSP</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot violet"></div>
+          <h3>Tools &amp; Commands</h3>
+        </div>
+        <ul>
+          <li>• openssl x509 — inspect a certificate</li>
+          <li>• openssl s_client -connect — view a live chain</li>
+          <li>• Let's Encrypt, DigiCert — common public CAs</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer">PKI Chain of Trust • Encryption Crash Course • ethical-hacking</p>
+  </div>
+
+  <script>
+    async function copyAsImage(btn) {
+      const orig = btn.textContent;
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        btn.textContent = '✓ Copied!';
+      } catch (e) { btn.textContent = '✗ Failed'; }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+    async function downloadPNG(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const link = document.createElement('a');
+        link.download = 'pki-chain-of-trust-process-flow.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.textContent = '✓ Done!';
+      } catch (e) { btn.textContent = '✗ Failed'; }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+    async function downloadPDF(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const orientation = canvas.width > canvas.height ? 'landscape' : 'portrait';
+        const pdf = new jsPDF({ orientation, unit: 'px', format: [canvas.width, canvas.height], hotfixes: ['px_scaling'] });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save('pki-chain-of-trust-process-flow.pdf');
+        btn.textContent = '✓ Done!';
+      } catch (e) { btn.textContent = '✗ Failed'; }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+  </script>
+</body>
+</html>
