@@ -163,3 +163,22 @@ logs/
 .idea
 .vscode
 .idea/.gitignore
+# Added by code-review-graph
+.code-review-graph/
+
+# AI assistant / IDE tool configs (local, machine-generated)
+.claude/
+.codebuddy/
+.cursorrules
+.gemini/
+.kiro/
+.qoder/
+.windsurfrules
+.mcp.json
+AGENTS.md
+CLAUDE.md
+CODEBUDDY.md
+GEMINI.md
+QODER.md
+opencode.jsonc
+.github/code-review-graph.instruction.md
