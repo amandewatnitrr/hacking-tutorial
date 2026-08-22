@@ -8,6 +8,7 @@
   - [Algorithm to discover clients on the same network](#algorithm-to-discover-clients-on-the-same-network)
     - [Step 1: Create ARP Request directed to broadcast MAC asking for IP](#step-1-create-arp-request-directed-to-broadcast-mac-asking-for-ip)
     - [Step 2: Set destination MAC to broadcast MAC](#step-2-set-destination-mac-to-broadcast-mac)
+    - [Step 3: Send Packet and receive response](#step-3-send-packet-and-receive-response)
 
 ---
 
@@ -158,3 +159,31 @@ Enter the IP to scan: 192.168.0.1
 Ether / ARP who has Net("192.168.0.1/24") says 192.168.0.105
 
 ```
+
+### Step 3: Send Packet and receive response
+
+- We will try to send ARP Request Broadcast packet `arp_request_broadcast` becuase it contains the ARP request and the Ethernet frame with the broadcast MAC address combination.
+
+- So, now we have created the ARP request and set the destination MAC to broadcast MAC. The next step is to send the packet and receive the response. We will use `scapy.srp()` function to send the packet and receive the response. The `srp()` function sends and receives packets at layer 2 (Ethernet layer) of the OSI model. It takes two arguments: the packet to be sent and a timeout value. The function returns a tuple containing two lists: the first list contains the packets that were sent, and the second list contains the packets that were received in response.
+
+```python
+import scapy.all as scapy
+
+def scan(ip):
+    # Create ARP Request/Object
+    arp_request = scapy.ARP(pdst=ip, op=1)
+    # Create Ethernet frame with broadcast MAC
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    # Combine Ethernet frame and ARP request
+    arp_request_broadcast = broadcast/arp_request
+    # Send Packet and receive response
+    answered, unanswered = scapy.srp(arp_request_broadcast, timeout=10)
+    print("Answered Packets:", answered.summary())
+
+input_ip = input("Enter the IP to scan: ")
+# Append /24 to the IP address to scan the entire subnet
+input_ip = input_ip + "/24"
+scan(input_ip)
+```
+
+- The `scapy.srp()` function sends the ARP request broadcast packet and waits for a response for a specified timeout period (in this case, 10 seconds). It recieves a couple of 2 lists, one for the packet sent and the answer & the other for the unanswered packets. The answered packets contain the responses from the devices on the network that received the ARP request and responded with their MAC addresses.
