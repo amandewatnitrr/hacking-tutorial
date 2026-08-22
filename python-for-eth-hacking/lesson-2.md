@@ -22,6 +22,8 @@
 
 ## Introduction to ARP (Address Resolution Protocol)
 
+![](../imgs/arp_request_object.png)
+
 >[!IMPORTANT]
 > ARP (Address Resolution Protocol) is a network protocol used to map an IP address to a physical MAC address on a local area network (LAN). It allows devices to communicate with each other by translating IP addresses into MAC addresses, which are necessary for data transmission on a LAN.
 > <br>
@@ -64,6 +66,9 @@ Received X packets, got X answers, remaining X packets
   - Parse the response and extract IP and MAC addresses.
   - Display the results in a user-friendly format.
 
+![](../imgs/network_scanner_algorithm_steps.png)
+[Open the .excalidraw source](../imgs/network_scanner_algorithm_steps.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
+
 ### Step 1: Create ARP Request directed to broadcast MAC asking for IP
 
 - This has 2 main parts:
@@ -75,6 +80,9 @@ Received X packets, got X answers, remaining X packets
 - `scapy.ARP().summary()` allows us to print the summary of the current object, that we just created.
 - So, when we set ip=dest inside the ARP object, it will set the destination IP address to the target IP address we want to scan. 
 - When we set op=1, it indicates that this is an ARP request, which means we are asking for the MAC address associated with the target IP address. Finally, when we set pdst=dest, it specifies the destination IP address that we want to send the ARP request to.
+
+![](../imgs/arp_request_object.png)
+[Open the .excalidraw source](../imgs/arp_request_object.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
 
 ```python
 import scapy.all as scapy
@@ -93,6 +101,9 @@ scan(input_ip)
 ### Step 2: Set destination MAC to broadcast MAC
 
 - The next thing on the list is to set the destination MAC to broadcast MAC to make sure that the ARP request is sent to all clients on the same network. In order to do this we need to create an Ethernet frame with the destination MAC address set to the broadcast address (ff:ff:ff:ff:ff:ff). This will ensure that the ARP request is sent to all devices on the local network.
+
+![](../imgs/arp_broadcast_encapsulation.png)
+[Open the .excalidraw source](../imgs/arp_broadcast_encapsulation.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
 
 ```python
 import scapy.all as scapy
