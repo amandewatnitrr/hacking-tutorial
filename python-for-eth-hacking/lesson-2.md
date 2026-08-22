@@ -1,7 +1,6 @@
 # Writing a Network Scanner in Python
 
 ![](../imgs/network_scanner_process_flow.png)
-[Open the interactive version](../imgs/network_scanner_process_flow.html) — has a copy/PNG/PDF export toolbar.
 
 ---
 - [Writing a Network Scanner in Python](#writing-a-network-scanner-in-python)
@@ -67,7 +66,6 @@ Received X packets, got X answers, remaining X packets
   - Display the results in a user-friendly format.
 
 ![](../imgs/network_scanner_algorithm_steps.png)
-[Open the .excalidraw source](../imgs/network_scanner_algorithm_steps.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
 
 ### Step 1: Create ARP Request directed to broadcast MAC asking for IP
 
@@ -82,7 +80,6 @@ Received X packets, got X answers, remaining X packets
 - When we set op=1, it indicates that this is an ARP request, which means we are asking for the MAC address associated with the target IP address. Finally, when we set pdst=dest, it specifies the destination IP address that we want to send the ARP request to.
 
 ![](../imgs/arp_request_object.png)
-[Open the .excalidraw source](../imgs/arp_request_object.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
 
 ```python
 import scapy.all as scapy
@@ -103,7 +100,6 @@ scan(input_ip)
 - The next thing on the list is to set the destination MAC to broadcast MAC to make sure that the ARP request is sent to all clients on the same network. In order to do this we need to create an Ethernet frame with the destination MAC address set to the broadcast address (ff:ff:ff:ff:ff:ff). This will ensure that the ARP request is sent to all devices on the local network.
 
 ![](../imgs/arp_broadcast_encapsulation.png)
-[Open the .excalidraw source](../imgs/arp_broadcast_encapsulation.excalidraw) — editable in [excalidraw.com](https://excalidraw.com) or the VS Code extension.
 
 ```python
 import scapy.all as scapy
