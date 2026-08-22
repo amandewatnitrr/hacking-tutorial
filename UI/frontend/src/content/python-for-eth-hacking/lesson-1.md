@@ -67,7 +67,7 @@ next: "python-port-scanning"
     eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
             inet 172.16.47.128  netmask 255.255.255.0  broadcast 172.16.47.255
             inet6 fe80::20c:29ff:fee0:ab03  prefixlen 64  scopeid 0x20<link>
-            ether 00:0c:29:e0:ab:03  txqueuelen 1000  (Ethernet)
+            ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)
             RX packets 809954  bytes 1184345755 (1.1 GiB)
             RX errors 0  dropped 0  overruns 0  frame 0
             TX packets 70404  bytes 5559742 (5.3 MiB)
@@ -154,14 +154,14 @@ next: "python-port-scanning"
     ```bash
     (.venv) root@kali:~/PycharmProjects/hacking-tutorial# python mac-address-change.py 
     Enter the interface name (e.g., eth0, wlan0): eth0
-    Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): 3c:b9:aa:d1:42:32
-    [+] Changing MAC address of eth0 to 3c:b9:aa:d1:42:32
+    Enter the new MAC address (format: xx:xx:xx:xx:xx:xx): XX:XX:XX:XX:XX:XX
+    [+] Changing MAC address of eth0 to XX:XX:XX:XX:XX:XX
     [+] MAC address changed successfully
-    New MAC address for eth0 is 3c:b9:aa:d1:42:32
+    New MAC address for eth0 is XX:XX:XX:XX:XX:XX
     eth0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
             inet 172.16.47.133  netmask 255.255.255.0  broadcast 172.16.47.255
             inet6 fe80::211:22ff:fe33:4455  prefixlen 64  scopeid 0x20<link>
-            ether 3c:b9:aa:d1:42:32  txqueuelen 1000  (Ethernet)
+            ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)
             RX packets 812230  bytes 1185567088 (1.1 GiB)
             RX errors 0  dropped 0  overruns 0  frame 0
             TX packets 72191  bytes 5808154 (5.5 MiB)

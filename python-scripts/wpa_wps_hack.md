@@ -72,7 +72,7 @@ sequenceDiagram
     Script->>User: Prompt: Enter interface name
     User->>Script: Provide: interface (e.g., wlan0)
     Script->>User: Prompt: Enter target MAC address (BSSID)
-    User->>Script: Provide: target_mac (e.g., AA:BB:CC:DD:EE:FF)
+    User->>Script: Provide: target_mac (e.g., XX:XX:XX:XX:XX:XX)
 
     Script->>Script: Call wpa_wps_hack(interface, target_mac)
 

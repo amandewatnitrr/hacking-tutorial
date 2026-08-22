@@ -65,9 +65,9 @@ sequenceDiagram
     Script->>User: Request Interface Name
     User->>Script: Provide 'wlan0mon'
     Script->>User: Request Target MAC
-    User->>Script: Provide 'AA:BB:CC:DD:EE:FF'
+    User->>Script: Provide 'XX:XX:XX:XX:XX:XX'
     Script->>User: Request Gateway MAC
-    User->>Script: Provide '11:22:33:44:55:66'
+    User->>Script: Provide 'XX:XX:XX:XX:XX:XX'
     
     Script->>Script: Call deauth_attack()
     Script->>OS: Execute: subprocess.call(command)

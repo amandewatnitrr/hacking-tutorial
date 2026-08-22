@@ -36,21 +36,21 @@
 
     BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
 
-    CE:82:A9:6D:BB:76  -59        3        0    0  11  260   WPA2 CCMP   PSK  Avik                            
-    6E:00:3A:D1:68:5D   -1        0        0    0  11   -1                    <length:  0>                    
-    40:E1:E4:AD:79:7A   -1        0        1    0  11   -1   WPA              <length:  0>                    
-    DA:62:32:3D:2D:66   -1        0        0    0   4   -1                    <length:  0>                    
-    8C:DC:02:8A:72:D0  -51       10        5    0  10  270   WPA2 CCMP   PSK  Nandhu12                        
-    20:0C:86:43:98:98  -61        4        0    0  13  270   WPA2 CCMP   PSK  SM-2.4G           
-    22:0C:86:53:98:98  -64        8        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com                 
-    02:53:E5:00:C7:34  -54       21        0    0  11  180   WPA3 CCMP   SAE  OnePlus Nord CE 3 Lite 5G       
-    44:95:3B:88:24:70   -1        0        9    0  13   -1   WPA              <length:  0>                    
-    44:95:3B:88:14:C0  -43       18        0    0  13  270   WPA2 CCMP   PSK  Goldenenclave603                
+    XX:XX:XX:XX:XX:XX  -59        3        0    0  11  260   WPA2 CCMP   PSK  Avik                            
+    XX:XX:XX:XX:XX:XX   -1        0        0    0  11   -1                    <length:  0>                    
+    XX:XX:XX:XX:XX:XX   -1        0        1    0  11   -1   WPA              <length:  0>                    
+    XX:XX:XX:XX:XX:XX   -1        0        0    0   4   -1                    <length:  0>                    
+    XX:XX:XX:XX:XX:XX  -51       10        5    0  10  270   WPA2 CCMP   PSK  Nandhu12                        
+    XX:XX:XX:XX:XX:XX  -61        4        0    0  13  270   WPA2 CCMP   PSK  SM-2.4G           
+    XX:XX:XX:XX:XX:XX  -64        8        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com                 
+    XX:XX:XX:XX:XX:XX  -54       21        0    0  11  180   WPA3 CCMP   SAE  OnePlus Nord CE 3 Lite 5G       
+    XX:XX:XX:XX:XX:XX   -1        0        9    0  13   -1   WPA              <length:  0>                    
+    XX:XX:XX:XX:XX:XX  -43       18        0    0  13  270   WPA2 CCMP   PSK  Goldenenclave603                
 
     BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
 
-    (not associated)   22:DC:83:2C:B5:D2  -33    0 - 1      8        2                                         
-    (not associated)   BA:0E:F0:A2:CC:4F  -65    0 - 1      0        1         ZTE_2.4G_cCGVZc                 
+    (not associated)   XX:XX:XX:XX:XX:XX  -33    0 - 1      8        2                                         
+    (not associated)   XX:XX:XX:XX:XX:XX  -65    0 - 1      0        1         ZTE_2.4G_cCGVZc                 
     Quitting...
     ```
 
@@ -90,21 +90,21 @@
 
     BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
 
-    BA:DD:71:A2:6B:FE   -1        0        3    0   1   -1   WPA              <length:  0>                    
-    02:53:E5:00:C7:34  -60        7        0    0  11  180   WPA3 CCMP   SAE  OnePlus Nord CE 3 Lite 5G       
-    CE:82:A9:6D:BB:76  -59        2        0    0  11  260   WPA2 CCMP   PSK  Avik                            
-    B4:3D:08:2D:91:40  -81       18        0    0 149  866   WPA2 CCMP   PSK  Rahul Agarwal_5G                
-    44:95:3B:88:14:C1  -63       21        1    0  60  866   WPA2 CCMP   PSK  Goldenenclave603                
-    CE:82:A9:6D:BB:77  -89       22        0    0  44 1560   WPA2 CCMP   PSK  Avik                            
-    30:DE:4B:B5:3C:19  -89       25        0    0  40  390   WPA2 CCMP   PSK  RakshaDeepak_5g                 
-    6C:4F:89:16:4F:FA  -85       24        0    0  40  866   WPA2 CCMP   PSK  Airtel_Sathvik                         
-    32:42:40:E6:AE:18  -71        0        3    0   9   -1   WPA              <length:  0>                    
-    44:95:3B:88:14:C0  -50       12        0    0  13  270   WPA2 CCMP   PSK  Goldenenclave603                
-    8C:DC:02:8A:72:D0  -51        5        7    0  10  270   WPA2 CCMP   PSK  Nandhu12                        
-    22:0C:86:53:98:98  -61        5        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com                 
-    6E:00:3A:D1:68:5D   -1        0        0    0  13   -1                    <length:  0>                    
-    44:95:3B:88:24:70   -1        0       35    0  13   -1   WPA              <length:  0>                    
-    20:0C:86:43:98:98  -61        5        4    0  13  270   WPA2 CCMP   PSK  SM-2.4G                               
+    XX:XX:XX:XX:XX:XX   -1        0        3    0   1   -1   WPA              <length:  0>                    
+    XX:XX:XX:XX:XX:XX  -60        7        0    0  11  180   WPA3 CCMP   SAE  OnePlus Nord CE 3 Lite 5G       
+    XX:XX:XX:XX:XX:XX  -59        2        0    0  11  260   WPA2 CCMP   PSK  Avik                            
+    XX:XX:XX:XX:XX:XX  -81       18        0    0 149  866   WPA2 CCMP   PSK  Rahul Agarwal_5G                
+    XX:XX:XX:XX:XX:XX  -63       21        1    0  60  866   WPA2 CCMP   PSK  Goldenenclave603                
+    XX:XX:XX:XX:XX:XX  -89       22        0    0  44 1560   WPA2 CCMP   PSK  Avik                            
+    XX:XX:XX:XX:XX:XX  -89       25        0    0  40  390   WPA2 CCMP   PSK  RakshaDeepak_5g                 
+    XX:XX:XX:XX:XX:XX  -85       24        0    0  40  866   WPA2 CCMP   PSK  Airtel_Sathvik                         
+    XX:XX:XX:XX:XX:XX  -71        0        3    0   9   -1   WPA              <length:  0>                    
+    XX:XX:XX:XX:XX:XX  -50       12        0    0  13  270   WPA2 CCMP   PSK  Goldenenclave603                
+    XX:XX:XX:XX:XX:XX  -51        5        7    0  10  270   WPA2 CCMP   PSK  Nandhu12                        
+    XX:XX:XX:XX:XX:XX  -61        5        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com                 
+    XX:XX:XX:XX:XX:XX   -1        0        0    0  13   -1                    <length:  0>                    
+    XX:XX:XX:XX:XX:XX   -1        0       35    0  13   -1   WPA              <length:  0>                    
+    XX:XX:XX:XX:XX:XX  -61        5        4    0  13  270   WPA2 CCMP   PSK  SM-2.4G                               
     Quitting...
 
     ```
@@ -127,21 +127,21 @@
 - When we run a command like this, we get the following output:
 
     ```bash
-    root@kali:~# airodump-ng --bssid 8C:DC:02:8A:72:D0 --channel 12 --write test wlan0
+    root@kali:~# airodump-ng --bssid XX:XX:XX:XX:XX:XX --channel 12 --write test wlan0
     20:28:55  Created capture file "test-02.cap".
 
     CH 12 ][ Elapsed: 1 min ][ 2025-07-25 20:30 
 
     BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
 
-    8C:DC:02:8A:72:D0  -53  25      127       12    0  10  270   WPA2 CCMP   PSK  Nandhu12            
+    XX:XX:XX:XX:XX:XX  -53  25      127       12    0  10  270   WPA2 CCMP   PSK  Nandhu12            
 
     BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
 
-    8C:DC:02:8A:72:D0  7E:17:D7:1F:44:6A  -71    0 - 1e    20      114                                 
-    8C:DC:02:8A:72:D0  5E:C6:31:F2:E5:D9  -65    1e- 1e    50      425                                 
-    8C:DC:02:8A:72:D0  DE:98:79:03:DF:F8  -61    0 - 1e    33      720                                 
-    8C:DC:02:8A:72:D0  3E:05:F8:C8:B2:47  -61    0 - 1      7      374                                 
+    XX:XX:XX:XX:XX:XX  XX:XX:XX:XX:XX:XX  -71    0 - 1e    20      114                                 
+    XX:XX:XX:XX:XX:XX  XX:XX:XX:XX:XX:XX  -65    1e- 1e    50      425                                 
+    XX:XX:XX:XX:XX:XX  XX:XX:XX:XX:XX:XX  -61    0 - 1e    33      720                                 
+    XX:XX:XX:XX:XX:XX  XX:XX:XX:XX:XX:XX  -61    0 - 1      7      374                                 
     Quitting...
     ```
 

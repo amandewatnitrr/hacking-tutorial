@@ -465,7 +465,7 @@ def packet_handler(pkt) -> None:
         tcp_layer = pkt[TCP]
         src_ip = ip6.src
         dst_ip = ip6.dst
-        # If dst/src are IPv4-mapped (::ffff:1.2.3.4), normalize to plain IPv4 string
+        # If dst/src are IPv4-mapped (::ffff:XX.XX.XX.XX), normalize to plain IPv4 string
         if src_ip.startswith("::ffff:"):
             src_ip = src_ip.split("::ffff:")[-1]
         if dst_ip.startswith("::ffff:"):
@@ -551,7 +551,7 @@ def parse_args():
         tcp_layer = pkt[TCP]
         src_ip = ip6.src
         dst_ip = ip6.dst
-        # If dst/src are IPv4-mapped (::ffff:1.2.3.4), normalize to plain IPv4 string
+        # If dst/src are IPv4-mapped (::ffff:XX.XX.XX.XX), normalize to plain IPv4 string
         if src_ip.startswith("::ffff:"):
             src_ip = src_ip.split("::ffff:")[-1]
         if dst_ip.startswith("::ffff:"):

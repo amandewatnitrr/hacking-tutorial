@@ -60,7 +60,7 @@ sudo vi /etc/hosts
 
   ```bash
   # /etc/resolv.conf
-  nameserver 8.8.8.8
+  nameserver XX.XX.XX.XX
   ```
   
   ```bash

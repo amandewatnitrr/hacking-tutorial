@@ -198,11 +198,11 @@ sequenceDiagram
   ```bash
   192.168.175.0/24 > 192.168.175.129  » net.probe on
   [06:29:59] [sys.log] [inf] net.probe starting net.recon as a requirement for net.probe
-  [06:29:59] [endpoint.new] endpoint 192.168.175.254 detected as 00:50:56:e5:67:d9 (VMware, Inc.).
-  [06:29:59] [endpoint.new] endpoint 192.168.175.130 detected as 00:0c:29:23:e8:71 (VMware, Inc.).
+  [06:29:59] [endpoint.new] endpoint 192.168.175.254 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  [06:29:59] [endpoint.new] endpoint 192.168.175.130 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
   192.168.175.0/24 > 192.168.175.129  » [06:29:59] [sys.log] [inf] net.probe probing 256 addresses on 192.168.175.0/24
-  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as 00:50:56:c0:00:08 (VMware, Inc.).
-  192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 00:0c:29:23:e8:71 (VMware, Inc.) lost.
+  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 XX:XX:XX:XX:XX:XX (VMware, Inc.) lost.
   ```
 
   This is another way of discovering connected clients quickly using bettercap. What we didn't notice is when we started the `net.probe on` command, it automatically started the `net.recon` command as a requirement for `net.probe`. This means that it is continuously scanning for new devices on the network. So, now if you do `help` again, you will see that the `net.recon` command is also running.
