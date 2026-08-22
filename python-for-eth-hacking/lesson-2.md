@@ -118,3 +118,36 @@ scan(input_ip)
 > What's an Ethernet frame?
 > - An Ethernet frame is a data packet that is transmitted over an Ethernet network. It consists of several fields, including the destination MAC address, source MAC address, EtherType, payload (data), and a frame check sequence (FCS) for error detection. The destination MAC address specifies the intended recipient of the frame, while the source MAC address identifies the sender. The EtherType field indicates the protocol used in the payload, and the FCS is used to verify the integrity of the frame during transmission.
 
+- If you execute the code this is what the output will look like:
+
+```shell
+Enter the IP to scan: 192.168.0.1
+###[ ARP ]###
+  hwtype    = Ethernet (10Mb)
+  ptype     = IPv4
+  hwlen     = None
+  plen      = None
+  op        = who-has
+  hwsrc     = XX:XX:XX:XX:XX:XX
+  psrc      = 192.168.0.105
+  hwdst     = 00:00:00:00:00:00
+  pdst      = Net("192.168.0.1/24")
+
+###[ Ethernet ]###
+  dst       = ff:ff:ff:ff:ff:ff
+  src       = XX:XX:XX:XX:XX:XX
+  type      = ARP
+###[ ARP ]###
+     hwtype    = Ethernet (10Mb)
+     ptype     = IPv4
+     hwlen     = None
+     plen      = None
+     op        = who-has
+     hwsrc     = XX:XX:XX:XX:XX:XX
+     psrc      = 192.168.0.105
+     hwdst     = 00:00:00:00:00:00
+     pdst      = Net("192.168.0.1/24")
+
+Ether / ARP who has Net("192.168.0.1/24") says 192.168.0.105
+
+```
