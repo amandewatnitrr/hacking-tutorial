@@ -864,13 +864,13 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "ARP Reply (unicast)\nhwsrc: AA:BB:CC:DD:EE:FF\npsrc: 192.168.0.1",
+      "text": "ARP Reply (unicast)\nhwsrc: XX:XX:XX:XX:XX:XX\npsrc: 192.168.0.1",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "reply",
-      "originalText": "ARP Reply (unicast)\nhwsrc: AA:BB:CC:DD:EE:FF\npsrc: 192.168.0.1",
+      "originalText": "ARP Reply (unicast)\nhwsrc: XX:XX:XX:XX:XX:XX\npsrc: 192.168.0.1",
       "lineHeight": 1.25
     },
     {
