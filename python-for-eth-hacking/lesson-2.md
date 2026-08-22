@@ -187,3 +187,22 @@ scan(input_ip)
 ```
 
 - The `scapy.srp()` function sends the ARP request broadcast packet and waits for a response for a specified timeout period (in this case, 10 seconds). It recieves a couple of 2 lists, one for the packet sent and the answer & the other for the unanswered packets. The answered packets contain the responses from the devices on the network that received the ARP request and responded with their MAC addresses.
+
+- On execution the output looks something like this:
+
+  ```shell
+  Enter the IP to scan: 192.168.0.107
+  Begin emission
+  *****
+  Finished sending 256 packets
+  ...........................................
+  Received 48 packets, got 5 answers, remaining 251 packets
+  Ether / ARP who has 192.168.0.1 says 192.168.0.105 ==> Ether / ARP is at XX:XX:XX:XX:XX:XX says 192.168.0.1
+  Ether / ARP who has 192.168.0.101 says 192.168.0.105 ==> Ether / ARP is at XX:XX:XX:XX:XX:XX says 192.168.0.101 / Padding
+  Ether / ARP who has 192.168.0.102 says 192.168.0.105 ==> Ether / ARP is at XX:XX:XX:XX:XX:XX says 192.168.0.102
+  Ether / ARP who has 192.168.0.107 says 192.168.0.105 ==> Ether / ARP is at XX:XX:XX:XX:XX:XX says 192.168.0.107
+  Ether / ARP who has 192.168.0.103 says 192.168.0.105 ==> Ether / ARP is at XX:XX:XX:XX:XX:XX says 192.168.0.103 / Padding
+  Answered Packets: None
+  ```
+
+  
