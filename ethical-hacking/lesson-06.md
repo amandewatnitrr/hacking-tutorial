@@ -191,11 +191,11 @@ sequenceDiagram
   ```bash
   192.168.175.0/24 > 192.168.175.129  » net.probe on
   [06:29:59] [sys.log] [inf] net.probe starting net.recon as a requirement for net.probe
-  [06:29:59] [endpoint.new] endpoint 192.168.175.254 detected as 00:50:56:e5:67:d9 (VMware, Inc.).
-  [06:29:59] [endpoint.new] endpoint 192.168.175.130 detected as 00:0c:29:23:e8:71 (VMware, Inc.).
+  [06:29:59] [endpoint.new] endpoint 192.168.175.254 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  [06:29:59] [endpoint.new] endpoint 192.168.175.130 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
   192.168.175.0/24 > 192.168.175.129  » [06:29:59] [sys.log] [inf] net.probe probing 256 addresses on 192.168.175.0/24
-  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as 00:50:56:c0:00:08 (VMware, Inc.).
-  192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 00:0c:29:23:e8:71 (VMware, Inc.) lost.
+  192.168.175.0/24 > 192.168.175.129  » [06:29:59] [endpoint.new] endpoint 192.168.175.1 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [06:30:20] [endpoint.lost] endpoint 192.168.175.130 XX:XX:XX:XX:XX:XX (VMware, Inc.) lost.
   ```
 
   This is another way of discovering connected clients quickly using bettercap. What we didn't notice is when we started the `net.probe on` command, it automatically started the `net.recon` command as a requirement for `net.probe`. This means that it is continuously scanning for new devices on the network. So, now if you do `help` again, you will see that the `net.recon` command is also running.
@@ -322,20 +322,20 @@ The same can be performed using our automated script as well which is at the spe
   192.168.175.0/24 > 192.168.175.129  » net.probe on
   192.168.175.0/24 > 192.168.175.129  » [19:49:37] [sys.log] [inf] net.probe starting net.recon as a requirement for net.probe
   192.168.175.0/24 > 192.168.175.129  » [19:49:37] [sys.log] [inf] net.probe probing 256 addresses on 192.168.175.0/24
-  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.130 detected as 00:0c:29:23:e8:71 (VMware, Inc.).
-  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.1 (DEVICE) detected as 00:50:56:c0:00:08 (VMware, Inc.).
-  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.254 detected as 00:50:56:ec:70:c5 (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.130 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.1 (DEVICE) detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
+  192.168.175.0/24 > 192.168.175.129  » [19:49:37] [endpoint.new] endpoint 192.168.175.254 detected as XX:XX:XX:XX:XX:XX (VMware, Inc.).
   192.168.175.0/24 > 192.168.175.129  » net.show
 
   ┌─────────────────┬───────────────────┬─────────────────┬──────────────┬────────┬────────┬──────────┐
   │      IP ▴       │        MAC        │      Name       │    Vendor    │  Sent  │ Recvd  │   Seen   │
   ├─────────────────┼───────────────────┼─────────────────┼──────────────┼────────┼────────┼──────────┤
-  │ 192.168.175.129 │ 00:0c:29:11:90:95 │ eth0            │ VMware, Inc. │ 0 B    │ 0 B    │ 19:49:31 │
-  │ 192.168.175.2   │ 00:50:56:f1:40:75 │ gateway         │ VMware, Inc. │ 1.5 kB │ 897 B  │ 19:49:31 │
+  │ 192.168.175.129 │ XX:XX:XX:XX:XX:XX │ eth0            │ VMware, Inc. │ 0 B    │ 0 B    │ 19:49:31 │
+  │ 192.168.175.2   │ XX:XX:XX:XX:XX:XX │ gateway         │ VMware, Inc. │ 1.5 kB │ 897 B  │ 19:49:31 │
   │                 │                   │                 │              │        │        │          │
   │ 192.168.175.1   │ XX:XX:XX:XX:XX:XX │ DEVICE          │ VMware, Inc. │ 1.7 kB │ 319 B  │ 19:49:40 │
-  │ 192.168.175.130 │ 00:0c:29:23:e8:71 │                 │ VMware, Inc. │ 32 kB  │ 1.9 MB │ 19:49:41 │
-  │ 192.168.175.254 │ 00:50:56:ec:70:c5 │                 │ VMware, Inc. │ 0 B    │ 92 B   │ 19:49:37 │
+  │ 192.168.175.130 │ XX:XX:XX:XX:XX:XX │                 │ VMware, Inc. │ 32 kB  │ 1.9 MB │ 19:49:41 │
+  │ 192.168.175.254 │ XX:XX:XX:XX:XX:XX │                 │ VMware, Inc. │ 0 B    │ 92 B   │ 19:49:37 │
   └─────────────────┴───────────────────┴─────────────────┴──────────────┴────────┴────────┴──────────┘
 
   ↑ 14 kB / ↓ 2.0 MB / 2402 pkts

@@ -207,7 +207,7 @@ main()
 [!] ALERT: ARP Spoofing Detected!
 [*] IP Address: 192.168.1.10
 [*] Real MAC:   00:11:22:33:44:55
-[*] Fake MAC:   aa:bb:cc:dd:ee:ff
+[*] Fake MAC:   XX:XX:XX:XX:XX:XX
 ```
  🔹 Improvements Suggested 
 
