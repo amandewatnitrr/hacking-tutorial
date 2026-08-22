@@ -100,10 +100,12 @@ import scapy.all as scapy
 def scan(ip):
     # Create ARP Request/Object
     arp_request = scapy.ARP(pdst=ip, op=1)
+    arp_request.show()
     # Create Ethernet frame with broadcast MAC
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     # Combine Ethernet frame and ARP request
     arp_request_broadcast = broadcast/arp_request
+    arp_request_broadcast.show()
     print(arp_request_broadcast.summary())
 
 input_ip = input("Enter the IP to scan: ")
@@ -111,3 +113,8 @@ input_ip = input("Enter the IP to scan: ")
 input_ip = input_ip + "/24"
 scan(input_ip)
 ```
+
+>[!IMPORTANT]
+> What's an Ethernet frame?
+> - An Ethernet frame is a data packet that is transmitted over an Ethernet network. It consists of several fields, including the destination MAC address, source MAC address, EtherType, payload (data), and a frame check sequence (FCS) for error detection. The destination MAC address specifies the intended recipient of the frame, while the source MAC address identifies the sender. The EtherType field indicates the protocol used in the payload, and the FCS is used to verify the integrity of the frame during transmission.
+
