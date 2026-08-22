@@ -121,7 +121,8 @@ Contributions are welcome! To contribute:
 1. Fork the repository and create a new branch for your changes.
 2. Add new lessons, improve existing content, or submit scripts and tools.
 3. Ensure your contributions follow ethical guidelines and do not promote illegal activity.
-4. Open a pull request with a clear description of your changes.
+4. Before pushing, run the IP/MAC-masking check so real/leaked IP or MAC addresses (e.g. from pasted tool output or logs) don't ship in your commit — see [Masking Leaked IP / MAC Addresses](./CONTRIBUTING.md#masking-leaked-ip--mac-addresses) in `CONTRIBUTING.md`.
+5. Open a pull request with a clear description of your changes.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) for details.
 
