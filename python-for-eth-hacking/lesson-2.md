@@ -9,6 +9,10 @@
     - [Step 1: Create ARP Request directed to broadcast MAC asking for IP](#step-1-create-arp-request-directed-to-broadcast-mac-asking-for-ip)
     - [Step 2: Set destination MAC to broadcast MAC](#step-2-set-destination-mac-to-broadcast-mac)
     - [Step 3: Send Packet and receive response](#step-3-send-packet-and-receive-response)
+    - [Step 4: Parse the response and extract IP and MAC addresses](#step-4-parse-the-response-and-extract-ip-and-mac-addresses)
+  - [Lists in Python](#lists-in-python)
+  - [Dictionaries in Python](#dictionaries-in-python)
+  - [How can we use lists and dictionaries together?](#how-can-we-use-lists-and-dictionaries-together)
 
 ---
 
@@ -315,3 +319,50 @@ scan(input_ip)
   ^C
   Stopping network scanner.
   ```
+
+### Step 4: Parse the response and extract IP and MAC addresses
+
+- As, in the code above, we have already parsed the response and extracted the IP and MAC addresses of the devices that responded to the ARP request. We stored this information in a list of dictionaries called `clients`, where each dictionary contains the IP and MAC address of a device.
+
+- We did it using `Lists` and `Dictionaries` in Python. The `clients` list is populated by iterating over the `answered` list returned by the `scapy.srp()` function. For each received packet, we extract the source IP address (`received.psrc`) and the source MAC address (`received.hwsrc`) and create a dictionary with these values. This dictionary is then appended to the `clients` list.
+
+## Lists in Python
+
+- In Python, a list is a built-in data structure that allows you to store an ordered collection of items. Lists can contain elements of different data types, including numbers, strings, and even other lists. They are mutable, meaning you can change their contents after they are created.
+
+- Lists are defined using square brackets `[]`, and elements are separated by commas. You can access elements in a list using their index, which starts at 0 for the first element. The a[0] will give you the first element, a[1] will give you the second element, and so on. You can also use negative indices to access elements from the end of the list, with a[-1] giving you the last element, a[-2] giving you the second-to-last element, and so on.
+
+## Dictionaries in Python
+
+- In Python, a dictionary is a built-in data structure that allows you to store key-value pairs. Each key in a dictionary is unique and is used to access its corresponding value. Dictionaries are mutable, meaning you can change their contents after they are created.
+
+- It's more like a list but is based on key-value pairs. Dictionaries are defined using curly braces `{}`, with each key-value pair separated by a colon `:` and pairs separated by commas. You can access values in a dictionary using their keys, like `my_dict[key]`.
+
+## How can we use lists and dictionaries together?
+
+```python
+import scapy.all as scapy
+
+def scan(ip):
+    # Create ARP Request/Object
+    arp_request = scapy.ARP(pdst=ip, op=1)
+    # Create Ethernet frame with broadcast MAC
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    # Combine Ethernet frame and ARP request
+    arp_request_broadcast = broadcast/arp_request
+    # Send Packet and receive response
+    answered = scapy.srp(arp_request_broadcast, timeout=10)[0]
+    print("IP\t\t\tMAC Address\n-----------------------------------------")
+    client_list = []
+    for element in answered:
+        client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+        client_list.append(client_dict)
+        print(element[1].psrc + "\t\t" + element[1].hwsrc)
+    print(client_list)
+    
+
+input_ip = input("Enter the IP to scan: ")
+# Append /24 to the IP address to scan the entire subnet
+input_ip = input_ip + "/24"
+scan(input_ip)
+```
