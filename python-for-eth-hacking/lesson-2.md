@@ -366,3 +366,24 @@ input_ip = input("Enter the IP to scan: ")
 input_ip = input_ip + "/24"
 scan(input_ip)
 ```
+
+- Here's how the output of the above code will look like:
+
+```shell
+python3 network_scanner_tutorial_testing.py                            ─╯
+Enter the IP to scan: 192.168.0.101
+Begin emission
+*.*****
+Finished sending 256 packets
+...................................................................
+Received 74 packets, got 6 answers, remaining 250 packets
+IP                      MAC Address
+-----------------------------------------
+192.168.0.1             XX:XX:XX:XX:XX:XX
+192.168.0.101           XX:XX:XX:XX:XX:XX
+192.168.0.100           XX:XX:XX:XX:XX:XX
+192.168.0.102           XX:XX:XX:XX:XX:XX
+192.168.0.107           XX:XX:XX:XX:XX:XX
+192.168.0.103           XX:XX:XX:XX:XX:XX
+[{'ip': '192.168.0.1', 'mac': 'XX:XX:XX:XX:XX:XX'}, {'ip': '192.168.0.101', 'mac': 'XX:XX:XX:XX:XX:XX'}, {'ip': '192.168.0.100', 'mac': 'XX:XX:XX:XX:XX:XX'}, {'ip': '192.168.0.102', 'mac': 'XX:XX:XX:XX:XX:XX'}, {'ip': '192.168.0.107', 'mac': 'XX:XX:XX:XX:XX:XX'}, {'ip': '192.168.0.103', 'mac': 'XX:XX:XX:XX:XX:XX'}]
+```
