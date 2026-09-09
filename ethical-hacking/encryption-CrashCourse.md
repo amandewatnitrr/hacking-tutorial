@@ -729,7 +729,7 @@ sequenceDiagram
 > even if the server's private key is compromised in the future, past communications remain secure. ECDSA provides a
 > secure method for verifying the identity of the communicating parties without the need for a trusted third party.
 
-![](../imgs/1*qY5TtUCN9TYfvvsUlippqg.png)
+![](../imgs/1-qY5TtUCN9TYfvvsUlippqg.png)
 
 > [!WARNING]
 > But the problem is you don't always get the choice. A server will support only certain authentication * key exchange
