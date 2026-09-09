@@ -30,7 +30,9 @@
 
 ## What is Anti CIA Triad?
 
-![](../imgs/1779208981975.jpg)
+<p align="center">
+  <img src="../imgs/1779208981975.jpg" alt="" />
+</p>
 
 - The Anti-CIA Triad is also known as `DAD` or `DAD Triad`, which stands for Disclosure, Alteration, and Denial. It represents the opposite of the CIA Triad and highlights the potential threats to cybersecurity.
 
