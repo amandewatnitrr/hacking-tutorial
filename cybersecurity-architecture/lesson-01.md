@@ -10,6 +10,9 @@
   - [What is Anti CIA Triad?](#what-is-anti-cia-triad)
   - [The Problem with Cybersecurity today](#the-problem-with-cybersecurity-today)
     - [Why so??](#why-so)
+  - [Who is a Security Architect?](#who-is-a-security-architect)
+  - [Security Principles \& Approachers](#security-principles--approachers)
+    - [OWASP](#owasp)
 
 
 ---
@@ -77,7 +80,6 @@
 ><br/><br/>Understand what the business is develop the security requirements based on the business requirements. Security should be a part of the business strategy, not a separate entity that is only considered when there is a security incident.<br/><br/>
 >- Not all data is equal. Some data is more sensitive than others, and security measures should be tailored accordingly. For example, financial data may require more stringent security controls than marketing data. By understanding the sensitivity of different types of data, organisations can deploy security solutions that are appropriate for each type of data. For example, you might want to secure data of the HR Department more than the data of the Marketing Department. Because, HR data is more sensitive than Marketing data. So, you might want to deploy more security solutions for HR data than Marketing data. This is where the concept of Data Classification comes into play. <br/><br/>Data Classification is the process of categorizing data based on its sensitivity and importance to the organisation. By classifying data, organisations can apply appropriate security controls and measures to protect it.
 
-
 >[!NOTE]
 > <b>Cybersecurity Terminologies:</b>
 > **Threat:** Any circumstance or event with the potential to adversely impact/affect organizational operations, assets, individuals, or the organization through an information system via disclosure, modification, or denial of service.
@@ -85,3 +87,37 @@
 > **Vulnerability:** A weakness or flaw in an information system, application, or network that can be exploited by a threat actor to confidentiality, integrity, or availability.
 > **Authentication:** The process of verifying the identity of a user, device, or system, typically through the use of credentials such as passwords, biometrics, or security tokens.
 > **Authorization:** The process of determining whether a user, device, or system has the necessary permissions to access a resource or perform an action.
+
+- Security Architectures are driven by business requirements as we have seen and discussed earlier.
+
+  - Cost vs Security Benifit
+  - Usability and Operability
+  - Integration with another business process
+
+## Who is a Security Architect?
+
+- A Security Architect is a professional responsible for designing, implementing, and managing an organization's/team's security architecture. They ensure that security measures align with business objectives, regulatory requirements, and industry best practices.
+
+>[!IMPORTANT]
+>- The most important thing is that you might have to be jack of all trades, master of none, but still better than master of one.
+>- Also, architects are not pen testers.
+
+## Security Principles & Approachers
+
+- A Fundamental statement that serves as the foundation for security in order to enable the achievement of business objectives and goals. For example:
+
+  - OWASP Top Ten: A list of the most critical web application security risks, maintained by the Open Web Application Security Project (OWASP).
+  - Open Group (Jericho Forum): A global community focused on developing open standards and best practices for secure information sharing and management.
+  - NIST 800-160: A publication by the National Institute of Standards and Technology (NIST) providing guidance on systems security engineering for developing secure and resilient systems.
+  - "Ten Guiding Principles for Security Architecture - John Viega and Gary McGraw": A set of principles aimed at guiding the design and implementation of secure and resilient information systems.
+  - "High Assurance Design" - Clifford J. Berg
+
+### OWASP
+
+  ![OWASP Top Ten](../imgs/1gW2PlibhbLXOj9s5_iTfbg.gif)
+
+- Miniize the attack surface
+- Apply defence in depth
+- Avoid security by Obscurity
+- Enforce least privilege
+- Secure defaults
