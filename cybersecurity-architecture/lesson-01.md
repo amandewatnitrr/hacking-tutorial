@@ -76,3 +76,12 @@
 >- Securrity requirements are not defined by Business Requirements. Security is a business enabler, not a business requirement. Security requirements should be defined by business requirements, not the other way around. Security should be a part of the business strategy, not a separate entity that is only considered when there is a security incident.
 ><br/><br/>Understand what the business is develop the security requirements based on the business requirements. Security should be a part of the business strategy, not a separate entity that is only considered when there is a security incident.<br/><br/>
 >- Not all data is equal. Some data is more sensitive than others, and security measures should be tailored accordingly. For example, financial data may require more stringent security controls than marketing data. By understanding the sensitivity of different types of data, organisations can deploy security solutions that are appropriate for each type of data. For example, you might want to secure data of the HR Department more than the data of the Marketing Department. Because, HR data is more sensitive than Marketing data. So, you might want to deploy more security solutions for HR data than Marketing data. This is where the concept of Data Classification comes into play. <br/><br/>Data Classification is the process of categorizing data based on its sensitivity and importance to the organisation. By classifying data, organisations can apply appropriate security controls and measures to protect it.
+
+
+>[!NOTE]
+> <b>Cybersecurity Terminologies:</b>
+> **Threat:** Any circumstance or event with the potential to adversely impact/affect organizational operations, assets, individuals, or the organization through an information system via disclosure, modification, or denial of service.
+> **Attack:** Any attempt to gain unauthorized access to an information system, disrupt its normal operation, or compromise its confidentiality, integrity, or availability.
+> **Vulnerability:** A weakness or flaw in an information system, application, or network that can be exploited by a threat actor to confidentiality, integrity, or availability.
+> **Authentication:** The process of verifying the identity of a user, device, or system, typically through the use of credentials such as passwords, biometrics, or security tokens.
+> **Authorization:** The process of determining whether a user, device, or system has the necessary permissions to access a resource or perform an action.
