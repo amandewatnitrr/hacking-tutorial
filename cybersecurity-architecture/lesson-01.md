@@ -1,6 +1,6 @@
 # Introduction to Cybersecurity Architecture
 
-![](../imgs/SRA-1024x569.png)
+![](../imgs/original-54080c1d010ef0bc22fb66b815e6e848.gif)
 
 ## Table of Contents
 
@@ -11,8 +11,14 @@
   - [The Problem with Cybersecurity today](#the-problem-with-cybersecurity-today)
     - [Why so??](#why-so)
   - [Who is a Security Architect?](#who-is-a-security-architect)
-  - [Security Principles \& Approachers](#security-principles--approachers)
+  - [Security Principles \& Approaches](#security-principles--approaches)
     - [OWASP](#owasp)
+    - [Open Group (Jericho Forum)](#open-group-jericho-forum)
+    - [NIST (National Institute of Standards and Technology)](#nist-national-institute-of-standards-and-technology)
+    - [The Ten Guiding Principles for Security Architecture](#the-ten-guiding-principles-for-security-architecture)
+    - [NCSC (National Cyber Security Centre)](#ncsc-national-cyber-security-centre)
+    - [High Assurance Design](#high-assurance-design)
+  - [Principles of Secure Design](#principles-of-secure-design)
 
 
 ---
@@ -102,22 +108,77 @@
 >- The most important thing is that you might have to be jack of all trades, master of none, but still better than master of one.
 >- Also, architects are not pen testers.
 
-## Security Principles & Approachers
+## Security Principles & Approaches
 
 - A Fundamental statement that serves as the foundation for security in order to enable the achievement of business objectives and goals. For example:
 
   - OWASP Top Ten: A list of the most critical web application security risks, maintained by the Open Web Application Security Project (OWASP).
   - Open Group (Jericho Forum): A global community focused on developing open standards and best practices for secure information sharing and management.
   - NIST 800-160: A publication by the National Institute of Standards and Technology (NIST) providing guidance on systems security engineering for developing secure and resilient systems.
-  - "Ten Guiding Principles for Security Architecture - John Viega and Gary McGraw": A set of principles aimed at guiding the design and implementation of secure and resilient information systems.
+  - "The Ten Guiding Principles for Security Architecture - John Viega and Gary McGraw": A set of principles aimed at guiding the design and implementation of secure and resilient information systems.
   - "High Assurance Design" - Clifford J. Berg
 
 ### OWASP
 
   ![OWASP Top Ten](../imgs/1gW2PlibhbLXOj9s5_iTfbg.gif)
 
-- Miniize the attack surface
-- Apply defence in depth
-- Avoid security by Obscurity
-- Enforce least privilege
-- Secure defaults
+- Minimize the attack surface: Limit the number of entry points and exposed functionalities to reduce potential attack vectors.
+- Apply defense in depth: Implement multiple layers of security controls to protect against different types of threats.
+- Avoid security by Obscurity: Do not rely on secrecy of design or implementation as the primary security measure.
+- Enforce least privilege: Grant users and systems the minimum level of access necessary to perform their tasks.
+- Secure defaults: Configure systems and applications with secure settings by default, minimizing the need for additional security configuration.
+
+### Open Group (Jericho Forum)
+
+![](../imgs/ogforum_security_0.jpg)
+
+- Fundamentals: Here, it means level of protection should be appropriate to the sensitivity and criticality of the information and systems being protected.
+- Surviving in a hostile world: Meaning the devices must communicate among them using only secure protocols.
+- Need for trust: Meaning transparency at all levels
+- Identity Management and Federation: Ensuring that identities are properly managed and that trust relationships are established for secure information sharing across different domains. (AAA - Authentication, Authorization, and Accountability)
+- Access to Data: Ensuring that access to sensitive data is properly controlled and monitored to prevent unauthorized access and data breaches. (Controlled, Private, and Secured)
+
+### NIST (National Institute of Standards and Technology)
+
+![](../imgs/nist-protect-function.gif)
+
+- Least Privilege: Ensure that users and systems have the minimum level of access necessary to perform their tasks, reducing the potential impact of security breaches.
+- Hierarchical Trust: Establish trust relationships in a hierarchical manner, ensuring that higher levels of trust are based on the verification and validation of lower levels.
+- Hierarchical Protection: Implement security controls in a hierarchical manner, ensuring that higher levels of protection are built upon the foundation of lower levels.
+- Minimize Sharing: Limit the sharing of sensitive information to only those who need it, reducing the risk of unauthorized access and data leaks. And, sharing based on sensitivity of the information.
+- Reduce Complexity: Simplify system designs and security controls to minimize potential vulnerabilities and make it easier to manage and maintain security measures effectively.
+
+### The Ten Guiding Principles for Security Architecture
+
+![](../imgs/51Xhk9Z1SfL._UF1000,1000_QL80_.jpg)
+
+- Secure the weakest link: Focus on strengthening the most vulnerable components of the system, as attackers often target the weakest points to gain access or cause damage.
+- Defense in depth: Implement multiple layers of security controls to protect against different types of threats, ensuring that if one layer is compromised, others still provide protection.
+- Fail securely: Design systems to fail in a secure manner, minimizing the potential impact of failures or errors on the overall security posture.
+- Minimize attack surface: Reduce the number of entry points and exposed functionalities to limit potential attack vectors.
+- Enforce least privilege: Grant users and systems the minimum level of access necessary to perform their tasks, reducing the risk of unauthorized access and misuse of privileges.
+- Keep it simple: Design systems and security controls to be as simple as possible, reducing the likelihood of errors and making it easier to understand, manage, and maintain security measures effectively.
+- Promote Privacy: Ensure that systems and processes are designed to protect the privacy of individuals, minimizing the collection and exposure of personal information and adhering to relevant privacy regulations and best practices.
+- Be reluctant to trust: Avoid placing trust in components, systems, or individuals without proper verification and validation, reducing the risk of security breaches due to misplaced trust.
+
+### NCSC (National Cyber Security Centre)
+
+![](../imgs/SuuKgeddIADLBSOh8EQkCXD8TVLKjJHbcgdSmtgUdQI.jpg.webp)
+
+- Establish the context before the design: Understand the environment, requirements, and constraints before starting the design process to ensure that security measures are appropriately aligned with the overall objectives and risks.
+- Make compromise difficult: Design systems and security measures in a way that makes it challenging for attackers to exploit vulnerabilities or bypass security controls, reducing the likelihood of successful attacks.
+- Make disruption difficult: Design systems and security measures to be resilient against disruptions, ensuring that attacks or failures have minimal impact on the overall functionality and security of the system.
+- Make compromise detection easier: Implement mechanisms and monitoring systems that facilitate the timely detection of security breaches or compromises, enabling rapid response and mitigation to minimize potential damage.
+- Reduce the impact of compromises: Implement measures that limit the potential damage caused by security breaches, ensuring that even if a compromise occurs, its effects are contained and manageable.
+
+### High Assurance Design
+
+- Security design patterns must be verifiable
+- Deploy and run securely
+- Embed intrusion detection at multiple points
+- Logs are secured and reliable
+- Segement data and resources according to risk
+
+## Principles of Secure Design
+
+![](../imgs/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif)
