@@ -1,7 +1,7 @@
 # Introduction to Cybersecurity Architecture
 
 <p align="center">
-  <img src="../imgs/original-54080c1d010ef0bc22fb66b815e6e848.gif" alt="" width="600" />
+  <img src="../imgs/original-54080c1d010ef0bc22fb66b815e6e848.gif" alt="Introduction to Cybersecurity Architecture" width="3840" />
 </p>
 
 ## Table of Contents
