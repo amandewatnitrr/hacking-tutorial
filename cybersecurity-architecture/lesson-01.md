@@ -14,13 +14,14 @@
     - [Why so??](#why-so)
   - [Who is a Security Architect?](#who-is-a-security-architect)
   - [Security Principles \& Approaches](#security-principles--approaches)
-    - [OWASP](#owasp)
-    - [Open Group (Jericho Forum)](#open-group-jericho-forum)
-    - [NIST (National Institute of Standards and Technology)](#nist-national-institute-of-standards-and-technology)
-    - [The Ten Guiding Principles for Security Architecture](#the-ten-guiding-principles-for-security-architecture)
-    - [NCSC (National Cyber Security Centre)](#ncsc-national-cyber-security-centre)
-    - [High Assurance Design](#high-assurance-design)
+      - [OWASP](#owasp)
+      - [Open Group (Jericho Forum)](#open-group-jericho-forum)
+      - [NIST (National Institute of Standards and Technology)](#nist-national-institute-of-standards-and-technology)
+      - [The Ten Guiding Principles for Security Architecture](#the-ten-guiding-principles-for-security-architecture)
+      - [NCSC (National Cyber Security Centre)](#ncsc-national-cyber-security-centre)
+      - [High Assurance Design](#high-assurance-design)
   - [Principles of Secure Design](#principles-of-secure-design)
+    - [Approaches to Security](#approaches-to-security)
 
 
 ---
@@ -120,7 +121,7 @@
   - "The Ten Guiding Principles for Security Architecture - John Viega and Gary McGraw": A set of principles aimed at guiding the design and implementation of secure and resilient information systems.
   - "High Assurance Design" - Clifford J. Berg
 
-### OWASP
+#### OWASP
 
   ![OWASP Top Ten](../imgs/1gW2PlibhbLXOj9s5_iTfbg.gif)
 
@@ -130,7 +131,7 @@
 - Enforce least privilege: Grant users and systems the minimum level of access necessary to perform their tasks.
 - Secure defaults: Configure systems and applications with secure settings by default, minimizing the need for additional security configuration.
 
-### Open Group (Jericho Forum)
+#### Open Group (Jericho Forum)
 
 ![](../imgs/ogforum_security_0.jpg)
 
@@ -140,7 +141,7 @@
 - Identity Management and Federation: Ensuring that identities are properly managed and that trust relationships are established for secure information sharing across different domains. (AAA - Authentication, Authorization, and Accountability)
 - Access to Data: Ensuring that access to sensitive data is properly controlled and monitored to prevent unauthorized access and data breaches. (Controlled, Private, and Secured)
 
-### NIST (National Institute of Standards and Technology)
+#### NIST (National Institute of Standards and Technology)
 
 ![](../imgs/nist-protect-function.gif)
 
@@ -150,7 +151,7 @@
 - Minimize Sharing: Limit the sharing of sensitive information to only those who need it, reducing the risk of unauthorized access and data leaks. And, sharing based on sensitivity of the information.
 - Reduce Complexity: Simplify system designs and security controls to minimize potential vulnerabilities and make it easier to manage and maintain security measures effectively.
 
-### The Ten Guiding Principles for Security Architecture
+#### The Ten Guiding Principles for Security Architecture
 
 ![](../imgs/51Xhk9Z1SfL._UF1000,1000_QL80_.jpg)
 
@@ -163,7 +164,7 @@
 - Promote Privacy: Ensure that systems and processes are designed to protect the privacy of individuals, minimizing the collection and exposure of personal information and adhering to relevant privacy regulations and best practices.
 - Be reluctant to trust: Avoid placing trust in components, systems, or individuals without proper verification and validation, reducing the risk of security breaches due to misplaced trust.
 
-### NCSC (National Cyber Security Centre)
+#### NCSC (National Cyber Security Centre)
 
 ![](../imgs/SuuKgeddIADLBSOh8EQkCXD8TVLKjJHbcgdSmtgUdQI.jpg.webp)
 
@@ -173,7 +174,7 @@
 - Make compromise detection easier: Implement mechanisms and monitoring systems that facilitate the timely detection of security breaches or compromises, enabling rapid response and mitigation to minimize potential damage.
 - Reduce the impact of compromises: Implement measures that limit the potential damage caused by security breaches, ensuring that even if a compromise occurs, its effects are contained and manageable.
 
-### High Assurance Design
+#### High Assurance Design
 
 - Security design patterns must be verifiable
 - Deploy and run securely
@@ -186,3 +187,33 @@
 <p align="center">
   <img src="../imgs/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif" alt="Principles of Secure Design" width="3840" />
 </p>
+
+- Least Privilege Principle
+- Strong Authentication
+- Fail-Safe
+- Layered Defence/ Defence-in-depth
+- Simplicity
+- Sensitive data is protected at all times
+- Effective Incident Response
+
+### Approaches to Security
+
+- Security through Obscurity
+
+  - Keeping a system secure by keeping its very existence or vulnerabilities secret
+
+- Security through Obsolescence
+
+  - Using an Outdated OS on a device to prevent hackers from intruding
+
+- Security through Minority
+
+  - Using very uncommon software in the hopes that attackers are less likely to target it
+
+- Security through Diversity
+
+  - Using a wide variety of systems and apps to confuse the attacker
+
+- Security by Design
+
+  - Security is considered in every step from requirements to design to deployment
