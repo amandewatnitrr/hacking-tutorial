@@ -183,4 +183,6 @@
 
 ## Principles of Secure Design
 
-![](../imgs/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif)
+<p align="center">
+  <img src="../imgs/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif" alt="Principles of Secure Design" width="3840" />
+</p>
