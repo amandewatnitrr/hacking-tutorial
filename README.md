@@ -2,6 +2,12 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:0f3460&height=180&section=header&text=Hacking%20Tutorial&fontSize=48&fontColor=e94560&fontAlignY=38&desc=Ethical%20Hacking%20%7C%20Network%20Security%20%7C%20Offensive%20Tooling&descAlignY=58&descSize=18" width="100%"/>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./imgs/logo-on-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./imgs/logo-on-light.svg">
+  <img src="./imgs/logo-on-light.svg" alt="Hacking Tutorial logo" width="140" height="140">
+</picture>
+
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1200&color=E94560&center=true&vCenter=true&width=560&lines=Recon+%C2%B7+MITM+%C2%B7+ARP+Spoofing+%C2%B7+SQLi;Python+Scripting+for+Security+Automation;Learn+it.+Lab+it.+Never+attack+what+isn't+yours." alt="typing banner" />
 
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-1a1a2e?style=for-the-badge&logo=gnu&logoColor=white)](./LICENSE)
