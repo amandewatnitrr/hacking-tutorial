@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="hacking-tutorial">
+  <title>hacking-tutorial</title>
+  <!-- For LIGHT backgrounds. Dark-ink glyph, 600/700-level shield so the
+       stroke keeps contrast against white instead of glowing out. -->
+  <defs>
+    <linearGradient id="ht-on-light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#0E7490"/>
+    </linearGradient>
+  </defs>
+  <path d="M100 16 L174 46 V102 C174 145 139 173 100 184 C61 173 26 145 26 102 V46 Z"
+        fill="none" stroke="url(#ht-on-light)" stroke-width="11"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M74 80 L98 102 L74 124" fill="none" stroke="#0B1220" stroke-width="13"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M112 124 H136" fill="none" stroke="#059669" stroke-width="13"
+        stroke-linecap="round"/>
+</svg>
