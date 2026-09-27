@@ -23,6 +23,10 @@
 
 <br/>
 
+![](./imgs/banner.gif)
+
+<br/>
+
 ![Python](https://skillicons.dev/icons?i=python,bash,linux,docker,git,vim)
 
 </div>
@@ -37,20 +41,20 @@ Everything here is meant to be run in labs you control. No shortcuts to third-pa
 
 ## Table of Contents
 
-- [Hacking Tutorial](#hacking-tutorial)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [What You'll Learn](#what-youll-learn)
-  - [Repository Structure](#repository-structure)
-  - [Getting Started](#getting-started)
-  - [Tutorial Guide](#tutorial-guide)
-  - [Resources](#resources)
-  - [Contributing](#contributing)
-  - [Analytics \& Privacy Guidelines](#analytics--privacy-guidelines)
-  - [Safety \& Ethics](#safety--ethics)
-  - [Security Warning](#security-warning)
-  - [Disclaimer](#disclaimer)
-  - [License](#license)
+- [Overview](#overview)
+- [Table of Contents](#table-of-contents)
+- [What You'll Learn](#what-youll-learn)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Tutorial Guide](#tutorial-guide)
+- [Resources](#resources)
+- [Contributing](#contributing)
+- [Analytics \& Privacy Guidelines](#analytics--privacy-guidelines)
+- [Safety \& Ethics](#safety--ethics)
+- [Security Warning](#security-warning)
+- [Disclaimer](#disclaimer)
+- [License](#license)
+- [Contributors](#contributors)
 
 ## What You'll Learn
 
