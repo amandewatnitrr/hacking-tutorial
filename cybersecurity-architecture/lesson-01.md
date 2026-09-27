@@ -22,6 +22,7 @@
       - [High Assurance Design](#high-assurance-design)
   - [Principles of Secure Design](#principles-of-secure-design)
     - [Approaches to Security](#approaches-to-security)
+  - [Cybersecurity Processes](#cybersecurity-processes)
 
 
 ---
@@ -217,3 +218,23 @@
 - Security by Design
 
   - Security is considered in every step from requirements to design to deployment
+
+## Cybersecurity Processes
+
+- When architecting a cybersecurity solution, the people responsible for managing the solution should be considered.
+
+- The three core processes every cybersecurity architect implements is:
+  
+  - Incident Response
+
+    - NIST 800-61, CERT, ISACA are the key standards for Incident Response.
+    - Systems must be designeed to support organiztions ability to respond to security incidents as quickly as possible.
+
+  - Audit and Reporting
+
+    - 
+
+  - Risk Management
+
+
+- 
