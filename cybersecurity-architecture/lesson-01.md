@@ -23,6 +23,10 @@
   - [Principles of Secure Design](#principles-of-secure-design)
     - [Approaches to Security](#approaches-to-security)
   - [Cybersecurity Processes](#cybersecurity-processes)
+    - [Risk Management](#risk-management)
+      - [Risk Monitoring](#risk-monitoring)
+      - [Risk Treatment](#risk-treatment)
+      - [Understanding Residual Risk](#understanding-residual-risk)
 
 
 ---
@@ -232,9 +236,56 @@
 
   - Audit and Reporting
 
-    - 
+    - Systems must be designed to support organizations' ability to audit and report security events effectively.
+    - Regular audits and reporting help in identifying security gaps and ensuring compliance with security policies.
+    - Ensuring that audit and reporting mechanisms are in place helps organizations maintain accountability and transparency in their security practices.
 
-  - Risk Management
+### Risk Management
 
+- Risk Management involves all process from accessing risks to managing it.
+- Risk Management has 4 phases:
 
-- 
+  - Risk Assessment
+  - Risk Analysis
+  - Risk Mitigation
+  - Risk Monitoring
+
+- Assesments is where all the assets, threats or vulnerabilites would be identified in order to identify the risks associated with the system.
+
+- Analsis will identify the impact of risks to the assets.
+
+- Risk Mitigation, there are 5 things we can do.
+
+  - Reduce the risk
+  - Avoid the risk
+  - Transfer the risk
+  - Accept the risk
+  - Reject the risk
+
+  #### Risk Monitoring
+
+  - Continuously monitor risks and the effectiveness of mitigation strategies to ensure that new risks are identified and managed promptly.
+
+  - Update risk management plans and strategies based on the findings from continuous monitoring to improve overall security posture.
+
+  - Risk Monitoring is a never ending process. It requires continuous attention and adaptation to new threats and changes in the organization's environment.
+
+  #### Risk Treatment
+
+  - Preventive: Measures taken to prevent risks from occurring.
+  
+  - Detective: Measures taken to detect risks when they occur.
+  
+  - Corrective: Measures taken to correct or mitigate the impact of risks after they occur
+
+  - Compensating: Measures taken to provide alternative controls when primary controls are not feasible or effective.
+
+  #### Understanding Residual Risk
+
+  ![](../imgs/risk-funnel.gif)
+
+  - Residual risk refers to the risk that still remains after all security controls eliminate some or all risks have already been made.
+
+  - It is also important to consider residual risk for compliance and regulatory requirements.
+
+  - Its a kind of risk that exists prior to any attempts at mitigation.
