@@ -1,7 +1,7 @@
 # Network Hacking - Pre Connection Attacks
 
 <!-- TOC -->
-- [Network Hacking - Pre Connection Attacks](#network-hacking-pre-connection-attacks)
+- [Network Hacking - Pre Connection Attacks](#network-hacking---pre-connection-attacks)
   - [Packet Sniffing Basics](#packet-sniffing-basics)
   - [Wifi Bands](#wifi-bands)
   - [Targeted Packet Sniffing](#targeted-packet-sniffing)
@@ -114,6 +114,8 @@
 
 ## Targeted Packet Sniffing
 
+![](../imgs/packet-sniffing.gif)
+
 - In order to capture packets from a specific network, we can use the `--bssid` option with `airodump-ng` command.
 - The `--bssid` option allows us to specify the MAC address of the target network we want to capture packets from.
 - We modify our command to be:
@@ -167,6 +169,8 @@
 - But we can analyze the packets using a tool called `Wireshark`, which is a network protocol analyzer that can read and analyze the packets in the `cap` file.
 
 ## Deauthentication Attack
+
+![](../imgs/deauth.gif)
 
 - The Deauthentication attack allows us to disconnect a client from a wireless network by sending deauthentication frames to the target client.
 - For this we will be pretending to be the client that we want to disconnect by changing our MAC Address to the MAC Address of the client, and tell the router that we want to disconnect from it. Then we are going to pretend to be the router, by changing our MAC Address to the MAC Address of the router, and tell the client that we want to disconnect it.

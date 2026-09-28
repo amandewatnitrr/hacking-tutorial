@@ -1,7 +1,7 @@
 # Network Hacking - Gaining Access WEP Cracking
 
 <!-- TOC -->
-- [Network Hacking - Gaining Access WEP Cracking](#network-hacking-gaining-access-wep-cracking)
+- [Network Hacking - Gaining Access WEP Cracking](#network-hacking---gaining-access-wep-cracking)
   - [Theory behing cracking WEP Encryption](#theory-behing-cracking-wep-encryption)
   - [WEP Capturing Basics](#wep-capturing-basics)
   - [Fake Authentication Attack](#fake-authentication-attack)
@@ -210,6 +210,8 @@ sequenceDiagram
 
 ## Fake Authentication Attack
 
+![](../imgs/fake-auth.gif)
+
 - Now, let's work on the issue of idle networks. Let's say the target network is not busy enough, and we are not able to capture enough packets to crack the WEP key.
 - One solution is either we have to wait long enough to capture enough packets, or we can force AP(Access Point) to generate new IVs.
 - Now, before doing this we need to associate with this network. So, what I mean by associate is we need to tell this network that we want to communuicate with it, because by default access points ignore any requests that they get unless the device has connected to the network, or associated with it. Remember, we are not connected to the network yet, we are just trying to associate with it.
@@ -238,6 +240,8 @@ sequenceDiagram
   So, now we are associated with the network, and if we send anything, it's going to accept it, and communicate with us. But, we are not connected to the network yet, we are just associated with it.
 
 ### ARP Request Replay Attack
+
+![](../imgs/arp-replay.gif)
 
 - Now, that we are associated with the network, we can start communicating with it, without getting ignored. So, now we can go and, start injecting packets into the traffic to force the access point to generate new IVs.
 
