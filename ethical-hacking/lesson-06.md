@@ -68,6 +68,8 @@ sequenceDiagram
     note over A: Attacker can still observe metadata (IPs, SNI, timing)
 ```
 
+![](../imgs/mitm.gif)
+
 - A normal communication looks like this where the client communicates to the server via the gateway, and the thus the data obtained in response is as expected. The attacker can intercept this communication and modify the data being sent or received, if not securely encrypted with HTTPS or other secure protocols.
 
 - In case, when a attacker gains access to the network, they can perform a MITM attack by intercepting the communication between the client and the server, the response from the server to the client is modified or altered, and the client receives the modified response. This can lead to various attacks such as data theft, session hijacking, or injecting malicious content into the communication.
