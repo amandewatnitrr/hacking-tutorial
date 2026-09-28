@@ -31,7 +31,7 @@
 
 ## What is Triangle of CIA??
 
-![CIA Triad Diagramatic Representation](../imgs/The_CIA_Triad_npewyc.avif)
+![CIA Triad Diagramatic Representation](../imgs/cia-triad.gif)
 
 - CIA in this context stands for Confidentiality, Integrity, and Availability. These three principles form the foundation of cybersecurity and are often referred to as the "CIA Triad." 
 
@@ -44,7 +44,7 @@
 ## What is Anti CIA Triad?
 
 <p align="center">
-  <img src="../imgs/1779208981975.jpg" alt="" />
+  <img src="../imgs/dad-triad.gif" alt="" />
 </p>
 
 - The Anti-CIA Triad is also known as `DAD` or `DAD Triad`, which stands for Disclosure, Alteration, and Denial. It represents the opposite of the CIA Triad and highlights the potential threats to cybersecurity.
