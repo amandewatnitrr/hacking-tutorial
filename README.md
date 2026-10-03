@@ -10,7 +10,7 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1200&color=E94560&center=true&vCenter=true&width=560&lines=Recon+%C2%B7+MITM+%C2%B7+ARP+Spoofing+%C2%B7+SQLi;Python+Scripting+for+Security+Automation;Learn+it.+Lab+it.+Never+attack+what+isn't+yours." alt="typing banner" />
 
-[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-1a1a2e?style=for-the-badge&logo=gnu&logoColor=white)](./LICENSE)
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-1a1a2e?style=for-the-badge)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-0f3460?style=for-the-badge&logo=git&logoColor=white)](./CONTRIBUTING.md)
 [![Python](https://img.shields.io/badge/Python-e94560?style=for-the-badge&logo=python&logoColor=white)](./python-scripts)
 [![Ethics First](https://img.shields.io/badge/Ethics-First-16213e?style=for-the-badge&logo=shieldsdotio&logoColor=white)](#safety--ethics)
@@ -179,7 +179,9 @@ This project is for educational purposes only. All activities described should b
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0. See [LICENSE](./LICENSE) for details.
+Copyright (c) 2026 amandewatnitrr. All rights reserved. This repository is viewable publicly but is not licensed for copying, redistribution, or reuse without written permission. See [LICENSE](./LICENSE) for details.
+
+Contributions are welcome and are accepted under the [Individual Contributor License Agreement](./docs/legal/individual_contributor_license_agreement.md). See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Contributors
 
