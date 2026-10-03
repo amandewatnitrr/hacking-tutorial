@@ -1,6 +1,6 @@
 # Threat Modeling
 
-![](../imgs/threat-model.gif" alt="Threat Modeling" width="3840" />
+![](../imgs/threat-model.gif)
 
 - [Threat Modeling](#threat-modeling)
   - [Introduction to Threat Modeling](#introduction-to-threat-modeling)
