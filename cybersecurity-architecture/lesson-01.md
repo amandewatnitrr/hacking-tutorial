@@ -289,3 +289,7 @@
   - It is also important to consider residual risk for compliance and regulatory requirements.
 
   - Its a kind of risk that exists prior to any attempts at mitigation.
+
+  - Inherent risks are risks prior to any mitigation efforts, representing the level of risk that exists in the absence of controls.
+
+  - While Residual risk is the risk that remains after all mitigation efforts have been applied, representing the level of risk that an organization must accept and manage.
