@@ -9,7 +9,7 @@
 
 ---
 
-![](../imgs/FMEA.png)
+![](../imgs/terrain-fmea-hq.gif)
 
 ## Introduction
 
@@ -21,6 +21,8 @@
 - The main goal is to spot potential issues, rank them (based on how severe they are, how often they happen, and how easily they can be caught), and take action to stop them from happening.
 
 <b> Requirements on Design/Process Risk Management </b>
+
+![](../imgs/risk-graph-hq.gif)
 
 ```mermaid
 graph TD
