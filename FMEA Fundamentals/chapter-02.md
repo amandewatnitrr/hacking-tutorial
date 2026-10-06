@@ -17,7 +17,7 @@ There are 3 main contexts in a FMEA:
 
 ## FBD (Functional Block Diagram)
 
-![](../imgs/functional_block_diagram.png)
+![](../imgs/fbd-hq.gif)
 
 - Defines what is included in the analysis — essentially drawing a boundary around what you are studying so nothing important is left out or accidentally included.
 - Lists out the key functions each part is supposed to perform, how they relate to each other, and what depends on what.
@@ -29,7 +29,7 @@ There are 3 main contexts in a FMEA:
 
 ## P Diagram (Process Flow Diagram)
 
-![](../imgs/5.jpg)
+![](../imgs/p-diagram-hq.gif)
 
 - Maps out everything that goes into and comes out of a system — including what controls it and what external factors (called "noise") can throw it off.
 - Establishes a baseline for what "normal" looks like — that is, what the system is supposed to do under expected conditions — so deviations are easier to spot.
@@ -42,7 +42,7 @@ There are 3 main contexts in a FMEA:
 
 ## dFMEA (Design Failure Mode and Effects Analysis)
 
-![](../imgs/DFMEA-Ballpoint-Pen-Tip-All-No-Numbering.png)
+![](../imgs/dfmea-hq.gif)
 
 - Looks for things that could go wrong while a product is still being designed — before it's built or shipped.
 - Examines what would happen to the rest of the system if each of those failures actually occurred.
