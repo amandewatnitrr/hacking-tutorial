@@ -5,6 +5,9 @@
 - [Threat Modeling](#threat-modeling)
   - [Introduction to Threat Modeling](#introduction-to-threat-modeling)
   - [Threat Modeling vs Risk Assessment](#threat-modeling-vs-risk-assessment)
+  - [Types of Threat Models](#types-of-threat-models)
+    - [Application Threat Model](#application-threat-model)
+    - [Operational Threat Model](#operational-threat-model)
 
 ## Introduction to Threat Modeling
 
@@ -61,3 +64,40 @@
 - Risks are measured based on <b>probability</b> that an event might occur and have certain impact on the functioning of the system.
 
 - Threat assesment is combination of a threat actor's intention to harm combined with capability of the actor to carry out these intentions.
+
+## Types of Threat Models
+
+- There are mainly 3 types of threat models:
+
+  - Application Threat Model
+  - Operational Threat Model
+  - Data Flow Threat Model
+
+### Application Threat Model
+
+- Focuses exclusively on the application the model has been designed for and is used to identify potential threats and vulnerabilities specific to that application.
+
+- The general idea here is:
+
+  - We first create an Architecture Design Diagram
+  - Identify the assets in use
+  - Identify the threats to those assets
+  - Team participation
+  - Idetify Threat Actors
+  - Controls to mitigate identified threats
+
+### Operational Threat Model
+
+- Provides organizations with general overview of it's infrastructure risk profile in order to better understand the attack surface and develop effective mitigation policies and strategies.
+
+- Operational Threat Model is more about entire business as a whole.
+
+- The general idea here is:
+
+  - We first identify the operational environment. This can include shared resources like database or encryption servers.
+
+  - Every resource attributes are identified, for example a server with unrestricted admin access can have more threats
+
+  - Potential threats are identified.
+
+  - Effective security controls are developed.
