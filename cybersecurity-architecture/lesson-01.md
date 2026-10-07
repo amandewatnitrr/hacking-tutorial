@@ -27,6 +27,7 @@
       - [Risk Monitoring](#risk-monitoring)
       - [Risk Treatment](#risk-treatment)
       - [Understanding Residual Risk](#understanding-residual-risk)
+  - [Secure Architecture Process](#secure-architecture-process)
 
 
 ---
@@ -293,3 +294,42 @@
   - Inherent risks are risks prior to any mitigation efforts, representing the level of risk that exists in the absence of controls.
 
   - While Residual risk is the risk that remains after all mitigation efforts have been applied, representing the level of risk that an organization must accept and manage.
+
+## Secure Architecture Process
+
+![](../imgs/secure-arch-4k.gif)
+
+- A Secure Architecture Process has 5 stages:
+
+  - Threat Modeling
+  - Secure Design/Architecture
+  - SDLC
+  - Testing and Validation
+  - Production/Deployment
+
+>[!IMPORTANT]
+> - Threat Modeling 
+>   - A process of identifying potential threats for the system.
+>   - Priortizes mitigations measures
+>   - Has great effect on the work plan
+>   - Involves everyone in the team
+>   - Utilizes formal methods and tools
+
+>[!IMPORTANT]
+> - Secure Design/Architecture
+>   - The most important step for the architect
+>   - Based on the Security Perimeters Paradigm
+>   - Integrates security defenses into the core architecture
+>   - Touches all aspects of the system.
+
+>[!IMPORTANT]
+> - SDLC (Software Development Life Cycle)
+>   - The actual development of the system
+>   - Implement code level security measures
+
+>[!IMPORTANT]
+> - Testing
+>   - Implement security oriented testing
+>   - Analysze the results
+>   - Compare to the Threat Model
+
