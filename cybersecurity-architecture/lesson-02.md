@@ -8,6 +8,7 @@
   - [Types of Threat Models](#types-of-threat-models)
     - [Application Threat Model](#application-threat-model)
     - [Operational Threat Model](#operational-threat-model)
+    - [Data Flow Threat Model](#data-flow-threat-model)
 
 ## Introduction to Threat Modeling
 
@@ -101,3 +102,9 @@
   - Potential threats are identified.
 
   - Effective security controls are developed.
+
+### Data Flow Threat Model
+
+- Used to accurately model the application through visual representation.
+
+- Diagram should identify the affected components through critical points and also highlight the flow of control through these components.
