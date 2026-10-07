@@ -68,6 +68,8 @@
 
 ## Types of Threat Models
 
+![](../imgs/trust-board-4k.gif)
+
 - There are mainly 3 types of threat models:
 
   - Application Threat Model
