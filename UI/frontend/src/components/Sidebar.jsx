@@ -18,7 +18,10 @@ const Sidebar = ({ isOpen, onClose, currentSlug }) => {
   }, []);
 
   return (
-    <aside className={`hl-sidebar ${isOpen ? 'hl-sidebar--open' : 'hl-sidebar--closed'}`}>
+    <aside
+      id="lesson-sidebar"
+      className={`hl-sidebar ${isOpen ? 'hl-sidebar--open' : 'hl-sidebar--closed'}`}
+    >
       <div className="hl-sidebar__panel" ref={scrollRef}>
         <div className="hl-sidebar__header">
           <span className="hl-sidebar__title">Lessons</span>
