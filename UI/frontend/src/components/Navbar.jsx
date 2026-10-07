@@ -48,9 +48,9 @@ const Navbar = () => {
     handleNavClick();
   };
 
-  // ✅ When the user refreshes on lessons, keep sidebar open
+  // Keep the sidebar open on desktop, but closed by default on smaller screens.
   useEffect(() => {
-    if (location.pathname.startsWith('/lessons')) {
+    if (location.pathname.startsWith('/lessons') && window.innerWidth >= 1024) {
       window.dispatchEvent(new CustomEvent('open-sidebar'));
     } else {
       window.dispatchEvent(new CustomEvent('close-sidebar'));
@@ -67,7 +67,7 @@ const Navbar = () => {
         </Link>
 
         {/* Links */}
-        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+        <div id="navbar-links" className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
           <button
             type="button"
             className="nav-link bg-transparent"
@@ -105,6 +105,8 @@ const Navbar = () => {
           className={`mobile-menu-button ${isMenuOpen ? 'open' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="navbar-links"
         >
           {isMenuOpen ? (
             // Close icon
