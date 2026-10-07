@@ -4,6 +4,7 @@
 
 - [Threat Modeling](#threat-modeling)
   - [Introduction to Threat Modeling](#introduction-to-threat-modeling)
+  - [Threat Modeling vs Risk Assessment](#threat-modeling-vs-risk-assessment)
 
 ## Introduction to Threat Modeling
 
@@ -49,3 +50,14 @@
   ![](../imgs/port-control.gif)
 
 - FMEA (Failure Modes and Effects Analysis) helps a lot with identifying potential failure points in a system and assessing their impact, which in turn aids in designing effective mitigations for security threats. Feel free to take a tour through the FMEA process to understand how it can be applied in threat modeling in <a href="../FMEA Fundamentals/chapter-01.md">this link</a>.
+
+## Threat Modeling vs Risk Assessment
+
+![](../imgs/versus-hq.gif)
+
+>[!NOTE]
+> Threats can exist without a risk, but a risk needs a associated threat to exist. Risks are event focused while threats are intent focused.
+
+- Risks are measured based on <b>probability</b> that an event might occur and have certain impact on the functioning of the system.
+
+- Threat assesment is combination of a threat actor's intention to harm combined with capability of the actor to carry out these intentions.
