@@ -327,24 +327,27 @@ article, .lesson-content, .markdown-content {
   word-wrap: break-word;
 }
 
-/* Fix for mobile devices */
+/* Keep lesson content full-width while the mobile sidebar is closed or open. */
 @media (max-width: 768px) {
+  .lesson-layout {
+    display: block;
+    width: 100%;
+  }
+
+  .main-content {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0.75rem;
+  }
+
   .lesson-content h1 {
     margin-left: 0;
     padding: 0 1rem;
   }
-  
+
   pre {
     font-size: 0.85rem;
     padding: 0.75rem;
   }
-  
-  img {
-    max-width: 100%;
-  }
 }
-
-
-
-
-

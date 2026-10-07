@@ -31,9 +31,14 @@ const LessonPage = () => {
     <>
       <Navbar />
       <div className={`lesson-page ${!isSidebarOpen ? 'sidebar-hidden' : ''}`}>
-        {/* <button className="sidebar-toggle" onClick={() => setIsSidebarOpen(true)}>
+        <button
+          className="sidebar-toggle"
+          onClick={() => setIsSidebarOpen(true)}
+          aria-expanded={isSidebarOpen}
+          aria-controls="lesson-sidebar"
+        >
           ☰ Lessons
-        </button> */}
+        </button>
         <div className={`lesson-layout ${!isSidebarOpen ? 'lesson-layout--sidebar-hidden' : ''}`}>
           <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} currentSlug={slug} />
           <main className="main-content">
