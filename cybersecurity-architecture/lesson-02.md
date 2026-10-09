@@ -9,6 +9,11 @@
     - [Application Threat Model](#application-threat-model)
     - [Operational Threat Model](#operational-threat-model)
     - [Data Flow Threat Model](#data-flow-threat-model)
+  - [STRIDE Threat Model](#stride-threat-model)
+  - [DREAD Threat Model](#dread-threat-model)
+  - [PASTA Threat Model](#pasta-threat-model)
+  - [OCTAVE Threat Model](#octave-threat-model)
+  - [TRIKE Threat Model](#trike-threat-model)
 
 ## Introduction to Threat Modeling
 
@@ -110,3 +115,105 @@
 - Used to accurately model the application through visual representation.
 
 - Diagram should identify the affected components through critical points and also highlight the flow of control through these components.
+
+## STRIDE Threat Model
+
+  ![](../imgs/stride-hq.gif)
+
+- STRIDE stands for Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege. It is a widely used threat modeling framework that helps identify and categorize potential security threats to a system.
+- STRIDE was developed by Microsoft
+- Developers can use this model during design phase to spot potential threats in the system.
+- So, when using STRIDE, developers ask themselves 2 questions:
+
+  1. What can go wrong in the system?
+  2. Are mitigation controls put in place effective?
+
+- To counter this the Threat Model aims for:
+
+  - Authentication
+  - Integrity
+  - Identification
+  - Confidentiality
+  - Availability
+  - Authorization
+
+- These threats are addressed by:
+
+  - Mitigation
+  - Elimination (component is removed)
+  - Transfered
+  - Accepted
+
+## DREAD Threat Model
+
+![](../imgs/dread-hq.gif)
+
+- DREAD stands for Damage, Reproducibility, Exploitability, Affected Users, and Discoverability. It is a risk assessment model used to quantify and prioritize potential security threats.
+- DREAD is used to assess and prioritize threats based on their potential impact and probability, helping organizations make informed decisions about risk management.
+- Each factor is awarded a score but this process can be very subjective and unreliable.
+
+## PASTA Threat Model
+
+![](../imgs/pasta-hq.gif)
+
+- PASTA stands for Process for Attack Simulation and Threat Analysis. It is a risk-centric threat modeling methodology that aims to identify and mitigate potential security threats throughout the software development lifecycle.
+
+- It's a 7 step methodology to create a process for simulating attacks to application, analyzing the threats, their origin, the risk they post to an organization, and how to mitigate them.
+
+- The 7 steps of PASTA are:
+  1. Definition of the Objectives
+  2. Definition of the Technical Scope
+  3. Application Decomposition and Analysis
+  4. Threat Analysis
+  5. Vulnerability and Weakness Analysis
+  6. Attack Simulation
+  7. Risk and Impact Analysis
+
+## OCTAVE Threat Model
+
+![](../imgs/octave-hq.gif)
+
+- OCTAVE stands for Operationally Critical Threat, Asset, and Vulnerability Evaluation. It is a risk-based strategic assessment and planning technique for security.
+- Due to its flexibility, it can be made to fit the needs of practically any organization while only requiring a small team of cyber security professionals to collaborate on the endeavor.
+- There are 3 variants of the OCTAVE methodology: 
+  - OCTAVE Allegro: best for small teams
+  - OCTAVE-S: suitable for larger organizations
+  - OCTAVE FORTE: Most Adaptable Variation
+- It is fast at discovering, prioritizing, and mitigating risks.
+
+## TRIKE Threat Model
+
+![](../imgs/trike-hq.gif)
+
+- TRIKE stands for Threat modeling, Risk assessment, and Information security Knowledge Engineering. It is a risk management and threat modeling framework that focuses on defining and enforcing security requirements for a system.
+- It is a Open Source Developed Framework released in 2006 and, is used by Security Professionals who run security audits.
+- It is a risk driven approach to threat modeling, where the focus is on identifying and mitigating risks based on their potential impact on the system.
+- It focuses on defence rather than offense, aiming to strengthen the system's security posture by proactively addressing potential threats.
+- TRIKE involves 4 stages:
+
+  - Determine risk level for each asset
+  - Document what's been done
+  - Communicate what was done and the impact to stake holders
+  - Work with stake holders to reduce risk
+  
+- <strong>TRIKE Process</strong>
+
+  - TRIKE uses something called a `requirement model`.
+    - Actors interacting with the system
+    - Assets or data elements to be used
+    - Intended actions performed by the system (CRUD)
+    - Rules that define when the actions can be performed.
+
+  - The next thing that comes in the TRIKE process is the `implementation model`.
+    - Identify the set of supporting operations
+    - Develop Data flow diagrams
+    - Identify Use flows
+
+  - The next step is to build the `threat model`.
+    - Identify all possible threats
+    - Identify weaknesses and vulnerabilities
+    - Identify mitigations that can reduce the risks
+
+  - The last step is building the `Risk Model`.
+    - Experimental and still under development
+    - Recommended to use other methodologies like NIST
