@@ -1,2 +1,6 @@
+# Shared runtime dependencies for the whole repository
+-r ../requirements.txt
+
+# Lab-specific dependencies
 Flask>=2.0
 pytest>=7.0

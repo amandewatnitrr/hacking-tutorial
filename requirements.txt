@@ -1,0 +1,31 @@
+# Runtime dependencies for the Python scripts in this repository.
+#
+# Every entry maps a third-party *import* name used in the scripts to its
+# actual PyPI package name (see the comment above each entry). Bounds are
+# chosen so that a Python 3.8 interpreter can still resolve a compatible
+# release (pip picks the newest version whose Requires-Python allows yours).
+#
+# Development/CI tooling lives in requirements-dev.txt.
+# Flask/pytest for the SQL injection lab live in sql-injection-lab/requirements.txt.
+#
+# See SETUP.md for setup instructions and the dependency contribution policy.
+
+# import requests  /  import urllib3  (python-scripts/https_data_fetcher_bettercap.py)
+requests>=2.28,<3
+# directly imported (disable_warnings); also a requests dependency
+urllib3>=1.26,<3
+
+# from bs4 import BeautifulSoup  (python-scripts/https_data_fetcher_bettercap.py)
+beautifulsoup4>=4.12,<5
+
+# import scapy.all  (arp spoof detector, network scanner, ids probe, ...)
+scapy>=2.5,<3
+
+# from cryptography import x509  (optional at runtime, guarded by try/except)
+# cryptography 45+ only ships cp311-abi3 wheels, so Python <3.11 is capped at 44.x
+cryptography>=41,<45; python_version < "3.11"
+cryptography>=44,<51; python_version >= "3.11"
+
+# import geoip2.database  (optional at runtime, guarded by try/except)
+# pip resolves a 3.8-compatible maxminddb (geoip2's dependency) automatically
+geoip2>=4.7,<6
