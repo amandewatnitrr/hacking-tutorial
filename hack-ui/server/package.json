@@ -1,0 +1,15 @@
+{
+  "name": "hack-ui-server",
+  "version": "1.0.0",
+  "description": "Local PTY bridge for hack-ui — spawns a real shell per terminal tab and streams it over WebSocket.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "node scripts/fix-spawn-helper-perms.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "node-pty": "^1.1.0",
+    "ws": "^8.22.0"
+  }
+}

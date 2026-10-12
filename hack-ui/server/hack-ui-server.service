@@ -1,0 +1,15 @@
+[Unit]
+Description=hack-ui terminal backend (runs as root so console tiles open a real root shell with no per-click password prompt)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/hack-ui/server
+ExecStart=/usr/bin/node index.js
+Environment=HACKUI_SERVER_PORT=7117
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
