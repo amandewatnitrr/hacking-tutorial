@@ -26,7 +26,16 @@ function readTerminalTheme() {
   }
 }
 
-export function TerminalTab({ session, active, onExit }) {
+function dumpBuffer(term) {
+  const buffer = term.buffer.active
+  const lines = []
+  for (let i = 0; i < buffer.length; i++) {
+    lines.push(buffer.getLine(i)?.translateToString(true) ?? "")
+  }
+  return lines.join("\n")
+}
+
+export function TerminalTab({ session, active, onExit, onReady }) {
   const containerRef = useRef(null)
   const termRef = useRef(null)
   const wsRef = useRef(null)
@@ -46,6 +55,7 @@ export function TerminalTab({ session, active, onExit }) {
     fitAddon.fit()
     termRef.current = term
     fitRef.current = fitAddon
+    onReady?.(session.id, { getText: () => dumpBuffer(term) })
 
     const syncSize = () => {
       if (!containerRef.current) return
@@ -112,6 +122,7 @@ export function TerminalTab({ session, active, onExit }) {
       dataListener.dispose()
       ws.close()
       term.dispose()
+      onReady?.(session.id, null)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

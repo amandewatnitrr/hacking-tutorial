@@ -1,5 +1,6 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { TerminalTab } from "./TerminalTab"
+import { backendRecordUrl } from "../lib/backend"
 
 const MIN_HEIGHT = 180
 const MAX_HEIGHT_MARGIN = 160
@@ -16,6 +17,31 @@ export function TerminalDrawer({
   rootStatus,
 }) {
   const dragRef = useRef(null)
+  const terminalsRef = useRef(new Map())
+  const [recordStatus, setRecordStatus] = useState("")
+
+  const handleTerminalReady = (sessionId, api) => {
+    if (api) terminalsRef.current.set(sessionId, api)
+    else terminalsRef.current.delete(sessionId)
+  }
+
+  const handleRecord = async () => {
+    const api = terminalsRef.current.get(activeId)
+    if (!api) return
+
+    try {
+      const res = await fetch(backendRecordUrl(), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: api.getText() }),
+      })
+      const data = await res.json()
+      setRecordStatus(res.ok ? `saved terminal-record/${data.file}` : `save failed — ${data.error ?? "unknown error"}`)
+    } catch {
+      setRecordStatus("save failed — is the backend running?")
+    }
+    setTimeout(() => setRecordStatus(""), 3200)
+  }
 
   const startDrag = (event) => {
     dragRef.current = { startY: event.clientY, startHeight: height }
@@ -72,7 +98,17 @@ export function TerminalDrawer({
             </button>
           ))}
         </div>
-        <div className="terminal-drawer__status mono">{rootStatus}</div>
+        <div className="terminal-drawer__status mono">{recordStatus || rootStatus}</div>
+        <button
+          type="button"
+          className="terminal-drawer__record"
+          onClick={handleRecord}
+          disabled={!activeId}
+          aria-label="Save current terminal output to a log file"
+          title="Save current terminal output to terminal-record/"
+        >
+          ● record
+        </button>
         <button
           type="button"
           className="terminal-drawer__collapse"
@@ -84,7 +120,13 @@ export function TerminalDrawer({
       </div>
       <div className="terminal-drawer__body" style={{ display: collapsed ? "none" : "block" }}>
         {sessions.map((session) => (
-          <TerminalTab key={session.id} session={session} active={session.id === activeId} onExit={() => {}} />
+          <TerminalTab
+            key={session.id}
+            session={session}
+            active={session.id === activeId}
+            onExit={() => {}}
+            onReady={handleTerminalReady}
+          />
         ))}
       </div>
     </div>
