@@ -28,6 +28,11 @@
   background: var(--rail-bg);
 }
 
+.top-bar__logo {
+  display: block;
+  align-self: center;
+}
+
 .top-bar__title {
   font-weight: 600;
   font-size: 15px;
@@ -259,6 +264,28 @@
   color: var(--term-ink-muted);
   padding: 0 10px;
   white-space: nowrap;
+}
+
+.terminal-drawer__record {
+  appearance: none;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--term-ink-muted);
+  border-radius: var(--radius-tag);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.terminal-drawer__record:hover:not(:disabled) {
+  color: var(--term-ink);
+  border-color: var(--term-ink-muted);
+}
+
+.terminal-drawer__record:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .terminal-drawer__collapse {

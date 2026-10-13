@@ -43,6 +43,7 @@ export const categories = [
       { title: "Hash function demo", tag: "PY.01 · hash-function", command: "cd python-scripts/hash-function && ls" },
       { title: "Symmetric encryption", tag: "PY.02 · symmetric-encryption", command: "cd python-scripts/symmetric-encryption && ls" },
       { title: "Fake webpage", tag: "PY.03 · fake-webpage", command: "cd python-scripts/fake-webpage && ls" },
+      { title: "MAC address change", tag: "PY.04 · mac-address-change", command: "cd python-scripts && python3 mac-address-change.py" },
     ],
   },
 ]

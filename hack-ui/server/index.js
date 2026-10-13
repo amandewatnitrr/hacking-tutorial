@@ -1,4 +1,7 @@
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
 const { WebSocketServer } = require("ws");
 const pty = require("node-pty");
 const { spawnSync } = require("child_process");
@@ -7,6 +10,8 @@ const PORT = Number(process.env.HACKUI_SERVER_PORT) || 7117;
 const HOST = process.env.HACKUI_SERVER_HOST || "0.0.0.0";
 const SHELL = process.platform === "win32" ? "powershell.exe" : process.env.SHELL || "bash";
 const isRoot = typeof process.getuid === "function" && process.getuid() === 0;
+const RECORD_DIR = path.join(__dirname, "..", "terminal-record");
+const MAX_RECORD_BODY = 10 * 1024 * 1024; // 10MB of scrollback text is already a lot
 
 function sudoAvailable() {
   if (process.platform === "win32") return false;
@@ -31,6 +36,68 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify({ ok: true, root: isRoot, canSudo }));
     return;
   }
+
+  if (req.method === "OPTIONS" && req.url === "/api/record") {
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  if (req.method === "POST" && req.url === "/api/record") {
+    const chunks = [];
+    let size = 0;
+    let aborted = false;
+
+    req.on("data", (chunk) => {
+      if (aborted) return;
+      size += chunk.length;
+      if (size > MAX_RECORD_BODY) {
+        aborted = true;
+        res.writeHead(413, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: false, error: "recording too large" }));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+
+    req.on("end", () => {
+      if (aborted) return;
+      let body;
+      try {
+        body = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+      } catch {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: false, error: "invalid JSON body" }));
+        return;
+      }
+
+      if (typeof body.content !== "string") {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: false, error: "missing content string" }));
+        return;
+      }
+
+      const ext = body.ext === "log" ? "log" : "txt";
+      const file = `${crypto.randomBytes(8).toString("hex")}.${ext}`;
+
+      try {
+        fs.mkdirSync(RECORD_DIR, { recursive: true });
+        fs.writeFileSync(path.join(RECORD_DIR, file), body.content, "utf8");
+      } catch (err) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: false, error: err.message }));
+        return;
+      }
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ ok: true, file }));
+    });
+    return;
+  }
+
   res.writeHead(404, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ ok: false, error: "not found" }));
 });
