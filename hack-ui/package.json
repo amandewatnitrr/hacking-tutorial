@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "install:all": "npm install && npm install --prefix server",
+    "dev:server": "npm --prefix server start",
+    "dev:all": "concurrently -n backend,frontend -c blue,green \"npm:dev:server\" \"npm:dev\""
   },
   "dependencies": {
     "@xterm/addon-fit": "^0.11.0",
@@ -19,6 +22,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.6",
     "oxlint": "^1.81.0",
     "vite": "^8.3.0"
   }
