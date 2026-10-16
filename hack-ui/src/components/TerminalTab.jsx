@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Terminal } from "@xterm/xterm"
 import { FitAddon } from "@xterm/addon-fit"
+import { SearchAddon } from "@xterm/addon-search"
 import "@xterm/xterm/css/xterm.css"
 import { backendWsUrl } from "../lib/backend"
 
@@ -35,11 +36,14 @@ function dumpBuffer(term) {
   return lines.join("\n")
 }
 
-export function TerminalTab({ session, active, onExit, onReady }) {
+// Only the pane's currently-active session is ever mounted — switching tabs,
+// moving a session to the other pane, or refreshing the page all unmount
+// this component. The backend keeps the PTY (and its output) running
+// regardless, so mounting again just reattaches via session.id and replays
+// what was missed instead of starting a fresh shell. `endOnCloseIds` is the
+// one case that should NOT reattach-on-return: an explicit × click.
+export function TerminalTab({ session, onExit, onReady, endOnCloseIds }) {
   const containerRef = useRef(null)
-  const termRef = useRef(null)
-  const wsRef = useRef(null)
-  const fitRef = useRef(null)
 
   useEffect(() => {
     const term = new Terminal({
@@ -48,20 +52,41 @@ export function TerminalTab({ session, active, onExit, onReady }) {
       fontSize: 13,
       cursorBlink: true,
       scrollback: 4000,
+      allowProposedApi: true,
     })
     const fitAddon = new FitAddon()
+    const searchAddon = new SearchAddon()
     term.loadAddon(fitAddon)
+    term.loadAddon(searchAddon)
     term.open(containerRef.current)
     fitAddon.fit()
-    termRef.current = term
-    fitRef.current = fitAddon
-    onReady?.(session.id, { getText: () => dumpBuffer(term) })
+    term.focus()
+
+    const searchDecorations = {
+      matchBackground: "#854d0e",
+      matchBorder: "#fbbf24",
+      matchOverviewRuler: "#fbbf24",
+      activeMatchBackground: "#b45309",
+      activeMatchBorder: "#fde68a",
+      activeMatchColorOverviewRuler: "#fde68a",
+    }
+
+    onReady?.(session.id, {
+      getText: () => dumpBuffer(term),
+      findNext: (query, options) =>
+        searchAddon.findNext(query, { decorations: searchDecorations, ...options }),
+      findPrevious: (query, options) =>
+        searchAddon.findPrevious(query, { decorations: searchDecorations, ...options }),
+      clearSearch: () => searchAddon.clearDecorations(),
+      onResultsChange: (callback) => searchAddon.onDidChangeResults(callback),
+      focus: () => term.focus(),
+    })
 
     const syncSize = () => {
       if (!containerRef.current) return
       fitAddon.fit()
-      if (wsRef.current?.readyState === WebSocket.OPEN) {
-        wsRef.current.send(JSON.stringify({ type: "resize", cols: term.cols, rows: term.rows }))
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: "resize", cols: term.cols, rows: term.rows }))
       }
     }
 
@@ -71,12 +96,13 @@ export function TerminalTab({ session, active, onExit, onReady }) {
     document.fonts.load('13px "Hack Nerd Font Mono"').then(syncSize).catch(() => {})
 
     const ws = new WebSocket(backendWsUrl())
-    wsRef.current = ws
 
     ws.onopen = () => {
       ws.send(
         JSON.stringify({
           type: "start",
+          sessionId: session.id,
+          title: session.title,
           cols: term.cols,
           rows: term.rows,
           prefill: session.prefill,
@@ -104,10 +130,6 @@ export function TerminalTab({ session, active, onExit, onReady }) {
       term.write("\r\n\x1b[31m[connection error — is the hack-ui backend running on :7117?]\x1b[0m\r\n")
     }
 
-    ws.onclose = () => {
-      term.write("\r\n\x1b[90m[connection closed]\x1b[0m\r\n")
-    }
-
     const dataListener = term.onData((data) => {
       if (ws.readyState === WebSocket.OPEN) {
         ws.send(JSON.stringify({ type: "input", data }))
@@ -120,6 +142,12 @@ export function TerminalTab({ session, active, onExit, onReady }) {
     return () => {
       resizeObserver.disconnect()
       dataListener.dispose()
+      if (endOnCloseIds?.current?.has(session.id)) {
+        if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: "end" }))
+        endOnCloseIds.current.delete(session.id)
+      }
+      ws.onmessage = null
+      ws.onerror = null
       ws.close()
       term.dispose()
       onReady?.(session.id, null)
@@ -127,12 +155,5 @@ export function TerminalTab({ session, active, onExit, onReady }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if (active && fitRef.current && containerRef.current) {
-      fitRef.current.fit()
-      termRef.current?.focus()
-    }
-  }, [active])
-
-  return <div className="terminal-tab-surface" style={{ display: active ? "block" : "none" }} ref={containerRef} />
+  return <div className="terminal-tab-surface" ref={containerRef} />
 }
