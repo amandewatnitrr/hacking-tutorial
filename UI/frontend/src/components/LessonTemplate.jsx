@@ -163,16 +163,22 @@ const LessonTemplate = ({ lesson }) => {
                 />
               );
             },
-            a({ children, href, ...props }) {
+            a({ children, href, className, ...props }) {
               // Handle internal anchor links
               if (href?.startsWith('#')) {
+                const combinedClass = [className, 'internal-link'].filter(Boolean).join(' ');
                 return (
                   <a
                     href={href}
+                    className={combinedClass}
                     onClick={(e) => {
                       e.preventDefault();
                       const id = href.substring(1);
-                      const element = document.getElementById(id);
+                      const element =
+                        document.getElementById(id) ||
+                        document.getElementById(`-${id}`) ||
+                        document.getElementById(id.replace(/^-+/, '')) ||
+                        document.getElementById(decodeURIComponent(id));
                       if (element) {
                         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         // Update URL hash without triggering navigation

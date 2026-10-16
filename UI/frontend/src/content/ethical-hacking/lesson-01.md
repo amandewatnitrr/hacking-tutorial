@@ -20,7 +20,7 @@ next: "lesson-02"
   - [Wireless Modes](#wireless-modes)
     - [Enabling Monitor Mode on Wireless Adapter](#enabling-monitor-mode-on-wireless-adapter)
 - [Extras - Learning Section - RSA Encryption](#extras-learning-section-rsa-encryption)
-    - [What is RSA?](#what-is-rsa)
+    - [📌 What is RSA?](#-what-is-rsa)
   - [The Math Behind RSA (Step by Step)](#the-math-behind-rsa-step-by-step)
       - [Step 1: Pick Two Large Primes](#step-1-pick-two-large-primes)
       - [Step 2: Build the Modulus](#step-2-build-the-modulus)
