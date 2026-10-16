@@ -197,8 +197,10 @@
 
 .nav-section {
   display: flex;
+  flex: 1 1 0;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .nav-section--left {
@@ -213,6 +215,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   gap: 0.5rem;
   padding: 0.7rem 1.2rem;
   border-radius: 6px;
@@ -267,9 +271,17 @@
   color: var(--text-secondary);
 }
 
+.nav-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .nav-title {
   font-size: 0.95rem;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
 
 /* Light theme overrides */
@@ -297,4 +309,23 @@
   border-top: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
+}
+
+@media (max-width: 600px) {
+  .lesson-template .lesson-navigation {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .lesson-template .nav-section {
+    width: 100%;
+  }
+
+  .lesson-template .nav-button,
+  .lesson-template .nav-button--right {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+  }
 }
