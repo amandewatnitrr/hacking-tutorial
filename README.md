@@ -56,11 +56,7 @@ Everything here is meant to be run in labs you control. No shortcuts to third-pa
 - [License](#license)
 - [Contributors](#contributors)
 
-
-
-https://github.com/user-attachments/assets/8a4a511a-4dfa-4a54-a6bb-2c729e4c2d4a
-
-<img width="420" height="236" alt="hacker-room" src="https://github.com/user-attachments/assets/f2a5a341-f833-484b-a173-7bda4c61f514" />
+<video src="https://github.com/user-attachments/assets/f2a5a341-f833-484b-a173-7bda4c61f514" width="420" height="236" autoplay loop muted playsinline controls></video>
 
 
 ## What You'll Learn
