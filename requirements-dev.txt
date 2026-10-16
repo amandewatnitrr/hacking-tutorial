@@ -1,0 +1,24 @@
+# Development / CI tooling. Install with:
+#   pip install -r requirements-dev.txt
+# Includes everything in requirements.txt plus the tools below.
+# Lower bounds are 3.8-compatible where such releases exist; pip picks the
+# newest release that supports your interpreter.
+
+-r requirements.txt
+
+# Test runner (used by sql-injection-lab/tests)
+pytest>=7.0
+
+# Formatters
+black>=24.8
+isort>=5.13
+
+# Git hook manager — see .pre-commit-config.yaml
+pre-commit>=3.5
+
+# Dependency vulnerability audit
+pip-audit>=2.7
+
+# Type checker — only meaningful for sql-injection-lab/app (see SETUP.md);
+# the standalone tutorial scripts are untyped and not checked in CI
+mypy>=1.14

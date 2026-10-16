@@ -45,6 +45,7 @@ Everything here is meant to be run in labs you control. No shortcuts to third-pa
 - [Table of Contents](#table-of-contents)
 - [What You'll Learn](#what-youll-learn)
 - [Repository Structure](#repository-structure)
+- [Quickstart](#quickstart)
 - [Getting Started](#getting-started)
 - [Tutorial Guide](#tutorial-guide)
 - [Resources](#resources)
@@ -93,6 +94,20 @@ Everything here is meant to be run in labs you control. No shortcuts to third-pa
 | [`safe-practice-questions/`](./safe-practice-questions) | Practice questions with an answer key |
 | [`UI/`](./UI) | Frontend for the site |
 | [`docs/`](./docs) | Reference material and legal notes |
+
+## Quickstart
+
+Set up the Python environment (per-OS details, Scapy/Npcap permissions, and troubleshooting live in [SETUP.md](./SETUP.md)):
+
+```bash
+git clone https://github.com/amandewatnitrr/hacking-tutorial.git
+cd hacking-tutorial
+python3 -m venv .venv
+source .venv/bin/activate          # Windows PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt     # add -r requirements-dev.txt for tests/linting
+```
+
+Prefer a helper? `source scripts/activate_venv.sh` (bash/zsh) or `. .\scripts\activate_venv.ps1` (PowerShell) creates and activates `.venv` for you.
 
 ## Getting Started
 

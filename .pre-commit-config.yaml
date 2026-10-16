@@ -1,0 +1,35 @@
+# See https://pre-commit.com for usage.
+# Install once per clone:  pre-commit install
+# Run against everything:  pre-commit run --all-files
+#
+# Note: python-scripts/ids_probe.py (and its UI copy) contain committed,
+# unresolved merge-conflict markers from a past bad merge. They are excluded
+# here so the hooks stay usable; see "Troubleshooting" in SETUP.md.
+
+exclude: |
+  (?x)^(
+    python-scripts/ids_probe\.py|
+    UI/frontend/src/content/python-scripts/ids_probe\.py
+  )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/psf/black
+    rev: 26.10.1
+    hooks:
+      - id: black
+
+  - repo: https://github.com/pycqa/isort
+    rev: 9.0.2
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
