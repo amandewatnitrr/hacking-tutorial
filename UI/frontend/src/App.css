@@ -17,7 +17,7 @@ body {
   padding: 0;
   background-color: var(--bg-primary);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .home-button a {
