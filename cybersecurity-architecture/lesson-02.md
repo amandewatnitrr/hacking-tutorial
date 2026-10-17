@@ -21,6 +21,11 @@
       - [Branch B: Social Engineering](#branch-b-social-engineering)
       - [Branch C: Insider Attack](#branch-c-insider-attack)
       - [Reading the tree](#reading-the-tree)
+    - [Mitigations for the Attack Tree](#mitigations-for-the-attack-tree)
+      - [Mitigations: Branch A (Supply Chain)](#mitigations-branch-a-supply-chain)
+      - [Mitigations: Branch B (Social Engineering)](#mitigations-branch-b-social-engineering)
+      - [Mitigations: Branch C (Insider)](#mitigations-branch-c-insider)
+      - [Summary](#summary)
 
 ## Introduction to Threat Modeling
 
