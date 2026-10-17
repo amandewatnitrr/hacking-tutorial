@@ -1,50 +1,40 @@
 import { useRef, useState } from "react"
-import { TerminalTab } from "./TerminalTab"
-import { backendRecordUrl } from "../lib/backend"
+import { TerminalPane } from "./TerminalPane"
 
 const MIN_HEIGHT = 180
 const MAX_HEIGHT_MARGIN = 160
+const MIN_PANE_PERCENT = 25
+const MAX_PANE_PERCENT = 75
 
 export function TerminalDrawer({
-  sessions,
-  activeId,
-  onSelect,
-  onClose,
+  paneCount,
+  panes,
+  onSelectTab,
+  onCloseTab,
+  onMoveToOtherPane,
+  onFocusPane,
+  onExit,
+  endOnCloseIds,
   collapsed,
   onToggleCollapsed,
   height,
   onResizeHeight,
   rootStatus,
+  onNewTerminal,
+  onToggleSplit,
 }) {
   const dragRef = useRef(null)
-  const terminalsRef = useRef(new Map())
-  const [recordStatus, setRecordStatus] = useState("")
+  const splitDragRef = useRef(null)
+  const panesRowRef = useRef(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [paneSplit, setPaneSplit] = useState(50)
 
-  const handleTerminalReady = (sessionId, api) => {
-    if (api) terminalsRef.current.set(sessionId, api)
-    else terminalsRef.current.delete(sessionId)
-  }
-
-  const handleRecord = async () => {
-    const api = terminalsRef.current.get(activeId)
-    if (!api) return
-
-    try {
-      const res = await fetch(backendRecordUrl(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: api.getText() }),
-      })
-      const data = await res.json()
-      setRecordStatus(res.ok ? `saved terminal-record/${data.file}` : `save failed — ${data.error ?? "unknown error"}`)
-    } catch {
-      setRecordStatus("save failed — is the backend running?")
-    }
-    setTimeout(() => setRecordStatus(""), 3200)
-  }
+  const hasAnySession = panes.A.tabs.length > 0 || panes.B.tabs.length > 0
+  if (!hasAnySession) return null
 
   const startDrag = (event) => {
     dragRef.current = { startY: event.clientY, startHeight: height }
+    setIsDragging(true)
     window.addEventListener("mousemove", handleDrag)
     window.addEventListener("mouseup", stopDrag)
   }
@@ -59,55 +49,44 @@ export function TerminalDrawer({
 
   const stopDrag = () => {
     dragRef.current = null
+    setIsDragging(false)
     window.removeEventListener("mousemove", handleDrag)
     window.removeEventListener("mouseup", stopDrag)
   }
 
-  if (sessions.length === 0) return null
+  const startSplitDrag = (event) => {
+    splitDragRef.current = { startX: event.clientX, startSplit: paneSplit }
+    window.addEventListener("mousemove", handleSplitDrag)
+    window.addEventListener("mouseup", stopSplitDrag)
+  }
+
+  const handleSplitDrag = (event) => {
+    if (!splitDragRef.current || !panesRowRef.current) return
+    const { width } = panesRowRef.current.getBoundingClientRect()
+    const delta = ((event.clientX - splitDragRef.current.startX) / width) * 100
+    const next = Math.min(MAX_PANE_PERCENT, Math.max(MIN_PANE_PERCENT, splitDragRef.current.startSplit + delta))
+    setPaneSplit(next)
+  }
+
+  const stopSplitDrag = () => {
+    splitDragRef.current = null
+    window.removeEventListener("mousemove", handleSplitDrag)
+    window.removeEventListener("mouseup", stopSplitDrag)
+  }
 
   return (
-    <div className="terminal-drawer" style={{ height: collapsed ? 40 : height }}>
-      {!collapsed && (
-        <div className="terminal-drawer__handle" onMouseDown={startDrag} />
-      )}
-      <div className="terminal-drawer__bar">
-        <div className="terminal-drawer__tabs">
-          {sessions.map((session) => (
-            <button
-              type="button"
-              key={session.id}
-              className={`terminal-tab${session.id === activeId && !collapsed ? " terminal-tab--active" : ""}`}
-              onClick={() => {
-                onSelect(session.id)
-                if (collapsed) onToggleCollapsed(false)
-              }}
-            >
-              <span className="terminal-tab__dot" aria-hidden="true" />
-              {session.title}
-              <span
-                className="terminal-tab__close"
-                role="button"
-                aria-label={`Close ${session.title}`}
-                onClick={(event) => {
-                  event.stopPropagation()
-                  onClose(session.id)
-                }}
-              >
-                &times;
-              </span>
-            </button>
-          ))}
-        </div>
-        <div className="terminal-drawer__status mono">{recordStatus || rootStatus}</div>
-        <button
-          type="button"
-          className="terminal-drawer__record"
-          onClick={handleRecord}
-          disabled={!activeId}
-          aria-label="Save current terminal output to a log file"
-          title="Save current terminal output to terminal-record/"
-        >
-          ● record
+    <div
+      className={`terminal-drawer${isDragging ? " terminal-drawer--dragging" : ""}`}
+      style={{ height: collapsed ? 40 : height }}
+    >
+      {!collapsed && <div className="terminal-drawer__handle" onMouseDown={startDrag} />}
+      <div className="terminal-drawer__toolbar">
+        <span className="terminal-drawer__status mono">{rootStatus}</span>
+        <button type="button" className="terminal-drawer__new" onClick={onNewTerminal}>
+          + terminal
+        </button>
+        <button type="button" className="terminal-drawer__split" onClick={onToggleSplit}>
+          {paneCount === 2 ? "⊟ merge panes" : "⊞ split view"}
         </button>
         <button
           type="button"
@@ -118,17 +97,39 @@ export function TerminalDrawer({
           {collapsed ? "⌃" : "⌄"}
         </button>
       </div>
-      <div className="terminal-drawer__body" style={{ display: collapsed ? "none" : "block" }}>
-        {sessions.map((session) => (
-          <TerminalTab
-            key={session.id}
-            session={session}
-            active={session.id === activeId}
-            onExit={() => {}}
-            onReady={handleTerminalReady}
-          />
-        ))}
-      </div>
+      {!collapsed && (
+        <div className="terminal-drawer__panes" ref={panesRowRef}>
+          <div className="terminal-drawer__pane-slot" style={{ flex: paneCount === 2 ? `0 0 ${paneSplit}%` : "1 1 auto" }}>
+            <TerminalPane
+              tabs={panes.A.tabs}
+              activeId={panes.A.activeId}
+              onSelect={(id) => onSelectTab("A", id)}
+              onClose={(id) => onCloseTab(id)}
+              onMoveToOtherPane={paneCount === 2 ? (id) => onMoveToOtherPane(id, "B") : undefined}
+              onFocus={() => onFocusPane("A")}
+              endOnCloseIds={endOnCloseIds}
+              onExit={onExit}
+            />
+          </div>
+          {paneCount === 2 && (
+            <>
+              <div className="terminal-drawer__pane-divider" onMouseDown={startSplitDrag} />
+              <div className="terminal-drawer__pane-slot" style={{ flex: `1 1 auto` }}>
+                <TerminalPane
+                  tabs={panes.B.tabs}
+                  activeId={panes.B.activeId}
+                  onSelect={(id) => onSelectTab("B", id)}
+                  onClose={(id) => onCloseTab(id)}
+                  onMoveToOtherPane={(id) => onMoveToOtherPane(id, "A")}
+                  onFocus={() => onFocusPane("B")}
+                  endOnCloseIds={endOnCloseIds}
+                  onExit={onExit}
+                />
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
 }
