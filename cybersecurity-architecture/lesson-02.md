@@ -297,31 +297,31 @@ graph TD
 Attacker goes after the weakest link: the 3rd party development company, its tools, or the trust the company places in them.
 
 ```mermaid
-graph TD
-    A("A. Supply chain engineering (OR)")
-    A --> A1("A1. Breach the 3rd party dev company (OR)")
-    A --> A2("A2. Poison tools and dependencies (OR)")
-    A --> A3("A3. Abuse vendor-to-company trust links (OR)")
+graph LR
+    A("A. Supply chain engineering<br/>(OR)")
+    A --> A1("A1. Breach the 3rd party dev<br/>company (OR)")
+    A --> A2("A2. Poison tools and<br/>dependencies (OR)")
+    A --> A3("A3. Abuse vendor-to-company<br/>trust links (OR)")
 
-    A1 --> A11{{"A1.1 Vendor network breach (AND)"}}
+    A1 --> A11{{"A1.1 Vendor network breach<br/>(AND)"}}
     A11 --> A111["Phish a vendor developer"]
-    A11 --> A112["Privilege escalation and lateral movement"]
-    A11 --> A113["Reach shared repo or build server"]
-    A1 --> A12["Steal vendor VPN creds, SSH keys, API tokens"]
-    A1 --> A13["Compromise vendor CI/CD pipeline"]
-    A1 --> A14["Malware on vendor laptop, or stolen device"]
-    A1 --> A15["Exploit weak vendor hygiene: unpatched VPN, no MFA"]
+    A11 --> A112["Privilege escalation and<br/>lateral movement"]
+    A11 --> A113["Reach shared repo or build<br/>server"]
+    A1 --> A12["Steal vendor VPN creds, SSH<br/>keys, API tokens"]
+    A1 --> A13["Compromise vendor CI/CD<br/>pipeline"]
+    A1 --> A14["Malware on vendor laptop, or<br/>stolen device"]
+    A1 --> A15["Exploit weak vendor hygiene:<br/>unpatched VPN, no MFA"]
 
-    A2 --> A21["Dependency confusion or typosquatted package"]
-    A2 --> A22["Hijack upstream open-source maintainer account"]
-    A2 --> A23["Trojanised IDE plugin, compiler or build tool"]
-    A2 --> A24["Poisoned container base image"]
+    A2 --> A21["Dependency confusion or<br/>typosquatted package"]
+    A2 --> A22["Hijack upstream open-source<br/>maintainer account"]
+    A2 --> A23["Trojanised IDE plugin,<br/>compiler or build tool"]
+    A2 --> A24["Poisoned container base<br/>image"]
 
-    A3 --> A31["Hard-coded secrets found in vendor repo"]
-    A3 --> A32["Over-privileged vendor accounts on company GitHub, cloud, Jira"]
-    A3 --> A33{{"A3.3 Tamper with delivered code (AND)"}}
-    A33 --> A331["Compromise artifact registry or code-signing key"]
-    A33 --> A332["Company accepts vendor drop with no review or SBOM check"]
+    A3 --> A31["Hard-coded secrets found in<br/>vendor repo"]
+    A3 --> A32["Over-privileged vendor<br/>accounts on company GitHub,<br/>cloud, Jira"]
+    A3 --> A33{{"A3.3 Tamper with delivered<br/>code (AND)"}}
+    A33 --> A331["Compromise artifact registry<br/>or code-signing key"]
+    A33 --> A332["Company accepts vendor drop<br/>with no review or SBOM check"]
 
     classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
     classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
@@ -334,36 +334,36 @@ graph TD
 Attacker targets people at the company or the vendor, not the technology.
 
 ```mermaid
-graph TD
+graph LR
     B("B. Social engineering (OR)")
     B --> B1("B1. Phishing (OR)")
-    B --> B2("B2. Pretexting and vishing (OR)")
-    B --> B3("B3. Fake recruiter or job test (OR)")
-    B --> B4("B4. Physical social engineering (OR)")
-    B --> B5("B5. Business email compromise (OR)")
+    B --> B2("B2. Pretexting and vishing<br/>(OR)")
+    B --> B3("B3. Fake recruiter or job<br/>test (OR)")
+    B --> B4("B4. Physical social<br/>engineering (OR)")
+    B --> B5("B5. Business email<br/>compromise (OR)")
 
-    B1 --> B11{{"B1.1 Spear-phish with MFA bypass (AND)"}}
-    B11 --> B111["OSINT on LinkedIn and GitHub to find developers"]
-    B11 --> B112["Craft lure: fake code review or Jira link"]
-    B11 --> B113["Adversary-in-the-middle proxy captures password and session cookie"]
-    B1 --> B12["MFA fatigue: spam push prompts until user approves"]
-    B1 --> B13["Malicious attachment or macro to dev workstation"]
+    B1 --> B11{{"B1.1 Spear-phish with MFA<br/>bypass (AND)"}}
+    B11 --> B111["OSINT on LinkedIn and GitHub<br/>to find developers"]
+    B11 --> B112["Craft lure: fake code review<br/>or Jira link"]
+    B11 --> B113["Adversary-in-the-middle<br/>proxy captures password and<br/>session cookie"]
+    B1 --> B12["MFA fatigue: spam push<br/>prompts until user approves"]
+    B1 --> B13["Malicious attachment or<br/>macro to dev workstation"]
 
     B2 --> B21{{"B2.1 Helpdesk reset (AND)"}}
-    B21 --> B211["Collect employee name, ID and manager from OSINT"]
-    B21 --> B212["Call IT helpdesk impersonating the developer"]
-    B21 --> B213["Get password reset and enrol attacker MFA device"]
-    B2 --> B22["Impersonate vendor project manager to request repo access"]
+    B21 --> B211["Collect employee name, ID<br/>and manager from OSINT"]
+    B21 --> B212["Call IT helpdesk<br/>impersonating the developer"]
+    B21 --> B213["Get password reset and enrol<br/>attacker MFA device"]
+    B2 --> B22["Impersonate vendor project<br/>manager to request repo<br/>access"]
 
-    B3 --> B31["Fake recruiter sends coding test with malware to developer"]
-    B3 --> B32["Fake open-source contributor submits malicious pull request"]
+    B3 --> B31["Fake recruiter sends coding<br/>test with malware to<br/>developer"]
+    B3 --> B32["Fake open-source contributor<br/>submits malicious pull<br/>request"]
 
-    B4 --> B41["Tailgate into office or vendor site"]
-    B4 --> B42["Drop infected USB near developers"]
-    B4 --> B43["Evil maid: plug implant into unattended workstation"]
+    B4 --> B41["Tailgate into office or<br/>vendor site"]
+    B4 --> B42["Drop infected USB near<br/>developers"]
+    B4 --> B43["Evil maid: plug implant into<br/>unattended workstation"]
 
-    B5 --> B51["Spoof or take over executive mailbox"]
-    B5 --> B52["Pressure vendor to share source archive urgently"]
+    B5 --> B51["Spoof or take over executive<br/>mailbox"]
+    B5 --> B52["Pressure vendor to share<br/>source archive urgently"]
 
     classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
     classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
@@ -376,35 +376,35 @@ graph TD
 Attacker is already inside, or turns someone who is. Includes the vendor's staff, who are insiders to the project too.
 
 ```mermaid
-graph TD
+graph LR
     C("C. Insider attack (OR)")
     C --> C1("C1. Malicious employee (OR)")
-    C --> C2("C2. Malicious vendor staff (OR)")
-    C --> C3("C3. Coerced or recruited insider (OR)")
+    C --> C2("C2. Malicious vendor staff<br/>(OR)")
+    C --> C3("C3. Coerced or recruited<br/>insider (OR)")
     C --> C4("C4. Negligent insider (OR)")
-    C --> C5("C5. Privileged or ex-insider (OR)")
+    C --> C5("C5. Privileged or ex-insider<br/>(OR)")
 
-    C1 --> C11["Copy source to USB, personal cloud or private git remote"]
-    C1 --> C12["Email code to personal address"]
-    C1 --> C13["Plant logic bomb or kill switch to enable ransom"]
+    C1 --> C11["Copy source to USB, personal<br/>cloud or private git remote"]
+    C1 --> C12["Email code to personal<br/>address"]
+    C1 --> C13["Plant logic bomb or kill<br/>switch to enable ransom"]
 
-    C2 --> C21["Vendor developer sells copy to rival"]
-    C2 --> C22["Vendor has weaker DLP and monitoring than company"]
+    C2 --> C21["Vendor developer sells copy<br/>to rival"]
+    C2 --> C22["Vendor has weaker DLP and<br/>monitoring than company"]
 
-    C3 --> C31["Rival bribes existing employee"]
-    C3 --> C32["Blackmail employee using personal leverage"]
+    C3 --> C31["Rival bribes existing<br/>employee"]
+    C3 --> C32["Blackmail employee using<br/>personal leverage"]
     C3 --> C33{{"C3.3 Planted employee (AND)"}}
-    C33 --> C331["Rival places agent via job application or vendor contract"]
-    C33 --> C332["Agent passes vetting and gains repo access"]
+    C33 --> C331["Rival places agent via job<br/>application or vendor<br/>contract"]
+    C33 --> C332["Agent passes vetting and<br/>gains repo access"]
 
-    C4 --> C41["Repo or storage bucket accidentally made public"]
-    C4 --> C42["Credentials committed to repo or pasted in public chat"]
-    C4 --> C43["Source pasted into unapproved AI or online tool"]
+    C4 --> C41["Repo or storage bucket<br/>accidentally made public"]
+    C4 --> C42["Credentials committed to<br/>repo or pasted in public<br/>chat"]
+    C4 --> C43["Source pasted into<br/>unapproved AI or online tool"]
     C4 --> C44["Lost or unencrypted laptop"]
 
-    C5 --> C51["Admin disables logging then dumps repo"]
-    C5 --> C52["Ex-employee or ex-vendor access never revoked"]
-    C5 --> C53["Shared or service account abused with no attribution"]
+    C5 --> C51["Admin disables logging then<br/>dumps repo"]
+    C5 --> C52["Ex-employee or ex-vendor<br/>access never revoked"]
+    C5 --> C53["Shared or service account<br/>abused with no attribution"]
 
     classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
     classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
@@ -433,41 +433,41 @@ Grey nodes are not rated. An `AND` node such as `A1.1` is rated as a whole, so i
 #### Mitigations: Branch A (Supply Chain)
 
 ```mermaid
-graph TD
-    A("A. Supply chain engineering (OR)")
-    A --> A1("A1. Breach the 3rd party dev company (OR)")
-    A --> A2("A2. Poison tools and dependencies (OR)")
-    A --> A3("A3. Abuse vendor-to-company trust links (OR)")
+graph LR
+    A("A. Supply chain engineering<br/>(OR)")
+    A --> A1("A1. Breach the 3rd party dev<br/>company (OR)")
+    A --> A2("A2. Poison tools and<br/>dependencies (OR)")
+    A --> A3("A3. Abuse vendor-to-company<br/>trust links (OR)")
 
-    A1 --> A11{{"🟡 A1.1 Vendor network breach (AND)"}}
-    A11 --> A111["A111 Phish a vendor developer"]
-    A11 --> A112["A112 Privilege escalation and lateral movement"]
-    A11 --> A113["A113 Reach shared repo or build server"]
-    A11 -.-> MA11(["Contract security clauses, right to audit, vendor works only inside company-hosted VDI, segmented network"])
-    A1 --> A12["🟢 A12 Steal vendor VPN creds, SSH keys, API tokens"]
-    A12 -.-> MA12(["Short-lived tokens, hardware-key MFA, IP allowlist for vendor access"])
-    A1 --> A13["🟡 A13 Compromise vendor CI/CD pipeline"]
-    A13 -.-> MA13(["Build on company-owned ephemeral runners, vendor only pushes reviewed code"])
-    A1 --> A14["🟡 A14 Malware on vendor laptop, or stolen device"]
-    A14 -.-> MA14(["Company-managed devices or VDI, EDR required, no local source copies"])
-    A1 --> A15["A15 Exploit weak vendor hygiene: unpatched VPN, no MFA"]
+    A1 --> A11{{"🟡 A1.1 Vendor network breach<br/>(AND)"}}
+    A11 --> A111["A111 Phish a vendor<br/>developer"]
+    A11 --> A112["A112 Privilege escalation<br/>and lateral movement"]
+    A11 --> A113["A113 Reach shared repo or<br/>build server"]
+    A11 -.-> MA11(["Contract security clauses,<br/>right to audit, vendor works<br/>only inside company-hosted<br/>VDI, segmented network"])
+    A1 --> A12["🟢 A12 Steal vendor VPN<br/>creds, SSH keys, API tokens"]
+    A12 -.-> MA12(["Short-lived tokens,<br/>hardware-key MFA, IP<br/>allowlist for vendor access"])
+    A1 --> A13["🟡 A13 Compromise vendor<br/>CI/CD pipeline"]
+    A13 -.-> MA13(["Build on company-owned<br/>ephemeral runners, vendor<br/>only pushes reviewed code"])
+    A1 --> A14["🟡 A14 Malware on vendor<br/>laptop, or stolen device"]
+    A14 -.-> MA14(["Company-managed devices or<br/>VDI, EDR required, no local<br/>source copies"])
+    A1 --> A15["A15 Exploit weak vendor<br/>hygiene: unpatched VPN, no<br/>MFA"]
 
-    A2 --> A21["🟢 A21 Dependency confusion or typosquatted package"]
-    A21 -.-> MA21(["Private registry with pinned namespaces, lockfiles with hashes"])
-    A2 --> A22["🔴 A22 Hijack upstream open-source maintainer account"]
-    A22 -.-> MA22(["Cannot prevent. Pin versions, delay upgrades, monitor advisories, keep SBOM to find affected builds fast"])
-    A2 --> A23["🟡 A23 Trojanised IDE plugin, compiler or build tool"]
-    A23 -.-> MA23(["Plugin allowlist, pinned versions, checksum verification, still trusts upstream publisher"])
-    A2 --> A24["A24 Poisoned container base image"]
+    A2 --> A21["🟢 A21 Dependency confusion<br/>or typosquatted package"]
+    A21 -.-> MA21(["Private registry with pinned<br/>namespaces, lockfiles with<br/>hashes"])
+    A2 --> A22["🔴 A22 Hijack upstream <br/>open-source maintainer account"]
+    A22 -.-> MA22(["Cannot prevent. Pin<br/>versions, delay upgrades,<br/>monitor advisories, keep<br/>SBOM to find affected builds<br/>fast"])
+    A2 --> A23["🟡 A23 Trojanised IDE plugin,<br/>compiler or build tool"]
+    A23 -.-> MA23(["Plugin allowlist, pinned<br/>versions, checksum<br/>verification, still trusts<br/>upstream publisher"])
+    A2 --> A24["A24 Poisoned container base<br/>image"]
 
-    A3 --> A31["🟢 A31 Hard-coded secrets found in vendor repo"]
-    A31 -.-> MA31(["Secret scanning in pre-commit and CI, central vault, rotate on detection"])
-    A3 --> A32["🟢 A32 Over-privileged vendor accounts on company GitHub, cloud, Jira"]
-    A32 -.-> MA32(["Least privilege, SSO with MFA, just-in-time access that expires"])
-    A3 --> A33{{"🟢 A3.3 Tamper with delivered code (AND)"}}
-    A33 --> A331["A331 Compromise artifact registry or code-signing key"]
-    A33 --> A332["A332 Company accepts vendor drop with no review or SBOM check"]
-    A33 -.-> MA33(["Signed artifacts, build provenance (SLSA), mandatory code review, SBOM check on every vendor drop"])
+    A3 --> A31["🟢 A31 Hard-coded secrets<br/>found in vendor repo"]
+    A31 -.-> MA31(["Secret scanning in <br/>pre-commit and CI, central<br/>vault, rotate on detection"])
+    A3 --> A32["🟢 A32 Over-privileged vendor<br/>accounts on company GitHub,<br/>cloud, Jira"]
+    A32 -.-> MA32(["Least privilege, SSO with<br/>MFA, just-in-time access<br/>that expires"])
+    A3 --> A33{{"🟢 A3.3 Tamper with delivered<br/>code (AND)"}}
+    A33 --> A331["A331 Compromise artifact<br/>registry or code-signing key"]
+    A33 --> A332["A332 Company accepts vendor<br/>drop with no review or SBOM<br/>check"]
+    A33 -.-> MA33(["Signed artifacts, build<br/>provenance (SLSA), mandatory<br/>code review, SBOM check on<br/>every vendor drop"])
 
     classDef plain fill:#f2f2f2,stroke:#888,color:#000;
     classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
@@ -482,47 +482,47 @@ graph TD
 #### Mitigations: Branch B (Social Engineering)
 
 ```mermaid
-graph TD
+graph LR
     B("B. Social engineering (OR)")
     B --> B1("B1. Phishing (OR)")
-    B --> B2("B2. Pretexting and vishing (OR)")
-    B --> B3("B3. Fake recruiter or job test (OR)")
-    B --> B4("B4. Physical social engineering (OR)")
-    B --> B5("B5. Business email compromise (OR)")
+    B --> B2("B2. Pretexting and vishing<br/>(OR)")
+    B --> B3("B3. Fake recruiter or job<br/>test (OR)")
+    B --> B4("B4. Physical social<br/>engineering (OR)")
+    B --> B5("B5. Business email<br/>compromise (OR)")
 
-    B1 --> B11{{"B1.1 Spear-phish with MFA bypass (AND)"}}
-    B11 --> B111["🔴 B111 OSINT on LinkedIn and GitHub to find developers"]
-    B111 -.-> MB111(["Cannot remove public profiles. Limit what staff publish, assume attacker knows names and roles"])
-    B11 --> B112["🔴 B112 Craft lure: fake code review or Jira link"]
-    B112 -.-> MB112(["Attacker-side work, cannot be stopped. Rely on downstream controls and fast reporting"])
-    B11 --> B113["🟢 B113 Adversary-in-the-middle proxy captures password and session cookie"]
-    B113 -.-> MB113(["Phishing-resistant MFA (FIDO2 or passkeys), device-bound sessions"])
-    B1 --> B12["🟢 B12 MFA fatigue: spam push prompts until user approves"]
-    B12 -.-> MB12(["Number-matching or FIDO2 keys, no plain push approvals"])
-    B1 --> B13["🟢 B13 Malicious attachment or macro to dev workstation"]
-    B13 -.-> MB13(["Mail sandboxing, block macros from internet, attachment detonation"])
+    B1 --> B11{{"B1.1 Spear-phish with MFA<br/>bypass (AND)"}}
+    B11 --> B111["🔴 B111 OSINT on LinkedIn and<br/>GitHub to find developers"]
+    B111 -.-> MB111(["Cannot remove public<br/>profiles. Limit what staff<br/>publish, assume attacker<br/>knows names and roles"])
+    B11 --> B112["🔴 B112 Craft lure: fake code<br/>review or Jira link"]
+    B112 -.-> MB112(["Attacker-side work, cannot<br/>be stopped. Rely on<br/>downstream controls and fast<br/>reporting"])
+    B11 --> B113["🟢 B113 Adversary-in-the-middle<br/>proxy captures password<br/>and session cookie"]
+    B113 -.-> MB113(["Phishing-resistant MFA<br/>(FIDO2 or passkeys), <br/>device-bound sessions"])
+    B1 --> B12["🟢 B12 MFA fatigue: spam push<br/>prompts until user approves"]
+    B12 -.-> MB12(["Number-matching or FIDO2<br/>keys, no plain push<br/>approvals"])
+    B1 --> B13["🟢 B13 Malicious attachment<br/>or macro to dev workstation"]
+    B13 -.-> MB13(["Mail sandboxing, block<br/>macros from internet,<br/>attachment detonation"])
 
     B2 --> B21{{"🟡 B2.1 Helpdesk reset (AND)"}}
-    B21 --> B211["B211 Collect employee name, ID and manager from OSINT"]
-    B21 --> B212["B212 Call IT helpdesk impersonating the developer"]
-    B21 --> B213["B213 Get password reset and enrol attacker MFA device"]
-    B21 -.-> MB21(["Call-back to number on file, manager approval, no MFA reset by phone alone, relies on staff following process"])
-    B2 --> B22["🟡 B22 Impersonate vendor project manager to request repo access"]
-    B22 -.-> MB22(["Out-of-band verification for any access request, access only via ticket"])
+    B21 --> B211["B211 Collect employee name,<br/>ID and manager from OSINT"]
+    B21 --> B212["B212 Call IT helpdesk<br/>impersonating the developer"]
+    B21 --> B213["B213 Get password reset and<br/>enrol attacker MFA device"]
+    B21 -.-> MB21(["Call-back to number on file,<br/>manager approval, no MFA<br/>reset by phone alone, relies<br/>on staff following process"])
+    B2 --> B22["🟡 B22 Impersonate vendor<br/>project manager to request<br/>repo access"]
+    B22 -.-> MB22(["Out-of-band verification for<br/>any access request, access<br/>only via ticket"])
 
-    B3 --> B31["🟡 B31 Fake recruiter sends coding test with malware to developer"]
-    B31 -.-> MB31(["Policy to run external tests only in disposable VM, awareness training"])
-    B3 --> B32["B32 Fake open-source contributor submits malicious pull request"]
+    B3 --> B31["🟡 B31 Fake recruiter sends<br/>coding test with malware to<br/>developer"]
+    B31 -.-> MB31(["Policy to run external tests<br/>only in disposable VM,<br/>awareness training"])
+    B3 --> B32["B32 Fake open-source<br/>contributor submits<br/>malicious pull request"]
 
-    B4 --> B41["🟡 B41 Tailgate into office or vendor site"]
-    B41 -.-> MB41(["Badge turnstiles, guards, visitor escorts, vendor site not under company control"])
-    B4 --> B42["🟢 B42 Drop infected USB near developers"]
-    B42 -.-> MB42(["Disable USB mass storage by endpoint policy"])
-    B4 --> B43["B43 Evil maid: plug implant into unattended workstation"]
+    B4 --> B41["🟡 B41 Tailgate into office<br/>or vendor site"]
+    B41 -.-> MB41(["Badge turnstiles, guards,<br/>visitor escorts, vendor site<br/>not under company control"])
+    B4 --> B42["🟢 B42 Drop infected USB near<br/>developers"]
+    B42 -.-> MB42(["Disable USB mass storage by<br/>endpoint policy"])
+    B4 --> B43["B43 Evil maid: plug implant<br/>into unattended workstation"]
 
-    B5 --> B51["🟢 B51 Spoof or take over executive mailbox"]
-    B51 -.-> MB51(["SPF, DKIM, DMARC reject policy, external sender banner"])
-    B5 --> B52["B52 Pressure vendor to share source archive urgently"]
+    B5 --> B51["🟢 B51 Spoof or take over<br/>executive mailbox"]
+    B51 -.-> MB51(["SPF, DKIM, DMARC reject<br/>policy, external sender<br/>banner"])
+    B5 --> B52["B52 Pressure vendor to share<br/>source archive urgently"]
 
     classDef plain fill:#f2f2f2,stroke:#888,color:#000;
     classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
@@ -537,50 +537,50 @@ graph TD
 #### Mitigations: Branch C (Insider)
 
 ```mermaid
-graph TD
+graph LR
     C("C. Insider attack (OR)")
     C --> C1("C1. Malicious employee (OR)")
-    C --> C2("C2. Malicious vendor staff (OR)")
-    C --> C3("C3. Coerced or recruited insider (OR)")
+    C --> C2("C2. Malicious vendor staff<br/>(OR)")
+    C --> C3("C3. Coerced or recruited<br/>insider (OR)")
     C --> C4("C4. Negligent insider (OR)")
-    C --> C5("C5. Privileged or ex-insider (OR)")
+    C --> C5("C5. Privileged or ex-insider<br/>(OR)")
 
-    C1 --> C11["🟢 C11 Copy source to USB, personal cloud or private git remote"]
-    C11 -.-> MC11(["DLP, USB block, CASB blocks personal cloud uploads, git push allowed only to company remotes"])
-    C1 --> C12["🟢 C12 Email code to personal address"]
-    C12 -.-> MC12(["Email DLP rules on source code patterns and archives"])
-    C1 --> C13["🟡 C13 Plant logic bomb or kill switch to enable ransom"]
-    C13 -.-> MC13(["Mandatory peer review, separation of duties, reproducible builds, only as good as the reviewers"])
+    C1 --> C11["🟢 C11 Copy source to USB,<br/>personal cloud or private<br/>git remote"]
+    C11 -.-> MC11(["DLP, USB block, CASB blocks<br/>personal cloud uploads, git<br/>push allowed only to company<br/>remotes"])
+    C1 --> C12["🟢 C12 Email code to personal<br/>address"]
+    C12 -.-> MC12(["Email DLP rules on source<br/>code patterns and archives"])
+    C1 --> C13["🟡 C13 Plant logic bomb or<br/>kill switch to enable ransom"]
+    C13 -.-> MC13(["Mandatory peer review,<br/>separation of duties,<br/>reproducible builds, only as<br/>good as the reviewers"])
 
-    C2 --> C21["🔴 C21 Vendor developer sells copy to rival"]
-    C21 -.-> MC21(["Authorised user can always read the code. Watermark builds to trace leaks, legal deterrent"])
-    C2 --> C22["🟡 C22 Vendor has weaker DLP and monitoring than company"]
-    C22 -.-> MC22(["Right-to-audit clause, work inside company VDI so company DLP applies"])
+    C2 --> C21["🔴 C21 Vendor developer sells<br/>copy to rival"]
+    C21 -.-> MC21(["Authorised user can always<br/>read the code. Watermark<br/>builds to trace leaks, legal<br/>deterrent"])
+    C2 --> C22["🟡 C22 Vendor has weaker DLP<br/>and monitoring than company"]
+    C22 -.-> MC22(["Right-to-audit clause, work<br/>inside company VDI so<br/>company DLP applies"])
 
-    C3 --> C31["🔴 C31 Rival bribes existing employee"]
-    C31 -.-> MC31(["Cannot prevent. Limit access, monitor with UEBA, rotate sensitive roles"])
-    C3 --> C32["🔴 C32 Blackmail employee using personal leverage"]
-    C32 -.-> MC32(["Cannot prevent. Same controls, plus support channel so staff report pressure early"])
-    C3 --> C33{{"🟡 C3.3 Planted employee (AND)"}}
-    C33 --> C331["C331 Rival places agent via job application or vendor contract"]
-    C33 --> C332["C332 Agent passes vetting and gains repo access"]
-    C33 -.-> MC33(["Background checks, staged access, need-to-know on crown-jewel repos"])
+    C3 --> C31["🔴 C31 Rival bribes existing<br/>employee"]
+    C31 -.-> MC31(["Cannot prevent. Limit<br/>access, monitor with UEBA,<br/>rotate sensitive roles"])
+    C3 --> C32["🔴 C32 Blackmail employee<br/>using personal leverage"]
+    C32 -.-> MC32(["Cannot prevent. Same<br/>controls, plus support<br/>channel so staff report<br/>pressure early"])
+    C3 --> C33{{"🟡 C3.3 Planted employee<br/>(AND)"}}
+    C33 --> C331["C331 Rival places agent via<br/>job application or vendor<br/>contract"]
+    C33 --> C332["C332 Agent passes vetting<br/>and gains repo access"]
+    C33 -.-> MC33(["Background checks, staged<br/>access, need-to-know on<br/>crown-jewel repos"])
 
-    C4 --> C41["🟢 C41 Repo or storage bucket accidentally made public"]
-    C41 -.-> MC41(["Org policy forbids public repos, continuous exposure scanning"])
-    C4 --> C42["🟢 C42 Credentials committed to repo or pasted in public chat"]
-    C42 -.-> MC42(["Secret scanning, revoke and rotate automatically"])
-    C4 --> C43["🟡 C43 Source pasted into unapproved AI or online tool"]
-    C43 -.-> MC43(["Approved enterprise AI with no training on data, browser DLP, policy and training"])
-    C4 --> C44["🟢 C44 Lost or unencrypted laptop"]
-    C44 -.-> MC44(["Full-disk encryption, remote wipe"])
+    C4 --> C41["🟢 C41 Repo or storage bucket<br/>accidentally made public"]
+    C41 -.-> MC41(["Org policy forbids public<br/>repos, continuous exposure<br/>scanning"])
+    C4 --> C42["🟢 C42 Credentials committed<br/>to repo or pasted in public<br/>chat"]
+    C42 -.-> MC42(["Secret scanning, revoke and<br/>rotate automatically"])
+    C4 --> C43["🟡 C43 Source pasted into<br/>unapproved AI or online tool"]
+    C43 -.-> MC43(["Approved enterprise AI with<br/>no training on data, browser<br/>DLP, policy and training"])
+    C4 --> C44["🟢 C44 Lost or unencrypted<br/>laptop"]
+    C44 -.-> MC44(["Full-disk encryption, remote<br/>wipe"])
 
-    C5 --> C51["🟡 C51 Admin disables logging then dumps repo"]
-    C51 -.-> MC51(["Off-box tamper-proof logs, two-person approval, privileged session recording"])
-    C5 --> C52["🟢 C52 Ex-employee or ex-vendor access never revoked"]
-    C52 -.-> MC52(["Automated offboarding tied to HR and contract end date, quarterly access review"])
-    C5 --> C53["🟢 C53 Shared or service account abused with no attribution"]
-    C53 -.-> MC53(["Named accounts only, vaulted service credentials, session recording"])
+    C5 --> C51["🟡 C51 Admin disables logging<br/>then dumps repo"]
+    C51 -.-> MC51(["Off-box tamper-proof logs,<br/>two-person approval,<br/>privileged session recording"])
+    C5 --> C52["🟢 C52 Ex-employee or <br/>ex-vendor access never revoked"]
+    C52 -.-> MC52(["Automated offboarding tied<br/>to HR and contract end date,<br/>quarterly access review"])
+    C5 --> C53["🟢 C53 Shared or service<br/>account abused with no<br/>attribution"]
+    C53 -.-> MC53(["Named accounts only, vaulted<br/>service credentials, session<br/>recording"])
 
     classDef plain fill:#f2f2f2,stroke:#888,color:#000;
     classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
