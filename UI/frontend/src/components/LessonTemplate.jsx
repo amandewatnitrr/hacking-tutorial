@@ -6,6 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { getLessonBySlug, getLessonImages } from '../utils/markdownloader';
+import { remarkGithubAlerts } from '../utils/remarkGithubAlerts';
 import Mermaid from './Mermaid';
 import './LessonTemplate.css';
 
@@ -111,7 +112,7 @@ const LessonTemplate = ({ lesson }) => {
 
       <article className="lesson-content">
         <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
+          remarkPlugins={[remarkGfm, remarkGithubAlerts]}
           rehypePlugins={[
             rehypeRaw,
             rehypeSlug,
