@@ -93,6 +93,46 @@
   color: var(--text-secondary);
 }
 
+/* GitHub-style alert callouts: > [!NOTE] / [!TIP] / [!IMPORTANT] / [!WARNING] / [!CAUTION] */
+.markdown-alert {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem 1rem;
+  border-left: 4px solid;
+  border-radius: 6px;
+  background: var(--bg-tertiary);
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.markdown-alert-title svg {
+  flex-shrink: 0;
+}
+
+.markdown-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-note { border-color: var(--color-info); }
+.markdown-alert-note .markdown-alert-title { color: var(--color-info); }
+
+.markdown-alert-tip { border-color: var(--color-success); }
+.markdown-alert-tip .markdown-alert-title { color: var(--color-success); }
+
+.markdown-alert-important { border-color: var(--accent-green-dark); }
+.markdown-alert-important .markdown-alert-title { color: var(--accent-green-dark); }
+
+.markdown-alert-warning { border-color: var(--color-warning); }
+.markdown-alert-warning .markdown-alert-title { color: var(--color-warning); }
+
+.markdown-alert-caution { border-color: var(--color-danger); }
+.markdown-alert-caution .markdown-alert-title { color: var(--color-danger); }
+
 .lesson-content a {
   color: var(--accent-green);
   text-decoration: none;
