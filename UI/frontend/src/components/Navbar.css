@@ -13,15 +13,15 @@
   --border-color: #2e3135;
 }
 
-/* 🌞 Light Theme — "Rose honeypot": warm plum/rose on soft rose paper */
+/* 🌞 Light Theme — "Lime": charcoal-green on fresh lime paper */
 [data-theme="light"] {
-  --bg-primary: #fbf1f6;
+  --bg-primary: #f6f9f1;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #eccbdc;
-  --text-primary: #280f20;
-  --accent-green: #8f214c;
-  --accent-green-light: #a8305f;
-  --border-color: #e6bdd4;
+  --bg-tertiary: #dfe9c9;
+  --text-primary: #171c10;
+  --accent-green: #56730c;
+  --accent-green-light: #7fa816;
+  --border-color: #cbdcad;
 }
 
 /* Smooth transition between themes */
