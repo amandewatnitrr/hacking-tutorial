@@ -187,6 +187,20 @@ export function getAllLessons() {
   // Sort lessons by order
   const sorted = lessons.sort((a, b) => a.order - b.order);
 
+  // Fill in prev/next within each category for lessons that don't set them
+  // explicitly in frontmatter — without this, every lesson shows "No
+  // previous/next lesson" since none of the markdown files set prev/next.
+  const byCategory = {};
+  sorted.forEach((lesson) => {
+    (byCategory[lesson.category] ||= []).push(lesson);
+  });
+  Object.values(byCategory).forEach((group) => {
+    group.forEach((lesson, i) => {
+      if (!lesson.prev && i > 0) lesson.prev = group[i - 1].slug;
+      if (!lesson.next && i < group.length - 1) lesson.next = group[i + 1].slug;
+    });
+  });
+
   console.log('📚 Total lessons loaded:', sorted.length);
   console.log('📋 Lesson slugs:', sorted.map(l => l.slug));
 
