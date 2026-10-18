@@ -37,6 +37,59 @@ The README below focuses on the script's actual behavior and implementation deta
 
 ---
 
+## Sequence Diagram (code flow)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Operator
+    participant Main as main()
+    participant Cap as Bettercap process
+    participant Reader as stdout reader thread
+
+    User->>Main: sudo python3 bettercap_arp_spoofing_script_auto.py <iface>
+    alt Interface argument missing
+        Main->>User: Print usage line and exit (1)
+    else Interface argument provided
+        Main->>Cap: Popen sudo bettercap -iface <iface>
+        alt bettercap binary not found or spawn error
+            Cap-->>Main: FileNotFoundError / Exception
+            Main->>User: Print install hint and exit (1)
+        else Bettercap started
+            Main->>Reader: Start daemon thread read_output()
+            Reader-->>User: Print every stdout line live while buffering it
+            Main->>Cap: net.probe on
+            Main->>User: Prompt: press Enter when discovery is complete
+            User-->>Main: Enter
+            Main->>Cap: net.probe off then net.show (with short waits)
+            Main->>Reader: stop_reading.set() and join thread
+            Main->>Main: parse_devices_log() and parse_devices_table(), dedupe by IP and MAC
+            alt No devices discovered
+                Main->>Cap: terminate()
+                Main->>User: Print no devices found and exit (1)
+            else Devices discovered
+                Main->>User: Print numbered device list
+                loop Until indices are valid
+                    User-->>Main: Target selection such as 0 or 1,3
+                    Main->>Main: Validate range and build comma separated IPs
+                end
+                loop Until answer is y or n
+                    User-->>Main: Enable full-duplex ARP spoofing
+                end
+                Main->>Cap: set fullduplex and targets, then arp.spoof on and net.sniff on
+                loop Until Ctrl+C
+                    Reader-->>User: Stream bettercap output line by line
+                end
+                User->>Main: Ctrl+C raises KeyboardInterrupt
+                Main->>Cap: terminate()
+                Main->>User: Print stopping message and exit
+            end
+        end
+    end
+```
+
+---
+
 ## Important implementation notes
 
 - The script strips ANSI escape sequences from Bettercap output before parsing (this avoids parsing errors caused by color codes).

@@ -227,6 +227,3 @@ MIT License - Educational and authorized testing purposes only
 ---
 
 **Disclaimer**: This tool is designed for educational purposes and authorized security testing only. Users are solely responsible for complying with applicable laws and obtaining proper authorization before use.
-```
-
-

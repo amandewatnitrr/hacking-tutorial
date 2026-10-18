@@ -121,3 +121,4 @@ sequenceDiagram
     FS-->>Script: File successfully written
     Script->>User: Wrote X entries to mylist.txt
     Script->>OS: Exit with code 0 (Success)
+```

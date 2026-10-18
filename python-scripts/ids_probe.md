@@ -116,3 +116,4 @@ sequenceDiagram
     
     User->>Script: Manual Termination (Ctrl+C)
     Script->>Script: Exit
+```

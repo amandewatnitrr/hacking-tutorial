@@ -121,3 +121,4 @@ sequenceDiagram
     LocalScript->>LocalScript: 13. Aggregate full result (JSON Dict)
     LocalScript-->>User: 14. Print final result (JSON to stdout)
     LocalScript->>LocalOS: 15. Exit (Code 0 or 1)
+```

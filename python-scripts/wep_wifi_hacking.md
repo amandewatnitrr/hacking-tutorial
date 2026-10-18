@@ -114,3 +114,4 @@ sequenceDiagram
     OS-->>Script: Processes Terminated
     Script->>Script: Final File Cleanup
     Script->>OS: Exit
+```

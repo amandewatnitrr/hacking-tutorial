@@ -119,3 +119,4 @@ sequenceDiagram
         CLI->>CLI: Write all results to --output JSON file
     end
     CLI-->>User: Display output and Exit (0)
+```

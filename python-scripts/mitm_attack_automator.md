@@ -91,3 +91,4 @@ sequenceDiagram
     OS->>Script: Return from subprocess.run()
     Script->>User: Display "[+] Attack stopped by user. Exiting."
     Script->>OS: Exit
+```

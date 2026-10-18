@@ -20,39 +20,47 @@ If a mismatch is detected, it alerts the user to a potential spoofing attempt.
 
 - **How to Run:**
   ```bash
-  sudo python3 arp_detector.py
+  sudo python3 arp_spoof_detector.py
+  ```
+
 ## Sequence Diagram — ARP Spoof Detector (Code Flow)
 
-    sequenceDiagram
+```mermaid
+sequenceDiagram
     participant User
     participant Script as ARP_Script
+    participant OS as Operating System
     participant Sniffer
     participant Handler as process_packet
     participant ARPUtil as get_mac/arping
     participant Console
 
-    User->>Script: sudo python3 arp_detector.py
-    Script->>Console: Print startup messages
-    Script->>Sniffer: Start sniff(store=False, prn=process_packet)
-    Sniffer-->>Handler: Pass each captured packet
-    Handler->>Handler: Check if packet has ARP layer and op == 2
-    alt Is ARP reply
-        Handler->>ARPUtil: arping(packet[ARP].psrc)
-        ARPUtil-->>Handler: Return real_mac (or None)
-        Handler->>Handler: response_mac = packet[ARP].hwsrc
-        alt real_mac exists and real_mac != response_mac
-            Handler->>Console: Print ALERT with IP, Real MAC, Fake MAC
-        else
-            Handler->>Console: Ignore (no alert)
+    User->>Script: sudo python3 arp_spoof_detector.py
+    Script->>OS: Root check with id -u
+    alt Not running as root
+        Script->>User: Print root-privilege error and exit (1)
+    else Running as root
+        Script->>Console: Print startup messages
+        Script->>Sniffer: Start sniff(store=False, prn=process_packet)
+        Sniffer-->>Handler: Pass each captured packet
+        Handler->>Handler: Check if packet has ARP layer and op == 2
+        alt Is ARP reply
+            Handler->>ARPUtil: arping(packet[ARP].psrc)
+            ARPUtil-->>Handler: Return real_mac (or None)
+            Handler->>Handler: response_mac = packet[ARP].hwsrc
+            alt real_mac exists and real_mac != response_mac
+                Handler->>Console: Print ALERT with IP, Real MAC, Fake MAC
+            else MAC matches or lookup failed
+                Handler->>Console: No alert printed
+            end
+        else Not an ARP reply
+            Handler->>Sniffer: Ignore non-ARP packets
         end
-    else
-        Handler->>Sniffer: Ignore non-ARP packets
+        User->>Script: Ctrl+C (stop)
+        Script->>Console: Print Detector stopped by user
+        Script->>User: Exit program
     end
-    User->>Script: Ctrl+C (stop)
-    Script->>Console: Print "Detector stopped by user."
-    Script->>User: Exit program
-
-
+```
 
 ---
 
