@@ -1,0 +1,10 @@
+Baked textures and GLTF models in this directory (roomModel, pcScreenModel,
+macScreenModel, topChairModel, coffeeSteamModel, elgatoLightModel,
+googleHomeLedsModel, bakedDay/Night/Neutral.jpg, lightMap.jpg,
+googleHomeLedMask.png) are sourced from Bruno Simon's "my-room-in-3d":
+
+    https://github.com/brunosimon/my-room-in-3d
+
+Used with permission from the repo owner. draco/ contains the Draco decoder
+shipped with the `three` npm package (three/examples/jsm/libs/draco),
+required to load the Draco-compressed meshes among the models above.
