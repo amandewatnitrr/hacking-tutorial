@@ -3,24 +3,25 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Dark theme (default) */
-  --bg-primary: #0b1220;
-  --bg-secondary: #121829;
-  --bg-tertiary: #1a2332;
-  --text-primary: #e6eef6;
-  --text-secondary: #9ca3af;
-  --accent-green: #00ff88;
-  --accent-green-light: #33ffaa;
-  --accent-green-dark: #00cc6a;
-  --border-color: #1f2937;
+  /* Dark theme (default) — OffSec-inspired violet/cyan on near-black */
+  --bg-primary: #1c1822;
+  --bg-secondary: #241f2d;
+  --bg-tertiary: #2d2738;
+  --text-primary: #f3f0f7;
+  --text-secondary: #a79fb3;
+  --accent-green: #6619d0;        /* primary accent (formerly neon green) */
+  --accent-green-light: #8a4ae8;
+  --accent-green-dark: #4f14a3;
+  --accent-cyan: #00bfcb;          /* secondary accent */
+  --border-color: #352f40;
 
-  /* Light theme */
-  --light-bg-primary: #fefcf5;   /* soft cream */
-  --light-bg-secondary: #f8f6ef;
-  --light-bg-tertiary: #f1efe6;
-  --light-text-primary: #1e293b;
-  --light-text-secondary: #4b5563;
-  --light-border-color: #d1d5db;
+  /* Light theme — bright neutral bg, same violet/cyan accent family */
+  --light-bg-primary: #faf9fc;
+  --light-bg-secondary: #f1eef6;
+  --light-bg-tertiary: #e8e3f0;
+  --light-text-primary: #211c29;
+  --light-text-secondary: #5c5468;
+  --light-border-color: #ddd6e8;
 
   /* Theme base vars (default: dark) */
   --bg: var(--bg-primary);
@@ -44,7 +45,7 @@
   --card: var(--bg-secondary);
   --text: var(--text-primary);
   --border: var(--border-color);
-  --accent-green: #00ff88;
+  --accent-green: #6619d0;
 }
 
 [data-theme='light'] {
@@ -52,7 +53,7 @@
   --card: var(--light-bg-secondary);
   --text: var(--light-text-primary);
   --border: var(--light-border-color);
-  --accent-green: #00cc6a; /* slightly muted in light */
+  --accent-green: #6619d0; /* same primary violet — keeps brand consistent across modes */
 }
 
 
