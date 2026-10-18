@@ -80,8 +80,8 @@
   height: auto;
   border-radius: 10px;
   margin: 1.75rem 0;
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.12);
-  border: 1px solid rgba(102, 255, 170, 0.2);
+  box-shadow: 0 8px 24px rgba(102, 25, 208, 0.12);
+  border: 1px solid rgba(138, 74, 232, 0.2);
 }
 
 .lesson-content blockquote {
@@ -128,8 +128,8 @@
 .lesson-content .internal-link:hover {
   color: var(--accent-green-light);
   transform: scale(1.02);
-  background-color: rgba(102, 255, 170, 0.12);
-  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.15);
+  background-color: rgba(0, 191, 203, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 191, 203, 0.15);
   border-bottom-color: transparent;
 }
 
@@ -137,7 +137,7 @@
 .lesson-content .internal-link:focus-visible {
   outline: 2px solid var(--accent-green);
   outline-offset: 2px;
-  background-color: rgba(102, 255, 170, 0.12);
+  background-color: rgba(0, 191, 203, 0.12);
   border-radius: 6px;
 }
 
@@ -168,7 +168,7 @@
   top: 0;
   right: 0;
   background: var(--accent-green);
-  color: #000000;
+  color: #ffffff;
   padding: 0.25rem 0.75rem;
   border-radius: 0 4px 0 4px;
   font-size: 0.75rem;
@@ -194,7 +194,7 @@
 }
 
 .lesson-content :not(pre) > code {
-  background: rgba(102, 255, 170, 0.08);
+  background: rgba(102, 25, 208, 0.1);
   color: var(--accent-green-light);
   padding: 0.15rem 0.35rem;
   border-radius: 3px;
@@ -261,32 +261,26 @@
 .nav-button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   min-width: 0;
   max-width: 100%;
-  gap: 0.5rem;
-  padding: 0.7rem 1.2rem;
-  border-radius: 6px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text);
-  justify-content: space-between;
   gap: 0.4rem;
-  padding: 0.4rem 0.9rem;   
+  padding: 0.4rem 1rem;
   height: auto;
-  border-radius: 10px;   
-  background: rgba(102, 255, 170, 0.12);
-  border: 1px solid rgba(102, 255, 170, 0.4);
+  border-radius: 9999px;
+  background: rgba(102, 25, 208, 0.12);
+  border: 1.5px solid rgba(102, 25, 208, 0.4);
   color: var(--accent-green-light);
   text-decoration: none;
   font-weight: 500;
   font-family: 'Courier New', monospace;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-button:hover {
   background-color: var(--bg-tertiary);
-  color: var(--accent-green);
+  border-color: var(--accent-cyan, #00bfcb);
+  color: var(--accent-cyan, #00bfcb);
   transform: translateY(-1px);
 }
 
@@ -358,15 +352,15 @@
 
 .lesson-template.light .lesson-content a[href^="#"]:hover,
 .lesson-template.light .lesson-content .internal-link:hover {
-  background-color: rgba(0, 204, 106, 0.12);
-  box-shadow: 0 2px 8px rgba(0, 204, 106, 0.2);
+  background-color: rgba(79, 20, 163, 0.12);
+  box-shadow: 0 2px 8px rgba(79, 20, 163, 0.2);
   color: var(--accent-green-dark);
 }
 
 .lesson-template.light .lesson-content a[href^="#"]:focus-visible,
 .lesson-template.light .lesson-content .internal-link:focus-visible {
   outline-color: var(--accent-green-dark);
-  background-color: rgba(0, 204, 106, 0.12);
+  background-color: rgba(79, 20, 163, 0.12);
 }
 
 .lesson-template.light .lesson-content :is(h1, h2, h3, h4) a[href^="#"]:hover {

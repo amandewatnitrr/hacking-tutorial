@@ -74,12 +74,12 @@
 }
 
 .hl-sidebar__link:hover {
-  background: rgba(102, 255, 170, 0.12);
+  background: rgba(0, 191, 203, 0.12);
   color: var(--text);
 }
 
 .hl-sidebar__link.is-active {
-  background: rgba(102, 126, 234, 0.18);
+  background: rgba(102, 25, 208, 0.18);
   color: var(--text);
 }
 
