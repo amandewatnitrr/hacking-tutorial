@@ -23,17 +23,17 @@
   --color-danger: #f0565f;
   --color-success: #4fd18a;
 
-  /* Light theme — "Rose honeypot": warm plum/rose on a soft rose-tinted paper */
-  --light-bg-primary: #fbf1f6;
-  --light-bg-secondary: #f3dce9;
-  --light-bg-tertiary: #eccbdc;
-  --light-text-primary: #280f20;
-  --light-text-secondary: #6f4a60;
-  --light-border-color: #e6bdd4;
-  --light-accent-green: #8f214c;        /* text accent */
-  --light-accent-green-light: #a8305f;  /* hover-lightened text accent */
-  --light-accent-green-dark: #b82d63;   /* fill accent */
-  --light-accent-green-dark-rgb: 184, 45, 99;
+  /* Light theme — "Lime": charcoal-green text on a fresh lime-tinted paper */
+  --light-bg-primary: #f6f9f1;
+  --light-bg-secondary: #e9f0db;
+  --light-bg-tertiary: #dfe9c9;
+  --light-text-primary: #171c10;
+  --light-text-secondary: #596b43;
+  --light-border-color: #cbdcad;
+  --light-accent-green: #56730c;        /* text accent */
+  --light-accent-green-light: #7fa816;  /* hover-lightened text accent */
+  --light-accent-green-dark: #6f9410;   /* fill accent */
+  --light-accent-green-dark-rgb: 111, 148, 16;
   --light-accent-cyan: #1949ad;         /* secondary/info hover accent */
   --light-accent-cyan-rgb: 25, 73, 173;
   --light-color-info: #1949ad;
