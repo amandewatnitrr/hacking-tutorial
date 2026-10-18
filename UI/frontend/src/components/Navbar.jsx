@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import logoOnDark from '../../../../imgs/logo-on-dark.svg?url';
+import logoOnLight from '../../../../imgs/logo-on-light.svg?url';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -62,7 +64,11 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Brand */}
         <Link to="/" className="navbar-brand" onClick={handleHomeClick}>
-          <span className="brand-icon">{'>'}_</span>
+          <img
+            src={theme === 'dark' ? logoOnDark : logoOnLight}
+            alt=""
+            className="brand-logo"
+          />
           <span className="brand-text">HackLearn</span>
         </Link>
 
