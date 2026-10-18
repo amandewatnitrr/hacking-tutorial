@@ -3,25 +3,43 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Dark theme (default) — OffSec-inspired violet/cyan on near-black */
-  --bg-primary: #1c1822;
-  --bg-secondary: #241f2d;
-  --bg-tertiary: #2d2738;
-  --text-primary: #f3f0f7;
-  --text-secondary: #a79fb3;
-  --accent-green: #6619d0;        /* primary accent (formerly neon green) */
-  --accent-green-light: #8a4ae8;
-  --accent-green-dark: #4f14a3;
-  --accent-cyan: #00bfcb;          /* secondary accent */
-  --border-color: #352f40;
+  /* Dark theme (default) — "Steel minimal": cool steel-blue accent on near-black grey */
+  --bg-primary: #121315;
+  --bg-secondary: #1a1c1f;
+  --bg-tertiary: #22252a;
+  --text-primary: #e9eaec;
+  --text-secondary: #9a9ea4;
+  --accent-green: #8bb6ea;        /* text accent: headings, links (lighter tone, readable on dark bg) */
+  --accent-green-light: #a9cdf5;  /* hover-lightened text accent */
+  --accent-green-dark: #2f6bbd;   /* fill accent: buttons, borders, focus rings (saturated) */
+  --accent-green-dark-rgb: 47, 107, 189;
+  --accent-cyan: #5a9ff2;         /* secondary/info hover accent */
+  --accent-cyan-rgb: 90, 159, 242;
+  --border-color: #2e3135;
 
-  /* Light theme — bright neutral bg, same violet/cyan accent family */
-  --light-bg-primary: #faf9fc;
-  --light-bg-secondary: #f1eef6;
-  --light-bg-tertiary: #e8e3f0;
-  --light-text-primary: #211c29;
-  --light-text-secondary: #5c5468;
-  --light-border-color: #ddd6e8;
+  /* Semantic colors — fixed meaning, shared across any accent direction */
+  --color-info: #5a9ff2;
+  --color-warning: #e8b84a;
+  --color-danger: #f0565f;
+  --color-success: #4fd18a;
+
+  /* Light theme — "Rose honeypot": warm plum/rose on a soft rose-tinted paper */
+  --light-bg-primary: #fbf1f6;
+  --light-bg-secondary: #f3dce9;
+  --light-bg-tertiary: #eccbdc;
+  --light-text-primary: #280f20;
+  --light-text-secondary: #6f4a60;
+  --light-border-color: #e6bdd4;
+  --light-accent-green: #8f214c;        /* text accent */
+  --light-accent-green-light: #a8305f;  /* hover-lightened text accent */
+  --light-accent-green-dark: #b82d63;   /* fill accent */
+  --light-accent-green-dark-rgb: 184, 45, 99;
+  --light-accent-cyan: #1949ad;         /* secondary/info hover accent */
+  --light-accent-cyan-rgb: 25, 73, 173;
+  --light-color-info: #1949ad;
+  --light-color-warning: #8a650a;
+  --light-color-danger: #b01c27;
+  --light-color-success: #157a4f;
 
   /* Theme base vars (default: dark) */
   --bg: var(--bg-primary);
@@ -45,7 +63,6 @@
   --card: var(--bg-secondary);
   --text: var(--text-primary);
   --border: var(--border-color);
-  --accent-green: #6619d0;
 }
 
 [data-theme='light'] {
@@ -53,7 +70,16 @@
   --card: var(--light-bg-secondary);
   --text: var(--light-text-primary);
   --border: var(--light-border-color);
-  --accent-green: #6619d0; /* same primary violet — keeps brand consistent across modes */
+  --accent-green: var(--light-accent-green);
+  --accent-green-light: var(--light-accent-green-light);
+  --accent-green-dark: var(--light-accent-green-dark);
+  --accent-green-dark-rgb: var(--light-accent-green-dark-rgb);
+  --accent-cyan: var(--light-accent-cyan);
+  --accent-cyan-rgb: var(--light-accent-cyan-rgb);
+  --color-info: var(--light-color-info);
+  --color-warning: var(--light-color-warning);
+  --color-danger: var(--light-color-danger);
+  --color-success: var(--light-color-success);
 }
 
 
