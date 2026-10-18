@@ -72,8 +72,10 @@ body {
   text-shadow: 0 0 10px rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.5);
 }
 
-.brand-icon {
-  font-family: 'Courier New', monospace;
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
 }
 
 .navbar-links {
