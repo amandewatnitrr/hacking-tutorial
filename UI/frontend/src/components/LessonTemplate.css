@@ -179,6 +179,45 @@
   color: var(--accent-green-light);
 }
 
+/* Back to Lessons link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(102, 255, 170, 0.12);
+  border: 1px solid rgba(102, 255, 170, 0.4);
+  color: var(--accent-green-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-green);
+  transform: translateY(-1px);
+}
+
+.back-link:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+}
+
+.lesson-template.light .back-link {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--accent-green-dark);
+  color: var(--accent-green-dark);
+}
+
+.lesson-template.light .back-link:hover {
+  background-color: var(--light-bg-tertiary);
+}
+
 /* Navigation */
 /* Professional Lesson Navigation */
 .lesson-navigation {

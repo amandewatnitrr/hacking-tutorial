@@ -104,6 +104,7 @@ const LessonTemplate = ({ lesson }) => {
   return (
     <div className={`lesson-template ${theme}`}>
       <header className="lesson-header">
+        <Link to="/" className="back-link">← Back to Lessons</Link>
         <h1>{lesson.title}</h1>
       </header>
 
