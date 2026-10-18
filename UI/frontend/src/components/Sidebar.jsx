@@ -31,7 +31,10 @@ const Sidebar = ({ isOpen, onClose, currentSlug }) => {
         <div className="hl-sidebar__sections">
           {Object.keys(grouped).map((catKey) => (
             <div className="hl-sidebar__section" key={catKey}>
-              <div className="hl-sidebar__heading">{getCategoryDisplayName(catKey)}</div>
+              <div className="hl-sidebar__heading">
+                <span>{getCategoryDisplayName(catKey)}</span>
+                <span className="hl-sidebar__count">{grouped[catKey].length}</span>
+              </div>
               <ul className="hl-sidebar__list">
                 {grouped[catKey].map((lesson) => (
                   <li key={lesson.slug} className="hl-sidebar__item">

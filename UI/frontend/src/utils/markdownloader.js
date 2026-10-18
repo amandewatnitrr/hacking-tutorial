@@ -1,5 +1,34 @@
 import matter from 'gray-matter';
 
+// Domain acronyms that should stay fully uppercase instead of Title Case
+// when a filename is humanized into a display title (e.g. "arp" -> "ARP",
+// not "Arp").
+const ACRONYMS = new Set([
+  'ids', 'ssh', 'arp', 'mitm', 'wep', 'wpa', 'wpa2', 'wps', 'mac', 'dns', 'sni',
+  'tcp', 'udp', 'ip', 'http', 'https', 'ctf', 'fmea', 'cli', 'ssl', 'tls', 'sql',
+  'cve', 'os', 'pc',
+]);
+
+/**
+ * Turns a raw filename slug ("mitm_attack_automator") into a readable
+ * fallback title ("MITM Attack Automator") for lessons with no frontmatter
+ * title. Preserves any word that already has non-lowercase letters
+ * (e.g. "NOVICE", "CrashCourse") instead of reflowing its casing.
+ */
+function humanizeTitle(fileName) {
+  return fileName
+    .replace(/[_-]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .map((word) => {
+      const lower = word.toLowerCase();
+      if (ACRONYMS.has(lower)) return lower.toUpperCase();
+      if (word === lower) return word.charAt(0).toUpperCase() + word.slice(1);
+      return word;
+    })
+    .join(' ');
+}
+
 // Import all markdown files directly from the repo-root topic folders.
 // Paths are relative to this file (src/utils/); `../../../../` lands on the
 // repo root (UI/frontend/src/utils -> src -> frontend -> UI -> repo root).
@@ -157,7 +186,7 @@ function parseMarkdownFile(filePath, content) {
   // 'ethical-hacking' and 'cybersecurity-architecture' pass through as-is.
 
   return {
-    title: data.title || fileName,
+    title: data.title || humanizeTitle(fileName),
     slug,
     category,
     order: data.order || 999,
