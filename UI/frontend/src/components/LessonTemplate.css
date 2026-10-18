@@ -324,7 +324,7 @@
 .nav-title {
   font-size: 0.95rem;
   color: var(--text);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* Light theme overrides */

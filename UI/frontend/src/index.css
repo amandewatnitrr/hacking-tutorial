@@ -131,7 +131,7 @@ button:hover {
 }
 
 /* Navbar, Sidebar, Cards, etc. */
-.navbar, .sidebar, .card, .lesson-header, .lesson-content {
+.navbar, .sidebar, .card {
   background-color: var(--card);
   color: var(--text);
   border: 1px solid var(--border);
