@@ -2,26 +2,26 @@
 /* THEME VARIABLES */
 /* ========================= */
 
-/* 🌙 Default = Dark Theme */
+/* 🌙 Default = Dark Theme — OffSec-inspired violet/cyan on near-black */
 :root {
-  --bg-primary: #0b1220;
-  --bg-secondary: #121829;
-  --bg-tertiary: #1a2332;
-  --text-primary: #e6e6e6;
-  --accent-green: #00ff88;
-  --accent-green-light: #66ffb3;
-  --border-color: #2b354a;
+  --bg-primary: #1c1822;
+  --bg-secondary: #241f2d;
+  --bg-tertiary: #2d2738;
+  --text-primary: #f3f0f7;
+  --accent-green: #6619d0;
+  --accent-green-light: #8a4ae8;
+  --border-color: #352f40;
 }
 
 /* 🌞 Light Theme */
 [data-theme="light"] {
-  --bg-primary: #f5f7fa;
+  --bg-primary: #faf9fc;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #e8ebf0;
-  --text-primary: #0b1220;
-  --accent-green: #007f4f;
-  --accent-green-light: #00b86b;
-  --border-color: #cfd5e3;
+  --bg-tertiary: #e8e3f0;
+  --text-primary: #211c29;
+  --accent-green: #6619d0;
+  --accent-green-light: #8a4ae8;
+  --border-color: #ddd6e8;
 }
 
 /* Smooth transition between themes */
@@ -69,7 +69,7 @@ body {
 
 .navbar-brand:hover {
   color: var(--accent-green-light);
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  text-shadow: 0 0 10px rgba(102, 25, 208, 0.5);
 }
 
 .brand-icon {
@@ -85,10 +85,10 @@ body {
 .nav-link {
   color: var(--text-primary);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -96,9 +96,9 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--accent-green);
-  border-color: var(--accent-green);
-  background-color: rgba(0, 255, 136, 0.1);
+  color: var(--accent-cyan, #00bfcb);
+  border-color: var(--accent-cyan, #00bfcb);
+  background-color: rgba(0, 191, 203, 0.1);
 }
 
 .github-link svg {
