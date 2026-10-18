@@ -2,26 +2,26 @@
 /* THEME VARIABLES */
 /* ========================= */
 
-/* 🌙 Default = Dark Theme — OffSec-inspired violet/cyan on near-black */
+/* 🌙 Default = Dark Theme — "Steel minimal": cool steel-blue on near-black grey */
 :root {
-  --bg-primary: #1c1822;
-  --bg-secondary: #241f2d;
-  --bg-tertiary: #2d2738;
-  --text-primary: #f3f0f7;
-  --accent-green: #6619d0;
-  --accent-green-light: #8a4ae8;
-  --border-color: #352f40;
+  --bg-primary: #121315;
+  --bg-secondary: #1a1c1f;
+  --bg-tertiary: #22252a;
+  --text-primary: #e9eaec;
+  --accent-green: #8bb6ea;
+  --accent-green-light: #a9cdf5;
+  --border-color: #2e3135;
 }
 
-/* 🌞 Light Theme */
+/* 🌞 Light Theme — "Rose honeypot": warm plum/rose on soft rose paper */
 [data-theme="light"] {
-  --bg-primary: #faf9fc;
+  --bg-primary: #fbf1f6;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #e8e3f0;
-  --text-primary: #211c29;
-  --accent-green: #6619d0;
-  --accent-green-light: #8a4ae8;
-  --border-color: #ddd6e8;
+  --bg-tertiary: #eccbdc;
+  --text-primary: #280f20;
+  --accent-green: #8f214c;
+  --accent-green-light: #a8305f;
+  --border-color: #e6bdd4;
 }
 
 /* Smooth transition between themes */
@@ -69,7 +69,7 @@ body {
 
 .navbar-brand:hover {
   color: var(--accent-green-light);
-  text-shadow: 0 0 10px rgba(102, 25, 208, 0.5);
+  text-shadow: 0 0 10px rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.5);
 }
 
 .brand-icon {
@@ -96,9 +96,9 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--accent-cyan, #00bfcb);
-  border-color: var(--accent-cyan, #00bfcb);
-  background-color: rgba(0, 191, 203, 0.1);
+  color: var(--accent-cyan, #5a9ff2);
+  border-color: var(--accent-cyan, #5a9ff2);
+  background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.1);
 }
 
 .github-link svg {
