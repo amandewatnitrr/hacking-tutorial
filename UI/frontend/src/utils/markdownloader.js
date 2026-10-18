@@ -70,6 +70,16 @@ function buildImageIndex(globsByCategory) {
 
 const imageIndex = buildImageIndex(categoryImageGlobs);
 
+// Many lessons reference `../imgs/<file>` — a shared, root-level image pool
+// (not inside any one category's own folder). Index it separately, keyed
+// by filename under an `imgs/` prefix so it merges into getLessonImages
+// without colliding with a category's own local images.
+const rootImageFiles = import.meta.glob('../../../../imgs/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true });
+const rootImageIndex = {};
+for (const [filePath, url] of Object.entries(rootImageFiles)) {
+  rootImageIndex[`imgs/${filePath.split('/').pop()}`] = url;
+}
+
 // Maps a file's glob path to the category folder it came from, so
 // getLessonImages can find the right image index for a lesson.
 const CATEGORY_FOLDER_BY_PATH_SEGMENT = Object.keys(CATEGORY_FILE_GROUPS);
@@ -84,9 +94,10 @@ function categoryFolderFromFilePath(filePath) {
  * @returns {Object} Map of image relative paths (as written in markdown) to asset URLs
  */
 export function getLessonImages(lesson) {
-  if (!lesson?.filePath) return {};
+  if (!lesson?.filePath) return rootImageIndex;
   const folder = categoryFolderFromFilePath(lesson.filePath);
-  return folder ? imageIndex[folder] || {} : {};
+  const categoryMap = folder ? imageIndex[folder] || {} : {};
+  return { ...rootImageIndex, ...categoryMap };
 }
 
 // Debug: Log what files were found
@@ -114,8 +125,19 @@ function parseMarkdownFile(filePath, content) {
     ? 'cli-editors-tutorials'
     : immediateParent;
 
-  // Generate slug from filename if not provided in frontmatter
-  const slug = data.slug || fileName;
+  // Generate slug from filename if not provided in frontmatter. The 3 newly
+  // wired categories reuse generic filenames ("lesson-01", "chapter-01")
+  // that collide with existing ethical-hacking slugs, so they're namespaced
+  // by category; existing categories keep their original (bare) slugs so
+  // current /lessons/<slug> links don't break.
+  const NEW_CATEGORIES_NEED_NAMESPACED_SLUG = new Set([
+    'cybersecurity-architecture', 'FMEA Fundamentals', 'cli-editors-tutorials',
+  ]);
+  const slug = data.slug || (
+    NEW_CATEGORIES_NEED_NAMESPACED_SLUG.has(categoryFolder)
+      ? `${categoryFolder.toLowerCase().replace(/\s+/g, '-')}-${fileName}`
+      : fileName
+  );
 
   // Determine category name
   let category = data.category || categoryFolder;

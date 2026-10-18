@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { getLessonBySlug } from '../utils/markdownloader';
+import { getLessonBySlug, getLessonImages } from '../utils/markdownloader';
 import Mermaid from './Mermaid';
 import './LessonTemplate.css';
 
@@ -54,14 +54,14 @@ const LessonTemplate = ({ lesson }) => {
     );
   }
 
+  const lessonImages = getLessonImages(lesson);
+
   const transformMarkdownUrl = (url, key, node) => {
     if (typeof url !== 'string') return url;
     const isImageNode = node?.tagName === 'img';
-    const isRelativeImage =
-      url.startsWith('../imgs/') || url.startsWith('./imgs/') || url.startsWith('./../imgs/');
-    if (isImageNode && isRelativeImage) {
-      const imageName = url.split('/').pop();
-      return `/imgs/${imageName}`;
+    if (isImageNode) {
+      const normalized = decodeURIComponent(url.replace(/^(\.\.?\/)+/, ''));
+      if (lessonImages[normalized]) return lessonImages[normalized];
     }
     return url;
   };
