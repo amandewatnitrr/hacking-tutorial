@@ -44,18 +44,43 @@
   padding: 0.5rem;
 }
 
+.hl-sidebar__section + .hl-sidebar__section {
+  border-top: 1px solid var(--border-color);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+
 .hl-sidebar__heading {
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-secondary);
-  margin: 0.75rem 0 0.25rem 0.25rem;
+  margin: 0.75rem 0.25rem 0.4rem;
+}
+
+.hl-sidebar__count {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary, var(--card));
+  border-radius: 99px;
+  padding: 0.05rem 0.45rem;
 }
 
 .hl-sidebar__list {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .hl-sidebar__item {
@@ -64,40 +89,50 @@
 
 .hl-sidebar__link {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.6rem;
-  padding: 0.45rem 0.5rem 0.45rem 0.6rem;
+  padding: 0.5rem 0.6rem;
   border-radius: 8px;
+  border-left: 2.5px solid transparent;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: background 200ms ease-in-out, color 200ms ease-in-out;
+  transition: background 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .hl-sidebar__link:hover {
   background: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.12);
   color: var(--text);
+  transform: translateX(2px);
 }
 
 .hl-sidebar__link.is-active {
-  background: rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.18);
+  background: rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.16);
+  border-left-color: var(--accent-green-dark);
   color: var(--text);
 }
 
 .hl-sidebar__bullet {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
+  margin-top: 0.55rem;
   border-radius: 50%;
   background: var(--text-secondary);
+  flex-shrink: 0;
 }
 
 .hl-sidebar__link.is-active .hl-sidebar__bullet {
-  background: var(--accent-green);
+  background: var(--accent-green-dark);
 }
 
 .hl-sidebar__text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  font-size: 0.92rem;
+}
+
+.hl-sidebar__link.is-active .hl-sidebar__text {
+  font-weight: 600;
 }
 
 /* Mobile slide-over */
