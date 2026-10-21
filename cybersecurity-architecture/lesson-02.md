@@ -14,6 +14,18 @@
   - [PASTA Threat Model](#pasta-threat-model)
   - [OCTAVE Threat Model](#octave-threat-model)
   - [TRIKE Threat Model](#trike-threat-model)
+  - [Attack Trees](#attack-trees)
+    - [Attack Tree: Steal or Ransom the Product Software](#attack-tree-steal-or-ransom-the-product-software)
+      - [Level 0: Overview](#level-0-overview)
+      - [Branch A: Supply Chain Engineering](#branch-a-supply-chain-engineering)
+      - [Branch B: Social Engineering](#branch-b-social-engineering)
+      - [Branch C: Insider Attack](#branch-c-insider-attack)
+      - [Reading the tree](#reading-the-tree)
+    - [Mitigations for the Attack Tree](#mitigations-for-the-attack-tree)
+      - [Mitigations: Branch A (Supply Chain)](#mitigations-branch-a-supply-chain)
+      - [Mitigations: Branch B (Social Engineering)](#mitigations-branch-b-social-engineering)
+      - [Mitigations: Branch C (Insider)](#mitigations-branch-c-insider)
+      - [Summary](#summary)
 
 ## Introduction to Threat Modeling
 
@@ -217,3 +229,390 @@
   - The last step is building the `Risk Model`.
     - Experimental and still under development
     - Recommended to use other methodologies like NIST
+
+## Attack Trees
+
+>[!IMPORTANT]
+> Attack trees are graphical representation of attack against a system or a network using a hierarichal tree structure.
+> The Root node represents the main goal of the attacker, and the branches represent different ways to achieve that goal. 
+> This graphical representation have 2 types of nodes: AND nodes and OR nodes.
+> `AND` nodes indicate that all child nodes must be achieved to reach the parent node, while `OR` nodes indicate that achieving any one of the child nodes is sufficient to reach the parent node.
+
+Example of an attack tree:
+
+```mermaid
+graph TD
+    A[Root Goal] --> B[AND Node]
+    A --> C[OR Node]
+    B --> D[Child Node 1]
+    B --> E[Child Node 2]
+    C --> F[Child Node 3]
+    C --> G[Child Node 4]
+```
+
+Here's an example for instagram.
+
+```mermaid
+graph TD
+    A[Instagram Session Hijack] --> B[Steal Session Cookie]
+    A --> C[Obtain Access Token]
+    B --> D[Use XSS Attack]
+    B --> E[Use Network Sniffing]
+    C --> F[Phishing Attack]
+    C --> G[Social Engineering]
+```
+
+- The attack tree process has following steps:
+
+  - Identify the main goal of the attacker (root node)
+  - Identify the ways to achieve the main goal (branches)
+  - Determine the logical relationship between the child nodes (AND/OR)
+  - Delete unrealistic leaf nodes
+  - Check for completeness
+
+- Let's take a real life scenario for analysis wherein your company is on the verge of releasing a revolutionary product and are concerned that the software used to create it will either be stolen and sold to rival companies or could be used to hold the company to ransom.
+
+  A 3rd party Software Development company is also involved in the project.
+
+### Attack Tree: Steal or Ransom the Product Software
+
+> Legend: hexagon = `AND` node (all children needed), rounded box = `OR` node (any child enough), plain box = leaf attack step.
+
+#### Level 0: Overview
+
+The attacker needs to *gain access* **AND** *monetise* it, so the root is an `AND` node. Access can come via any of 3 vectors (`OR`), and monetisation via any of 3 routes (`OR`).
+
+```mermaid
+graph TD
+
+
+    A[Stealing sensitive Data] --> SC("A. Supply chain engineering")
+    A --> SE("B. Social engineering")
+    A --> IN("C. Insider attack")
+
+
+    classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
+    class R and;
+    class ACC,MON,SC,SE,IN or;
+```
+
+#### Branch A: Supply Chain Engineering
+
+Attacker goes after the weakest link: the 3rd party development company, its tools, or the trust the company places in them.
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    A("A. Supply chain<br/>engineering (OR)")
+    A --> A1("A1. Breach the 3rd party<br/>dev company (OR)")
+    A --> A2("A2. Poison tools and<br/>dependencies (OR)")
+    A --> A3("A3. Abuse<br/>vendor-to-company trust<br/>links (OR)")
+
+    A1 --> A11{{"A1.1 Vendor network<br/>breach (AND)"}}
+    A11 --> A111["Phish a vendor developer"]
+    A11 --> A112["Privilege escalation and<br/>lateral movement"]
+    A11 --> A113["Reach shared repo or<br/>build server"]
+    A1 --> A12["Steal vendor VPN creds,<br/>SSH keys, API tokens"]
+    A1 --> A13["Compromise vendor CI/CD<br/>pipeline"]
+    A1 --> A14["Malware on vendor<br/>laptop, or stolen device"]
+    A1 --> A15["Exploit weak vendor<br/>hygiene: unpatched VPN,<br/>no MFA"]
+
+    A2 --> A21["Dependency confusion or<br/>typosquatted package"]
+    A2 --> A22["Hijack upstream<br/>open-source maintainer<br/>account"]
+    A2 --> A23["Trojanised IDE plugin,<br/>compiler or build tool"]
+    A2 --> A24["Poisoned container base<br/>image"]
+
+    A3 --> A31["Hard-coded secrets found<br/>in vendor repo"]
+    A3 --> A32["Over-privileged vendor<br/>accounts on company<br/>GitHub, cloud, Jira"]
+    A3 --> A33{{"A3.3 Tamper with<br/>delivered code (AND)"}}
+    A33 --> A331["Compromise artifact<br/>registry or code-signing<br/>key"]
+    A33 --> A332["Company accepts vendor<br/>drop with no review or<br/>SBOM check"]
+
+    classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
+    class A11,A33 and;
+    class A,A1,A2,A3 or;
+```
+
+#### Branch B: Social Engineering
+
+Attacker targets people at the company or the vendor, not the technology.
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    B("B. Social engineering<br/>(OR)")
+    B --> B1("B1. Phishing (OR)")
+    B --> B2("B2. Pretexting and<br/>vishing (OR)")
+    B --> B3("B3. Fake recruiter or<br/>job test (OR)")
+    B --> B4("B4. Physical social<br/>engineering (OR)")
+    B --> B5("B5. Business email<br/>compromise (OR)")
+
+    B1 --> B11{{"B1.1 Spear-phish with<br/>MFA bypass (AND)"}}
+    B11 --> B111["OSINT on LinkedIn and<br/>GitHub to find<br/>developers"]
+    B11 --> B112["Craft lure: fake code<br/>review or Jira link"]
+    B11 --> B113["Adversary-in-the-middle<br/>proxy captures password<br/>and session cookie"]
+    B1 --> B12["MFA fatigue: spam push<br/>prompts until user<br/>approves"]
+    B1 --> B13["Malicious attachment or<br/>macro to dev workstation"]
+
+    B2 --> B21{{"B2.1 Helpdesk reset<br/>(AND)"}}
+    B21 --> B211["Collect employee name,<br/>ID and manager from<br/>OSINT"]
+    B21 --> B212["Call IT helpdesk<br/>impersonating the<br/>developer"]
+    B21 --> B213["Get password reset and<br/>enrol attacker MFA<br/>device"]
+    B2 --> B22["Impersonate vendor<br/>project manager to<br/>request repo access"]
+
+    B3 --> B31["Fake recruiter sends<br/>coding test with malware<br/>to developer"]
+    B3 --> B32["Fake open-source<br/>contributor submits<br/>malicious pull request"]
+
+    B4 --> B41["Tailgate into office or<br/>vendor site"]
+    B4 --> B42["Drop infected USB near<br/>developers"]
+    B4 --> B43["Evil maid: plug implant<br/>into unattended<br/>workstation"]
+
+    B5 --> B51["Spoof or take over<br/>executive mailbox"]
+    B5 --> B52["Pressure vendor to share<br/>source archive urgently"]
+
+    classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
+    class B11,B21 and;
+    class B,B1,B2,B3,B4,B5 or;
+```
+
+#### Branch C: Insider Attack
+
+Attacker is already inside, or turns someone who is. Includes the vendor's staff, who are insiders to the project too.
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    C("C. Insider attack (OR)")
+    C --> C1("C1. Malicious employee<br/>(OR)")
+    C --> C2("C2. Malicious vendor<br/>staff (OR)")
+    C --> C3("C3. Coerced or recruited<br/>insider (OR)")
+    C --> C4("C4. Negligent insider<br/>(OR)")
+    C --> C5("C5. Privileged or<br/>ex-insider (OR)")
+
+    C1 --> C11["Copy source to USB,<br/>personal cloud or<br/>private git remote"]
+    C1 --> C12["Email code to personal<br/>address"]
+    C1 --> C13["Plant logic bomb or kill<br/>switch to enable ransom"]
+
+    C2 --> C21["Vendor developer sells<br/>copy to rival"]
+    C2 --> C22["Vendor has weaker DLP<br/>and monitoring than<br/>company"]
+
+    C3 --> C31["Rival bribes existing<br/>employee"]
+    C3 --> C32["Blackmail employee using<br/>personal leverage"]
+    C3 --> C33{{"C3.3 Planted employee<br/>(AND)"}}
+    C33 --> C331["Rival places agent via<br/>job application or<br/>vendor contract"]
+    C33 --> C332["Agent passes vetting and<br/>gains repo access"]
+
+    C4 --> C41["Repo or storage bucket<br/>accidentally made public"]
+    C4 --> C42["Credentials committed to<br/>repo or pasted in public<br/>chat"]
+    C4 --> C43["Source pasted into<br/>unapproved AI or online<br/>tool"]
+    C4 --> C44["Lost or unencrypted<br/>laptop"]
+
+    C5 --> C51["Admin disables logging<br/>then dumps repo"]
+    C5 --> C52["Ex-employee or ex-vendor<br/>access never revoked"]
+    C5 --> C53["Shared or service<br/>account abused with no<br/>attribution"]
+
+    classDef and fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef or fill:#e8f1fb,stroke:#2e6da4,color:#000;
+    class C33 and;
+    class C,C1,C2,C3,C4,C5 or;
+```
+
+#### Reading the tree
+
+- Weak points are leaves with no `AND` partner. One step, attacker wins. Examples: stolen vendor creds (`A12`), unrevoked access (`C52`), MFA fatigue (`B12`).
+- `AND` nodes are where defenders get leverage. Break any one child and whole path fails. Example: `A3.3` fails if company reviews vendor code or verifies signatures.
+- Vendor appears in all 3 branches (`A1`, `B22`, `C2`). Third party is the common thread, so contract security requirements, least-privilege access and monitoring for vendor accounts matter as much as internal controls.
+
+### Mitigations for the Attack Tree
+
+The same attack trees are redrawn below with a rating on each attack node and the mitigation attached as a child. Solid line = attack step, dotted line = countermeasure (rounded pill). Hexagon = `AND` node. Rating:
+
+| Colour | Status | Meaning |
+| --- | --- | --- |
+| 🟢 Green | Resolved | A control exists that closes the path or reduces it to negligible risk. |
+| 🟡 Yellow | Possible | A mitigation exists but is partial: it needs vendor cooperation, process discipline or extra budget, or leaves residual risk. |
+| 🔴 Red | Unavoidable | Cannot be prevented (attacker-side activity, or a trusted person acting maliciously). Only limit the blast radius, detect and respond. |
+
+Grey nodes are not rated. An `AND` node such as `A1.1` is rated as a whole, so its mitigation hangs off the hexagon. An `OR` node stays open until every child under it is closed, so one unrated or red sibling keeps the whole branch exposed.
+
+#### Mitigations: Branch A (Supply Chain)
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    A("A. Supply chain<br/>engineering (OR)")
+    A --> A1("A1. Breach the 3rd party<br/>dev company (OR)")
+    A --> A2("A2. Poison tools and<br/>dependencies (OR)")
+    A --> A3("A3. Abuse<br/>vendor-to-company trust<br/>links (OR)")
+
+    A1 --> A11{{"🟡 A1.1 Vendor network<br/>breach (AND)"}}
+    A11 --> A111["A111 Phish a vendor<br/>developer"]
+    A11 --> A112["A112 Privilege<br/>escalation and lateral<br/>movement"]
+    A11 --> A113["A113 Reach shared repo<br/>or build server"]
+    A11 -.-> MA11(["Contract security<br/>clauses, right to audit,<br/>vendor works only inside<br/>company-hosted VDI,<br/>segmented network"])
+    A1 --> A12["🟢 A12 Steal vendor VPN<br/>creds, SSH keys, API<br/>tokens"]
+    A12 -.-> MA12(["Short-lived tokens,<br/>hardware-key MFA, IP<br/>allowlist for vendor<br/>access"])
+    A1 --> A13["🟡 A13 Compromise vendor<br/>CI/CD pipeline"]
+    A13 -.-> MA13(["Build on company-owned<br/>ephemeral runners,<br/>vendor only pushes<br/>reviewed code"])
+    A1 --> A14["🟡 A14 Malware on vendor<br/>laptop, or stolen device"]
+    A14 -.-> MA14(["Company-managed devices<br/>or VDI, EDR required, no<br/>local source copies"])
+    A1 --> A15["A15 Exploit weak vendor<br/>hygiene: unpatched VPN,<br/>no MFA"]
+
+    A2 --> A21["🟢 A21 Dependency<br/>confusion or<br/>typosquatted package"]
+    A21 -.-> MA21(["Private registry with<br/>pinned namespaces,<br/>lockfiles with hashes"])
+    A2 --> A22["🔴 A22 Hijack upstream<br/>open-source maintainer<br/>account"]
+    A22 -.-> MA22(["Cannot prevent. Pin<br/>versions, delay<br/>upgrades, monitor<br/>advisories, keep SBOM to<br/>find affected builds<br/>fast"])
+    A2 --> A23["🟡 A23 Trojanised IDE<br/>plugin, compiler or<br/>build tool"]
+    A23 -.-> MA23(["Plugin allowlist, pinned<br/>versions, checksum<br/>verification, still<br/>trusts upstream<br/>publisher"])
+    A2 --> A24["A24 Poisoned container<br/>base image"]
+
+    A3 --> A31["🟢 A31 Hard-coded secrets<br/>found in vendor repo"]
+    A31 -.-> MA31(["Secret scanning in<br/>pre-commit and CI,<br/>central vault, rotate on<br/>detection"])
+    A3 --> A32["🟢 A32 Over-privileged<br/>vendor accounts on<br/>company GitHub, cloud,<br/>Jira"]
+    A32 -.-> MA32(["Least privilege, SSO<br/>with MFA, just-in-time<br/>access that expires"])
+    A3 --> A33{{"🟢 A3.3 Tamper with<br/>delivered code (AND)"}}
+    A33 --> A331["A331 Compromise artifact<br/>registry or code-signing<br/>key"]
+    A33 --> A332["A332 Company accepts<br/>vendor drop with no<br/>review or SBOM check"]
+    A33 -.-> MA33(["Signed artifacts, build<br/>provenance (SLSA),<br/>mandatory code review,<br/>SBOM check on every<br/>vendor drop"])
+
+    classDef plain fill:#f2f2f2,stroke:#888,color:#000;
+    classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
+    classDef yellow fill:#fff3b0,stroke:#b8860b,color:#000;
+    classDef red fill:#f5b7b1,stroke:#c0392b,color:#000;
+    class A,A1,A2,A3,A111,A112,A113,A15,A24,A331,A332 plain;
+    class A12,MA12,A21,MA21,A31,MA31,A32,MA32,A33,MA33 green;
+    class A11,MA11,A13,MA13,A14,MA14,A23,MA23 yellow;
+    class A22,MA22 red;
+```
+
+#### Mitigations: Branch B (Social Engineering)
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    B("B. Social engineering<br/>(OR)")
+    B --> B1("B1. Phishing (OR)")
+    B --> B2("B2. Pretexting and<br/>vishing (OR)")
+    B --> B3("B3. Fake recruiter or<br/>job test (OR)")
+    B --> B4("B4. Physical social<br/>engineering (OR)")
+    B --> B5("B5. Business email<br/>compromise (OR)")
+
+    B1 --> B11{{"B1.1 Spear-phish with<br/>MFA bypass (AND)"}}
+    B11 --> B111["🔴 B111 OSINT on LinkedIn<br/>and GitHub to find<br/>developers"]
+    B111 -.-> MB111(["Cannot remove public<br/>profiles. Limit what<br/>staff publish, assume<br/>attacker knows names and<br/>roles"])
+    B11 --> B112["🔴 B112 Craft lure: fake<br/>code review or Jira link"]
+    B112 -.-> MB112(["Attacker-side work,<br/>cannot be stopped. Rely<br/>on downstream controls<br/>and fast reporting"])
+    B11 --> B113["🟢 B113<br/>Adversary-in-the-middle<br/>proxy captures password<br/>and session cookie"]
+    B113 -.-> MB113(["Phishing-resistant MFA<br/>(FIDO2 or passkeys),<br/>device-bound sessions"])
+    B1 --> B12["🟢 B12 MFA fatigue: spam<br/>push prompts until user<br/>approves"]
+    B12 -.-> MB12(["Number-matching or FIDO2<br/>keys, no plain push<br/>approvals"])
+    B1 --> B13["🟢 B13 Malicious<br/>attachment or macro to<br/>dev workstation"]
+    B13 -.-> MB13(["Mail sandboxing, block<br/>macros from internet,<br/>attachment detonation"])
+
+    B2 --> B21{{"🟡 B2.1 Helpdesk reset<br/>(AND)"}}
+    B21 --> B211["B211 Collect employee<br/>name, ID and manager<br/>from OSINT"]
+    B21 --> B212["B212 Call IT helpdesk<br/>impersonating the<br/>developer"]
+    B21 --> B213["B213 Get password reset<br/>and enrol attacker MFA<br/>device"]
+    B21 -.-> MB21(["Call-back to number on<br/>file, manager approval,<br/>no MFA reset by phone<br/>alone, relies on staff<br/>following process"])
+    B2 --> B22["🟡 B22 Impersonate vendor<br/>project manager to<br/>request repo access"]
+    B22 -.-> MB22(["Out-of-band verification<br/>for any access request,<br/>access only via ticket"])
+
+    B3 --> B31["🟡 B31 Fake recruiter<br/>sends coding test with<br/>malware to developer"]
+    B31 -.-> MB31(["Policy to run external<br/>tests only in disposable<br/>VM, awareness training"])
+    B3 --> B32["B32 Fake open-source<br/>contributor submits<br/>malicious pull request"]
+
+    B4 --> B41["🟡 B41 Tailgate into<br/>office or vendor site"]
+    B41 -.-> MB41(["Badge turnstiles,<br/>guards, visitor escorts,<br/>vendor site not under<br/>company control"])
+    B4 --> B42["🟢 B42 Drop infected USB<br/>near developers"]
+    B42 -.-> MB42(["Disable USB mass storage<br/>by endpoint policy"])
+    B4 --> B43["B43 Evil maid: plug<br/>implant into unattended<br/>workstation"]
+
+    B5 --> B51["🟢 B51 Spoof or take over<br/>executive mailbox"]
+    B51 -.-> MB51(["SPF, DKIM, DMARC reject<br/>policy, external sender<br/>banner"])
+    B5 --> B52["B52 Pressure vendor to<br/>share source archive<br/>urgently"]
+
+    classDef plain fill:#f2f2f2,stroke:#888,color:#000;
+    classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
+    classDef yellow fill:#fff3b0,stroke:#b8860b,color:#000;
+    classDef red fill:#f5b7b1,stroke:#c0392b,color:#000;
+    class B,B1,B2,B3,B4,B5,B11,B211,B212,B213,B32,B43,B52 plain;
+    class B113,MB113,B12,MB12,B13,MB13,B42,MB42,B51,MB51 green;
+    class B21,MB21,B22,MB22,B31,MB31,B41,MB41 yellow;
+    class B111,MB111,B112,MB112 red;
+```
+
+#### Mitigations: Branch C (Insider)
+
+```mermaid
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false, "padding": 16, "nodeSpacing": 30, "rankSpacing": 70}}}%%
+graph LR
+    C("C. Insider attack (OR)")
+    C --> C1("C1. Malicious employee<br/>(OR)")
+    C --> C2("C2. Malicious vendor<br/>staff (OR)")
+    C --> C3("C3. Coerced or recruited<br/>insider (OR)")
+    C --> C4("C4. Negligent insider<br/>(OR)")
+    C --> C5("C5. Privileged or<br/>ex-insider (OR)")
+
+    C1 --> C11["🟢 C11 Copy source to<br/>USB, personal cloud or<br/>private git remote"]
+    C11 -.-> MC11(["DLP, USB block, CASB<br/>blocks personal cloud<br/>uploads, git push<br/>allowed only to company<br/>remotes"])
+    C1 --> C12["🟢 C12 Email code to<br/>personal address"]
+    C12 -.-> MC12(["Email DLP rules on<br/>source code patterns and<br/>archives"])
+    C1 --> C13["🟡 C13 Plant logic bomb<br/>or kill switch to enable<br/>ransom"]
+    C13 -.-> MC13(["Mandatory peer review,<br/>separation of duties,<br/>reproducible builds,<br/>only as good as the<br/>reviewers"])
+
+    C2 --> C21["🔴 C21 Vendor developer<br/>sells copy to rival"]
+    C21 -.-> MC21(["Authorised user can<br/>always read the code.<br/>Watermark builds to<br/>trace leaks, legal<br/>deterrent"])
+    C2 --> C22["🟡 C22 Vendor has weaker<br/>DLP and monitoring than<br/>company"]
+    C22 -.-> MC22(["Right-to-audit clause,<br/>work inside company VDI<br/>so company DLP applies"])
+
+    C3 --> C31["🔴 C31 Rival bribes<br/>existing employee"]
+    C31 -.-> MC31(["Cannot prevent. Limit<br/>access, monitor with<br/>UEBA, rotate sensitive<br/>roles"])
+    C3 --> C32["🔴 C32 Blackmail employee<br/>using personal leverage"]
+    C32 -.-> MC32(["Cannot prevent. Same<br/>controls, plus support<br/>channel so staff report<br/>pressure early"])
+    C3 --> C33{{"🟡 C3.3 Planted employee<br/>(AND)"}}
+    C33 --> C331["C331 Rival places agent<br/>via job application or<br/>vendor contract"]
+    C33 --> C332["C332 Agent passes<br/>vetting and gains repo<br/>access"]
+    C33 -.-> MC33(["Background checks,<br/>staged access,<br/>need-to-know on<br/>crown-jewel repos"])
+
+    C4 --> C41["🟢 C41 Repo or storage<br/>bucket accidentally made<br/>public"]
+    C41 -.-> MC41(["Org policy forbids<br/>public repos, continuous<br/>exposure scanning"])
+    C4 --> C42["🟢 C42 Credentials<br/>committed to repo or<br/>pasted in public chat"]
+    C42 -.-> MC42(["Secret scanning, revoke<br/>and rotate automatically"])
+    C4 --> C43["🟡 C43 Source pasted into<br/>unapproved AI or online<br/>tool"]
+    C43 -.-> MC43(["Approved enterprise AI<br/>with no training on<br/>data, browser DLP,<br/>policy and training"])
+    C4 --> C44["🟢 C44 Lost or<br/>unencrypted laptop"]
+    C44 -.-> MC44(["Full-disk encryption,<br/>remote wipe"])
+
+    C5 --> C51["🟡 C51 Admin disables<br/>logging then dumps repo"]
+    C51 -.-> MC51(["Off-box tamper-proof<br/>logs, two-person<br/>approval, privileged<br/>session recording"])
+    C5 --> C52["🟢 C52 Ex-employee or<br/>ex-vendor access never<br/>revoked"]
+    C52 -.-> MC52(["Automated offboarding<br/>tied to HR and contract<br/>end date, quarterly<br/>access review"])
+    C5 --> C53["🟢 C53 Shared or service<br/>account abused with no<br/>attribution"]
+    C53 -.-> MC53(["Named accounts only,<br/>vaulted service<br/>credentials, session<br/>recording"])
+
+    classDef plain fill:#f2f2f2,stroke:#888,color:#000;
+    classDef green fill:#c8e6c9,stroke:#2e7d32,color:#000;
+    classDef yellow fill:#fff3b0,stroke:#b8860b,color:#000;
+    classDef red fill:#f5b7b1,stroke:#c0392b,color:#000;
+    class C,C1,C2,C3,C4,C5,C331,C332 plain;
+    class C11,MC11,C12,MC12,C41,MC41,C42,MC42,C44,MC44,C52,MC52,C53,MC53 green;
+    class C13,MC13,C43,MC43,C51,MC51,C22,MC22,C33,MC33 yellow;
+    class C31,MC31,C32,MC32,C21,MC21 red;
+```
+
+#### Summary
+
+| Branch | 🟢 Resolved | 🟡 Possible | 🔴 Unavoidable |
+| --- | --- | --- | --- |
+| A. Supply chain | 5 | 4 | 1 |
+| B. Social engineering | 5 | 4 | 2 |
+| C. Insider | 7 | 5 | 3 |
+
+- Green items are mostly technical controls the company owns outright, so fix them first. They are cheap relative to the risk removed.
+- Yellow items nearly all depend on the vendor or on people following process. Contracts, audits and moving vendor work into company-hosted VDI convert many of them to green.
+- Red items cannot be engineered away. Plan for them with least privilege, detection (logging, UEBA), leak tracing (build watermarking) and an incident response plan that includes legal action and ransom-handling decisions.
+- Even a fully green branch leaves the red ones, so the residual risk of the project is set by the red leaves.
+

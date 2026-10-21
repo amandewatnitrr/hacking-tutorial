@@ -17,7 +17,7 @@ body {
   padding: 0;
   background-color: var(--bg-primary);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .home-button a {
@@ -250,34 +250,6 @@ pre {
   opacity: 1;
   background-color: #3e3e3e;
 }
-/* Remove gap between header and lesson nav */
-.lesson-header,
-.lesson-navigation,
-.lesson-header + .lesson-navigation {
-  margin: 0;
-  padding: 1rem 2rem;
-  background-color: var(--card) !important;
-  border: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* adjust lesson-navigation padding */
-.lesson-navigation {
-  padding: 0.5rem 2rem;
-  border-radius: 0 0 8px 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-.lesson-header h1 {
-  margin: 0;
-}
-
 /* also remove borders from any parent wrapper */
 .lesson,
 .lesson-container,

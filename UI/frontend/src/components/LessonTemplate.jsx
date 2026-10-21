@@ -5,7 +5,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { getLessonBySlug } from '../utils/markdownloader';
+import { getLessonBySlug, getLessonImages } from '../utils/markdownloader';
+import { remarkGithubAlerts } from '../utils/remarkGithubAlerts';
 import Mermaid from './Mermaid';
 import './LessonTemplate.css';
 
@@ -54,14 +55,14 @@ const LessonTemplate = ({ lesson }) => {
     );
   }
 
+  const lessonImages = getLessonImages(lesson);
+
   const transformMarkdownUrl = (url, key, node) => {
     if (typeof url !== 'string') return url;
     const isImageNode = node?.tagName === 'img';
-    const isRelativeImage =
-      url.startsWith('../imgs/') || url.startsWith('./imgs/') || url.startsWith('./../imgs/');
-    if (isImageNode && isRelativeImage) {
-      const imageName = url.split('/').pop();
-      return `/imgs/${imageName}`;
+    if (isImageNode) {
+      const normalized = decodeURIComponent(url.replace(/^(\.\.?\/)+/, ''));
+      if (lessonImages[normalized]) return lessonImages[normalized];
     }
     return url;
   };
@@ -112,7 +113,7 @@ const LessonTemplate = ({ lesson }) => {
 
       <article className="lesson-content">
         <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
+          remarkPlugins={[remarkGfm, remarkGithubAlerts]}
           rehypePlugins={[
             rehypeRaw,
             rehypeSlug,
@@ -164,16 +165,22 @@ const LessonTemplate = ({ lesson }) => {
                 />
               );
             },
-            a({ children, href, ...props }) {
+            a({ children, href, className, ...props }) {
               // Handle internal anchor links
               if (href?.startsWith('#')) {
+                const combinedClass = [className, 'internal-link'].filter(Boolean).join(' ');
                 return (
                   <a
                     href={href}
+                    className={combinedClass}
                     onClick={(e) => {
                       e.preventDefault();
                       const id = href.substring(1);
-                      const element = document.getElementById(id);
+                      const element =
+                        document.getElementById(id) ||
+                        document.getElementById(`-${id}`) ||
+                        document.getElementById(id.replace(/^-+/, '')) ||
+                        document.getElementById(decodeURIComponent(id));
                       if (element) {
                         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         // Update URL hash without triggering navigation

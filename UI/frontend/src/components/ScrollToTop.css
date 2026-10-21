@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #47837e;
+  background-color: var(--accent-green-dark);
   color: white;
   width: 20px;
   height: 50px;
@@ -19,7 +19,7 @@
 }
 
 .scroll-to-top:hover {
-  background-color: #4790a1;
+  background-color: var(--accent-cyan, #5a9ff2);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }

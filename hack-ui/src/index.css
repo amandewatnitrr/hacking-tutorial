@@ -1,0 +1,191 @@
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/PublicSans-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/PublicSans-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/PublicSans-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-500.woff2") format("woff2");
+}
+
+/* Mono variant: icon glyphs are width-adjusted to the monospace cell grid,
+   which is what a terminal emulator needs (the Propo/UI variants are not). */
+@font-face {
+  font-family: "Hack Nerd Font Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/HackNerdFontMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Hack Nerd Font Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/HackNerdFontMono-Bold.ttf") format("truetype");
+}
+
+:root {
+  --page-bg: #ebe3cf;
+  --rail-bg: #ddd2b3;
+  --card-bg: #fffdf7;
+  --card-border: #c9bd9e;
+  --ink: #3a3226;
+  --ink-muted: #5c4f36;
+  --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  --font-term: "Hack Nerd Font Mono", "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  --rule-line: rgba(90, 76, 46, 0.12);
+  --stamp: #8a2e2e;
+  --stamp-ink: #fffaf2;
+  --tab-ink: #3a3226;
+
+  --hue-recon: #2f6f63;
+  --hue-recon-bg: #dce9e2;
+  --hue-mitm: #335a80;
+  --hue-mitm-bg: #dbe4ee;
+  --hue-sqli: #8a6a1d;
+  --hue-sqli-bg: #efe5cc;
+  --hue-binexp: #6a3f74;
+  --hue-binexp-bg: #e6dce9;
+  --hue-crypto: #3f6e2e;
+  --hue-crypto-bg: #dfe8d6;
+  --hue-spoof: #b45309;
+  --hue-spoof-bg: #f0e0cc;
+  --hue-socialeng: #a3306f;
+  --hue-socialeng-bg: #ecd9e5;
+
+  --shadow-card: 0 1px 2px rgba(58, 50, 38, 0.08);
+  --shadow-card-press: 0 3px 8px rgba(58, 50, 38, 0.18);
+  --radius-card: 10px;
+  --radius-tag: 4px;
+
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-family: var(--font-sans);
+}
+
+:root[data-theme="dark"] {
+  --page-bg: #0d1420;
+  --rail-bg: #111a28;
+  --card-bg: #15202f;
+  --card-border: #223246;
+  --ink: #eef1f6;
+  --ink-muted: #8a97ab;
+  --rule-line: rgba(238, 241, 246, 0.06);
+  --stamp: #c2184a;
+  --stamp-ink: #ffffff;
+  --tab-ink: #eef1f6;
+
+  --hue-recon: #38bdf8;
+  --hue-recon-bg: #16293a;
+  --hue-mitm: #a78bfa;
+  --hue-mitm-bg: #241c3a;
+  --hue-sqli: #fbbf24;
+  --hue-sqli-bg: #3a2e14;
+  --hue-binexp: #fb7185;
+  --hue-binexp-bg: #3a1620;
+  --hue-crypto: #4ade80;
+  --hue-crypto-bg: #163a26;
+  --hue-spoof: #fb923c;
+  --hue-spoof-bg: #3a2414;
+  --hue-socialeng: #f472b6;
+  --hue-socialeng-bg: #3a1830;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card-press: 0 3px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* The terminal drawer stays this dark regardless of app theme (conventional
+   for embedded terminals) — fixed tokens, not part of the light/dark pair. */
+:root {
+  --term-bg: #0d1420;
+  --term-rail: #111a28;
+  --term-card: #15202f;
+  --term-border: #223246;
+  --term-ink: #eef1f6;
+  --term-ink-muted: #8a97ab;
+  --term-stamp: #c2184a;
+  --term-live: #4ade80;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--ink);
+  transition: background-color 320ms var(--ease-smooth), color 320ms var(--ease-smooth);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: var(--ease-smooth);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+}

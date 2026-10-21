@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LessonPage from './pages/LessonPage';
+import HomePage from './pages/HomePage';
 import ScrollToTop from './components/ScrollToTop';
 import { getAllLessons } from './utils/markdownloader';
 import ThemeToggle from "./components/ThemeToggle";
@@ -60,20 +61,7 @@ codeBlocks.forEach((block) => {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        {/* Redirect root to first lesson */}
-        <Route
-          path="/"
-          element={
-            firstLesson ? (
-              <Navigate to={`/lessons/${firstLesson.slug}`} replace />
-            ) : (
-              <div style={{ padding: '2rem', textAlign: 'center' }}>
-                <h1>No lessons found</h1>
-                <p>Please add markdown files to the content folder.</p>
-              </div>
-            )
-          }
-        />
+        <Route path="/" element={<HomePage />} />
 
         {/* Dynamic lesson route */}
         <Route path="/lessons/:slug" element={<LessonPage />} />

@@ -3,24 +3,43 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Dark theme (default) */
-  --bg-primary: #0b1220;
-  --bg-secondary: #121829;
-  --bg-tertiary: #1a2332;
-  --text-primary: #e6eef6;
-  --text-secondary: #9ca3af;
-  --accent-green: #00ff88;
-  --accent-green-light: #33ffaa;
-  --accent-green-dark: #00cc6a;
-  --border-color: #1f2937;
+  /* Dark theme (default) — "Steel minimal": cool steel-blue accent on near-black grey */
+  --bg-primary: #121315;
+  --bg-secondary: #1a1c1f;
+  --bg-tertiary: #22252a;
+  --text-primary: #e9eaec;
+  --text-secondary: #9a9ea4;
+  --accent-green: #8bb6ea;        /* text accent: headings, links (lighter tone, readable on dark bg) */
+  --accent-green-light: #a9cdf5;  /* hover-lightened text accent */
+  --accent-green-dark: #2f6bbd;   /* fill accent: buttons, borders, focus rings (saturated) */
+  --accent-green-dark-rgb: 47, 107, 189;
+  --accent-cyan: #5a9ff2;         /* secondary/info hover accent */
+  --accent-cyan-rgb: 90, 159, 242;
+  --border-color: #2e3135;
 
-  /* Light theme */
-  --light-bg-primary: #fefcf5;   /* soft cream */
-  --light-bg-secondary: #f8f6ef;
-  --light-bg-tertiary: #f1efe6;
-  --light-text-primary: #1e293b;
-  --light-text-secondary: #4b5563;
-  --light-border-color: #d1d5db;
+  /* Semantic colors — fixed meaning, shared across any accent direction */
+  --color-info: #5a9ff2;
+  --color-warning: #e8b84a;
+  --color-danger: #f0565f;
+  --color-success: #4fd18a;
+
+  /* Light theme — "Lime": charcoal-green text on a fresh lime-tinted paper */
+  --light-bg-primary: #f6f9f1;
+  --light-bg-secondary: #e9f0db;
+  --light-bg-tertiary: #dfe9c9;
+  --light-text-primary: #171c10;
+  --light-text-secondary: #596b43;
+  --light-border-color: #cbdcad;
+  --light-accent-green: #56730c;        /* text accent */
+  --light-accent-green-light: #7fa816;  /* hover-lightened text accent */
+  --light-accent-green-dark: #6f9410;   /* fill accent */
+  --light-accent-green-dark-rgb: 111, 148, 16;
+  --light-accent-cyan: #1949ad;         /* secondary/info hover accent */
+  --light-accent-cyan-rgb: 25, 73, 173;
+  --light-color-info: #1949ad;
+  --light-color-warning: #8a650a;
+  --light-color-danger: #b01c27;
+  --light-color-success: #157a4f;
 
   /* Theme base vars (default: dark) */
   --bg: var(--bg-primary);
@@ -44,7 +63,6 @@
   --card: var(--bg-secondary);
   --text: var(--text-primary);
   --border: var(--border-color);
-  --accent-green: #00ff88;
 }
 
 [data-theme='light'] {
@@ -52,7 +70,16 @@
   --card: var(--light-bg-secondary);
   --text: var(--light-text-primary);
   --border: var(--light-border-color);
-  --accent-green: #00cc6a; /* slightly muted in light */
+  --accent-green: var(--light-accent-green);
+  --accent-green-light: var(--light-accent-green-light);
+  --accent-green-dark: var(--light-accent-green-dark);
+  --accent-green-dark-rgb: var(--light-accent-green-dark-rgb);
+  --accent-cyan: var(--light-accent-cyan);
+  --accent-cyan-rgb: var(--light-accent-cyan-rgb);
+  --color-info: var(--light-color-info);
+  --color-warning: var(--light-color-warning);
+  --color-danger: var(--light-color-danger);
+  --color-success: var(--light-color-success);
 }
 
 
@@ -64,7 +91,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   transition: background-color 0.3s, color 0.3s;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -104,7 +131,7 @@ button:hover {
 }
 
 /* Navbar, Sidebar, Cards, etc. */
-.navbar, .sidebar, .card, .lesson-header, .lesson-content {
+.navbar, .sidebar, .card {
   background-color: var(--card);
   color: var(--text);
   border: 1px solid var(--border);

@@ -214,7 +214,12 @@
   ```
 
 - Finally, we enable the Wireless Adapter again using `ifconfig wlan0 up`.
-- Now, if we run `iwconfig` again, we can see that the mode of the Wireless Adapter has been changed to `Monitor Mode`.
+- Now, if we run `iwconfig` again, we can see that the mode of the Wireless Adapter has been changed to `Monitor Mode`. To revert back to the normal mode, you would use:
+
+  ```bash
+  iwconfig wlan0 mode managed
+  ifconfig wlan0 up
+  ```
 
 ---
 

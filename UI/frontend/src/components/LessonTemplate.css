@@ -80,8 +80,8 @@
   height: auto;
   border-radius: 10px;
   margin: 1.75rem 0;
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.12);
-  border: 1px solid rgba(102, 255, 170, 0.2);
+  box-shadow: 0 8px 24px rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.12);
+  border: 1px solid rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.25);
 }
 
 .lesson-content blockquote {
@@ -93,16 +93,103 @@
   color: var(--text-secondary);
 }
 
+/* GitHub-style alert callouts: > [!NOTE] / [!TIP] / [!IMPORTANT] / [!WARNING] / [!CAUTION] */
+.markdown-alert {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem 1rem;
+  border-left: 4px solid;
+  border-radius: 6px;
+  background: var(--bg-tertiary);
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.markdown-alert-title svg {
+  flex-shrink: 0;
+}
+
+.markdown-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-note { border-color: var(--color-info); }
+.markdown-alert-note .markdown-alert-title { color: var(--color-info); }
+
+.markdown-alert-tip { border-color: var(--color-success); }
+.markdown-alert-tip .markdown-alert-title { color: var(--color-success); }
+
+.markdown-alert-important { border-color: var(--accent-green-dark); }
+.markdown-alert-important .markdown-alert-title { color: var(--accent-green-dark); }
+
+.markdown-alert-warning { border-color: var(--color-warning); }
+.markdown-alert-warning .markdown-alert-title { color: var(--color-warning); }
+
+.markdown-alert-caution { border-color: var(--color-danger); }
+.markdown-alert-caution .markdown-alert-title { color: var(--color-danger); }
+
 .lesson-content a {
   color: var(--accent-green);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: all 0.2s;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .lesson-content a:hover {
   color: var(--accent-green-light);
   border-bottom-color: var(--accent-green-light);
+}
+
+.lesson-content a:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Learning topic items / internal anchor links */
+.lesson-content a[href^="#"],
+.lesson-content .internal-link {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  margin: 0.1rem 0;
+  border-radius: 6px;
+  color: var(--accent-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.lesson-content a[href^="#"]:hover,
+.lesson-content .internal-link:hover {
+  color: var(--accent-green-light);
+  transform: scale(1.02);
+  background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.12);
+  box-shadow: 0 2px 8px rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.15);
+  border-bottom-color: transparent;
+}
+
+.lesson-content a[href^="#"]:focus-visible,
+.lesson-content .internal-link:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+  background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.12);
+  border-radius: 6px;
+}
+
+/* Headings containing anchor links retain heading hierarchy styling with subtle hover effect */
+.lesson-content :is(h1, h2, h3, h4) a[href^="#"] {
+  color: inherit;
+  padding: 0.1rem 0.4rem;
+}
+
+.lesson-content :is(h1, h2, h3, h4) a[href^="#"]:hover {
+  color: var(--accent-green-light);
+  transform: scale(1.01);
 }
 
 .external-link-icon {
@@ -120,8 +207,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: var(--accent-green);
-  color: #000000;
+  background: var(--accent-green-dark);
+  color: #ffffff;
   padding: 0.25rem 0.75rem;
   border-radius: 0 4px 0 4px;
   font-size: 0.75rem;
@@ -130,7 +217,9 @@
 }
 
 .lesson-content pre {
-  background: var(--bg-secondary);
+  /* code blocks stay dark regardless of site theme — var(--bg-secondary) flips to a
+     light surface in light mode, which left light-gray code text unreadable there */
+  background: #1a1c1f;
   color: #e5e7eb;
   padding: 1.5rem;
   border-radius: 8px;
@@ -147,7 +236,7 @@
 }
 
 .lesson-content :not(pre) > code {
-  background: rgba(102, 255, 170, 0.08);
+  background: rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.12);
   color: var(--accent-green-light);
   padding: 0.15rem 0.35rem;
   border-radius: 3px;
@@ -236,8 +325,10 @@
 
 .nav-section {
   display: flex;
+  flex: 1 1 0;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .nav-section--left {
@@ -251,30 +342,26 @@
 .nav-button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.2rem;
-  border-radius: 6px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text);
   justify-content: space-between;
+  min-width: 0;
+  max-width: 100%;
   gap: 0.4rem;
-  padding: 0.4rem 0.9rem;   
+  padding: 0.4rem 1rem;
   height: auto;
-  border-radius: 10px;   
-  background: rgba(102, 255, 170, 0.12);
-  border: 1px solid rgba(102, 255, 170, 0.4);
+  border-radius: 9999px;
+  background: rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.12);
+  border: 1.5px solid rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.4);
   color: var(--accent-green-light);
   text-decoration: none;
   font-weight: 500;
   font-family: 'Courier New', monospace;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-button:hover {
   background-color: var(--bg-tertiary);
-  color: var(--accent-green);
+  border-color: var(--accent-cyan, #5a9ff2);
+  color: var(--accent-cyan, #5a9ff2);
   transform: translateY(-1px);
 }
 
@@ -306,9 +393,17 @@
   color: var(--text-secondary);
 }
 
+.nav-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .nav-title {
   font-size: 0.95rem;
   color: var(--text);
+  overflow-wrap: break-word;
 }
 
 /* Light theme overrides */
@@ -331,9 +426,50 @@
 .lesson-template.light .nav-title {
   color: var(--light-text-primary);
 }
+
+.lesson-template.light .lesson-content a:focus-visible {
+  outline-color: var(--accent-green-dark);
+}
+
+.lesson-template.light .lesson-content a[href^="#"]:hover,
+.lesson-template.light .lesson-content .internal-link:hover {
+  background-color: rgba(var(--accent-cyan-rgb, 25, 73, 173), 0.12);
+  box-shadow: 0 2px 8px rgba(var(--accent-cyan-rgb, 25, 73, 173), 0.2);
+  color: var(--accent-green-dark);
+}
+
+.lesson-template.light .lesson-content a[href^="#"]:focus-visible,
+.lesson-template.light .lesson-content .internal-link:focus-visible {
+  outline-color: var(--accent-green-dark);
+  background-color: rgba(var(--accent-cyan-rgb, 25, 73, 173), 0.12);
+}
+
+.lesson-template.light .lesson-content :is(h1, h2, h3, h4) a[href^="#"]:hover {
+  color: var(--accent-green-dark);
+}
+
 /* 👇 Add this at the very end of Lesson.css or relevant CSS file */
 .lesson-navigation {
   border-top: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
+}
+
+@media (max-width: 600px) {
+  .lesson-template .lesson-navigation {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .lesson-template .nav-section {
+    width: 100%;
+  }
+
+  .lesson-template .nav-button,
+  .lesson-template .nav-button--right {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+  }
 }

@@ -2,26 +2,26 @@
 /* THEME VARIABLES */
 /* ========================= */
 
-/* 🌙 Default = Dark Theme */
+/* 🌙 Default = Dark Theme — "Steel minimal": cool steel-blue on near-black grey */
 :root {
-  --bg-primary: #0b1220;
-  --bg-secondary: #121829;
-  --bg-tertiary: #1a2332;
-  --text-primary: #e6e6e6;
-  --accent-green: #00ff88;
-  --accent-green-light: #66ffb3;
-  --border-color: #2b354a;
+  --bg-primary: #121315;
+  --bg-secondary: #1a1c1f;
+  --bg-tertiary: #22252a;
+  --text-primary: #e9eaec;
+  --accent-green: #8bb6ea;
+  --accent-green-light: #a9cdf5;
+  --border-color: #2e3135;
 }
 
-/* 🌞 Light Theme */
+/* 🌞 Light Theme — "Lime": charcoal-green on fresh lime paper */
 [data-theme="light"] {
-  --bg-primary: #f5f7fa;
+  --bg-primary: #f6f9f1;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #e8ebf0;
-  --text-primary: #0b1220;
-  --accent-green: #007f4f;
-  --accent-green-light: #00b86b;
-  --border-color: #cfd5e3;
+  --bg-tertiary: #dfe9c9;
+  --text-primary: #171c10;
+  --accent-green: #56730c;
+  --accent-green-light: #7fa816;
+  --border-color: #cbdcad;
 }
 
 /* Smooth transition between themes */
@@ -69,11 +69,13 @@ body {
 
 .navbar-brand:hover {
   color: var(--accent-green-light);
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  text-shadow: 0 0 10px rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.5);
 }
 
-.brand-icon {
-  font-family: 'Courier New', monospace;
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
 }
 
 .navbar-links {
@@ -85,10 +87,10 @@ body {
 .nav-link {
   color: var(--text-primary);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -96,9 +98,9 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--accent-green);
-  border-color: var(--accent-green);
-  background-color: rgba(0, 255, 136, 0.1);
+  color: var(--accent-cyan, #5a9ff2);
+  border-color: var(--accent-cyan, #5a9ff2);
+  background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.1);
 }
 
 .github-link svg {
