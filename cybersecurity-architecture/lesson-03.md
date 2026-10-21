@@ -11,6 +11,7 @@
       - [Access Control](#access-control)
       - [Reliabiltiy](#reliabiltiy)
     - [Platform Security](#platform-security)
+  - [Application \& Data Security](#application--data-security)
 
 ---
 
@@ -93,3 +94,7 @@
   - DLP (Data Loss Prevention)
 
     - Implement DLP solutions to monitor and protect sensitive data from unauthorized access, sharing, or leakage. DLP helps ensure that critical information remains secure and compliant with organizational policies.
+
+## Application & Data Security
+
+- Well, we will consider it in next section as that deserves a topic of its own. Application security focuses on protecting software applications from vulnerabilities and attacks, while data security ensures the confidentiality, integrity, and availability of sensitive information.
