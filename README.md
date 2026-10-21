@@ -130,6 +130,7 @@ Prefer a helper? `source scripts/activate_venv.sh` (bash/zsh) or `. .\scripts\ac
 - [SNI Lesson](./ethical-hacking/lesson-sni.md)
 - [DNS Lesson](./ethical-hacking/lesson-dns.md)
 - [Password Attacks & Hash Cracking](./ethical-hacking/lesson-password_attack-and_hashcracking.md)
+- [SQL Injection (SQLi)](./ethical-hacking/lesson-sql-injection.md)
 - [Python for Ethical Hacking — A Guide to Post Scanning](./python-for-eth-hacking/A-guide-to-post-scanning.md)
 - [SQL Injection Learning Lab](./sql-injection-lab/README.md)
 - [Intro to Binary Exploitation](./intro-to-binary-exploitation/Intro.MD)
