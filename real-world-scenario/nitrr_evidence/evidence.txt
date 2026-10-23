@@ -1,0 +1,70 @@
+### 1. Full HTTPS response headers ###
+HTTP/1.1 200 OK
+Date: Fri, 23 Oct 2026 20:49:14 GMT
+Server: Apache/2.4.66 (Ubuntu)
+Set-Cookie: googtrans=%2Fen%2Fen
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+
+### 2. Plain HTTP (port 80) - no redirect, served in clear ###
+HTTP/1.1 200 OK
+Date: Fri, 23 Oct 2026 20:49:14 GMT
+Server: Apache/2.4.66 (Ubuntu)
+Set-Cookie: googtrans=%2Fen%2Fen
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+
+### 3. 404 page leaking exact Apache version ###
+HTTP/1.1 404 Not Found
+Date: Fri, 23 Oct 2026 20:49:14 GMT
+Server: Apache/2.4.66 (Ubuntu)
+Content-Length: 314
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.66 (Ubuntu) Server at nitrr.ac.in Port 443</address>
+</body></html>
+
+### 4. TLS cert details ###
+* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256 / [blank] / UNDEF
+*  subject: CN=*.nitrr.ac.in
+*  expire date: Jan  3 23:59:59 2027 GMT
+*  subjectAltName: host "nitrr.ac.in" matched cert's "nitrr.ac.in"
+*  issuer: C=GB; O=Sectigo Limited; CN=Sectigo Public Server Authentication CA DV R36
+### jQuery version banner ###
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.66 (Ubuntu) Server at nitrr.ac.in Port 443</address>
+<
+/*! jQuery v3.2.1 | (c) JS Foundation and other contributors | jquery.org/license */
+!function(a,b){"use strict";"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(
+### local jquery-2.1.4 bundle check ###
+HTTP 200
+### local js/jquery-2.1.4 gallery.js banner ###
+/*! jQuery v2.1.4 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
+!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h
+### Cookie flags (no Secure/HttpOnly/SameSite) ###
+Set-Cookie: googtrans=%2Fen%2Fen
+
+### 5. Browser console - mixed content warning on live HTTPS page ###
+[warn] Mixed Content: The page at 'https://nitrr.ac.in/' was loaded over HTTPS, but requested an insecure element 'http://hitwebcounter.com/counter/counter.php?page=6067539&style=0038&nbdigits=9&type=page&initCount=700000'.
+
+### 6. Clickjacking PoC ###
+See clickjacking_poc.html + clickjacking_poc_screenshot.png in this folder.
+Real nitrr.ac.in homepage renders fully inside an <iframe> on an unrelated local page,
+confirming absence of X-Frame-Options / CSP frame-ancestors.

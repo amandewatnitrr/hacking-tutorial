@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>nitrr.ac.in - raw evidence captures</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; background: #1e1e1e; color: #ddd; margin: 0; padding: 24px; }
+  .card { background: #111; border: 1px solid #333; border-radius: 8px; margin-bottom: 28px; overflow: hidden; }
+  .card-head { background: #c0392b; color: #fff; padding: 10px 16px; font-weight: bold; font-size: 15px; }
+  .card-sub { background: #222; color: #9fd; padding: 8px 16px; font-family: monospace; font-size: 13px; border-bottom: 1px solid #333; }
+  pre { margin: 0; padding: 16px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .ok { color: #8f8; }
+  .bad { color: #f88; font-weight: bold; }
+  .label { color: #888; }
+</style>
+</head>
+<body>
+
+<div class="card" id="headers">
+  <div class="card-head">EVIDENCE A — Missing security headers (Finding 1)</div>
+  <div class="card-sub">$ curl -sS -D - -o /dev/null --max-time 15 "https://nitrr.ac.in/"   (run 2026-10-24, 20:49:14 GMT)</div>
+  <pre><span class="label">HTTP/1.1 200 OK
+Date: Fri, 23 Oct 2026 20:49:14 GMT</span>
+<span class="bad">Server: Apache/2.4.66 (Ubuntu)   <- exact version leaked</span>
+<span class="label">Set-Cookie: googtrans=%2Fen%2Fen
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8</span>
+
+<span class="bad">Strict-Transport-Security   -> MISSING
+Content-Security-Policy    -> MISSING
+X-Frame-Options             -> MISSING
+X-Content-Type-Options      -> MISSING
+Referrer-Policy              -> MISSING
+Permissions-Policy           -> MISSING</span></pre>
+</div>
+
+<div class="card" id="http">
+  <div class="card-head">EVIDENCE B — HTTP is served with no redirect to HTTPS (Finding 2)</div>
+  <div class="card-sub">$ curl -sS -D - -o /dev/null --max-time 15 "http://nitrr.ac.in/"   (plain HTTP, not HTTPS)</div>
+  <pre><span class="bad">HTTP/1.1 200 OK   <- should be 301/302 redirecting to https://</span>
+<span class="label">Date: Fri, 23 Oct 2026 20:49:14 GMT
+Server: Apache/2.4.66 (Ubuntu)
+Set-Cookie: googtrans=%2Fen%2Fen
+Content-Type: text/html; charset=UTF-8</span></pre>
+</div>
+
+<div class="card" id="jquery">
+  <div class="card-head">EVIDENCE C — Outdated jQuery served directly by nitrr.ac.in (Finding 5)</div>
+  <div class="card-sub">$ curl -sS --max-time 15 "https://nitrr.ac.in/js/jquery-2.1.4%20gallery.js" | head -c 200</div>
+  <pre><span class="bad">/*! jQuery v2.1.4 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */</span>
+<span class="label">!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw...</span>
+
+<span class="label">CVEs that apply to jQuery 2.1.4: CVE-2015-9251, CVE-2019-11358, CVE-2020-11022, CVE-2020-11023</span></pre>
+</div>
+
+<div class="card" id="mixed">
+  <div class="card-head">EVIDENCE D — Mixed-content warning, captured from Chrome console on the live page (Finding 6)</div>
+  <div class="card-sub">Chrome DevTools &rarr; Console tab, while visiting https://nitrr.ac.in/ directly</div>
+  <pre><span class="bad">[warn] Mixed Content:</span> <span class="label">The page at 'https://nitrr.ac.in/' was loaded over HTTPS, but requested
+an insecure element 'http://hitwebcounter.com/counter/counter.php?page=6067539&style=0038&nbdigits=9&type=page&initCount=700000'.
+This request was automatically upgraded to HTTPS, For more information see
+https://blog.chromium.org/2019/10/no-more-mixed-messages-about-https.html</span></pre>
+</div>
+
+</body>
+</html>
