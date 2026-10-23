@@ -1,0 +1,2065 @@
+<html xmlns="https://www.w3.org/1999/xphp">
+   <head>
+      <link rel="shortcut icon" href="img/nitrr.ico" />
+      <title>::: National Institute of Technology Raipur :::</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="css/bootstrap.css" rel="stylesheet" />
+      <!--<script src="js/jquery.min.js"></script>-->
+      <link href="css/normalize.css" rel="stylesheet" />
+      <link href="FontAwesome/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/animate.min.css">
+      <link rel="stylesheet" href="css/owl.theme.default.css">
+      <link rel="stylesheet" href="css/transitions.css">
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="css/color.css">
+      <link rel="stylesheet" href="css/responsive.css">
+      <style>
+         .flashit {
+         color: white;
+         -webkit-animation: flash linear 1s infinite;
+         animation: flash linear 1s infinite;
+         }
+         @-webkit-keyframes flash {
+         0% {
+         opacity: 1;
+         }
+         50% {
+         opacity: .1;
+         }
+         100% {
+         opacity: 1;
+         }
+         }
+         @keyframes flash {
+         0% {
+         opacity: 1;
+         }
+         50% {
+         opacity: .1;
+         }
+         100% {
+         opacity: 1;
+         }
+         }
+         .read-more-state {
+         display: none;
+         }
+         .read-more-target {
+         opacity: 0;
+         max-height: 0;
+         font-size: 0;
+         transition: .25s ease;
+         }
+         .read-more-state:checked~.read-more-wrap .read-more-target {
+         opacity: 1;
+         font-size: inherit;
+         max-height: 999em;
+         }
+         .read-more-state~.read-more-trigger:before {
+         content: 'Show more';
+         }
+         .read-more-state:checked~.read-more-trigger:before {
+         content: 'Show less';
+         }
+         .read-more-trigger {
+         cursor: pointer;
+         display: inline-block;
+         padding: 0 .5em;
+         color: #666;
+         font-size: .9em;
+         line-height: 2;
+         border: 1px solid #ddd;
+         border-radius: .25em;
+         }
+         /* Other style */
+         body {
+         margin: 0;
+         padding: 0;
+         }
+         .demo {
+         padding-bottom: 5%;
+         padding-left: 35%;
+         }
+         html,
+         body {
+         max-width: 100vw;
+         }
+         .dropdown-menu>li.kopie>a {
+         padding-left: 5px;
+         }
+         .dropdown-submenu {
+         position: relative;
+         }
+         .dropdown-submenu>.dropdown-menu {
+         top: 0;
+         left: 100%;
+         margin-top: -6px;
+         margin-left: -1px;
+         -webkit-border-radius: 0 6px 6px 6px;
+         -moz-border-radius: 0 6px 6px 6px;
+         border-radius: 0 6px 6px 6px;
+         }
+         .dropdown-submenu>a:after {
+         border-color: transparent transparent transparent #333;
+         border-style: solid;
+         border-width: 5px 0 5px 5px;
+         content: " ";
+         display: block;
+         float: right;
+         height: 0;
+         margin-right: -10px;
+         margin-top: 5px;
+         width: 0;
+         }
+         .dropdown-submenu:hover>a:after {
+         border-left-color: #555;
+         }
+         .dropdown-menu>li>a:hover,
+         .dropdown-menu>.active>a:hover {
+         text-decoration: underline;
+         }
+         @media (max-width: 767px) {
+         .navbar-nav {
+         display: inline;
+         }
+         }
+         .navbar-default .navbar-brand {
+         display: inline;
+         }
+         .navbar-default .navbar-toggle .icon-bar {
+         background-color: #053c5e;
+         }
+         .navbar-default .navbar-nav .dropdown-menu>li>a {
+         color: red;
+         border-radius: 4px;
+         margin-top: 2px;
+         }
+         .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+         color: #333;
+         }
+         .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+         .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+         background: red;
+         }
+         .navbar-nav .open .dropdown-menu {
+         border-bottom: 1px solid white;
+         border-radius: 0;
+         }
+         .dropdown-menu {
+         padding-left: 10px;
+         }
+         .dropdown-menu .dropdown-menu {
+         padding-left: 20px;
+         }
+         .dropdown-menu .dropdown-menu .dropdown-menu {
+         padding-left: 30px;
+         }
+         li.dropdown.open {
+         border: 0px solid red;
+         }
+         }
+         @media (min-width: 768px) {
+         ul.nav li:hover>ul.dropdown-menu {
+         display: block;
+         }
+         #navbar {
+         text-align: center;
+         }
+         }
+         @media screen and (min-width: 980px) {}
+         @media screen and (max-width: 640px) {}
+         @media (max-width: 767px) navbar.less:615 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {}
+         .navbar {
+         margin-bottom: 0;
+         border-radius: 0;
+         }
+         #navbar .navbar {
+         width: 100%;
+         }
+         .navbar-inverse {
+         width: 100%;
+         }
+         .navbar-nav {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         }
+         /* Navbar full width */
+         .navbar {
+         width: 100%;
+         margin-bottom: 0;
+         border-radius: 0;
+         }
+         /* Desktop menu alignment */
+        /* @media (min-width:768px) {
+         .navbar-nav {
+         float: none;
+         display: flex;
+         justify-content: center;
+         flex-wrap: wrap;
+         }
+         .navbar-nav>li {
+         float: none;
+         }
+         }*/
+         /* Mobile Fix */
+         @media (max-width:767px) {
+         .navbar-nav {
+         display: block;
+         width: 100%;
+         }
+         .navbar-nav>li {
+         width: 100%;
+         }
+         .navbar-nav>li>a {
+         padding: 12px 15px;
+         }
+         /* Fix submenu for mobile */
+         .dropdown-submenu>.dropdown-menu {
+         position: relative;
+         left: 0;
+         top: 0;
+         margin-left: 15px;
+         }
+         }
+         .top-strip {
+         height: 13px;
+         background: #053c5e;
+         }
+         .header-main {
+         background: #fff;
+         padding: 12px 15px;
+         }
+         .header-flex {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         flex-wrap: wrap;
+         gap: 20px;
+         margin-left: 3px;
+         }
+         .header-left {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         flex: 1;
+         min-width: 300px;
+         }
+         .header-logo img {
+         max-width: 95px;
+         height: auto;
+         display: block;
+         }
+         .header-title {
+         color: #053c5e;
+         line-height: 1.2;
+         }
+         .header-title .hindi-title {
+         font-size: 18px;
+         margin-bottom: 4px;
+         }
+         .header-title .english-title {
+         font-size: 22px;
+         font-weight: 600;
+         margin: 0;
+         }
+         .header-title .subtitle {
+         font-size: 18px;
+         margin: 2px 0 0;
+         }
+         .header-right {
+         text-align: right;
+         color: #053c5e;
+         }
+         .header-right .top-links a {
+         color: #053c5e;
+         margin-left: 10px;
+         text-decoration: none;
+         display: inline-block;
+         margin-bottom: 5px;
+         }
+         #google_translate_element {
+         margin-top: 5px;
+         transform: scale(0.8);
+         transform-origin: right top;
+         }
+         @media (max-width: 767px) {
+         .header-flex {
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+         }
+         .header-left {
+         flex-direction: column;
+         text-align: center;
+         min-width: auto;
+         }
+         .header-right {
+         text-align: center;
+         }
+         .header-right .top-links a {
+         margin: 4px 6px;
+         }
+         .header-title .hindi-title {
+         font-size: 16px;
+         }
+         .header-title .english-title {
+         font-size: 18px;
+         }
+         .header-title .subtitle {
+         font-size: 15px;
+         }
+         .header-logo img {
+         max-width: 75px;
+         }
+         }
+         /* =========================
+         COMPACT ACADEMIC MENU
+         ========================= */
+         .mega-dropdown {
+         position: static !important;
+         }
+         .mega-dropdown .dropdown-menu {
+
+    /*width: 50%;*/
+
+    left: 150;
+
+    /*right: 0;*/
+
+    padding: 10px;
+
+   /* border: none;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.04);
+
+    backdrop-filter: blur(100px);
+
+    -webkit-backdrop-filter: blur(500px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+
+    border: 1px solid rgba(255,255,255,0.25);*/
+}
+         /* Cards */
+         .academic-card {
+         background: #fff;
+         border-radius: 10px;
+         padding: 14px 16px;
+         min-height: auto;
+         box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+         border: 1px solid #053c5e;
+         transition: 0.3s;
+         }
+         .academic-card:hover {
+         transform: translateY(-2px);
+         }
+         /* Titles */
+         .academic-title {
+         font-size: 18px;
+         font-weight: 700;
+         color: #053c5e;
+         margin-bottom: 10px;
+         padding-bottom: 5px;
+         border-bottom: 1px solid #e5e5e5;
+         }
+         /* Links */
+         .academic-links a {
+         display: block;
+         color: #333 !important;
+         text-decoration: none;
+         padding: 5px 10px;
+         margin-bottom: 0px;
+         border-radius: 5px;
+         transition: 0.25s;
+         font-size: 15px;
+         line-height: 1.3;
+         text-decoration : none;
+         }
+         .academic-links a:hover {
+         background: #053c5e;
+         color: #fff !important;
+         padding-left: 14px;
+         text-decoration : none;
+         }
+         /* Department column scroll */
+         .department-scroll {
+         max-height: 420px;
+         overflow-y: auto;
+         padding-right: 4px;
+         }
+         /* Custom scrollbar */
+         .department-scroll::-webkit-scrollbar {
+         width: 5px;
+         }
+         .department-scroll::-webkit-scrollbar-thumb {
+         background: #053c5e;
+         border-radius: 10px;
+         }
+         /* Hover */
+         /*@media (min-width:768px) {
+         .mega-dropdown:hover .dropdown-menu {
+         display: block;
+         }
+         }*/
+         /* Mobile */
+         @media (max-width:767px) {
+         .mega-dropdown .dropdown-menu {
+         position: relative;
+         padding: 12px;
+         }
+         .academic-card {
+         margin-bottom: 15px;
+         }
+         .department-scroll {
+         max-height: none;
+         }
+         }
+      </style>
+      <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i|PT+Sans|PT+Sans+Narrow" rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&amp;subset=latin,cyrillic-ext,greek-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&amp;subset=latin,cyrillic-ext,greek-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i,700,700i|Noto+Sans:400,400i,700,700i|Raleway:400,600,600i,700,700i" rel="stylesheet">
+   </head>
+   <div class="container-fluid" style="padding:0;">
+      <div style="height:10px;background:#053c5e;"></div>
+   </div>
+   <body class="home homeone">
+      <div id="wrapper" class="wrapper">
+      <header id="header" class="header haslayout">
+         <div class="container-fluid header-main">
+            <div class="header-flex">
+               <div class="header-left">
+                  <div class="header-logo">
+                     <a href="https://nitrr.ac.in/index.php">
+                     <img src="images/nitrr_new_logo_new.png" alt="NIT Raipur Logo">
+                     </a>
+                  </div>
+                  <div class="header-title">
+                     <div class="Logohindi" style="margin-top:-13px; color:#053c5e"> राष्ट्रीय प्रौद्योगिकी संस्थान रायपुर</div>
+                     <div>
+                        <a href="index.php" style="color:#053c5e; font-weight:600; font-size:30px; text-decoration:none; display:block; margin:0;">
+                        National Institute of Technology Raipur
+                        </a>
+                     </div>
+                     <span style="font-size:18px; display:block; margin:-5px; margin-left: 1px; margin-top: 3px; ">
+                     An Institute of National Importance
+                     </span>
+                  </div>
+               </div>
+               <div class="header-right hidden-xs">
+                  <div class="top-links">
+                     <a href="index.php"><i class="fa fa-home"></i> Home</a>
+                     <a href="https://mail.google.com/a/nitrr.ac.in"><i class="fa fa-envelope"></i> Email</a>
+                     <a href="https://nitrr.ac.in/directors.php"><i class="fa fa-graduation-cap"></i> Directors of NITRR</a>
+                     <a href="https://gecnitrralumni.org/"><i class="fa fa-graduation-cap"></i> Alumni</a>
+                     <a href="nirf_data.php"><i class="fa fa-certificate"></i> NIRF</a>
+                     <a href="contact.php"><i class="fa fa-phone-square"></i> Contact</a>
+                  </div>
+                  <div id="google_translate_element"></div>
+               </div>
+               <script type="text/javascript">
+                  function googleTranslateElementInit() {
+                     new google.translate.TranslateElement({
+                        pageLanguage: 'en'
+                     }, 'google_translate_element');
+                  }
+               </script>
+               <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            </div>
+         </div>
+      </header>
+      <div class="container-fluid" style="padding-left:0;padding-right:0;position:relative;top:-10px;">
+         <div class="row">
+            <div class="col-sm-12">
+               <div id="navbar">
+                  <nav class="navbar navbar-inverse" role="navigation" style="background:#053c5e;color:white;width:100%;border-radius:0;">
+                     <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                     </div>
+                     <div class="collapse navbar-collapse" id="navbar-collapse-1" style="background:#053c5e;color:white;">
+                        <ul class="nav navbar-nav">
+                           <!--single menu here-->
+                           <ul class="hidden-lg hidden-sm hidden-md" style="padding-left:14px;list-style-type:none;">
+                              <li>
+                                 <i class="fa fa-home" aria-hidden="true"></i>
+                                 <a href="index.php" style="text-decoration:none;color:white;">Home</a>
+                              </li>
+                              <li>
+                                 <i class="fa fa-envelope" aria-hidden="true"></i>
+                                 <a href="https://mail.google.com/a/nitrr.ac.in" style="text-decoration:none;color:white;"> Email</a>
+                              </li>
+                              <li>
+                                 <i class="fa fa-envelope" aria-hidden="true"></i>
+                                 <a href="https://nitrr.ac.in/directors.php" style="text-decoration:none; color:white;">
+                                 Directors of NITRR </a>
+                              </li>
+                              <li>
+                                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                 <a href="https://gecnitrralumni.org/" style="text-decoration:none;color:white;"> Alumni</a>
+                              </li>
+                              <!--                                       <li><i class="fa fa-users" aria-hidden="true"></i><a href="http://tpo.nitrr.ac.in" target="_new" style="text-decoration:none;color:white;"> T & P</a></li> -->
+                              <li>
+                                 <i class="fa fa-certificate" aria-hidden="true"></i>
+                                 <a href="nirf_data.php" style="text-decoration:none;color:white;">NIRF</a>
+                              </li>
+                              <li>
+                                 <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                 <a href="contact.php" style="text-decoration:none;color:white;"> Contact</a>
+                              </li>
+                           </ul>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-bank"></i>&nbsp;The Institute <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                 <div class="academic-links">
+                                 <li>
+                                    <a href="aboutus.php" style="color:black; text-transform:none;">&#9679; About Institute</a>
+                                 </li>
+                                 <li>
+                                    <a href="genesis.php" style="color:black; text-transform:none;">&#9679; Genesis</a>
+                                 </li>
+                                 <!-- <li><a href="downloads/vision_2020.pdf" style="color:black; text-transform:none;" target="_new">&#9679; Vision 2030</a></li> -->
+                                 <li>
+                                    <a href="downloads/Vision 2030_24112021.pdf" style="color:black; text-transform:none;" target="_new">&#9679; Vision 2030</a>
+                                 </li>
+                              </div>
+                              </ul>
+                           </li>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-cogs"></i>&nbsp;Administration <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="width: 250px;">
+                                 <div class="academic-links">
+                                 <li>
+                                    <a href="bog.php" style="color:black; text-transform:none;">&#9679; Board of Governors</a>
+                                 </li>
+                                 <li>
+                                    <a href="chairperson.php" style="color:black; text-transform:none;">&#9679; Chairperson</a>
+                                 </li>
+                                 <li>
+                                    <a href="director.php" style="color:black; text-transform:none;">&#9679; Director</a>
+                                 </li>
+                                 <li>
+                                    <a href="deans.php" style="color:black; text-transform:none;">&#9679; Deans</a>
+                                 </li>
+                                 <li>
+                                    <a href="registrar.php" style="color:black; text-transform:none;">&#9679; Registrar</a>
+                                 </li>
+                                 <li>
+                                    <a href="senate.php" style="color:black; text-transform:none;">&#9679; Senate</a>
+                                 </li>
+                                 <li>
+                                    <a href="BAWC.php" style="color:black; text-transform:none;">&#9679; Building and Work Committee</a>
+                                 </li>
+                                 <li>
+                                    <a href="finance.php" style="color:black; text-transform:none;"> &#9679; Finance Committee</a>
+                                 </li>
+                                 <li>
+                                    <a href="adminstaff.php" style="color:black; text-transform:none;">&#9679; Administration</a>
+                                 </li>
+                                 <li>
+                                    <a href="Vigilance_Cell.php" style="color:black; text-transform:none;">&#9679; Vigilance Cell</a>
+                                 </li>
+                                 <li>
+                                    <a href="committee.php" style="color:black; text-transform:none;">&#9679; Committees</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://nitrr.ac.in/fac_rnc_new.php" style="color:black; text-transform:none;">&#9679; Faculty List</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://nitrr.ac.in/Finance_Accounts.php" style="color:black; text-transform:none;">&#9679; Finance & Accounts</a>
+                                 </li>
+                              </div>
+                              </ul>
+                           </li>
+                           <!-- Academics Menu -->
+                           <li class="dropdown mega-dropdown">
+                              <a href="#"
+                                 class="dropdown-toggle"
+                                 data-toggle="dropdown"
+                                 style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-graduation-cap"></i>&nbsp;Academics
+                              <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                 <div class="row">
+                                    <!-- Departments -->
+                                    <div class="col-md-6">
+                                       <div class="academic-card">
+                                          <div class="academic-title">
+                                             <i class="fa fa-university"></i>
+                                             Departments
+                                          </div>
+                                          <div class="academic-links">
+                                             <a href="aboutgeology.php">&#9679; Applied Geology</a>
+                                             <a href="aboutarchitecture.php">&#9679; Architecture & Planning</a>
+                                             <a href="aboutbiomed.php">&#9679; Bio Medical Engineering</a>
+                                             <a href="aboutbiotech.php">&#9679; Bio Technology</a>
+                                             <a href="aboutchemical.php">&#9679; Chemical Engineering</a>
+                                             <a href="aboutchemistry.php">&#9679; Chemistry</a>
+                                             <a href="aboutcivil.php">&#9679; Civil Engineering</a>
+                                             <a href="aboutmca.php">&#9679; Computer Applications</a>
+                                             <a href="aboutcse.php">&#9679; Computer Science & Engineering</a>
+                                             <a href="aboutelectrical.php">&#9679; Electrical Engineering</a>
+                                             <a href="aboutelectronics.php">&#9679; Electronics and Communication Engineering</a>                                             
+                                             <a href="aboutenglish.php">&#9679; Humanities & Social Sciences</a>
+                                             <a href="aboutit.php">&#9679; Information Technology</a>
+                                             <a href="aboutmath.php">&#9679; Mathematics</a>
+                                             <a href="aboutmechanical.php">&#9679; Mechanical Engineering</a>
+                                             <a href="aboutmeta.php">&#9679; Metallurgical and Materials Engineering</a>
+                                             <a href="aboutmining.php">&#9679; Mining Engineering</a>
+                                             <a href="aboutphysics.php">&#9679; Physics</a>
+                                             <a href="aboutworkshop.php">&#9679; Workshop</a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- Centers -->
+                                    <div class="col-md-6">
+                                       <div class="academic-card">
+                                          <div class="academic-title">
+                                             <i class="fa fa-building"></i>
+                                             Centers
+                                          </div>
+                                          <div class="academic-links">
+                                             <a href="https://cosine.nitrr.ac.in/">&#9679; Centre of Space & Interplanetary Exploration (COSINE)</a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- Facilities -->
+                                    <!--  <div class="col-md-4">
+                                       <div class="academic-card">
+                                       
+                                           <div class="academic-title">
+                                               <i class="fa fa-book"></i>
+                                               Facilities
+                                           </div>
+                                       
+                                           <div class="academic-links">
+                                       
+                                               <a href="dept-cl.php">Central Library</a>
+                                               <a href="hostel.php">Hostel</a>
+                                               <a href="sports.php">Sports</a>
+                                               <a href="sportscomplex.php">Sports Complex</a>
+                                               <a href="guest_house.php">Guest House</a>
+                                               <a href="dispensary.php">Medical Facilities</a>
+                                       
+                                           </div>
+                                       
+                                       </div>
+                                       
+                                       </div> -->
+                                 </div>
+                              </ul>
+                           </li>
+                           <!-- End Academics -->
+                           <li>
+                              <a href="res_home.php" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-pencil-square-o"></i>&nbsp;Research & Consultancy </a>
+                           </li>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-book"></i>Examination <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="width:280px;">
+                                 <div class="academic-links">
+                                 <li>
+                                    <a href="ABC_APAAR_ID_Registration.php" style="color:black; text-transform:none;">&#9679; ABC/APAAR ID Registration</a>
+                                 </li>
+                                 <li>
+                                    <a href="verification.php" style="color:black; text-transform:none;">&#9679; Education Verification Procedure</a>
+                                 </li>
+                                 <li>
+                                    <a href="exam_notice.php" style="color:black; text-transform:none;">&#9679; Notice</a>
+                                 </li>
+                                 <li>
+                                    <a href="results.php" style="color:black; text-transform:none;">&#9679; Results</a>
+                                 </li>
+                                 <li>
+                                    <a href="timetable.php" style="color:black; text-transform:none;">&#9679; Time Table</a>
+                                 </li>
+                              </div>
+                              </ul>
+                           </li>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-building-o"></i>&nbsp; Facilities <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="width:300px;">
+                                 <div class="academic-links">
+                                 <li>
+                                    <a href="all_in_one_store.php" style="color:black; text-transform:none;">&#9679; All-In-One Store</a>
+                                 </li>
+                                 <li>
+                                    <a href="campus_security.php" style="color:black; text-transform:none;">&#9679; Campus Security</a>
+                                 </li>
+                                 <li>
+                                    <a href="canteen.php" style="color:black; text-transform:none;">&#9679; Canteen and CCD </a>
+                                 </li>
+                                 <li>
+                                    <a href="dept-cl.php" style="color:black; text-transform:none;">&#9679; Central Library</a>
+                                 </li>
+                                 <li>
+                                    <a href="downloads/notice/2022/Circular regarding charges for common facilities.pdf" style="color:black; text-transform:none;">&#9679; Charges for Common facilities</a>
+                                 </li>
+                                 <li>
+                                    <a href="dept-eo.php" style="color:black; text-transform:none;">&#9679; Estate Office</a>
+                                 </li>
+                                 <li>
+                                    <a href="guest_house.php" style="color:black; text-transform:none;">&#9679; Guest House</a>
+                                 </li>
+                                 <li>
+                                    <a href="hostel.php" style="color:black; text-transform:none;">&#9679; Hostel</a>
+                                 </li>
+                                 <li>
+                                    <a href="dispensary.php" style="color:black; text-transform:none;">&#9679; Medical Facilities</a>
+                                 </li>
+                                 <li>
+                                    <a href="sports.php" style="color:black; text-transform:none;">&#9679; Sports</a>
+                                 </li>
+                                 <li>
+                                    <a href="sportscomplex.php" style="color:black; text-transform:none;">&#9679; Sports Complex </a>
+                                 </li>
+                                 <li>
+                                    <a href="juice_corner_CDB.php" style="color:black; text-transform:none;">&#9679; Vachan Milk Parlour and Coffee Day </a>
+                                 </li>
+                              </div>
+                              </ul>
+                           </li>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-map-pin"></i>Centers/Cell <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="width:390px;">
+                                 <div class="academic-links">
+                                 <li>
+                                    <a href="https://comkeen.com/biunitraipur/" style="color:black; text-transform:none;">&#9679; Behaviour Insight Unit (BIU) NIT RAIPUR</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://cdc.nitrr.ac.in/" style="color:black; text-transform:none;">&#9679; Career Development Centre</a>
+                                 </li>
+                                 <li>
+                                    <!-- <a href="https://nitrr.ac.in/dept-ccc.php" style="color:black; text-transform:none;">&#9679; Central Computer Center</a> -->
+                                    <a href="https://ccc.nitrr.ac.in/" style="color:black; text-transform:none;">&#9679; Central Computer Centre</a>
+                                 </li>
+                                 <li>
+                                    <!-- <a href="https://nitrr.ac.in/dept-ccc.php" style="color:black; text-transform:none;">&#9679; Central Computer Center</a> -->
+                                    <a href="https://cmahanadi.nitrr.ac.in//" style="color:black; text-transform:none;">&#9679; cMahanadi </a>
+                                 </li>
+
+                                 <!-- <li>
+                                    <a href="https://cosine.nitrr.ac.in/" style="color:black; text-transform:none;">&#9679; Centre of Space & Interplanetary Exploration (COSINE)</a>
+                                 </li> -->
+                                 <li>
+                                    <a href="cec_adv.php" style="color:black; text-transform:none;">&#9679; Continuing Education Center</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://nitrr.ac.in/iiic.php" style="color:black; text-transform:none;">&#9679; Industry Institute Collaboration Cell (IICC)</a>
+                                 </li>
+                                 <li>
+                                    <a href="nit_raipur_mental_health_webpage.php" style="color:black; text-transform:none;">&#9679; Students Mental Health & Wellbeing Services</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://tpo.nitrr.ac.in/" style="color:black; text-transform:none;">&#9679; Training & Placement Cell</a>
+                                 </li>
+
+
+                                 <!-- <li>
+                                    <a href="file:///C:/Users/hp/Downloads/nit_raipur_mental_health_webpage.html" style="color:black; text-transform:none;">&#9679; Students Mental Health & Wellbeing Services</a>
+                                 </li> -->
+
+
+                              </div>
+                              </ul>
+                           </li>
+                           <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-newspaper-o"></i>&nbsp;Media <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="width:200px;">
+                                  <div class="academic-links">
+                                 <li>
+                                    <a href="mediaimage.php" style="color:black; text-transform:none;">&#9679; Image Gallery</a>
+                                 </li>
+                                 <li>
+                                    <a href="newsletter.php" style="color:black; text-transform:none;">&#9679; Mirror</a>
+                                 </li>
+                                 <li>
+                                    <a href="pmrc.php" style="color:black; text-transform:none;">&#9679; PMRC</a>
+                                 </li>
+                                 <li>
+                                    <a href="mediapress.php" style="color:black; text-transform:none;">&#9679; Press Clipping</a>
+                                 </li>
+                                 <li>
+                                    <a href="https://www.youtube.com/channel/UC0esbqS3Lc9zXRddcf0uwPw" style="color:black; text-transform:none;">&#9679; Video Gallery</a>
+                                 </li>
+                              </div>
+                              </ul>
+                           </li>
+                           <li>
+                              <a target="new" href="https://www.nitrrfie.in/" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-user"></i>&nbsp;NITRRFIE </a>
+                           </li>
+                           <li>
+                              <a target="new" href="https://csr.nitrr.ac.in/" style="color:white;background-color:#053c5e;">
+                              <i class="fa fa-file-text"></i>&nbsp;CSR </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- /.navbar-collapse -->
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <!--************************************
+         Header End
+         *************************************-->
+      <!--************************************
+         Home Slider Start
+         *************************************-->
+<style>
+   /* ---------------- HR ---------------- */
+   hr {
+   opacity: 0.3;
+   border-color: #000;
+   }
+   /* ---------------- MODAL ---------------- */
+   #css-only-modals {
+   position: fixed;
+   pointer-events: none;
+   left: 0;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 10000000;
+   text-align: center;
+   white-space: nowrap;
+   height: 100%;
+   overflow: auto;
+   }
+   #css-only-modals:before {
+   content: '';
+   display: inline-block;
+   height: 100%;
+   vertical-align: middle;
+   margin-right: -0.25em;
+   }
+   .css-only-modal-check {
+   display: none;
+   pointer-events: auto;
+   }
+   .css-only-modal-check:checked~.css-only-modal {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10000002;
+   }
+   .css-only-modal {
+   width: 60%;
+   background: #fff;
+   position: relative;
+   display: inline-block;
+   vertical-align: middle;
+   padding: 25px;
+   text-align: right;
+   border-radius: 4px;
+   white-space: normal;
+   opacity: 0;
+   overflow: auto;
+   }
+   .css-only-modal h2 {
+   text-align: center;
+   }
+   .css-only-modal p {
+   text-align: left;
+   }
+   .css-only-modal-close {
+       position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 10000003;
+    cursor: pointer;
+   }
+   .css-only-modal-check:checked~#screen-shade {
+   opacity: 0.5;
+   pointer-events: auto;
+   }
+   #screen-shade {
+       opacity: 0;
+    background: #000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    transition: opacity 0.8s;
+    z-index: 10000001;
+   }
+   /* ---------------- STRIPE ---------------- */
+   .stripe {
+   width: 100%;
+   text-align: center;
+   overflow: hidden;
+   }
+   .stripe>.container>p,
+   .stripe>.container>ul {
+   text-align: left;
+   padding: 35px;
+   margin: 0;
+   }
+   .stripe>.container>hr {
+   margin: 50px 0;
+   }
+   #nav-spacer {
+   display: block;
+   height: 50px;
+   }
+   .default {
+   color: white;
+   background: DarkCyan;
+   }
+   .inverse {
+   color: DarkCyan;
+   background: white;
+   }
+   .grey {
+   color: white;
+   background: DimGrey;
+   }
+   .grey-light {
+   color: DimGrey;
+   background: white;
+   }
+   .color {
+   color: DarkOrange;
+   }
+   /*-----------Category Box----------------*/
+   /* WRAPPER */
+   .category-wrapper {
+   /*max-width: 1100px;*/
+   margin: 15px auto;
+   padding: 5px;
+   }
+   /* ROW */
+   .category-row {
+   display: flex;
+   justify-content: center;
+   gap: 15px;
+   flex-wrap: wrap;
+   }
+   /* TILE BOX */
+   .CategoryBox {
+   width: 130px;
+   height: 110px;
+   border-radius: 12px;
+   color: #fff;
+   text-align: center;
+   padding-top: 20px;
+   transition: all 0.3s ease;
+   cursor: pointer;
+   }
+   /* ICON */
+   .CategoryBox i {
+   font-size: 26px;
+   /*margin-bottom: 8px;*/
+   }
+   /* TEXT */
+   .CategoryBox h2 {
+   font-size: 13px;
+   font-weight: 600;
+   }
+   /* HOVER */
+   .CategoryBox:hover {
+   transform: translateY(-8px) scale(1.05);
+   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+   }
+   /* DIFFERENT COLORS */
+   .box1 { background: linear-gradient(135deg, #0ea5e9, #2563eb); }
+   .box2 { background: linear-gradient(135deg, #10b981, #059669); }
+   .box3 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+   .box4 { background: linear-gradient(135deg, #ef4444, #dc2626); }
+   .box5 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+   .box6 { background: linear-gradient(135deg, #ec4899, #be185d); }
+   .box7 { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+   .box8 { background: linear-gradient(135deg, #64748b, #334155); }
+   .box9  { background: linear-gradient(135deg, #6366f1, #4338ca); }   /* Indigo */
+   .box10 { background: linear-gradient(135deg, #84cc16, #4d7c0f); }   /* Lime */
+   .box11 { background: linear-gradient(135deg, #f43f5e, #be123c); }   /* Rose */
+   .box12 { background: linear-gradient(135deg, #06b6d4, #155e75); }   /* Deep Cyan */
+   .box13 { background: linear-gradient(135deg, #78716c, #44403c); }   /* Stone */
+   /* ---------------- CAROUSEL ---------------- */
+   .carousel-inner .item img {
+   width: 100%;
+   height: 420px;
+   object-fit: cover;
+   display: block;
+   }
+   /* ---------------- HOME CONTENT BOX ---------------- */
+   .HomeContentBox1 {
+   border: 1px solid #10b981;
+   border-radius: 8px;
+   background: #f8fafc;
+   padding: 12px;
+   height: 55%;
+   display: flex;
+   flex-direction: column;
+   }
+   .HomeContentBox1 iframe {
+   width: 100%;
+   border: 0;
+   flex-grow: 1;
+   }
+   .HomeContentBox1 .read {
+   margin-top: auto;
+   }
+   .HomeContentBox1 .NewHead {
+   border-radius: 6px 6px 0 0;
+   }
+   .important-links {
+   background: #fff;
+   border: 1px solid #e5e7eb;
+   }
+   .important-links h3 {
+   background: #10B981;
+   color: #fff;
+   padding: 8px;
+   text-align: center;
+   }
+   /*===========Ticker Box===========*/
+   /* .tickerbox {
+   background: #f5f5f5;
+   padding: 6px 10px;
+   border: 1px solid #10b981;
+   border-radius: 4px;
+   }
+   .tickerbox span {
+   float: left;
+   margin-right: 10px;
+   }*/
+   .ticker-text {
+   animation: scrollLoop linear infinite;
+   }
+   .ticker-text:hover {
+   animation-play-state: paused;
+   }
+   @keyframes scrollLoop {
+   from {
+   transform: translateX(0);
+   }
+   to {
+   transform: translateX(-50%);
+   }
+   }
+   .tickerbox {
+   background: #f5f5f5;
+   padding: 6px 10px;
+   border: 1px solid #10b981;
+   border-radius: 4px;
+   display: flex;
+   align-items: center;
+   }
+   .tickerbox span {
+   margin-right: 10px;
+   white-space: nowrap;
+   }
+   .tickerbox marquee {
+   font-size: 14px;
+   }
+   .tickerbox marquee {
+   font-size: 14px;
+   }
+   .shortcode figure{
+   margin-bottom:15px;
+   }
+   /*.shortcodetextbox{
+   padding:10px;
+   }
+   @media (max-width:768px){
+   .shortcodetextbox h2{
+   font-size:20px;
+   }
+   .description{
+   font-size:14px;
+   }
+   }*/
+   /* Layout */
+   .director-content {
+   display: flex;
+   gap: 15px;
+   align-items: flex-start;
+   }
+   /* Image (square like screenshot) */
+   .director-content .director-img img {
+   width: 130px;
+   height: auto;
+   border-radius: 4px; /* ❌ remove circle */
+   border: none;
+   }
+   /* Text */
+   .description {
+   text-align: justify;
+   font-size: 15px;
+   line-height: 1.7;
+   }
+   /* Mobile */
+   @media (max-width:768px){
+   .director-content {
+   flex-direction: column;
+   align-items: center;
+   text-align: center;
+   }
+   .director-content .director-img img {
+   width: 120px;
+   }
+   .description {
+   text-align: justify;
+   }
+   }
+   /* Button */
+   .read-more-btn {
+   background: #053c5e;
+   color: #fff;
+   border: none;
+   padding: 6px 15px;
+   border-radius: 4px;
+   transition: 0.3s;
+   }
+   .read-more-btn:hover {
+   background: #032a42;
+   }
+   /* Mobile */
+   @media (max-width:768px){
+   .title {
+   font-size: 20px;
+   }
+   .description {
+   font-size: 14px;
+   }
+   .director-img img {
+   width: 100px;
+   height: 100px;
+   }
+   }
+   /* Header Row */
+   .director-header {
+   display: flex;
+   /*align-items: center;*/
+   gap: 15px;
+   margin-bottom: 15px;
+   }
+   /* Image */
+   .director-img img {
+   width: 90px;
+   height: 90px;
+   border-radius: 50%;
+   object-fit: cover;
+   border: 3px solid #053c5e;
+   }
+   /* Text */
+   .director-info {
+   flex: 1;
+   }
+   /* Name */
+   .director-name {
+   font-size: 16px;
+   font-weight: 600;
+   color: #060607;
+   margin: 0;
+   }
+   /* Title */
+   .title {
+   font-size: 22px;
+   color: #053c5e;
+   margin: 5px 0 0;
+   }
+   /* Mobile fix */
+   @media (max-width:768px){
+   .director-header {
+   flex-direction: column;
+   text-align: center;
+   }
+   .director-img img {
+   width: 80px;
+   height: 80px;
+   }
+   .title {
+   font-size: 20px;
+   }
+   }
+   /*welcome msg*/
+   .welcome-card {
+   background: #ffffff;
+   border-radius: 14px;
+   padding: 30px 28px;
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+   border-top: 4px solid #00014e;
+   margin-bottom: 25px;
+   transition: 0.3s ease;
+   }
+   .welcome-title {
+   text-align: center;
+   color: #00014e;
+   font-size: 30px;
+   font-weight: 700;
+   margin-bottom: 10px;
+   text-transform: uppercase;
+   }
+   .welcome-divider {
+   width: 70px;
+   height: 3px;
+   background: #f0ad4e;
+   margin: 0 auto 25px auto;
+   border-radius: 10px;
+   }
+   .welcome-description {
+   color: #333;
+   font-size: 15.5px;
+   line-height: 1.9;
+   text-align: justify;
+   }
+   .welcome-description p {
+   margin-bottom: 16px;
+   }
+   .read-more-btn {
+   background: #00014e;
+   color: #fff;
+   border: none;
+   /*padding: 10px 22px;*/
+   border-radius: 30px;
+   font-size: 14px;
+   font-weight: 600;
+   cursor: pointer;
+   margin-top: 10px;
+   }
+   .read-more-btn:hover {
+   background: #f0ad4e;
+   color: #00014e;
+   }
+   .custom-modal-content {
+   border-radius: 14px;
+   overflow: hidden;
+   }
+   .custom-modal-header {
+   /*background: #00014e;*/
+   color: #fff;
+   padding: 15px 20px;
+   }
+   .custom-modal-body {
+   max-height: 70vh;
+   overflow-y: auto;
+   padding: 25px;
+   text-align: justify;
+   font-size: 15.5px;
+   line-height: 1.9;
+   color: #333;
+   }
+   .welcome-signature {
+   margin-top: 25px;
+   color: #00014e;
+   font-size: 16px;
+   line-height: 1.7;
+   text-align: right;
+   font-weight: 500;
+   }
+</style>
+
+
+
+
+
+
+
+
+<!-- modal-->
+<!--################################### Comment starts Below ##########################################  -->
+<!-- Uncomment following to show the popup( by Ravindra) -->
+<div id="css-only-modals" ><input id="modal1" class="css-only-modal-check" type="checkbox" checked/><div class="css-only-modal"><label for="modal1" class="css-only-modal-close"><i class="fa fa-times fa-2x" style="font-size:40px;color:red"></i></label>
+   <ul align=left> 
+<!-- <h4 align=center><b>NIT Raipur - A Legacy of Excellence by Dr. Suresh Haware, Chairman BoG NIT Raipur</b></h4> -->
+
+<li>
+                <a href="https://nitrr.ac.in/downloads/book_by_the_chairman/NIT%20Raipur_A%20Legacy%20of%20Excellence.pdf"
+                   target="_blank"
+                   onclick="saveBookClick()">
+                    "NIT Raipur - A Legacy of Excellence"
+                </a>
+                by Dr. Suresh Haware, Chairman BoG NIT Raipur
+            </li> 
+
+<!--<li><a href="https://www.youtube.com/embed/PaxuxZGUSMQ" target="_blank">16th Convocation NIT Raipur | 09th Nov 2025 Live Youtube Link.</a></li><li><a href="admission.php" target="_blank">Ph. D. admissions for academic session of SPRING 2025-26</a></li>-->
+
+<!-- <iframe width="600" height="600" src="https://nitrr.ac.in/downloads/book_by_the_chairman/NIT%20Raipur_A%20Legacy%20of%20Excellence.pdf" allowfullscreen></iframe> -->
+</ul></div><div id="screen-shade"></div></div> 
+<!--  Uncomment following section for poup Message (By Ravindra) -->
+<!-- Remove this comment ################################### Comment Ends Below ########################################## -->
+
+
+<script>
+function saveBookClick() {
+
+    fetch(window.location.href, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'book_click=1',
+        keepalive: true
+    }).catch(function(error) {
+        console.error('Click tracking failed:', error);
+    });
+
+    // Nothing else is required.
+    // The original href will open the PDF in a new tab.
+}
+</script>
+
+
+<div class="clearfix"></div>
+<div class="container-fluid">
+   <!---------------------- Carousel Section ---------------------------------  -->
+   <div class="container-fluid" style="padding-bottom:10px;width:100%;">
+      <div class="row" style="margin-top:-10px;">
+         <div class="col-sm-12">
+            <!-- <div class="container-fluid"> -->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="border:2px solid black;">
+               <!-- Wrapper for slides -->
+               <div class="carousel-inner">
+                  <!--      <div class="item active"><img src="images/ICLA_01.jpg" alt="..."></div> -->
+                  <div class="item active">
+                     <img src="images/gate_nitrr_2026.jpg" alt="" title="">
+                  </div>
+                  <div class="item ">
+                     <img src="images/smart_cls_inag.jpg" alt="" title="">
+                  </div>
+                  <div class="item ">
+                     <img src="images/2025/Hira Lounge.jpg" alt="" title="Inaugration of Hire Lounge">
+                  </div>
+                  <!-- <div class="item ">
+                     <img src="images/2025/vice presidents visit 1.jpg" alt="" title="">
+                     </div> -->
+                  <!--    <div class="item ">
+                     <img src="images/2025/vice presidents visit 3.jpg" alt="" title="">
+                     </div> -->
+                  <!-- <div class="item ">
+                     <img src="images/2024/CCC_new.jpeg" alt="" title="CCC NIT Raipur">
+                     </div> -->
+                  <div class="item ">
+                     <img src="images/2025/15th-convoavtion-1.jpg" alt="" title="15th Convocation 2025">
+                  </div>
+                  <div class="item ">
+                     <img src="images/2024/convocation2024-2.jpg" alt="" title="Convocation 2024">
+                  </div>
+                  <!-- <div class="item ">
+                     <img src="images/2024/convocation2024_1.jpg" alt="" title=" Convocation 2024">
+                     </div> -->
+                  <!--  <div class="item ">
+                     <img src="images/2024/convocation2024_4.jpg" alt="" title="Convocation 2024">
+                     </div> -->
+                  <!--       <div class="item ">
+                     <img src="images/IMG-20260218-2.jpg" alt="" title="">
+                     </div> -->
+                  <!--    <div class="item ">
+                     <img src="images/IMG-20260218-3.jpg" alt="" title="">
+                     </div> -->           
+                  <!--     <div class="item ">
+                     <img src="images/2025/TPP03472_.jpg" alt="" title="">
+                     </div> -->
+                  <!-- <div class="item ">
+                     <img src="images/2025/15th convocation 3.jpg" alt="" title="Convocation 2025">
+                     </div> -->
+                  <!-- 
+                     <div class="item ">
+                        <img src="images/2024/convocation2024_3.jpg" alt="" title="Convocation 2024">
+                     </div> -->
+                  <!--     <div class="item ">
+                     <img src="images/202202(1).jpg" alt="" title="">
+                     </div> -->
+                  <!--    <div class="item ">
+                     <img src="images/202206(1).jpg" alt="" title="">
+                     </div> -->
+                  <div class="item ">
+                     <img src="images/NIT Raipur XII Convocation 2021 Website (3)(1).jpg" alt="" title="">
+                  </div>
+                  <!--  <div class="item">
+                     <img src="images/4.jpg" alt="...">
+                     </div> -->
+                  <!--  <div class="item">
+                     <img src="images/6.jpg" alt="...">
+                     </div> -->
+                  <!--    <div class="item">
+                     <img src="images/9.jpg" alt="...">
+                     </div> -->
+                  <!--  <div class="item">
+                     <img src="images/10.jpg" alt="...">
+                     </div> -->
+                  <!--   <div class="item">
+                     <img src="images/11.jpg" alt="...">
+                     </div> -->
+                  <!--       <div class="item">
+                     <img src="images/12.jpg" alt="...">
+                     </div> -->
+                  <div class="item">
+                     <img src="images/13.jpg" alt="...">
+                  </div>
+                  <div class="item ">
+                     <img src="images/2025/IMG727960420_960x420.jpg" alt="" title="">
+                  </div>
+                  <!--              <div class="item">
+                     <img src="images/17.jpg" alt="...">
+                     </div> -->
+               </div>
+               <!-- Controls -->
+               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+               </a>
+               <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+               <span class="glyphicon glyphicon-chevron-right"></span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--------------------- END Carousel Section ------------------------->
+   <br/>
+   <!----------------------- marquee Section ------------------------->
+   <div class="container-fluid">
+      <div class="tickerbox" style="display:flex; align-items:center; gap:10px; overflow:hidden;">
+         <span style="white-space:nowrap; flex-shrink:0;">
+         <a href="javascript:void(0)" onclick="popup2('allmarquee.php')" class="flashit">
+         View All
+         </a>
+         </span>
+         <div class="ticker-wrapper" style="overflow:hidden; width:100%;">
+            <div class="ticker-text" id="tickerText" style="white-space:nowrap; display:inline-flex;">
+               
+
+<a href="https://nitrr.ac.in/stu_welfarenotice.php" target="_blank" rel="noopener">Invitation of applications under the Research Prototype Process Development Initiative (RPDI) for Ph.D. Research Scholars.</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../downloads/book_by_the_chairman/NIT%20Raipur_A%20Legacy%20of%20Excellence.pdf" target="_blank" rel="noopener">NIT Raipur - A Legacy of Excellence by Dr. Suresh Haware, Chairman BoG NIT Raipur</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../downloads/notice/2026/Chhattisgarh%20Post%20Matric%20Scholarship-2026-27.pdf" target="_blank" rel="noopener">Chhattisgarh Post Matric Scholarship - 2026-27</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="donation.php" target="_blank" rel="noopener">Appeal for Donation</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;             </div>
+         </div>
+      </div>
+   </div>
+   <!-------  End marquee Section  --------->
+    <br/>
+   <!-------------- Welcome Section  -------------->
+   <div class="container-fluid" style="margin-top:-35px;">
+      <div class="row">
+         <div class="col-xs-12 col-sm-4 col-md-4">
+            <section class="sectionspace haslayout">
+               <div class="shortcode welcomeandgreeting">
+                  <figure style="width:100%;">
+                     <iframe 
+                        src="https://www.youtube.com/embed/2qc7Zdl_8tM"
+                        style="width:100%; height:276px; border:0;"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                     </iframe>
+                  </figure>
+               </div>
+            </section>
+         </div>
+         <div class="col-xs-12 col-sm-4 col-md-4">
+            <br />
+            <div class="shortcodetextbox director-card">
+               <h2 class="title text-center">Director's Message</h2>
+               <div class="director-content">
+                  <!-- LEFT IMAGE -->
+                  <div class="director-img">
+                     <img src="https://nitrr.ac.in/faculty_photoes/PP_NVR.jpg" alt="Director">
+                     <br/>
+                     <b>Dr. N V Ramana Rao, Director</b><br>
+                  </div>
+                  <!-- RIGHT TEXT -->
+                  <div class="description">
+                     It gives me immense pleasure to welcome you to the <b>National Institute of Technology Raipur</b>, an institution with a rich legacy and a steadfast commitment to excellence in technical education and research. Established in 1956 as Government Engineering College Raipur, with its foundation laid by the first President of India, Hon’ble Dr. Rajendra Prasad,...
+                     <div class="text-left" style="margin-top:10px;">
+                        <button type="button" class="read-more-btn" data-toggle="modal" data-target="#welcomeModal">
+                        Read All
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Popup Modal -->
+         <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel">
+            <div class="modal-dialog" role="document" style="width: 80%; max-width: 1000px; margin: 30px auto;">
+               <div class="modal-content" style="height: 80vh; border-radius: 14px; overflow: hidden;">
+                  <div class="modal-header" style="color:#fff;">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity:1;">
+                     <span aria-hidden="true" style="color:#272ac3;">&times;</span>
+                     </button>
+                     <h4 class="modal-title" id="welcomeModalLabel">Director's Message</h4>
+                  </div>
+                  <div class="modal-body" style="height: calc(80vh - 60px); overflow-y: auto; padding: 25px; text-align: justify;">
+                     <p style="color: #040404; text-align: justify;">
+                        It gives me immense pleasure to welcome you to the <b>National Institute of Technology Raipur</b>, an institution with a rich legacy and a steadfast commitment to excellence in technical education and research. Established in 1956 as Government Engineering College Raipur, with its foundation laid by the first President of India, Hon’ble Dr. Rajendra Prasad, and later inaugurated by the first Prime Minister, Hon’ble Pt. Jawaharlal Nehru, the institute has evolved into one of the premier institutions of national importance since becoming an NIT in 2005.
+                     </p>
+                     <p style="color: #040404; text-align: justify;">
+                        From its humble beginnings with two departments—Metallurgical and Mining Engineering—NIT Raipur has grown into a comprehensive center of learning, offering a wide range of undergraduate, postgraduate, and doctoral programs across diverse disciplines. Over the decades, the institute has played a significant role in the technological, industrial, and economic development of the region and the nation.
+                     </p>
+                     <p style="color: #040404; text-align: justify;">
+                        At NIT Raipur, we are committed to nurturing students by equipping them with strong technical knowledge, fostering innovative and out-of-the-box thinking, and instilling ethical values. Our focus extends beyond conventional teaching to encompass research, consultancy, industry collaboration, and the holistic development of our students. The institute actively undertakes research projects, testing, consultancy services, and continuing education programs, thereby contributing meaningfully to the welfare and advancement of society. Our faculty members, in addition to imparting high-quality education, actively promote innovation and guide students toward academic excellence, ensuring they are professionally trained, efficient, and well-equipped to meet future challenges.
+                     </p>
+                     <p style="color: #040404; text-align: justify;">
+                        We take pride in providing an excellent academic environment supported by modern infrastructure. Our laboratories are equipped with state-of-the-art machinery, advanced equipment, and contemporary computing facilities, enabling students to gain hands-on experience and practical exposure in their respective fields.
+                     </p>
+                     <p style="color: #040404; text-align: justify;">
+                        As one of the earliest engineering institutions of independent India, NIT Raipur continues to uphold its tradition of excellence while embracing new challenges and opportunities. I warmly invite you to explore, engage, and collaborate with us through placements, internships, research partnerships, mentorship, and consultancy as we strive to contribute towards building a technologically empowered and self-reliant nation.
+                     </p>
+                     <p style="color: #040404; text-align: justify;">
+                        I welcome you to NIT Raipur and look forward to building enduring and meaningful associations.
+                     </p>
+                     <div class="welcome-signature">
+                        <strong>(Director)</strong><br>
+                        National Institute of Technology Raipur
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-4 col-md-4">
+            <br />
+            <!-- IMPORTANT LINKS -->
+            <div style="background:#10B981;color:white;border-radius:6px;margin-bottom:15px;">
+               <div style="text-align:center;font-weight:bold;padding:10px;"> IMPORTANT LINKS </div>
+               <div style="border-top:2px solid white;margin:0 10px 10px;"></div>
+               <ul style="list-style:none;padding:0 15px 10px 15px;">
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="onlinepay.php" style="color:white;text-decoration:none;"> Online Fee Payment</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="http://www.nitrr.ac.in/UG%20First%20Year.php" style="color:white;text-decoration:none;"> UG First Year</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="donation.php" style="color:white;text-decoration:none;"> Appeal for Donation</a>
+                  </li>
+                  <!--  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="https://josaa.nic.in" target="_blank" style="color:white;text-decoration:none;"> JoSAA</a>
+                     </li> -->
+                  <!-- <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="convocation_15th.php" style="color:white;text-decoration:none;"> 16th Convocation</a>
+                  </li> -->
+
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="convocation_17th.php" style="color:white;text-decoration:none;">17th Convocation 2026 (03rd November 2026)</a>
+                  </li>
+
+               </ul>
+            </div>
+            <!-- ACADEMICS -->
+            <div style="background:#2563EB;color:white;border-radius:6px;">
+               <div style="text-align:center;font-weight:bold;padding:10px;"> ACADEMICS </div>
+               <div style="border-top:2px solid white;margin:0 10px 10px;"></div>
+               <ul style="list-style:none;padding:0 15px 10px 15px;">
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="admission.php" style="color:white;text-decoration:none;"> Admission & Fee Structure</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="ordinances.php" style="color:white;text-decoration:none;"> Ordinances</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="acad_downloads.php" style="color:white;text-decoration:none;"> Calendar / Notices / Time Table</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="syllabus.php" style="color:white;text-decoration:none;"> Syllabus</a>
+                  </li>
+                  <li>
+                     <i class="fa fa-bell"></i>
+                     <a href="how_to_apply.php" style="color:white;text-decoration:none;"> How to Apply</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!------------------- End Welcome section --------------->
+    <br/>
+   <!----------------- Information Section----------->
+   <div class="category-wrapper" style="border: solid 1px #10b981; padding: 10px; border-radius: 12px;margin-right: 10px;margin-left: 10px;">
+      <div class="category-row">
+         <div class="CategoryBox box1">
+            <a href="subscribe.php">
+               <i class="fa fa-street-view"></i>
+               <h2>Campus Tour</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box2">
+            <a href="mis_new.php">
+               <i class="fa fa-address-card-o"></i>
+               <h2>MIS</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box3">
+            <a href="results.php">
+               <i class="fa fa-book"></i>
+               <h2>Result</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box4">
+            <a href="advertisement.php">
+               <i class="fa fa-bullhorn"></i>
+               <h2>Recruitment</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box5">
+            <a href="gallery.php">
+               <i class="fa fa-camera"></i>
+               <h2>Gallery</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box6">
+            <a href="gen_downloads.php">
+               <i class="fa fa-download"></i>
+               <h2>Downloads</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box7">
+            <a href="student_welfare.php">
+               <i class="fa fa-group"></i>
+               <h2>Student Welfare</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box8">
+            <a href="circulars.php">
+               <i class="fa fa-folder-o"></i>
+               <h2>Circulars</h2>
+            </a>
+         </div>
+         <div class="CategoryBox box9">
+            <a href="admission.php">
+               <i class="fa fa-graduation-cap"></i>
+               <h2>Admission</h2>
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- End Information Section  -->
+    <br/>
+   <!-- Notice Section -->
+   <div class="container-fluid" >
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="row">
+               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="HomeContentBox1" style="">
+                     <h1 class="NewHead" style="background:#26aae1;color:white; ">
+                        <i class="fa fa-bullhorn" style="background:#26aae1;color:white; " aria-hidden="true"></i>Announcement
+                     </h1>
+                     <script type="text/javascript">
+                        var iframesrc = "announcement.php";
+                        
+                        document.write('<iframe id="datamain" src="' + iframesrc + '" width="100%" height="280" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>');
+                     </script>
+                     <a href="javascript: void(0)" onclick="popup2('announcement.php')" class="read"> read more </a>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="HomeContentBox1">
+                     <h1 class="NewHead" style="background:#fcb040;color:white; ">
+                        <i class="fa fa-bars" style="background:#fcb040;color:white; " aria-hidden="true"></i>Tender
+                     </h1>
+                     <script type="text/javascript">
+                        var iframesrc = "tender.php";
+                        
+                        document.write('<iframe id="datamain" src="' + iframesrc + '" width="100%" height="280" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>');
+                     </script>
+                     <a href="javascript: void(0)" onclick="popup2('tender.php')" class="read"> read more </a>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="HomeContentBox1">
+                     <div class="NewHead" style="background:#f26521;color:white; ">
+                        <i class="fa fa-calendar-check-o" style="background:#f26521;color:white; " aria-hidden="true"></i>Notice
+                     </div>
+                     <script type="text/javascript">
+                        var iframesrc = "notice2.php";
+                        
+                        document.write('<iframe id="datamain" src="' + iframesrc + '" width="100%" height="300" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>');
+                     </script>
+                     <a href="javascript: void(0)" onclick="popup2('notice2.php')" class="read"> read more </a>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="HomeContentBox1">
+                     <div class="NewHead" style="background:#10B981;color:white; ">
+                        <i class="fa fa-users" style="background:#10B981;color:white; " aria-hidden="true"></i> Events
+                     </div>
+                     <script type="text/javascript">
+                        var iframesrc = "conferences.php";
+                        
+                        document.write('<iframe id="datamain" src="'+iframesrc+'" width="100%" height="300" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>');
+                     </script>
+                     <a href="javascript: void(0)" onclick="popup2('conferences.php')" class="read"> read more </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- End Notice Section --> 
+  <!--************************************
+            Footer Start
+    *************************************-->
+<style>
+    
+.footer-links{
+background:#2f4356;
+padding:15px 20px;
+}
+
+.footer-list{
+list-style:none;
+padding-left:0;
+}
+
+.footer-list li{
+margin-bottom:7px;
+position:relative;
+padding-left:15px;
+font-size:14px;
+}
+
+.footer-list li:before{
+content: ">";
+position:absolute;
+left:0;
+color:#9ec3df;
+}
+
+.footer-list a{
+color:white;
+text-decoration:none;
+}
+
+.footer-list a:hover{
+color:#9ec3df;
+}
+
+</style>
+
+
+
+
+
+
+
+    <footer id="footer" class="footer haslayout" style="margin-top:-90px;">
+          
+            <div class="footermiddlebar">
+                <div class="container-fluid">
+                    <div class="row">
+                        
+                        <!--<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                            <div class="widget widgetcoursecategories">
+                                <div class="widgettitle">
+                                    <h3>Administration</h3>
+                                </div>
+                                <div class="widgetcontent">
+                                    <ul>
+                                        <li><a href="BOD.php"> Board of Governors</a></li>
+                                        <li><a href="director.php"> Director</a></li>
+                                        <li><a href="deans.php"> Deans</a></li>
+                                        <li><a href="registrar.php"> Registrar</a></li>
+                                        <li><a href="Senate.php"> Senate</a></li>
+                                       
+                                        <li><a href="finance.php"> Finance</a></li>
+                                        <li><a href="adminstaff.php"> Administrative Staff</a></li>
+                                        <li><a href="Committee.php"> Committees</a></li>
+                                        <li><a href="BAWC.php"> Building and Work Committee</a></li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                           
+                            <div class="widget widgetcoursecategories">
+                                <br />
+                                <div class="widgettitle">
+                                    <h3>Academics</h3>
+                                </div>
+                                <div class="widgetcontent">
+                                    <ul>
+                                        <li><a href="ordinances.php"> Ordinances</a></li>
+                                        <li><a href="acad_calendar.php"> Academic Calender</a></li>
+                                        <li><a href="acad_notice.php"> Notices</a></li>
+                                        <li><a href="how_to_Apply.php"> How To Apply</a></li>
+                                        <li><a href="syllabus.php"> Syllabus & Scheme</a></li>
+                                        <li><a href="acad_calendar.php"> List of Holidays</a></li>
+                                        <li><a href="firstyear_schedule.php"> First Year Classes Schedule's</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+
+              <div class="container-fluid footer-links">
+<div class="row">
+
+<!-- COLUMN 1 -->
+
+<div class="col-md-3 col-sm-6">
+<ul class="footer-list">
+
+<!-- <li><a href="downloads/NIT Raipur at a Glance09112021.pdf">NIT Raipur at a Glance</a></li> -->
+<li><a href="Vision2030.php">Vision 2030</a></li>
+<li><a href="mis_new.php">MIS</a></li>
+<li><a href="mous.php">MOUs</a></li>
+<li><a href="antiraggingcommittee.php">Anti-Ragging System</a></li>
+<li><a href="t&c.php">Terms & Condition</a></li>
+<!-- <li><a href="iiic.php">Industry Institute Collaboration Cell (IICC)</a></li> -->
+<!--<li><a href="https://nitrr.ac.in/downloads/asmita%20hindi%20magazine.pdf">वार्षिक हिंदी पत्रिका 'अस्मिता' 2026</a></li>-->
+<li><a href="https://nitrr.ac.in/downloads/ashmita_2025-26.pdf">वार्षिक हिंदी पत्रिका 'अस्मिता' 2025-26</a></li>
+
+
+<li><a href="downloads/pledge cert 18.jpg" target="_blank">Pledge Certificate</a></li>
+<li><a href="downloads/InstituteStartupPolicy_Final3.pdf" target="_blank">Institute Innovation and Start-up Policy</a></li>
+<li><a href="https://nitrr.ac.in/Finance_Accounts.php">Finance & Accounts</a></li>
+</ul>
+</div>
+
+
+<!-- COLUMN 2 -->
+
+<div class="col-md-3 col-sm-6">
+<ul class="footer-list">
+
+<li><a href="https://nitrropac.libsys10.in/home/dashboard">Web OPAC</a></li>
+<li><a href="https://nitrr.ac.in/ICC.php">ICC</a></li>
+<li><a href="rti.php">RTI</a></li>
+<!--<li><a href="teqip_3.php">TEQIP III</a></li>-->
+<!-- <li><a href="https://moocs.nitrr.ac.in/">MOOCs</a></li> -->
+<li><a href="https://swayam.gov.in/">SWAYAM Free Online Education</a></li>
+<li><a href="nad.php">National Academic Depository (NAD)</a></li>
+<!-- <li><a href="downloads/hindi_fonts.rar">Hindi Font</a></li> -->
+<li><a href="https://search.ebscohost.com/login.aspx?profile=eds">NIT Raipur Library Discovery</a></li>
+
+<li>
+                <a href="https://nitrr.ac.in/downloads/book_by_the_chairman/NIT%20Raipur_A%20Legacy%20of%20Excellence.pdf"
+                   target="_blank"
+                   onclick="saveBookClick()">
+                    "NIT Raipur - A Legacy of Excellence" by Dr. Suresh Haware, Chairman BoG NIT Raipur
+                    </a>
+            </li> 
+
+<li><a href="bismou.php">BIS MOU Notifications</a></li> 
+<!-- <li><a href="https://inae-seven.vercel.app/">INAE YEISS 2026</a></li> -->
+</ul>
+</div>
+
+
+<!-- COLUMN 3 -->
+
+<div class="col-md-3 col-sm-6">
+<ul class="footer-list">
+
+<li><a href="ann_report.php">Annual Reports</a></li>
+<li><a href="UBA/index.html">Unnat Bharat Abhiyan</a></li>
+<li><a href="shilpi.php">Shilpi</a></li>
+<li><a href="newsletter.php">NITRR Newsletter - MIRROR : Click to Subscribe</a></li>
+<li><a href="Researchnewsletter.php">Research Newsletter</a></li>
+<li><a href="yeartopperlist.php">Year Wise Toppers List</a></li>
+<li><a href="NITstatutes.php">NIT Act, Statutes</a></li>
+<li><a href="https://www.nitrr.ac.in/Alumni%20Awards.php" target="_blank">Institute Alumnus Awards</a></li>
+<li><a href="https://cmahanadi.nitrr.ac.in/" target="_blank">cMahanadi</a></li>
+
+
+</ul>
+</div>
+
+
+<!-- COLUMN 4 -->
+
+<div class="col-md-3 col-sm-6">
+<ul class="footer-list">
+
+<li><a href="bis.php">Bureau of Indian Standards</a></li>
+<li><a href="https://mddb.nitrr.ac.in/">microRNA Disease Data Bank</a></li>
+<li><a href="https://iks.nitrr.ac.in/">IKS</a></li>
+<li><a href="downloads/Covid E Book.pdf">E-booklet on COVID-related Research & Development works done by CFTIs</a></li>
+<li><a href="https://www.nitrr.ac.in/nba-dcs-nitrr.php">NBA–DCS-NITRR</a></li>
+<li><a href="ariia.php">ARIIA</a></li>
+<li><a href="downloads/FAQ.pdf">FAQ</a></li>
+
+
+
+
+
+</ul>
+</div>
+
+</div>
+</div>
+                        </div>
+                </div>
+            </div>
+            <div class="footerbar">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-sm-6">
+                                <span class="copyright" >Copyright &copy;  2026, National Institute of Technology Raipur, All Rights Reserved</span>
+                            </div>
+                            
+                            <!-- <div class="col-sm-3">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                <span><a href="https://nitrr.ac.in/Finance_Accounts.php">Finance & Accounts</a></span>
+                            </div> -->
+                            
+                            <div class="col-sm-3">
+
+                                <ul class="socialicons">
+
+                                          <li class="linkedin"><a href="https://www.linkedin.com/school/national-institute-of-technology-raipur" title="linkedin account of Institute"><i class="fa fa-linkedin"></i></a></li>
+                                            <li class="facebook"><a href="https://www.facebook.com/nitrr.raipur/" title="facebook account of Institute"><i class="fa fa-facebook"></i></a></li>
+
+                                            <li class="instagram"><a href="https://www.instagram.com/nit_raipur/" title="instagram account of Institute"><i class="fa fa-instagram"></i></a></li>
+
+
+
+                                            <li class="twitter"><a href="https://twitter.com/NITRR" target="new" title="Twitter account of Institute"><i class="fa fa-twitter"></i></a></li>
+                                            <li class="youtube"><a href="https://www.youtube.com/channel/UC0esbqS3Lc9zXRddcf0uwPw" target="_new" title="Youtube account of Institute"  ><i class="fa fa-youtube"></i></a></li>
+
+                                            <!--  <li class="googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>-->
+                                        </ul>
+                                                                            
+                                
+                            </div>
+							<br>
+							
+
+                         <!--   <nav class="addnav">
+                                <ul>
+                                    <li><a href="javascript:void(0);">Privacy Policy</a></li>
+                                    <li><a href="javascript:void(0);">Term and Conditions</a></li>
+                                    <li><a href="javascript:void(0);">Contact</a></li>
+                                </ul>
+                            </nav>-->
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+			
+        </footer>
+		
+        <!--************************************
+            Footer End
+    *************************************-->
+
+
+</div>
+<script>
+    $.(function(){
+    $(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            });
+    });
+	
+    
+</script>
+
+<script>
+function saveBookClick() {
+
+    fetch(window.location.href, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'book_click=1',
+        keepalive: true
+    }).catch(function(error) {
+        console.error('Click tracking failed:', error);
+    });
+
+    // Nothing else is required.
+    // The original href will open the PDF in a new tab.
+}
+</script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/g1.js"></script> 
+<script src="js/g2.js"></script> 
+<script src="js/g3.js"></script> 
+<script src="js/g4.js"></script> 
+<script src="js/jswin.js"></script> 
+<script src="js/jquery.mobile.custom.min gallery.js"></script> 
+
+<script src="js/jquery-2.1.4 gallery.js"></script> 
+<script src="js/main gallery.js"></script> 
+
+<script src="js/modernizr gallery.js"></script> 
+
+<script src="js/snap.svg-min gallery.js"></script> 
+
+</body>
+</html>
+<table class="table table-condensed">
+   <thead>
+      <tr>
+         <th>Visitors #:</th>
+         <th>
+            <img src="http://hitwebcounter.com/counter/counter.php?page=6067539&style=0038&nbdigits=9&type=page&initCount=700000">
+         </th>
+         <th>Last updated on:
+            24-10-2026         </th>
+      </tr>
+   </thead>
+</table>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+       const ticker = document.getElementById("tickerText");
+   
+       // duplicate content for seamless loop
+       ticker.innerHTML += ticker.innerHTML;
+   
+       function setSpeed() {
+           const width = ticker.scrollWidth / 2;
+           const speed = 80; // lower = slower
+           const duration = width / speed;
+   
+           ticker.style.animationDuration = duration + "s";
+       }
+   
+       setSpeed();
+       window.addEventListener("resize", setSpeed);
+   });
+</script>

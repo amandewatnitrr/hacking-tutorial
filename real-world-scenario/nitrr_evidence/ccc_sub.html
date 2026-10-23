@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>CCC | NITRR</title>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <meta content="" name="keywords">
+      <meta content="" name="description">
+      <!-- Favicon -->
+      <link rel="icon" type="image/png" href="img/ccc/nitrr_new_logo_new.png">
+      <!-- Google Web Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Space+Grotesk&display=swap" rel="stylesheet"> -->
+      <!-- Icon Font Stylesheet -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+      <!-- Libraries Stylesheet -->
+      <link href="lib/animate/animate.min.css" rel="stylesheet">
+      <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+      <!-- Customized Bootstrap Stylesheet -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- <link href="css/custom.css" rel="stylesheet"> -->
+      <!-- Template Stylesheet -->
+      <link href="css/style.css" rel="stylesheet">
+   </head>
+   <style>
+      .dropdown-submenu .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-left: 0.1rem;
+      }
+      @media (max-width: 991px) {
+      .dropdown-menu {
+      position: static !important;
+      }
+      .dropdown-submenu .dropdown-menu {
+      margin-left: 15px;
+      }
+      }
+      /* Header background */
+.header-bg {
+    background: #dde3ea;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+/* Logo */
+.logo-img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+/* Title */
+.brand-text {
+    font-size: 25px;
+    font-weight: 600;
+    color: #1b263b;
+    white-space: nowrap;
+}
+
+/* Nav links */
+.navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3a52;
+    /*margin: 0 8px;*/
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Hover underline effect */
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #1b263b;
+    left: 0;
+    bottom: 0;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #1b263b;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.dropdown-item:hover {
+    background: #eef1f5;
+}
+
+/* Mobile fix */
+@media (max-width: 991px) {
+    .brand-text {
+        font-size: 14px;
+    }
+
+    .navbar-nav {
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+    }
+}
+   </style>
+   <body>
+      <!-- Spinner Start -->
+      <div id="spinner"
+         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <!-- Spinner End -->
+      <!-- Navbar Start -->
+      <div class="container-fluid sticky-top header-bg">
+   <div class="container">
+
+      <nav class="navbar navbar-expand-lg navbar-light py-2">
+
+         <!-- Logo + Title -->
+         <a href="index.php" class="navbar-brand d-flex align-items-center">
+            <img src="img/ccc/nitrr_new_logo_new.png" 
+                 alt="CCC Logo" class="logo-img">
+            
+            <span class="brand-text">
+               Central Computer Centre | NIT Raipur
+            </span>
+         </a>
+
+         <!-- Toggle -->
+         <button class="navbar-toggler ms-auto" type="button" 
+                 data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <!-- Menu -->
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto align-items-lg-center">
+
+               <a href="index.php" class="nav-item nav-link">Home</a>               
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     Services
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="applications_services.php">Application Development</a></li>
+                     <li><a class="dropdown-item" href="systems_networks.php">Systems & Networks</a></li>
+                     <li hidden><a class="dropdown-item" href="#">LDAP</a></li>
+                  </ul>
+               </div>
+
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     Facilities
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="data_center.php">Data Center</a></li>
+                     <li hidden><a class="dropdown-item" href="data_center.php">HPC</a></li>
+                     <li><a class="dropdown-item" href="clcs.php">CLCs</a></li>
+                     <li><a class="dropdown-item" href="central_lab.php">Central Lab</a></li>
+                  </ul>
+               </div>
+
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     People
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="committee_members.php">Committee Members </a></li>
+                     <li><a class="dropdown-item" href="ccc_team.php">CCC Team</a></li>
+                     <li><a class="dropdown-item" href="former_members.php">Former Members</a></li>
+                  </ul>
+               </div>
+
+               <a href="procedures_form.php" class="nav-item nav-link">Procedures & Forms</a>
+               <a href="gallery.php" class="nav-item nav-link">Gallery</a>
+               <a href="contact.php" class="nav-item nav-link">Contact</a>
+
+            </div>
+         </div>
+
+      </nav>
+
+   </div>
+</div>
+      <script>
+         document.querySelectorAll('.dropdown-submenu > a').forEach(function(el){
+             el.addEventListener('click', function(e){
+                 if(window.innerWidth < 992){
+                     e.preventDefault();
+                     this.nextElementSibling.classList.toggle('show');
+                 }
+             });
+         });
+      </script>
+      <!-- Navbar End -->
+<style>
+   .service-item {
+   border-radius: 12px;
+   background: #f8f9fa;
+   transition: 0.3s;
+   }
+   .service-item:hover {
+   background: #e9ecef;
+   transform: translateY(-5px);
+   }
+   .text-justify {
+   text-align: justify;
+   }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Hero Start -->
+<div class="container-fluid hero-header">
+   <div class="container">
+   <div class="row align-items-center"
+     style="background:#dde3ea; border-left:3px solid #1b263b;border-right:3px solid #1b263b; border-radius:10px; padding:30px;">
+         <div class="col-lg-6">
+            <h1 class="display-1 mb-4 animated slideInLeft">
+               Central Computer Centre
+            </h1>
+            <!-- <h5 class="d-inline-block border border-2 border-dark py-3 px-5 mb-0 animated slideInRight">
+            <a href="procedures_form.php" >Procedures & Forms</a></h5> -->
+         </div>
+         <div class="col-lg-6">
+            <div class="owl-carousel header-carousel animated fadeIn text-center">
+               <div style="">
+                  <img class="img-fluid w-100" src="img/ccc/new_ccc.jpg" alt="">
+                  <div class="team-overlay">
+                     <small class="mb-2">CCC Main Building</small>
+                  </div>
+               </div>
+               <div>
+                  <img class="img-fluid w-100" src="img/ccc/Data_Center_new.jpg" alt="">
+                  <div class="team-overlay">
+                     <small class="mb-2">Data Center</small>
+                  </div>
+               </div>
+               <div>
+                  <img class="img-fluid w-100" src="img/ccc/server.jpg" alt="">
+                  <div class="team-overlay">
+                     <small class="mb-2">Advanced Computing Facility</small>
+                  </div>
+               </div>
+               <div>
+                  <img class="img-fluid w-100" src="img/ccc/ndr1.jpg" alt="">
+                  <div class="team-overlay">
+                     <small class="mb-2">Network Distribution Room</small>
+                  </div>
+               </div>
+               <div>
+                  <img class="img-fluid w-100" src="img/ccc/1.jpeg" alt="">
+                  <div class="team-overlay">
+                     <small class="mb-2">CCC Lab</small>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>      
+   </div>
+</div>
+<!-- Hero End -->
+<!--  Section network Divider -->
+<div class="container my-5 text-center" >
+   <div class="d-flex align-items-center justify-content-center">
+      <hr style="width: 30%;">
+      <i class="fa fa-network-wired text-primary mx-3"></i>
+      <hr style="width: 30%;">
+   </div>
+</div>
+<!-- Divider End -->
+<!-- About Start -->
+<div class="container-fluid">
+   <div class="container">
+      <div class="row g-5">
+         <div class="col-lg-6">
+            <div class="row">
+               <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
+                  <img class="img-fluid" src="img/ccc/ndr2_resized.jpg" alt="">
+                  <!-- <img class="img-fluid h-75" src="img/about-1.jpg" alt=""> -->
+               </div>
+               <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
+                  <img class="img-fluid" src="img/ccc/CLC3b_resized.jpg" alt="">
+                  <!-- <div class="h-25 d-flex align-items-center text-center bg-primary px-4">
+                     <h4 class="text-white lh-base mb-0">Central Computer Centre </h4>
+                     </div> -->
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <h2 class="mb-3"><span class="text-primary bg-light px-2">About Us</span></h2>
+            <p class="mb-2" style="text-align: justify;"> <strong>Central Computer Centre (CCC) </strong>is the nodal agency and engine for propelling ICT Infrastructure Development, Maintenance and Growth at NIT Raipur. On this front, the Systems and Networks Division of the CCC has planned, designed, implemented, optimized, and is operating and maintaining the ICT Infrastructure pertaining to the Campus Wide Wired Network, the Campus Wide WiFi Network, the Campus Wide Telephony Network, the Campus Network Security, the Advanced Computing Facility, the Campus Hosting Services, the Campus Wide Software Licensing and the Central Computer Centre.</p>
+            <p class="mb-2" style="text-align: justify;">CCC is also engaged in Software Development Works towards various internal application requirements of the Institute. Here, the Applications & Services Division of the CCC has developed and tested in-house the Institute Website, the Faculty Recruitment Application, and the Online Testing Application for Institute Ph.D. Admissions, among others. It is also running an Institute Directory Service which is used for Internet Access Authentication and a Webcasting Service for Webcasting Video Streams. This group is also managing the Institute Email Application.</p>
+            <div class="row g-3" hidden>
+               <div class="col-sm-6">
+                  <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
+                  <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Professional Staff</h6>
+               </div>
+               <div class="col-sm-6">
+                  <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>24/7 Support</h6>
+                  <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Fair Prices</h6>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- About End -->
+<!--  Section network Divider -->
+<div class="container my-5 text-center" >
+   <div class="d-flex align-items-center justify-content-center">
+      <hr style="width: 30%;">
+      <i class="fa fa-network-wired text-primary mx-3"></i>
+      <hr style="width: 30%;">
+   </div>
+</div>
+<!-- Divider End -->
+<!-- Service Start -->
+<div class="container-fluid">
+   <div class="container">
+      <!-- Heading -->
+      <div class="text-center mb-5 wow fadeIn" data-wow-delay="0.1s">
+         <h1 class="mb-5"><span class="text-dark bg-light px-2">Enabling Seamless Internet Connectivity Across Campus</span></h1>
+      </div>
+      <div class="row g-5 align-items-center">
+         <!-- LEFT CONTENT -->
+         <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <p class="mb-3 text-justify">
+               <strong>Central Computer Centre (CCC)</strong> plays a vital role in enabling seamless internet connectivity across the entire campus. It maintains a robust and highly available network backbone to ensure uninterrupted 24×7 internet services. The network infrastructure efficiently supports thousands of students and employees, facilitating academic, research, and administrative activities. High-speed connectivity is extended to all hostels, ensuring students remain connected at all times.
+            </p>
+            <p class="mb-3 text-justify">
+               The network infrastructure supports thousands of students and employees, facilitating academic, research, and administrative activities. High-speed connectivity is extended to hostels and staff quarters.
+            </p>
+            <p class="mb-0 text-justify">
+               A large number of Wi-Fi access points are deployed across the campus to ensure widespread coverage and smooth digital operations.
+            </p>
+         </div>
+         <!-- RIGHT CARDS -->
+         <div class="col-lg-7">
+            <div class="row g-4">
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-users fa-3x mb-4"></i>
+                     <h5>Campus Users</h5>
+                  </div>
+               </div>
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.2s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-building fa-3x mb-4"></i>
+                     <h5>Faculty & Staff Residences</h5>
+                  </div>
+               </div>
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-university fa-3x mb-4"></i>
+                     <h5>Residential Hostels</h5>
+                  </div>
+               </div>
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.4s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-wifi fa-3x mb-4"></i>
+                     <h5>Campus Wi-Fi Coverage</h5>
+                  </div>
+               </div>
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-microscope fa-3x mb-4"></i>
+                     <h5>Academic & Research Labs</h5>
+                  </div>
+               </div>
+               <div class="col-md-4 wow fadeIn" data-wow-delay="0.6s">
+                  <div class="service-item text-center p-4 h-100 shadow-sm">
+                     <i class="fa fa-sync-alt fa-3x mb-4"></i>
+                     <h5>24×7 Network Availability</h5>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Service End -->
+<!--  Section network Divider -->
+<div class="container my-5 text-center" >
+   <div class="d-flex align-items-center justify-content-center">
+      <hr style="width: 30%;">
+      <i class="fa fa-network-wired text-primary mx-3"></i>
+      <hr style="width: 30%;">
+   </div>
+</div>
+<!-- Divider End -->
+<!-- Feature Start -->
+<div class="container-fluid">
+   <div class="container">
+      <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+         <!-- <h1 class="mb-5">Why People <span class="text-uppercase text-primary bg-light px-2">Choose Us</span></h1> -->
+         <h1 class="mb-5"><span class="text-dark bg-light px-2">Some of our Facilities</span></h1>
+      </div>
+      <div class="row g-5 align-items-center text-center">
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+            <i class="fa fa-globe fa-2x text-primary mb-4"></i>
+            <h5>Institute Website</h5>
+            <p class="mb-0" style="text-align:justify;">Provides updated information on academics, departments, notices, and events for students, faculty, and visitors.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.2s">
+            <i class="fa fa-envelope fa-2x text-primary mb-4"></i>                   
+            <h5>Web Mail</h5>
+            <p class="mb-0" style="text-align:justify;"> Provides secure email communication services for students, faculty, and staff with easy web-based access.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+            <i class="fa fa-address-book fa-2x text-primary mb-4"></i>
+            <h5>Directory Services</h5>
+            <p class="mb-0" style="text-align:justify;"> Provides centralized user authentication and access control for secure network and application usage.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.4s">
+            <i class="fa fa-network-wired fa-2x text-primary mb-4"></i>
+            <h5>Wired Network</h5>
+            <p class="mb-0" style="text-align:justify;">Provides reliable high-speed wired and Wi-Fi connectivity across the campus for seamless internet access.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".5s">
+            <i class="fa fa-wifi fa-2x text-primary mb-4"></i>
+            <h5>Wireless Network</h5>
+            <p class="mb-0" style="text-align:justify;">Campus-wide Wi-Fi connectivity for seamless internet access.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".6s">
+            <i class="fa fa-shield-alt fa-2x text-primary mb-4"></i>
+            <h5>Campus Network Security</h5>
+            <p class="mb-0" style="text-align:justify;">Ensures secure network operations through firewalls, monitoring, and protection against cyber threats.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+            <i class="fa fa-server fa-2x text-primary mb-4"></i>
+            <h5>Advanced Computing Facility</h5>
+            <p class="mb-0" style="text-align:justify;"> Provides High Performance Computing (HPC) resources for research, simulations, and data-intensive applications.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.4s">
+            <i class="fa fa-phone fa-2x text-primary mb-4"></i>
+            <h5>Telephony Network</h5>
+            <p class="mb-0" style="text-align:justify;">Provides campus-wide voice communication and IP telephony services.</p>
+         </div>
+         <!-- NEW -->
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+            <i class="fa fa-desktop fa-2x text-primary mb-4"></i>
+            <h5>Computer Lab</h5>
+            <p class="mb-0" style="text-align:justify;">Equipped labs for academic activities, training, and practical sessions.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".1s">
+            <i class="fa fa-chalkboard-teacher fa-2x text-primary mb-4"></i>
+            <h5>Computer Lab Classrooms</h5>
+            <p class="mb-0" style="text-align:justify;">Modern labs supporting teaching, training, and hands-on learning.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".3s">
+            <i class="fa fa-cogs fa-2x text-primary mb-4"></i>
+            <h5>Software Licensing</h5>
+            <p class="mb-0" style="text-align:justify;">Manages licensed software access for academic and administrative use.</p>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+            <i class="fa fa-cloud fa-2x text-primary mb-4"></i>
+            <h5>Campus Hosting Services</h5>
+            <p class="mb-0" style="text-align:justify;">Provides hosting for institute websites, applications, and internal services.</p>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Feature End -->
+<!-- Divider End -->
+<!--  Section network Divider -->
+<div class="container my-5 text-center" >
+   <div class="d-flex align-items-center justify-content-center">
+      <hr style="width: 30%;">
+      <i class="fa fa-network-wired text-primary mx-3"></i>
+      <hr style="width: 30%;">
+   </div>
+</div>
+<!-- Divider End -->
+<!-- Team Start -->
+<div class="container-fluid">
+   <div class="container">
+      <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+         <!-- <h1 class="mb-5">Why People <span class="text-uppercase text-primary bg-light px-2">Choose Us</span></h1> -->
+         <h1 class="mb-5"><span class="text-dark bg-light px-2">Infrastructure Highlights of CCC</span></h1>
+      </div>
+      <div class="row g-4">
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="team-item position-relative overflow-hidden">
+               <img class="img-fluid w-100" src="img/ccc/1.jpeg" alt="">
+               <div class="team-overlay">
+                  <small class="mb-2">CCC Lab</small>
+                  <!-- <h4 class="lh-base text-light">Boris Johnson</h4> -->
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+            <div class="team-item position-relative overflow-hidden">
+               <img class="img-fluid w-100" src="img/ccc/server.jpg" alt="">
+               <div class="team-overlay">
+                  <small class="mb-2">Advanced Computing Facility</small>                          
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+            <div class="team-item position-relative overflow-hidden">
+               <img class="img-fluid w-100" src="img/ccc/Data_Center_new.jpg" alt="">
+               <div class="team-overlay">
+                  <small class="mb-2">Data Center</small>                            
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+            <div class="team-item position-relative overflow-hidden">
+               <img class="img-fluid w-100" src="img/ccc/ndr1.jpg" alt="">
+               <div class="team-overlay">
+                  <small class="mb-2">Network Distribution Room</small>                           
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Team End -->
+<!--  Section network Divider -->
+<div class="container my-5 text-center" >
+   <div class="d-flex align-items-center justify-content-center">
+      <!-- <hr style="width: 30%;">
+      <i class="fa fa-network-wired text-primary mx-3"></i>
+      <hr style="width: 30%;"> -->
+   </div>
+</div>
+<!-- Divider End -->
+<!-- Footer Start -->
+<style>
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content wrapper */
+.main-content {
+    flex: 1;
+}
+
+/* Footer */
+.footer-bg {
+    background: #dde3ea;
+    border-top: 1px solid #cfd6df;
+}
+   /* Footer background */
+.footer-bg {
+    background: #dde3ea;
+    border-top: 1px solid #cfd6df;
+}
+
+/* Footer text */
+.footer-text {
+    font-size: 20px;
+    color: #2c3a52;
+}
+
+/* Links */
+.footer-link {
+    color: #1b263b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+</style>
+<body>
+<br/>
+<br/>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- your entire page content here -->
+    </div>
+
+    <!-- FOOTER -->
+    <div class="container-fluid footer-bg py-3">
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0 footer-text">
+                    &copy; <a href="https://nitrr.ac.in/" class="footer-link">CCC | NIT Raipur</a>, All Rights Reserved.
+                </div>
+
+                <div class="col-md-6 text-center text-md-end footer-text" hidden>
+                    Designed By <a href="https://htmlcodex.com" class="footer-link">HTML Codex</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body><!-- Footer End -->
+<!-- Back to Top -->
+<a href="#!" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+</html>
