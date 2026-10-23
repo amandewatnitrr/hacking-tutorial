@@ -276,19 +276,20 @@
   margin-bottom: 0.75rem;
   padding: 0.4rem 0.9rem;
   border-radius: 10px;
-  background: rgba(102, 255, 170, 0.12);
-  border: 1px solid rgba(102, 255, 170, 0.4);
+  background: rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.12);
+  border: 1px solid rgba(var(--accent-green-dark-rgb, 47, 107, 189), 0.4);
   color: var(--accent-green-light);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.9rem;
   font-family: 'Courier New', monospace;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .back-link:hover {
   background-color: var(--bg-tertiary);
-  color: var(--accent-green);
+  border-color: var(--accent-cyan, #5a9ff2);
+  color: var(--accent-cyan, #5a9ff2);
   transform: translateY(-1px);
 }
 
@@ -298,13 +299,15 @@
 }
 
 .lesson-template.light .back-link {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: var(--accent-green-dark);
-  color: var(--accent-green-dark);
+  background: var(--light-bg-secondary);
+  border-color: var(--light-border-color);
+  color: var(--light-text-primary);
 }
 
 .lesson-template.light .back-link:hover {
   background-color: var(--light-bg-tertiary);
+  border-color: var(--accent-green-dark);
+  color: var(--accent-green-dark);
 }
 
 /* Navigation */
