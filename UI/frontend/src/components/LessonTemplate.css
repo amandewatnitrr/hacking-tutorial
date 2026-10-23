@@ -473,6 +473,29 @@
   .lesson-template .nav-button,
   .lesson-template .nav-button--right {
     width: 100%;
-    padding: 0.65rem 0.75rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.65rem 1rem;
+    border-radius: 12px;
+    gap: 0.6rem;
+  }
+
+  .lesson-template .nav-section--left .nav-arrow {
+    margin-right: 0;
+  }
+
+  .lesson-template .nav-arrow {
+    flex-shrink: 0;
+  }
+
+  .lesson-template .nav-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .lesson-template .nav-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
