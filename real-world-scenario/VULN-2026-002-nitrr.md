@@ -15,6 +15,19 @@ Everything below was tested against the live site with read-only, non-destructiv
 ![nitrr.ac.in live homepage](nitrr_evidence/live_homepage_screenshot.jpg)
 
 ---
+## Summary of Findings
+
+| # | Finding | CWE | OWASP | Severity |
+| --- | --- | --- | --- | --- |
+| 1 | No security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy all absent) | CWE-693 | A05:2021 | Medium-High |
+| 2 | No forced HTTP→HTTPS redirect | CWE-319 | A02:2021 | Medium |
+| 3 | Apache exact version disclosed on every response incl. error pages (Apache/2.4.66 (Ubuntu)) | CWE-200 | A05:2021 | Low |
+| 4 | Clickjacking — working PoC, site renders fully inside attacker-controlled iframe | CWE-1021 | A05:2021 | Medium |
+| 5 | Outdated jQuery (two copies: 3.2.1 and 2.1.4) and Bootstrap 3.3.7, with filed CVEs (CVE-2019-11358, CVE-2020-11022/11023, CVE-2015-9251, CVE-2018-14040/14041/14042, CVE-2019-8331) | CWE-1104 | A06:2021 | Medium |
+| 6 | Mixed content — HTTP resources loaded on HTTPS page (hitwebcounter.com, two internal links) | CWE-319 | A02:2021 | Low |
+| 7 | Cookie (googtrans) issued without Secure/HttpOnly/SameSite flags | CWE-614 | — | Low/Informational |
+
+---
 
 ## Finding 1 — no security headers at all
 
