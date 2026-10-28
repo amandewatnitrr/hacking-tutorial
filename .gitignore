@@ -184,4 +184,5 @@ GEMINI.md
 QODER.md
 opencode.jsonc
 .github/code-review-graph.instruction.md
-.vscode/
+.vscode
+real-world-scenario/VULN-2026-001-dewanganshaadi.md
