@@ -1,0 +1,14 @@
+CVE ID: CVE-2026-109619
+Published: 2026-10-21T14:17:09.823
+Status: Analyzed
+Description: PHP has various global state that temporarily points into request memory. In some scenarios, global state may not be correctly reset, or may be repopulated after being reset. The global state may then refer to request memory even after it has been freed. Subsequent requests may read or branch on this stale state before it is fully initialized. Multiple strategies can trigger this condition and produce remote code execution (RCE).
+
+CVSS 3.1: 8.1 HIGH
+Vector: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H
+
+Affected versions:
+  8.2.* < 8.2.35 => affected
+  8.3.* < 8.3.36 => affected
+  8.4.* < 8.4.27 => affected
+  8.5.* < 8.5.12 => affected
+  0 < * => affected

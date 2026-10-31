@@ -1,0 +1,36 @@
+PHP2Shell Detection Probe — db.nitrr.ac.in
+Date: 2026-10-28
+Tested by: amandewatnitrr (co-owner / authorized)
+
+PROBE SENT:
+  POST https://db.nitrr.ac.in/index.php?route=/&lang=en
+  Cookie: PHPSESSID=detectprobe_<timestamp>
+  Content-Type: multipart/form-data
+  Body fields:
+    PHP_SESSION_UPLOAD_PROGRESS = detect_probe_cve_2026_109618
+    dummy = (empty file, probe.txt)
+
+RESULT:
+  HTTP/2 200 OK
+  Server: Apache/2.4.65 (Debian)
+  PHP processed the request without error.
+  session.upload_progress code path confirmed reachable.
+
+INTERPRETATION:
+  PHP accepted PHP_SESSION_UPLOAD_PROGRESS in multipart/form-data.
+  This confirms the attack surface for CVE-2026-109618/109619 is exposed.
+  Probe is non-exploiting: no zval forgery, no OOM trigger, no shellcode.
+
+SERVER VERSION (from X-Powered-By response header):
+  PHP/8.3.26
+
+VULNERABLE RANGE (from NVD CVE-2026-109618):
+  PHP 8.3.* < 8.3.36 => affected
+  PHP/8.3.26 < 8.3.36 => CONFIRMED VULNERABLE
+
+ACTIVE EXPLOITATION DATA (Delft Threat Intelligence Lab, 2026-10-28):
+  72,376 exploitation requests
+  659 source IPs
+  174 IPs sent actual code / dropper
+  First exploitation seen: 2026-10-21 08:37:17 UTC
+  CISA Known Exploited Vulnerabilities catalog: LISTED
