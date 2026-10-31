@@ -1,0 +1,24 @@
+CVE ID: CVE-2026-109618
+Published: 2026-10-21T14:17:09.357
+Status: Analyzed
+Description: PHP uses longjmp() for out-of-memory (OOM) errors to exit the current context and abort handling of the request. Some contexts may not properly account for this scenario and leave request memory in an uninitialized state before performing an allocation. The subsequent request cleanup procedure may read or branch on this memory. Multiple OOM strategies can consistently trigger this condition and lead to remote code execution (RCE).
+
+CVSS 3.1: 9.8 CRITICAL
+Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+
+Affected versions:
+  8.2.* < 8.2.35 => affected
+  8.3.* < 8.3.36 => affected
+  8.4.* < 8.4.27 => affected
+  8.5.* < 8.5.12 => affected
+  0 < * => affected
+
+References:
+  https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w
+  http://www.openwall.com/lists/oss-security/2026/10/21/6
+  http://www.openwall.com/lists/oss-security/2026/10/23/5
+  https://arcticwolf.com/resources/blog/php2shell-critical-php-vulnerabilities-enable-unauthenticated-remote-code-execution/
+  https://cert-portal.siemens.com/productcert/html/ssa-566512.html
+  https://php2shell.delftintellab.com
+  https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109618
+  https://www.wiz.io/blog/php2shell-php-rce

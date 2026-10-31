@@ -120,4 +120,5 @@ flowchart TD
 >[!NOTE]
 > There are more flows and variations in authentication mechanisms like:
 > - <strong>Self-authenticating component:</strong> A component that can authenticate itself without relying on an external authentication engine, often using cryptographic keys or certificates. It is not a recommended approach for all scenarios due to potential security risks.
-> - <strong>Authentication engine using another authentication engine or Authentication-as-a-Service (AaaS) or Hybrid Identity Mechanism:</strong> This happens if the user store and the authentication enginer working with it, are located in another environment, and we donot want to expose the user store to the new more public environment. 
+> - <strong>Authentication engine using another authentication engine or Authentication-as-a-Service (AaaS) or Hybrid Identity Mechanism:</strong> This happens if the user store and the authentication enginer working with it, are located in another environment, and we donot want to expose the user store to the new more public environment.
+>  - 
