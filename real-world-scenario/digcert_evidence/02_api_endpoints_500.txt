@@ -1,0 +1,31 @@
+=== Finding 2: API endpoints return 500 on unauthenticated access ===
+
+--- /api/get_all_org ---
+HTTP/1.1 500 Internal Server Error
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 31 Oct 2026 14:53:09 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 145
+Connection: keep-alive
+X-Frame-Options: DENY
+Vary: origin
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Server Error (500)</title>
+</head>
+<body>
+  <h1>Server Error (500)</h1><p></p>
+</body>
+</html>
+
+--- /api/get_faculties ---
+HTTP/1.1 500 Internal Server Error
+Server: nginx/1.24.0 (Ubuntu)
+--- /api/get_rows ---
+HTTP 500

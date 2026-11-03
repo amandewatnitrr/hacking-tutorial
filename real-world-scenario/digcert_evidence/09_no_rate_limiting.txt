@@ -1,0 +1,11 @@
+=== Finding 9: No Rate Limiting — 8 rapid POST requests to /api/faculty_login ===
+=== Expected: some 429. Actual: all 401 (wrong creds), never 429 ===
+
+Request 1: HTTP 401
+Request 2: HTTP 401
+Request 3: HTTP 401
+Request 4: HTTP 401
+Request 5: HTTP 401
+Request 6: HTTP 401
+Request 7: HTTP 401
+Request 8: HTTP 401

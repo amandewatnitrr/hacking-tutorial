@@ -1,0 +1,13 @@
+HTTP/1.1 500 Internal Server Error
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 31 Oct 2026 14:52:03 GMT
+Content-Type: application/json
+Content-Length: 68
+Connection: keep-alive
+Vary: Accept, origin
+Allow: POST, OPTIONS
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
