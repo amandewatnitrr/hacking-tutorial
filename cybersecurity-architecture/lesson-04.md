@@ -251,4 +251,4 @@ flowchart TD
 
   - **Something you are:** This is something that the user is, like a fingerprint, facial recognition, voice recognition or biometric data. This form of authentication is often used in conjunction with something you know or something you have for multi-factor authentication.
 
-- When designing an authentication system, it is important to consider the right authentication factors for the system. And, there are some considerations that need to be taken into account.
+- When designing an authentication system, it is important to consider the right authentication factors for the system. And, there are some considerations that need to be taken into account. 
