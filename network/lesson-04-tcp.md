@@ -17,6 +17,12 @@ TCP turns the internet's best-effort packet delivery into a reliable, ordered st
 
 ---
 
+## Network Simulation
+
+![TCP Network Simulation](imgs/tcp-simulation.gif)
+
+Client connects to web server: topology builds up, SYN packet (green) crosses the internet, SYN-ACK returns, bidirectional data flows (amber arrows), a gap triggers an ACK, and the missing segment is retransmitted (purple DATA packet).
+
 ## Sequence Diagram
 
 ![TCP Sequence Diagram](imgs/tcp-sequence.png)

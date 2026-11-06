@@ -17,6 +17,12 @@ HTTP is the protocol of the web: a client asks for a resource, such as an HTML p
 
 ---
 
+## Network Simulation
+
+![HTTP Network Simulation](imgs/http-simulation.gif)
+
+Watch the network build up step by step: client starts alone, URL appears, router joins, DNS resolver and internet cloud appear, DNS query fires, web server appears, TCP SYN/ACK handshake, then the HTTP GET request.
+
 ## Network Topology
 
 ![HTTP Network Diagram](imgs/http-network.png)

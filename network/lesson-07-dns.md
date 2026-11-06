@@ -17,6 +17,12 @@ DNS turns names like `www.example.com` into the IP addresses computers use to re
 
 ---
 
+## Network Simulation
+
+![DNS Network Simulation](imgs/dns-simulation.gif)
+
+Watch the DNS resolution chain build up: client types a URL, queries the resolver (8.8.8.8), resolver asks the root server, root refers to the .com TLD server, TLD refers to the authoritative server (198.61.100.53), which finally returns the IP address.
+
 ## DNS Hierarchy
 
 ```
