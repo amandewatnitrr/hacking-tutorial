@@ -17,6 +17,14 @@ SSH gives you an encrypted, authenticated connection to another computer, to run
 
 ---
 
+
+## Network Simulation
+
+![SSH Network Simulation](imgs/ssh-simulation.gif)
+Secure shell setup: algorithm negotiation, server host-key verification, Diffie-Hellman key exchange, then an encrypted authenticated session.
+
+---
+
 ## Sequence Diagram
 
 ![SSH Sequence Diagram](imgs/ssh-sequence.png)

@@ -17,6 +17,14 @@ ICMP is how the network reports back: a router says a packet's time ran out, a s
 
 ---
 
+
+## Network Simulation
+
+![ICMP Network Simulation](imgs/icmp-simulation.gif)
+Ping: ICMP echo request travels from client to server, server echoes it back, TTL-exceeded messages surface unreachable hops.
+
+---
+
 ## Sequence Diagram
 
 ![ICMP Sequence Diagram](imgs/icmp-sequence.png)

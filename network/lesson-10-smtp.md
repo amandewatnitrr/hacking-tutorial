@@ -17,6 +17,14 @@ SMTP moves email: from your mail app to your provider's server, and from that se
 
 ---
 
+
+## Network Simulation
+
+![SMTP Network Simulation](imgs/smtp-simulation.gif)
+Email delivery step by step: EHLO greeting, AUTH LOGIN, MAIL FROM, RCPT TO, DATA with headers and body, server acknowledges with 250 OK.
+
+---
+
 ## Sequence Diagram
 
 ![SMTP Sequence Diagram](imgs/smtp-sequence.png)

@@ -17,6 +17,14 @@ IP gives every device an address and moves packets from network to network. Each
 
 ---
 
+
+## Network Simulation
+
+![IP Network Simulation](imgs/ip-simulation.gif)
+Packet routing hop by hop: each router reads the destination IP and forwards toward it, decrementing the TTL at every hop.
+
+---
+
 ## Network Topology
 
 ![IP Network Diagram](imgs/ip-network.png)

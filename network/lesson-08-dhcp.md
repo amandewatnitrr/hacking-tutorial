@@ -17,6 +17,14 @@ DHCP hands a device everything it needs to use a network: an **IP address**, the
 
 ---
 
+
+## Network Simulation
+
+![DHCP Network Simulation](imgs/dhcp-simulation.gif)
+Watch the full DORA exchange: client broadcasts Discover with no IP, server offers an address, client requests it, server confirms — all four messages before the device has a working IP.
+
+---
+
 ## Sequence Diagram
 
 ![DHCP Sequence Diagram](imgs/dhcp-sequence.png)

@@ -17,6 +17,14 @@ UDP sends data in independent packets called datagrams, with no connection, no a
 
 ---
 
+
+## Network Simulation
+
+![UDP Network Simulation](imgs/udp-simulation.gif)
+No handshake, no acknowledgement: UDP datagrams fire directly from sender to receiver, trading reliability for speed.
+
+---
+
 ## UDP vs TCP
 
 | | TCP | UDP |

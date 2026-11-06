@@ -17,6 +17,14 @@ FTP moves files between a client and a server. It is unusual in using **two TCP 
 
 ---
 
+
+## Network Simulation
+
+![FTP Network Simulation](imgs/ftp-simulation.gif)
+Two connections in action: control channel (port 21) carries commands, a separate passive data channel opens for each file transfer.
+
+---
+
 ## Sequence Diagram
 
 ![FTP Sequence Diagram](imgs/ftp-sequence.png)

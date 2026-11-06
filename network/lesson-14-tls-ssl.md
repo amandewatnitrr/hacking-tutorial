@@ -17,6 +17,14 @@ TLS puts a secure channel on top of TCP. It **proves the server's identity** wit
 
 ---
 
+
+## Network Simulation
+
+![TLS SSL Network Simulation](imgs/tls-ssl-simulation.gif)
+TLS 1.3 handshake in one round trip: ClientHello with key share, ServerHello with certificate, server Finished, client Finished, then encrypted application data.
+
+---
+
 ## Sequence Diagram
 
 ![TLS Sequence Diagram](imgs/tls-sequence.png)

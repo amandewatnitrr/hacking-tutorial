@@ -1,5 +1,13 @@
 # POP3 & IMAP — Reading Email
 
+
+## Network Simulation
+
+![POP3 Network Simulation](imgs/pop3-simulation.gif)
+POP3 download: connect on port 110, USER/PASS login, LIST to see messages, RETR to download each one, then DELE to remove from server.
+
+---
+
 ## POP3 — Post Office Protocol v3
 
 > **Layer 7 · Application** | Ports `995` (TLS), `110` (STLS) | RFC 1939
@@ -67,6 +75,14 @@ S: +OK Logging out, deleted 1 messages.
 - No folder sync across devices
 - No server-side search
 - If you use two devices, only one gets each message
+
+---
+
+
+## Network Simulation
+
+![IMAP Network Simulation](imgs/imap-simulation.gif)
+IMAP sync: connect on port 143, LOGIN, SELECT INBOX, FETCH headers then body parts — messages stay on server so every device sees the same mailbox.
 
 ---
 

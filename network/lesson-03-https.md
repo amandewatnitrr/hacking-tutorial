@@ -17,6 +17,14 @@ HTTPS is HTTP sent through an encrypted TLS connection. TLS proves the server is
 
 ---
 
+
+## Network Simulation
+
+![HTTPS Network Simulation](imgs/https-simulation.gif)
+Watch TLS wrap HTTP: certificate exchange and key negotiation happen first, then the encrypted HTTP request travels inside the secure tunnel.
+
+---
+
 ## Network Topology
 
 ![HTTPS Network Diagram](imgs/https-network.png)
