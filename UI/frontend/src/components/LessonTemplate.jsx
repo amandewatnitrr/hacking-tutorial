@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { getLessonBySlug, getLessonImages } from '../utils/markdownloader';
+import { getLessonBySlug, getLessonImages, resolveLessonLink } from '../utils/markdownloader';
 import { remarkGithubAlerts } from '../utils/remarkGithubAlerts';
 import Mermaid from './Mermaid';
 import './LessonTemplate.css';
@@ -194,6 +194,16 @@ const LessonTemplate = ({ lesson }) => {
                 );
               }
               
+              // Relative links to another lesson's .md file route in-app
+              const lessonRoute = resolveLessonLink(lesson, href);
+              if (lessonRoute) {
+                return (
+                  <Link to={lessonRoute} className={className}>
+                    {children}
+                  </Link>
+                );
+              }
+
               // Handle external links
               const isExternal = href?.startsWith('http');
               return (

@@ -103,6 +103,76 @@ body {
   background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.1);
 }
 
+/* Lessons dropdown: one row per lesson section */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown__trigger {
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+}
+
+.nav-dropdown__caret {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown__caret.is-open {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.nav-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 0;
+  min-width: 17rem;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 1002;
+}
+
+.nav-dropdown__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-dropdown__item:hover,
+.nav-dropdown__item:focus-visible {
+  color: var(--accent-cyan, #5a9ff2);
+  background-color: rgba(var(--accent-cyan-rgb, 90, 159, 242), 0.1);
+}
+
+.nav-dropdown__item.is-current {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.nav-dropdown__count {
+  color: var(--text-secondary, #9a9ea4);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .github-link svg {
   fill: currentColor;
 }
@@ -171,6 +241,28 @@ body {
 
   .mobile-menu-button {
     display: block;
+  }
+
+  /* Inside the mobile panel the section list expands inline */
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown__trigger {
+    justify-content: space-between;
+  }
+
+  .nav-dropdown__menu {
+    position: static;
+    min-width: 0;
+    padding: 0 0 0.25rem 0.5rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .nav-dropdown__item {
+    white-space: normal;
   }
 
   .bg-transparent {

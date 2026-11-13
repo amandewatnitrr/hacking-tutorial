@@ -17,6 +17,19 @@ const Sidebar = ({ isOpen, onClose, currentSlug }) => {
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Keep the current lesson in view when arriving from elsewhere (e.g. the
+  // navbar's section menu), since the restored scroll may be far from it.
+  useEffect(() => {
+    const panel = scrollRef.current;
+    const active = panel?.querySelector('.hl-sidebar__link.is-active');
+    if (!active) return;
+    const panelBox = panel.getBoundingClientRect();
+    const activeBox = active.getBoundingClientRect();
+    if (activeBox.top < panelBox.top || activeBox.bottom > panelBox.bottom) {
+      panel.scrollTop += activeBox.top - panelBox.top - panelBox.height / 3;
+    }
+  }, [currentSlug]);
+
   return (
     <aside
       id="lesson-sidebar"

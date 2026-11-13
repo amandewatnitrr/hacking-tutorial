@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getLessonsByCategory, getCategoryDisplayName } from '../utils/markdownloader';
 import logoOnDark from '../../../../imgs/logo-on-dark.svg?url';
 import logoOnLight from '../../../../imgs/logo-on-light.svg?url';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLessonsOpen, setIsLessonsOpen] = useState(false);
+  const lessonsMenuRef = useRef(null);
   const [theme, setTheme] = useState('dark');
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,19 +32,43 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  const handleNavClick = () => setIsMenuOpen(false);
-
-  // ✅ Handle Lessons click
-  const handleLessonsClick = () => {
-    if (!location.pathname.startsWith('/lessons')) {
-      // Navigate to lessons page (you can change this to your first lesson)
-      navigate('/lessons/introduction');
-    } else {
-      // Already on a lesson page — just ensure sidebar is visible
-      window.dispatchEvent(new CustomEvent('open-sidebar'));
-    }
-    handleNavClick();
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+    setIsLessonsOpen(false);
   };
+
+  // One entry per lesson section, linking to that section's first lesson.
+  const sections = useMemo(
+    () =>
+      Object.entries(getLessonsByCategory()).map(([key, lessons]) => ({
+        key,
+        name: getCategoryDisplayName(key),
+        count: lessons.length,
+        firstSlug: lessons[0].slug,
+        slugs: new Set(lessons.map((lesson) => lesson.slug)),
+      })),
+    []
+  );
+  const currentSlug = location.pathname.startsWith('/lessons/')
+    ? decodeURIComponent(location.pathname.slice('/lessons/'.length))
+    : null;
+
+  // Close the Lessons menu on outside click or Escape.
+  useEffect(() => {
+    if (!isLessonsOpen) return undefined;
+    const onPointerDown = (event) => {
+      if (!lessonsMenuRef.current?.contains(event.target)) setIsLessonsOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setIsLessonsOpen(false);
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isLessonsOpen]);
 
   // ✅ Handle Home click
   const handleHomeClick = () => {
@@ -74,13 +101,39 @@ const Navbar = () => {
 
         {/* Links */}
         <div id="navbar-links" className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <button
-            type="button"
-            className="nav-link bg-transparent"
-            onClick={handleLessonsClick}
-          >
-            Lessons
-          </button>
+          <div className="nav-dropdown" ref={lessonsMenuRef}>
+            <button
+              type="button"
+              className="nav-link bg-transparent nav-dropdown__trigger"
+              onClick={() => setIsLessonsOpen((open) => !open)}
+              aria-expanded={isLessonsOpen}
+              aria-controls="navbar-lessons-menu"
+            >
+              Lessons
+              <span className={`nav-dropdown__caret ${isLessonsOpen ? 'is-open' : ''}`} aria-hidden="true" />
+            </button>
+
+            {isLessonsOpen && (
+              <ul id="navbar-lessons-menu" className="nav-dropdown__menu">
+                {sections.map((section) => {
+                  const isCurrent = section.slugs.has(currentSlug);
+                  return (
+                    <li key={section.key}>
+                      <Link
+                        to={`/lessons/${section.firstSlug}`}
+                        className={`nav-dropdown__item ${isCurrent ? 'is-current' : ''}`}
+                        aria-current={isCurrent ? 'true' : undefined}
+                        onClick={handleNavClick}
+                      >
+                        <span>{section.name}</span>
+                        <span className="nav-dropdown__count">{section.count}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
 
           <Link to="/" className="nav-link" onClick={handleHomeClick}>
             Home

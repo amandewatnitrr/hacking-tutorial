@@ -6,7 +6,7 @@ import matter from 'gray-matter';
 const ACRONYMS = new Set([
   'ids', 'ssh', 'arp', 'mitm', 'wep', 'wpa', 'wpa2', 'wps', 'mac', 'dns', 'sni',
   'tcp', 'udp', 'ip', 'http', 'https', 'ctf', 'fmea', 'cli', 'ssl', 'tls', 'sql',
-  'cve', 'os', 'pc',
+  'cve', 'os', 'pc', 'osi', 'dhcp', 'icmp', 'smtp', 'ftp', 'imap', 'pop3',
 ]);
 
 /**
@@ -35,6 +35,9 @@ function humanizeTitle(fileName) {
 // NOTE: import.meta.glob is statically analyzed at build time — both the
 // pattern and the options object must be literal, not a shared constant.
 const ethicalHackingFiles = import.meta.glob('../../../../ethical-hacking/*.{md,MD}', { query: '?raw', import: 'default', eager: true });
+// network/ also holds a README.md index of the lessons; only the lesson files
+// themselves are loaded so the index doesn't show up as a lesson.
+const networkFiles = import.meta.glob('../../../../network/lesson-*.{md,MD}', { query: '?raw', import: 'default', eager: true });
 const binaryExploitationFiles = import.meta.glob('../../../../intro-to-binary-exploitation/*.{md,MD}', { query: '?raw', import: 'default', eager: true });
 const pythonHackingFiles = import.meta.glob('../../../../python-for-eth-hacking/*.{md,MD}', { query: '?raw', import: 'default', eager: true });
 const pythonScriptsFiles = import.meta.glob('../../../../python-scripts/*.{md,MD}', { query: '?raw', import: 'default', eager: true });
@@ -45,6 +48,7 @@ const cliEditorsFiles = import.meta.glob('../../../../cli-editors-tutorials/emac
 
 const CATEGORY_FILE_GROUPS = {
   'ethical-hacking': ethicalHackingFiles,
+  'network': networkFiles,
   'intro-to-binary-exploitation': binaryExploitationFiles,
   'python-for-eth-hacking': pythonHackingFiles,
   'python-scripts': pythonScriptsFiles,
@@ -69,6 +73,7 @@ const mdFiles = Object.assign({}, ...Object.values(CATEGORY_FILE_GROUPS));
 // lesson's folder instead of a single shared/flat directory.
 const categoryImageGlobs = {
   'ethical-hacking': import.meta.glob('../../../../ethical-hacking/**/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true }),
+  'network': import.meta.glob('../../../../network/**/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true }),
   'intro-to-binary-exploitation': import.meta.glob('../../../../intro-to-binary-exploitation/**/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true }),
   'python-for-eth-hacking': import.meta.glob('../../../../python-for-eth-hacking/**/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true }),
   'python-scripts': import.meta.glob('../../../../python-scripts/**/*.{png,jpg,jpeg,gif,webp}', { query: '?url', import: 'default', eager: true }),
@@ -183,7 +188,7 @@ function parseMarkdownFile(filePath, content) {
   } else if (categoryFolder === 'cli-editors-tutorials') {
     category = 'cli-editors-tutorials';
   }
-  // 'ethical-hacking' and 'cybersecurity-architecture' pass through as-is.
+  // 'ethical-hacking', 'network' and 'cybersecurity-architecture' pass through as-is.
 
   return {
     title: data.title || humanizeTitle(fileName),
@@ -269,6 +274,37 @@ export function getLessonBySlug(slug) {
   return lessons.find(lesson => lesson.slug === slug) || null;
 }
 
+let slugByFilePath = null;
+
+/**
+ * Resolve a relative markdown link written inside a lesson (e.g.
+ * "lesson-03-https.md" or "./lesson-02.md#setup") to the in-app route of the
+ * lesson it points at.
+ * @param {Object} lesson - The lesson the link appears in
+ * @param {string} href - The link target as written in the markdown
+ * @returns {string|null} Route such as "/lessons/<slug>#hash", or null when
+ *   the link is not a relative link to a known lesson file
+ */
+export function resolveLessonLink(lesson, href) {
+  if (!lesson?.filePath || typeof href !== 'string') return null;
+  if (href.startsWith('#') || href.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(href)) return null;
+
+  const hashIndex = href.indexOf('#');
+  const pathPart = hashIndex === -1 ? href : href.slice(0, hashIndex);
+  const hash = hashIndex === -1 ? '' : href.slice(hashIndex);
+  if (!/\.md$/i.test(pathPart)) return null;
+
+  const segments = lesson.filePath.split('/').slice(0, -1);
+  for (const part of decodeURIComponent(pathPart).split('/')) {
+    if (part === '..') segments.pop();
+    else if (part && part !== '.') segments.push(part);
+  }
+
+  slugByFilePath ??= new Map(getAllLessons().map((l) => [l.filePath, l.slug]));
+  const slug = slugByFilePath.get(segments.join('/'));
+  return slug ? `/lessons/${slug}${hash}` : null;
+}
+
 /**
  * Get category display name
  * @param {string} category - The category key
@@ -277,6 +313,7 @@ export function getLessonBySlug(slug) {
 export function getCategoryDisplayName(category) {
   const displayNames = {
     'ethical-hacking': 'Ethical Hacking',
+    'network': 'Network Protocols',
     'binary-exploitation': 'Binary Exploitation',
     'python-for-ethical-hacking': 'Python for Ethical Hacking',
     'python-scripts': 'Python Scripts',
