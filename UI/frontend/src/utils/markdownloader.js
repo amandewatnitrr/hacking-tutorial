@@ -4,9 +4,18 @@ import matter from 'gray-matter';
 // when a filename is humanized into a display title (e.g. "arp" -> "ARP",
 // not "Arp").
 const ACRONYMS = new Set([
-  'ids', 'ssh', 'arp', 'mitm', 'wep', 'wpa', 'wpa2', 'wps', 'mac', 'dns', 'sni',
+  'ids', 'ssh', 'arp', 'mitm', 'wep', 'wpa', 'wpa2', 'wpa3', 'wps', 'mac', 'dns', 'sni',
   'tcp', 'udp', 'ip', 'http', 'https', 'ctf', 'fmea', 'cli', 'ssl', 'tls', 'sql',
   'cve', 'os', 'pc', 'osi', 'dhcp', 'icmp', 'smtp', 'ftp', 'imap', 'pop3',
+  'quic', 'bgp', 'igmp', 'ntp', 'smb', 'sip', 'sae', 'pppoe', 'owe', 'mfp',
+  'rtsp', 'rtmp', 'srtp', 'dtls', 'sctp', 'nat', 'vpn', 'lan', 'wan',
+  'doh', 'dot', 'dnssec', 'rrsig', 'nsec', 'dnskey',
+  'esp', 'ah', 'ike', 'ipsec', 'spf', 'dkim',
+  'ott', 'eap', 'peap', 'ttls', 'radius', 'bras',
+  'oui', 'vlan', 'csma', 'crc', 'mtu', 'mtu',
+  'ipcp', 'lcp', 'pap', 'chap',
+  'rtc', 'rtp', 'rtcp', 'sdp', 'stun', 'turn', 'ice',
+  'amf', 'pac', 'wpad',
 ]);
 
 /**
